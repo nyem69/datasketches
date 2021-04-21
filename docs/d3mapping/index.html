@@ -12,7 +12,7 @@ path {
 <script src="https://unpkg.com/topojson@3"></script>
 <script>
 var width = 960,
-    height = 500;
+    height = 400;
 
 var flags = [{},
             {'name': 'Johor'},
@@ -40,12 +40,14 @@ var flags = [{},
 
 var projection = d3.geoMercator()
     .center([0, 0 ])
-    .scale(2500)
-    .rotate([-109,-4]);
+    .scale(2800)
+    .rotate([-109.45,-3]);
 
 var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+//    .attr("width", width)
+//    .attr("height", height);
+  .attr('viewBox', [0,0,width,height].join(' ')) // fill screen
+;
 
 var path = d3.geoPath()
     .projection(projection);
@@ -70,9 +72,9 @@ d3.json("https://raw.githubusercontent.com/cszang/dendrobox/master/data/world-11
            .data(data)
            .enter()
            .append("a")
-			    	  .attr("xlink:href", function(d) {
-				    	  return "https://www.google.com/search?q="+d.city;}
-		    		  )
+              .attr("xlink:href", function(d) {
+                return "https://www.google.com/search?q="+d.city;}
+              )
            .append("circle")
            .attr("cx", function(d) {
                    return projection([d.lon, d.lat])[0];
@@ -159,16 +161,18 @@ d3.json("malaysia.json").then(function(malaysia) {
   statesEnter.append("path")
     .attr("class", "states")
     .attr("d", path)
-    .style("stroke", "#000")
+    .style("stroke", "white")
     .style("fill", "none")
     .style("stroke-width", "1px")
     ;
-  my
-    .append("path")
-      .style("fill","none")
-      .style("stroke","#000")
-      //.attr("d", projection.getCompositionBorders());
-      .attr("d", path);
+
+//  my
+//    .append("path")
+//      .style("fill","none")
+//      //.style("stroke","#000")
+//      .style("stroke",'none')
+//      //.attr("d", projection.getCompositionBorders());
+//      .attr("d", path);
 
 });
 
@@ -184,34 +188,46 @@ d3.json("malaysia.json").then(function(malaysia) {
 //=====================
 
 d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv')
-	.then(function(raw){
+  .then(function(raw){
 
-		console.log('raw', raw);
+    console.log('raw', raw);
 
-		let data = raw.filter(d=>d.Longitude && d.Latitude)
-									.map(d=>{
-										d.longitude = +d.Longitude;
-										d.latitude = +d.Latitude;
-										return d;
-									})
+    let data = raw.filter(d=>d.Longitude && d.Latitude)
+                  .map(d=>{
+                    d.longitude = +d.Longitude;
+                    d.latitude = +d.Latitude;
+                    return d;
+                  })
 
-		console.log('data', data);
+    console.log('data', data);
 
-		// https://www.d3indepth.com/geographic/
+    // https://www.d3indepth.com/geographic/
 
-		svg.append('g').attr('class','cities-malaysia')
-			.selectAll('circle').data(data)
-			.enter()
-				.append('circle')
-					.attr('cx', d=>projection([d.longitude,d.latitude])[0])
-					.attr('cy', d=>projection([d.longitude,d.latitude])[1])
-					.attr('r',5)
-					.attr('fill','magenta')
-
-
+    svg.append('g').attr('class','cities-malaysia')
+      .selectAll('circle').data(data)
+      .enter()
+        .append('circle')
+          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+          .attr('r',3)
+          .attr('fill','magenta')
 
 
-	});
+    svg.append('g').attr('class','cities-malaysia-label')
+      .selectAll('text').data(data)
+      .enter()
+        .append('text')
+          .attr('x', d=>projection([d.longitude,d.latitude])[0])
+          .attr('y', d=>projection([d.longitude,d.latitude])[1])
+          .attr('fill','purple')
+          .attr('text-anchor','middle')
+          .attr('font-size','60%')
+          .attr('transform','translate(0,-7)')
+          .text(d=>d.Daerah);
+
+
+
+  });
 
 
 </script>
