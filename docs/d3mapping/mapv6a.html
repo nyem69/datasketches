@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+</style>
+<body>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://unpkg.com/topojson@3"></script>
+<script>
+var width = 960,
+    height = 500;
+
+var flags = [{},
+            {'name': 'Johor'},
+            {'name': 'Kedah'},
+            {'name': 'Kelantan'},
+            {'name': 'Kuala Lumpur'},
+            {'name': 'Labuan'},
+            {'name': 'Melaka'},
+            {'name': 'Negeri Sembilan'},
+            {'name': 'Pahang'},
+            {'name': 'Perak'},
+            {'name': 'Perlis'},
+            {'name': 'Pulau Pinang'},
+            {'name': 'Putrajaya'},
+            {'name': 'Sabah'},
+            {'name': 'Sarawak'},
+            {'name': 'Selangor'},
+            {'name': 'Terengganu'},
+          ]
+
+//var projection = d3.geoMercator()
+//    .center([0, 5 ])
+//    .scale(150)
+//    .rotate([-180,0]);
+
+var projection = d3.geoMercator()
+    .center([0, 0 ])
+    .scale(2500)
+    .rotate([-109,-4]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var path = d3.geoPath()
+    .projection(projection);
+
+var g = svg.append("g");
+var my = svg.append("g").attr('class','map-malaysia');
+
+
+
+
+
+
+// load and display the World
+// d3.json("world-110m2.json").then(function(topology) {
+
+d3.json("https://raw.githubusercontent.com/cszang/dendrobox/master/data/world-110m2.json").then(function(topology) {
+
+
+    // load and display the cities
+    d3.csv("cities.csv").then(function(data) {
+        g.selectAll("circle")
+           .data(data)
+           .enter()
+           .append("a")
+			    	  .attr("xlink:href", function(d) {
+				    	  return "https://www.google.com/search?q="+d.city;}
+		    		  )
+           .append("circle")
+           .attr("cx", function(d) {
+                   return projection([d.lon, d.lat])[0];
+           })
+           .attr("cy", function(d) {
+                   return projection([d.lon, d.lat])[1];
+           })
+           .attr("r", 5)
+           .style("fill", "red");
+
+           g.selectAll("text")
+            .data(data)
+            .enter()
+            .append("text") // append text
+            .attr("x", function(d) {
+            return projection([d.lon, d.lat])[0];
+            })
+            .attr("y", function(d) {
+            return projection([d.lon, d.lat])[1];
+            })
+            .attr("dy", -7) // set y position of bottom of text
+            .style("fill", "black") // fill the text with the colour black
+            .attr("text-anchor", "middle") // set anchor y justification
+            .text(function(d) {return d.city;}); // define the text to display
+
+    });
+
+    g.selectAll("path")
+       .data(topojson.feature(topology, topology.objects.countries)
+           .features)
+       .enter().append("path")
+       .attr("d", path);
+
+});
+
+
+
+
+
+
+
+//=====================
+// from mapv4.html
+//=====================
+
+//d3.json("malaysia.json", function(error, malaysia) {
+d3.json("malaysia.json").then(function(malaysia) {
+
+
+  var states = topojson.feature(malaysia, malaysia.objects.states);
+  var land = topojson.feature(malaysia, malaysia.objects.land);
+
+
+
+  my.selectAll(".land")
+      .data(land.features)
+      .enter()
+      .append("path")
+      .attr("class", "land")
+      .attr("d", path)
+      .style("fill", "#aca")
+      .style("stroke", "#000")
+      .style("stroke-width", "1px");
+
+  var statesEnter = my.selectAll(".state")
+    .data(states.features)
+    .enter();
+
+  statesEnter.append("clipPath")
+    .attr("class","mask")
+    .attr("id",function(d){return "clip"+d.properties.id;})
+    .append("path")
+    .attr("d",path);
+
+  statesEnter.append("image")
+      .attr("xlink:href",function(d){return flags[d.properties.id].img;})
+      .attr("x", function(d){return path.bounds(d)[0][0];})
+      .attr("y", function(d){return path.bounds(d)[0][1];})
+      .attr("width", function(d){var bounds = path.bounds(d); return bounds[1][0] - bounds[0][0];})
+      .attr("height", function(d){var bounds = path.bounds(d); return bounds[1][1] - bounds[0][1];})
+      .attr("preserveAspectRatio","none")
+      .attr("clip-path", function(d){return "url(#clip"+d.properties.id+")";});
+
+  statesEnter.append("path")
+    .attr("class", "states")
+    .attr("d", path)
+    .style("stroke", "#000")
+    .style("fill", "none")
+    .style("stroke-width", "1px")
+    ;
+  my
+    .append("path")
+      .style("fill","none")
+      .style("stroke","#000")
+      //.attr("d", projection.getCompositionBorders());
+      .attr("d", path);
+
+});
+
+
+
+
+
+
+//=====================
+// load districts from google sheets
+// sheet: https://docs.google.com/spreadsheets/d/17vLxlZGl1cOTpjFqQhh1x_ABVKbh4muUOh1hFK0XYhg/edit?usp=sharing
+// csv: https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv
+//=====================
+
+d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv')
+	.then(function(raw){
+
+		console.log('raw', raw);
+
+		let data = raw.filter(d=>d.Longitude && d.Latitude)
+									.map(d=>{
+										d.longitude = +d.Longitude;
+										d.latitude = +d.Latitude;
+										return d;
+									})
+
+		console.log('data', data);
+
+		// https://www.d3indepth.com/geographic/
+
+		svg.append('g').attr('class','cities-malaysia')
+			.selectAll('circle').data(data)
+			.enter()
+				.append('circle')
+					.attr('cx', d=>projection([d.longitude,d.latitude])[0])
+					.attr('cy', d=>projection([d.longitude,d.latitude])[1])
+					.attr('r',5)
+					.attr('fill','magenta')
+
+
+
+
+	});
+
+
+</script>
+<br>
+<p>Pointing and Label in a map</p>
+
+<br>
+<button onclick="document.location='index.html'">Main Menu</button>
+<button onclick="document.location='maping(5).html'">Back</button>
+</body>
+</html>
