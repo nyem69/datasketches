@@ -18,8 +18,10 @@ path {
 
 
 <div style="display:flex">
-	<div style="flex:1 1 auto"><select class="color-selector"></select></div>
-	<div style="flex:1 1 auto"><select class="color-selector2"></select></div>
+	<div style="flex:1 1 auto;display:flex">
+		<div style="flex:1 1 auto">Type: <select class="color-selector"></select></div>
+		<div style="flex:1 1 auto">Color Scheme: <select class="color-selector2"></select></div>
+	</div>
 	<div style="flex:1 1 auto"><svg class="color-grid"></svg></div>
 </div>
 
@@ -53,6 +55,17 @@ var g = svg.append("g");
 var my = svg.append("g").attr('class','map-malaysia');
 
 
+
+
+
+
+
+//=====================
+// global variables
+//=====================
+
+let states,
+		land;
 
 
 
@@ -135,16 +148,17 @@ Sequential (Multi-Hue),schemeYlOrRd,9
 
 	});
 
-console.log('schemes', schemes);
-
-let colors = d3.shuffle(
-								schemes.map(d=>d.scheme)
-						 )[0];
-
-console.log('colors', colors.length, colors);
-
-
-
+//
+//console.log('schemes', schemes);
+//
+//let colors = d3.shuffle(
+//								schemes.map(d=>d.scheme)
+//						 )[0];
+//
+//console.log('colors', colors.length, colors);
+//
+//
+//
 
 
 //=====================
@@ -189,7 +203,7 @@ function colorSelector2()	{
 	let p = d3.select('.color-selector2')
 						.on('change', function(e,d){
 							console.log('color-selector2:', d3.select(this).property('value'));
-							//colorSelector2();
+							colorGrid();
 						})
 						.selectAll('option').data(selected_schemes, d=>d.name);
 
@@ -198,6 +212,7 @@ function colorSelector2()	{
 			.append('option')
 			.html(d=>d.name);
 
+	colorGrid();
 
 	console.groupEnd('colorSelector2');
 }
@@ -218,6 +233,7 @@ function colorGrid()	{
 
 
 	let r = d3.select('.color-grid')
+							.attr('height',50)
 							.attr('viewBox',[0,0, 30*scheme.length, 30].join(' '))
 							.selectAll('rect').data(scheme);
 
@@ -229,38 +245,82 @@ function colorGrid()	{
 					.attr('width',30)
 					.attr('height',30)
 			.merge(r)
-					.attr('fill',d=>d);
+					.transition()
+						.delay((d,i)=>i*10)
+						.duration(1000)
+							.attr('fill',d=>d);
 
 
-	//recolorMap(scheme);
+	recolorMap(scheme);
 
 
 	console.groupEnd('colorSelector2');
 }
 
 
+
 //=====================
 //  recolorMap
 //=====================
 function recolorMap(colors)	{
+	console.group('recolorMap');
 
-	if (states)	{
-		states.features.forEach(d=>{
-			d.properties.color = d3.shuffle(colors)[0];
-		});
+	if (!colors)	{
+		colors = schemes[0].scheme;
 	}
+
+	// map already exists?
+	if (states && states.features)	{
+
+
+		// store color in object properties
+		console.log('colors', colors.length, colors);
+
+		let morecolors = [...colors]; // clone
+
+		// remove unwanted colors
+		morecolors = morecolors.filter(d=>['#ffffff','#000000'].indexOf(d)<0);
+
+		while (morecolors.length < states.features.length)	{
+			morecolors = morecolors.concat([...colors].reverse());
+		}
+
+		console.log('morecolors', morecolors.length, morecolors);
+
+
+		states.features.forEach((d,i)=>{
+			d.properties.color = morecolors[i];
+		});
+
+
+
+		let p = d3.selectAll(".state")
+							.transition()
+								.delay((d,i)=>i*10)
+								.duration(1000)
+									.attr('stroke','white')
+									.attr('fill', d=>{
+										console.log('properties', d.properties);
+										return d.properties.color
+									});
+
+
+	}
+
+
+
+	console.groupEnd('recolorMap');
 
 }
 
 
 
 
+
+
+
 colorSelector2();
 colorGrid();
-
-
-
-
 
 
 
@@ -273,9 +333,11 @@ colorGrid();
 d3.json("malaysia.json").then(function(malaysia) {
 
 
-  var states = topojson.feature(malaysia, malaysia.objects.states);
-  var land = topojson.feature(malaysia, malaysia.objects.land);
+//  var states = topojson.feature(malaysia, malaysia.objects.states);
+//  var land = topojson.feature(malaysia, malaysia.objects.land);
 
+  states = topojson.feature(malaysia, malaysia.objects.states);
+  land = topojson.feature(malaysia, malaysia.objects.land);
 
 	//=====================
 	// shift sabah/sarawak/labuan closer to semenanjung
@@ -298,39 +360,24 @@ d3.json("malaysia.json").then(function(malaysia) {
 
 
 
-
-	// store color in object properties
-	console.log('colors', colors.length, colors);
-
-	let morecolors = d3.shuffle(colors);
-
-	// remove unwanted colors
-	morecolors = morecolors.filter(d=>['#ffffff','#000000'].indexOf(d)<0);
-
-	while (morecolors.length < states.features.length)	{
-		morecolors = morecolors.concat(morecolors);
-	}
-
-	console.log('morecolors', morecolors.length, morecolors);
-
-	states.features.forEach((d,i)=>{
-		d.properties.color = morecolors[i];
-	});
-
-
   my.selectAll(".state").data(states.features)
     .enter()
       .append("path")
       	.attr('class','state')
 	      .attr("d", path)
-	    	.attr('stroke','white')
-	    	.attr('fill', d=>d.properties.color  )
+	    	.attr('stroke','gray')
+	    	.attr('fill', 'white' );
 
 
+
+	recolorMap();
 
 
 
 });
+
+
+
 
 
 
@@ -345,7 +392,9 @@ d3.json("malaysia.json").then(function(malaysia) {
 
 <br>
 <button onclick="document.location='index.html'">Main Menu</button>
-<button onclick="document.location='index3.html'">Back</button>
-<button onclick="document.location='index5.html'">Next</button>
+<button onclick="document.location='index4.html'">Back</button>
+<!--
+<button onclick="document.location='index6.html'">Next</button>
+-->
 </body>
 </html>
