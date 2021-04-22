@@ -148,9 +148,10 @@ Sequential (Multi-Hue),schemeYlOrRd,9
 
   });
 
-//
-//console.log('schemes', schemes);
-//
+
+console.log('schemes', schemes);
+
+
 //let colors = d3.shuffle(
 //                schemes.map(d=>d.scheme)
 //             )[0];
@@ -294,15 +295,15 @@ function recolorMap(colors)  {
 
 
 
-    let p = d3.selectAll(".state")
-              .transition()
-                .delay((d,i)=>i*10)
-                .duration(1000)
-                  .attr('stroke','white')
-                  .attr('fill', d=>{
-                    console.log('properties', d.properties);
-                    return d.properties.color
-                  });
+    d3.selectAll(".state")
+        .transition()
+          .delay((d,i)=>i*10)
+          .duration(1000)
+            .attr('stroke','white')
+            .attr('fill', d=>{
+              console.log('properties', d.properties);
+              return d.properties.color
+            });
 
 
   }
