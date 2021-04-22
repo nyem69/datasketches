@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+/*
+// remove css styles, use js element styling instead
+
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+
+*/
+
+</style>
+<body>
+
+
+<div style="display:flex">
+	<div style="flex:1 1 auto"><select class="color-selector"></select></div>
+	<div style="flex:1 1 auto"><select class="color-selector2"></select></div>
+	<div style="flex:1 1 auto"><svg class="color-grid"></svg></div>
+</div>
+
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://unpkg.com/topojson@3"></script>
+<script>
+var width = 960,
+    height = 400;
+
+//var projection = d3.geoMercator()
+//    .center([0, 5 ])
+//    .scale(150)
+//    .rotate([-180,0]);
+
+var projection = d3.geoMercator()
+    .center([0, 0 ])
+    .scale(2800 + 5*100)
+    .rotate([-109.45 + 5/2,-3]);
+
+var svg = d3.select("body").append("svg")
+//    .attr("width", width)
+//    .attr("height", height);
+  .attr('viewBox', [0,0,width,height].join(' ')) // fill screen
+;
+
+var path = d3.geoPath()
+    .projection(projection);
+
+var g = svg.append("g");
+var my = svg.append("g").attr('class','map-malaysia');
+
+
+
+
+
+
+//=====================
+// colors
+//=====================
+// https://github.com/d3/d3/blob/master/API.md#color-schemes-d3-scale-chromatic
+// https://github.com/d3/d3-scale-chromatic/blob/v2.0.0/README.md#schemeCategory10
+
+
+
+
+//  let colors = d3.shuffle([
+//  	d3.schemeSet3,
+//		d3.schemeCategory10,
+//		d3.schemeAccent,
+//		d3.schemeDark2,
+//		d3.schemePaired,
+//		d3.schemePastel1,
+//		d3.schemePastel2,
+//		d3.schemeSet1,
+//		d3.schemeSet2,
+//		d3.schemeSet3,
+//		d3.schemeTableau10,
+//		d3.schemeBlues[9],
+//  ])[0];
+
+
+
+
+let schemes = `
+Categorical,schemeCategory10
+Categorical,schemeAccent
+Categorical,schemeDark2
+Categorical,schemePaired
+Categorical,schemePastel1
+Categorical,schemePastel2
+Categorical,schemeSet1
+Categorical,schemeSet2
+Categorical,schemeSet3
+Categorical,schemeTableau10
+Diverging,schemeBrBG,9
+Diverging,schemePRGn,9
+Diverging,schemePiYG,9
+Diverging,schemePuOr,9
+Diverging,schemeRdBu,9
+Diverging,schemeRdGy,9
+Diverging,schemeRdYlBu,9
+Diverging,schemeRdYlGn,9
+Diverging,schemeSpectral,9
+Sequential (Single Hue),schemeBlues,9
+Sequential (Single Hue),schemeGreens,9
+Sequential (Single Hue),schemeGreys,9
+Sequential (Single Hue),schemeOranges,9
+Sequential (Single Hue),schemePurples,9
+Sequential (Single Hue),schemeReds,9
+Sequential (Multi-Hue),schemeBuGn,9
+Sequential (Multi-Hue),schemeBuPu,9
+Sequential (Multi-Hue),schemeGnBu,9
+Sequential (Multi-Hue),schemeOrRd,9
+Sequential (Multi-Hue),schemePuBuGn,9
+Sequential (Multi-Hue),schemePuBu,9
+Sequential (Multi-Hue),schemePuRd,9
+Sequential (Multi-Hue),schemeRdPu,9
+Sequential (Multi-Hue),schemeYlGnBu,9
+Sequential (Multi-Hue),schemeYlGn,9
+Sequential (Multi-Hue),schemeYlOrBr,9
+Sequential (Multi-Hue),schemeYlOrRd,9
+`.split(/\n/).filter(d=>d)
+	.map(d=>{
+		let k = d.split(',');
+		let c = {
+								type	: k[0],
+								name	: k[1],
+								index	: +k[2]||null,
+							};
+		c.scheme = c.index ? d3[c.name][c.index] : d3[c.name];
+		return c;
+
+	});
+
+console.log('schemes', schemes);
+
+let colors = d3.shuffle(
+								schemes.map(d=>d.scheme)
+						 )[0];
+
+console.log('colors', colors.length, colors);
+
+
+
+
+
+//=====================
+//  color selectors
+//=====================
+
+let colorGroups = d3.groups(schemes,d=>d.type)
+										.map(d=>{
+											return {
+												key		: d[0],
+												values: d[1]
+											}
+										});
+
+console.log('colorGroups', colorGroups);
+
+
+d3.select('.color-selector')
+		.on('change', function(e,d){
+			console.log('color-selector:', d3.select(this).property('value'));
+			colorSelector2();
+		})
+		.selectAll('option').data(colorGroups)
+			.enter()
+				.append('option')
+				.html(d=>d.key);
+
+
+
+//=====================
+//  colorSelector2
+//=====================
+
+function colorSelector2()	{
+	console.group('colorSelector2');
+
+	let selected_type = d3.select('.color-selector').property('value');
+	console.log('selected_type:', selected_type);
+
+	let selected_schemes = schemes.filter(d=>d.type==selected_type);
+
+	let p = d3.select('.color-selector2')
+						.on('change', function(e,d){
+							console.log('color-selector2:', d3.select(this).property('value'));
+							//colorSelector2();
+						})
+						.selectAll('option').data(selected_schemes, d=>d.name);
+
+	p.exit().remove();
+	p.enter()
+			.append('option')
+			.html(d=>d.name);
+
+
+	console.groupEnd('colorSelector2');
+}
+
+
+
+//=====================
+//  colorGrid
+//=====================
+function colorGrid()	{
+	console.group('colorSelector2');
+
+	let selected_scheme_name = d3.select('.color-selector2').property('value');
+	console.log('selected_scheme_name:', selected_scheme_name);
+
+	let scheme = schemes.find(d=>d.name==selected_scheme_name).scheme;
+	console.log('scheme:', scheme);
+
+
+	let r = d3.select('.color-grid')
+							.attr('viewBox',[0,0, 30*scheme.length, 30].join(' '))
+							.selectAll('rect').data(scheme);
+
+	r.exit().remove();
+
+	r.enter()
+				.append('rect')
+					.attr('transform',(d,i)=>'translate('+[30*i, 0]+')')
+					.attr('width',30)
+					.attr('height',30)
+			.merge(r)
+					.attr('fill',d=>d);
+
+
+	//recolorMap(scheme);
+
+
+	console.groupEnd('colorSelector2');
+}
+
+
+//=====================
+//  recolorMap
+//=====================
+function recolorMap(colors)	{
+
+	if (states)	{
+		states.features.forEach(d=>{
+			d.properties.color = d3.shuffle(colors)[0];
+		});
+	}
+
+}
+
+
+
+
+colorSelector2();
+colorGrid();
+
+
+
+
+
+
+
+
+//=====================
+// from mapv4.html
+//=====================
+
+//d3.json("malaysia.json", function(error, malaysia) {
+d3.json("malaysia.json").then(function(malaysia) {
+
+
+  var states = topojson.feature(malaysia, malaysia.objects.states);
+  var land = topojson.feature(malaysia, malaysia.objects.land);
+
+
+	//=====================
+	// shift sabah/sarawak/labuan closer to semenanjung
+	//=====================
+
+	[land,states].forEach(d=>{
+		d.features
+			.forEach(d=>{
+				d.geometry.coordinates.forEach(d=>{
+					d[0].forEach(_shift);
+				});
+			});
+	});
+
+	function _shift(d)	{
+		if (typeof d=='object' && d.length==2)	{
+			if (d[0]>105) d[0] += -5;
+		}
+	}
+
+
+
+
+	// store color in object properties
+	console.log('colors', colors.length, colors);
+
+	let morecolors = d3.shuffle(colors);
+
+	// remove unwanted colors
+	morecolors = morecolors.filter(d=>['#ffffff','#000000'].indexOf(d)<0);
+
+	while (morecolors.length < states.features.length)	{
+		morecolors = morecolors.concat(morecolors);
+	}
+
+	console.log('morecolors', morecolors.length, morecolors);
+
+	states.features.forEach((d,i)=>{
+		d.properties.color = morecolors[i];
+	});
+
+
+  my.selectAll(".state").data(states.features)
+    .enter()
+      .append("path")
+      	.attr('class','state')
+	      .attr("d", path)
+	    	.attr('stroke','white')
+	    	.attr('fill', d=>d.properties.color  )
+
+
+
+
+
+});
+
+
+
+
+</script>
+
+
+
+<br>
+<p>Color selector</p>
+
+
+<br>
+<button onclick="document.location='index.html'">Main Menu</button>
+<button onclick="document.location='index3.html'">Back</button>
+<button onclick="document.location='index5.html'">Next</button>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+/*
+// remove css styles, use js element styling instead
+
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+
+*/
+
+</style>
+<body>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://unpkg.com/topojson@3"></script>
+<script>
+var width = 960,
+    height = 400;
+
+//var projection = d3.geoMercator()
+//    .center([0, 5 ])
+//    .scale(150)
+//    .rotate([-180,0]);
+
+var projection = d3.geoMercator()
+    .center([0, 0 ])
+    .scale(2800 + 5*100)
+    .rotate([-109.45 + 5/2,-3]);
+
+var svg = d3.select("body").append("svg")
+//    .attr("width", width)
+//    .attr("height", height);
+  .attr('viewBox', [0,0,width,height].join(' ')) // fill screen
+;
+
+var path = d3.geoPath()
+    .projection(projection);
+
+var g = svg.append("g");
+var my = svg.append("g").attr('class','map-malaysia');
+
+
+
+
+
+
+//=====================
+// colors
+//=====================
+
+// https://github.com/d3/d3/blob/master/API.md#color-schemes-d3-scale-chromatic
+// https://github.com/d3/d3-scale-chromatic/blob/v2.0.0/README.md#schemeCategory10
+
+let colors = d3.shuffle([
+	d3.schemeSet3,
+	d3.schemeCategory10,
+	d3.schemeAccent,
+	d3.schemeDark2,
+	d3.schemePaired,
+	d3.schemePastel1,
+	d3.schemePastel2,
+	d3.schemeSet1,
+	d3.schemeSet2,
+	d3.schemeSet3,
+	d3.schemeTableau10,
+])[0];
+
+
+console.log('colors', colors.length, colors);
+
+
+
+
+
+
+//=====================
+// from mapv4.html
+//=====================
+
+//d3.json("malaysia.json", function(error, malaysia) {
+d3.json("malaysia.json").then(function(malaysia) {
+
+
+  var states = topojson.feature(malaysia, malaysia.objects.states);
+  var land = topojson.feature(malaysia, malaysia.objects.land);
+
+
+	//=====================
+	// shift sabah/sarawak/labuan closer to semenanjung
+	//=====================
+
+	[land,states].forEach(d=>{
+		d.features
+			.forEach(d=>{
+				d.geometry.coordinates.forEach(d=>{
+					d[0].forEach(_shift);
+				});
+			});
+	});
+
+	function _shift(d)	{
+		if (typeof d=='object' && d.length==2)	{
+			if (d[0]>105) d[0] += -5;
+		}
+	}
+
+
+	// store color in object properties
+	states.features.forEach(d=>{
+		d.properties.color = d3.shuffle(colors)[0];
+	});
+
+
+  my.selectAll(".state").data(states.features)
+    .enter()
+      .append("path")
+      	.attr('class','state')
+	      .attr("d", path)
+	    	.attr('stroke','white')
+	    	.attr('fill', d=>d.properties.color  )
+
+
+
+
+
+});
+
+
+
+
+
+</script>
+
+
+
+<br>
+<p>Random fill color</p>
+
+
+<br>
+<button onclick="document.location='index.html'">Main Menu</button>
+<button onclick="document.location='index3.html'">Back</button>
+<button onclick="document.location='index5.html'">Next</button>
+</body>
+</html>
