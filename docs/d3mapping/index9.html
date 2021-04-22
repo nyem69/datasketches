@@ -3,8 +3,49 @@
 
 <style>
 html {
+	background:#30404D;
+	color:#ffffff;
 	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
 }
+
+a {
+	color:
+}
+
+
+/*-------
+
+slider
+
+---------*/
+
+.range-wrap {
+  position: relative;
+  margin: 0 auto 3rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: rgb(128,0,0);
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgb(128,0,0);
+  top: -1px;
+  left: 50%;
+}
+
+
 </style>
 
 <body>
@@ -32,6 +73,88 @@ var svg = d3.select("body").append("svg")
 var path = d3.geoPath()
     .projection(projection);
 
+
+svg.append('defs')
+	.html(`
+
+	<filter id="fshadow01" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
+		<feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="BlurAlpha"/>
+		<feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
+		<feMerge>
+			<feMergeNode in="OffsetBlurAlpha"/>
+			<feMergeNode in="SourceGraphic"/>
+		</feMerge>
+	</filter>
+
+	<filter id="fshadow02" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
+		<feGaussianBlur in="SourceAlpha" stdDeviation="3" result="BlurAlpha"/>
+		<feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
+		<feMerge>
+			<feMergeNode in="OffsetBlurAlpha"/>
+			<feMergeNode in="SourceGraphic"/>
+		</feMerge>
+	</filter>
+
+	<filter id="fshadow03" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
+		<feGaussianBlur in="SourceAlpha" stdDeviation="7" result="BlurAlpha"/>
+		<feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
+		<feMerge>
+			<feMergeNode in="OffsetBlurAlpha"/>
+			<feMergeNode in="SourceGraphic"/>
+		</feMerge>
+	</filter>
+
+	<radialGradient id="Red" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:rgb(255,0,0)"/>
+		<stop offset="1" style="stop-color:rgb(128,0,0)"/>
+	</radialGradient>
+	<radialGradient id="Yellow" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:rgb(255,255,0)"/>
+		<stop offset="1" style="stop-color:rgb(128,128,0)"/>
+	</radialGradient>
+	<radialGradient id="Orange" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:#ff0"/>
+		<stop offset="1" style="stop-color:#f90"/>
+	</radialGradient>
+	<radialGradient id="Cyan" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:rgb(0,255,255)"/>
+		<stop offset="1" style="stop-color:rgb(0,128,128)"/>
+	</radialGradient>
+	<radialGradient id="WildStrawberry" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:rgb(255,10,155)"/>
+		<stop offset="1" style="stop-color:rgb(128,5,78)"/>
+	</radialGradient>
+	<radialGradient id="Blue" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:rgb(0,0,255)"/>
+		<stop offset="1" style="stop-color:rgb(0,0,128)"/>
+	</radialGradient>
+	<radialGradient id="Purple" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:rgb(140,35,255)"/>
+		<stop offset="1" style="stop-color:rgb(70,18,128)"/>
+	</radialGradient>
+	<radialGradient id="Lime" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:rgb(127,255,0)"/>
+		<stop offset="1" style="stop-color:rgb(64,128,0)"/>
+	</radialGradient>
+	<radialGradient id="Silver" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:#fff"/>
+		<stop offset="1" style="stop-color:#999"/>
+	</radialGradient>
+	<radialGradient id="Brown" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:#fff"/>
+		<stop offset="1" style="stop-color:#E18400"/>
+	</radialGradient>
+	<radialGradient id="SkyBlue" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:#fff"/>
+		<stop offset="1" style="stop-color:#87CEFA"/>
+	</radialGradient>
+	<radialGradient id="Tomato" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+		<stop offset="0" style="stop-color:#fff"/>
+		<stop offset="1" style="stop-color:#FF6347"/>
+	</radialGradient>
+`);
+
+
 var g = svg.append("g");
 
 
@@ -41,6 +164,8 @@ var g = svg.append("g");
 
 let states,
     land;
+
+let timer;
 
 //=====================
 // from mapv4.html
@@ -80,6 +205,7 @@ d3.json("malaysia.json").then(function(malaysia) {
         .attr('stroke','steelblue')
         .attr('stroke-width',1)
         .attr('fill', 'none' )
+  	    .attr('filter','url(#fshadow02)')
 
 	svg.append("g").attr('class','map-fill-states')
   	.selectAll(".state").data(states.features)
@@ -87,8 +213,8 @@ d3.json("malaysia.json").then(function(malaysia) {
 	      .append("path")
 	        .attr('class','state')
 	        .attr("d", path)
-	        .attr('stroke','#ccc')
-	        .attr('fill', '#f2f2f2' )
+	        .attr('stroke','#666')
+	        .attr('fill', '#30404D' )
 	        .attr('stroke-width',.5)
 	        .attr('fill-opacity',1)
 	        .on('click',function(e,d){
@@ -182,11 +308,17 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 						let p2 = k.total.find(d=>d.date==k.max_total_date);
 						k.latest_total_value = p2 && p2.value || null;
 
+						// min active date
+						k.min_active_date = d3.min(k.active, d=>d.date);
+
 					});
 
 					data.push(k);
 
         });
+
+		let min_date = d3.min(data, d=>d.min_active_date);
+    console.log('min_date', min_date);
 
 
 		let max_date = d3.max(data, d=>d.max_active_date);
@@ -198,7 +330,7 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 		// sort descending
 		data.sort((a,b)=>{ return a.latest_active_value > b.latest_active_value });
 
-    //console.log('data', data);
+   //console.log('data', data);
 
 
 		//=====================
@@ -235,9 +367,12 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
           .attr('stroke-opacity',.2)
           .attr('stroke-width',.5)
           .on('mouseover',function(e,d){
+
           	d3.select('.cities-malaysia-label')
           		.selectAll('text')
 				      	.attr('display',k=>k.Daerah==d.Daerah ? 'block':'none')
+
+
           })
 
 
@@ -251,17 +386,37 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
           .attr('cx', d=>projection([d.longitude,d.latitude])[0])
           .attr('cy', d=>projection([d.longitude,d.latitude])[1])
           .attr('r',d=>scaleRadius(d.latest_active_value))
-          .attr('stroke','#fff')
-          .attr('stroke-width',1)
-          .attr('fill',d=>scaleColorCircle(d.latest_active_value)||0)
-          .attr('fill-opacity',.8)
+          .attr('fill',d=>d.latest_active_value > 500 ? 'url(#Red)'
+          								: d.latest_active_value > 100 ? 'url(#Orange)'
+          								: d.latest_active_value > 20 ? 'url(#Yellow)'
+          								: 'url(#Lime)'
+          )
+          .attr('filter','url(#fshadow01)')
           .on('mouseover',function(e,d){
 
           	d3.select('.cities-malaysia-label')
           		.selectAll('text')
 				      	.attr('display',k=>k.Daerah==d.Daerah ? 'block':'none')
 
+
+
+				    d3.select(this)
+				    	.transition()
+				    		.duration(100)
+				    		.ease(d3.easeBounce)
+					    	.attr('r', scaleRadius(d.latest_active_value)+10)
+
+
           })
+          .on('mouseout', function(e,d){
+
+				    d3.select(this)
+				    	.transition()
+				    		//.duration(100)
+				    		.ease(d3.easeBounce)
+					    	.attr('r', scaleRadius(d.latest_active_value))
+
+          });
 
 
 
@@ -292,6 +447,7 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 		        		.attr('fill','#fff')
 		        		.attr('stroke-width',2)
 		        		.attr('font-size','60%')
+		        		.attr('filter','url(#fshadow01)')
 		        		.text(d=>d.Daerah)
 
 		        	sel.append('tspan')
@@ -300,6 +456,7 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 		        		.attr('stroke','#fff')
 		        		.attr('fill','#fff')
 		        		.attr('stroke-width',2)
+		        		.attr('filter','url(#fshadow01)')
 		        		.text(d=>comma(d.latest_active_value))
 
 		        	sel.append('tspan')
@@ -360,7 +517,7 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 			d.properties.cases = active_cases_by_states.find(k=>k.negeri == map_id[ d.properties.id ] );
 		});
 
-		console.log('states', states);
+		//console.log('states', states);
 
 		let max_by_states = d3.max(states.features,d=>d.properties.cases.value);
 		let scaleColor = d3.scaleLinear()
@@ -371,16 +528,20 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 		//=====================
 		// textures.js
 		//=====================
+		// https://riccardoscalco.it/textures/
+
 		states.features.forEach(d=>{
 
 			let t = textures.lines()
 						.size(4)
 						.strokeWidth(1)
 						.shapeRendering("crispEdges")
-						.stroke(chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex())
-						.background(chroma(scaleColor(d.properties.cases.value)).brighten().hex());
 
-			d.properties.cases.texture = t;
+						// https://gka.github.io/chroma.js/
+						.stroke( chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
+						.background( chroma(scaleColor(d.properties.cases.value)).brighten().hex() );
+
+			d.properties.texture = t;
 			svg.call(t);
 
 		});
@@ -388,13 +549,13 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 
 
     d3.select('.map-fill-states').selectAll(".state")
-        .transition()
-          .delay((d,i)=>i*10)
-          .attr('fill',d=>d.properties.cases.texture.url())
-          .duration(1000)
-          	.attr('stroke','#999')
-          	.attr('fill-opacity',.8)
-            //.attr('fill', d=>scaleColor(d.properties.cases.value))
+        .attr('fill',d=>d.properties.texture.url())
+      	.attr('stroke','#999')
+      	.attr('fill-opacity',.8)
+
+
+
+
 
 		//=====================
 		// title
@@ -411,11 +572,164 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 					.text('Active covid-19 cases by districts');
 
 				sel.append('tspan')
+					.attr('class','title-date')
 					.attr('x','46%')
 					.attr('dy','1.2em')
 					.text(moment(max_date).format('D MMM YYYY'));
 
+				sel.append('tspan')
+					.attr('class','title-total')
+					.attr('x','46%')
+					.attr('dy','1.4em')
+					.attr('font-size','110%')
+					.text(comma(d3.sum(data, d=>d.latest_active_value)));
+
+				sel.append('tspan')
+					.attr('x','46%')
+					.attr('dy','1em')
+					.attr('font-size','90%')
+					.text('active cases');
+
 			});
+
+
+
+
+
+
+
+
+		//====================================================================================
+		// slider
+		//====================================================================================
+		// https://css-tricks.com/value-bubbles-for-range-inputs/
+
+		d3.select('.range')
+				.attr('min', +moment(min_date,'YYYY-MM-DD'))
+				.attr('max', +moment(max_date,'YYYY-MM-DD'))
+				.attr('step',1)
+				.attr('value', +moment(max_date,'YYYY-MM-DD'));
+
+		const allRanges = document.querySelectorAll(".range-wrap");
+		allRanges.forEach(wrap => {
+		  const range = wrap.querySelector(".range");
+		  const bubble = wrap.querySelector(".bubble");
+
+		  range.addEventListener("input", () => {
+		    setBubble(range, bubble);
+		  });
+		  setBubble(range, bubble);
+		});
+
+		function setBubble(range, bubble) {
+		  const val = range.value;
+		  const min = range.min ? range.min : 0;
+		  const max = range.max ? range.max : 100;
+		  const newVal = Number(((val - min) * 100) / (max - min));
+
+		  //console.log('val', val, moment(val));
+
+		  //bubble.innerHTML = val;
+		  bubble.innerHTML = moment(+val).format('D MMM YYYY');
+
+		  // Sorta magic numbers based on size of the native UI thumb
+		  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+
+
+			// delay execution
+			if (timer) {
+				window.clearTimeout(timer);
+				timer=null;
+			}
+			timer = window.setTimeout(()=>{
+				slideTime(moment(+val).format('YYYY-MM-DD'));
+			},10);
+
+		}
+
+
+		//=====================
+		//
+		//=====================
+		function slideTime(date)	{
+
+			//=====================
+			// hide text
+			//=====================
+			d3.select('.cities-malaysia-label')
+				.selectAll('text')
+					.attr('display','none');
+
+			//=====================
+			// big circle
+			//=====================
+			d3.select('.cities-malaysia-mouseover')
+				.selectAll('circle')
+					.attr('r',d=>{
+						let p = d.active.find(d=>d.date==date);
+						return p && +p.value>0 ? scaleRadius(p.value)+10 : 0;
+					})
+
+			//=====================
+			// circle
+			//=====================
+			d3.select('.cities-malaysia')
+				.selectAll('circle')
+					//.attr('filter', null)
+					.attr('r',d=>{
+						let p = d.active.find(d=>d.date==date);
+						return p && +p.value>0 ? scaleRadius(p.value) : 0;
+					})
+
+			//=====================
+			// map
+			//=====================
+			let active_cases_by_states = d3.groups(data, d=>d.Negeri)
+													.map(d=>{
+														return {
+															negeri	: d[0],
+															values	: d[1],
+															value		: d3.sum(d[1], d=>d3.sum(d.active.filter(d=>d.date==date), d=>d.value)),
+														}
+													});
+
+			//console.log('active_cases_by_states', active_cases_by_states);
+
+			states.features.forEach(d=>{
+
+				d.properties.cases = active_cases_by_states.find(k=>k.negeri == map_id[ d.properties.id ] );
+
+				let t = textures.lines()
+							.size(4)
+							.strokeWidth(1)
+							.shapeRendering("crispEdges")
+							.stroke( chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
+							.background( chroma(scaleColor(d.properties.cases.value)).brighten().hex() );
+
+				d.properties.texture = t;
+
+				svg.call(d.properties.texture);
+
+			});
+
+	    d3.select('.map-fill-states').selectAll(".state")
+        .attr('fill',d=>d.properties.texture.url())
+
+
+			//=====================
+			// title-date, total
+			//=====================
+			d3.select('.title-date')
+				.text(moment(date).format('D MMM YYYY'));
+
+			d3.select('.title-total')
+				.text(()=>{
+					let total = d3.sum(active_cases_by_states, d=>d.value);
+					return total ? comma(total) : ' '
+				});
+
+		}
+
 
 
 
@@ -427,16 +741,20 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 </script>
 
 
+<div class="slider">
+	<div class="range-wrap" style="width: 90%;">
+	  <input type="range" class="range">
+	  <output class="bubble"></output>
+	</div>
+</div>
 
-<br>
-<p>With
-	<a href="https://riccardoscalco.it/textures/" target="_blank">textures.js</a>
-</p>
+<p>Time slider</p>
 
 <br>
 <button onclick="document.location='index.html'">Main Menu</button>
-<button onclick="document.location='index6.html'">Back</button>
+<button onclick="document.location='index8.html'">Back</button>
+<!--
 <button onclick="document.location='index8.html'">Next</button>
-
+-->
 </body>
 </html>
