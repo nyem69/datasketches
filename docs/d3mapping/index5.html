@@ -18,11 +18,11 @@ path {
 
 
 <div style="display:flex">
-	<div style="flex:1 1 auto;display:flex">
-		<div style="flex:1 1 auto">Type: <select class="color-selector"></select></div>
-		<div style="flex:1 1 auto">Color Scheme: <select class="color-selector2"></select></div>
-	</div>
-	<div style="flex:1 1 auto"><svg class="color-grid"></svg></div>
+  <div style="flex:1 1 auto;display:flex">
+    <div style="flex:1 1 auto">Type: <select class="color-selector"></select></div>
+    <div style="flex:1 1 auto">Color Scheme: <select class="color-selector2"></select></div>
+  </div>
+  <div style="flex:1 1 auto"><svg class="color-grid"></svg></div>
 </div>
 
 
@@ -65,7 +65,7 @@ var my = svg.append("g").attr('class','map-malaysia');
 //=====================
 
 let states,
-		land;
+    land;
 
 
 
@@ -80,18 +80,18 @@ let states,
 
 
 //  let colors = d3.shuffle([
-//  	d3.schemeSet3,
-//		d3.schemeCategory10,
-//		d3.schemeAccent,
-//		d3.schemeDark2,
-//		d3.schemePaired,
-//		d3.schemePastel1,
-//		d3.schemePastel2,
-//		d3.schemeSet1,
-//		d3.schemeSet2,
-//		d3.schemeSet3,
-//		d3.schemeTableau10,
-//		d3.schemeBlues[9],
+//    d3.schemeSet3,
+//    d3.schemeCategory10,
+//    d3.schemeAccent,
+//    d3.schemeDark2,
+//    d3.schemePaired,
+//    d3.schemePastel1,
+//    d3.schemePastel2,
+//    d3.schemeSet1,
+//    d3.schemeSet2,
+//    d3.schemeSet3,
+//    d3.schemeTableau10,
+//    d3.schemeBlues[9],
 //  ])[0];
 
 
@@ -136,24 +136,24 @@ Sequential (Multi-Hue),schemeYlGn,9
 Sequential (Multi-Hue),schemeYlOrBr,9
 Sequential (Multi-Hue),schemeYlOrRd,9
 `.split(/\n/).filter(d=>d)
-	.map(d=>{
-		let k = d.split(',');
-		let c = {
-								type	: k[0],
-								name	: k[1],
-								index	: +k[2]||null,
-							};
-		c.scheme = c.index ? d3[c.name][c.index] : d3[c.name];
-		return c;
+  .map(d=>{
+    let k = d.split(',');
+    let c = {
+                type  : k[0],
+                name  : k[1],
+                index  : +k[2]||null,
+              };
+    c.scheme = c.index ? d3[c.name][c.index] : d3[c.name];
+    return c;
 
-	});
+  });
 
 //
 //console.log('schemes', schemes);
 //
 //let colors = d3.shuffle(
-//								schemes.map(d=>d.scheme)
-//						 )[0];
+//                schemes.map(d=>d.scheme)
+//             )[0];
 //
 //console.log('colors', colors.length, colors);
 //
@@ -166,25 +166,25 @@ Sequential (Multi-Hue),schemeYlOrRd,9
 //=====================
 
 let colorGroups = d3.groups(schemes,d=>d.type)
-										.map(d=>{
-											return {
-												key		: d[0],
-												values: d[1]
-											}
-										});
+                    .map(d=>{
+                      return {
+                        key    : d[0],
+                        values: d[1]
+                      }
+                    });
 
 console.log('colorGroups', colorGroups);
 
 
 d3.select('.color-selector')
-		.on('change', function(e,d){
-			console.log('color-selector:', d3.select(this).property('value'));
-			colorSelector2();
-		})
-		.selectAll('option').data(colorGroups)
-			.enter()
-				.append('option')
-				.html(d=>d.key);
+    .on('change', function(e,d){
+      console.log('color-selector:', d3.select(this).property('value'));
+      colorSelector2();
+    })
+    .selectAll('option').data(colorGroups)
+      .enter()
+        .append('option')
+        .html(d=>d.key);
 
 
 
@@ -192,29 +192,29 @@ d3.select('.color-selector')
 //  colorSelector2
 //=====================
 
-function colorSelector2()	{
-	console.group('colorSelector2');
+function colorSelector2()  {
+  console.group('colorSelector2');
 
-	let selected_type = d3.select('.color-selector').property('value');
-	console.log('selected_type:', selected_type);
+  let selected_type = d3.select('.color-selector').property('value');
+  console.log('selected_type:', selected_type);
 
-	let selected_schemes = schemes.filter(d=>d.type==selected_type);
+  let selected_schemes = schemes.filter(d=>d.type==selected_type);
 
-	let p = d3.select('.color-selector2')
-						.on('change', function(e,d){
-							console.log('color-selector2:', d3.select(this).property('value'));
-							colorGrid();
-						})
-						.selectAll('option').data(selected_schemes, d=>d.name);
+  let p = d3.select('.color-selector2')
+            .on('change', function(e,d){
+              console.log('color-selector2:', d3.select(this).property('value'));
+              colorGrid();
+            })
+            .selectAll('option').data(selected_schemes, d=>d.name);
 
-	p.exit().remove();
-	p.enter()
-			.append('option')
-			.html(d=>d.name);
+  p.exit().remove();
+  p.enter()
+      .append('option')
+      .html(d=>d.name);
 
-	colorGrid();
+  colorGrid();
 
-	console.groupEnd('colorSelector2');
+  console.groupEnd('colorSelector2');
 }
 
 
@@ -222,39 +222,39 @@ function colorSelector2()	{
 //=====================
 //  colorGrid
 //=====================
-function colorGrid()	{
-	console.group('colorSelector2');
+function colorGrid()  {
+  console.group('colorSelector2');
 
-	let selected_scheme_name = d3.select('.color-selector2').property('value');
-	console.log('selected_scheme_name:', selected_scheme_name);
+  let selected_scheme_name = d3.select('.color-selector2').property('value');
+  console.log('selected_scheme_name:', selected_scheme_name);
 
-	let scheme = schemes.find(d=>d.name==selected_scheme_name).scheme;
-	console.log('scheme:', scheme);
-
-
-	let r = d3.select('.color-grid')
-							.attr('height',50)
-							.attr('viewBox',[0,0, 30*scheme.length, 30].join(' '))
-							.selectAll('rect').data(scheme);
-
-	r.exit().remove();
-
-	r.enter()
-				.append('rect')
-					.attr('transform',(d,i)=>'translate('+[30*i, 0]+')')
-					.attr('width',30)
-					.attr('height',30)
-			.merge(r)
-					.transition()
-						.delay((d,i)=>i*10)
-						.duration(1000)
-							.attr('fill',d=>d);
+  let scheme = schemes.find(d=>d.name==selected_scheme_name).scheme;
+  console.log('scheme:', scheme);
 
 
-	recolorMap(scheme);
+  let r = d3.select('.color-grid')
+              .attr('height',50)
+              .attr('viewBox',[0,0, 30*scheme.length, 30].join(' '))
+              .selectAll('rect').data(scheme);
+
+  r.exit().remove();
+
+  r.enter()
+        .append('rect')
+          .attr('transform',(d,i)=>'translate('+[30*i, 0]+')')
+          .attr('width',30)
+          .attr('height',30)
+      .merge(r)
+          .transition()
+            .delay((d,i)=>i*10)
+            .duration(1000)
+              .attr('fill',d=>d);
 
 
-	console.groupEnd('colorSelector2');
+  recolorMap(scheme);
+
+
+  console.groupEnd('colorSelector2');
 }
 
 
@@ -262,54 +262,54 @@ function colorGrid()	{
 //=====================
 //  recolorMap
 //=====================
-function recolorMap(colors)	{
-	console.group('recolorMap');
+function recolorMap(colors)  {
+  console.group('recolorMap');
 
-	if (!colors)	{
-		colors = schemes[0].scheme;
-	}
+  if (!colors)  {
+    colors = schemes[0].scheme;
+  }
 
-	// map already exists?
-	if (states && states.features)	{
-
-
-		// store color in object properties
-		console.log('colors', colors.length, colors);
-
-		let morecolors = [...colors]; // clone
-
-		// remove unwanted colors
-		morecolors = morecolors.filter(d=>['#ffffff','#000000'].indexOf(d)<0);
-
-		while (morecolors.length < states.features.length)	{
-			morecolors = morecolors.concat([...colors].reverse());
-		}
-
-		console.log('morecolors', morecolors.length, morecolors);
+  // map already exists?
+  if (states && states.features)  {
 
 
-		states.features.forEach((d,i)=>{
-			d.properties.color = morecolors[i];
-		});
+    // store color in object properties
+    console.log('colors', colors.length, colors);
+
+    let morecolors = [...colors]; // clone
+
+    // remove unwanted colors
+    morecolors = morecolors.filter(d=>['#ffffff','#000000'].indexOf(d)<0);
+
+    while (morecolors.length < states.features.length)  {
+      morecolors = morecolors.concat([...colors].reverse());
+    }
+
+    console.log('morecolors', morecolors.length, morecolors);
 
 
-
-		let p = d3.selectAll(".state")
-							.transition()
-								.delay((d,i)=>i*10)
-								.duration(1000)
-									.attr('stroke','white')
-									.attr('fill', d=>{
-										console.log('properties', d.properties);
-										return d.properties.color
-									});
-
-
-	}
+    states.features.forEach((d,i)=>{
+      d.properties.color = morecolors[i];
+    });
 
 
 
-	console.groupEnd('recolorMap');
+    let p = d3.selectAll(".state")
+              .transition()
+                .delay((d,i)=>i*10)
+                .duration(1000)
+                  .attr('stroke','white')
+                  .attr('fill', d=>{
+                    console.log('properties', d.properties);
+                    return d.properties.color
+                  });
+
+
+  }
+
+
+
+  console.groupEnd('recolorMap');
 
 }
 
@@ -339,38 +339,38 @@ d3.json("malaysia.json").then(function(malaysia) {
   states = topojson.feature(malaysia, malaysia.objects.states);
   land = topojson.feature(malaysia, malaysia.objects.land);
 
-	//=====================
-	// shift sabah/sarawak/labuan closer to semenanjung
-	//=====================
+  //=====================
+  // shift sabah/sarawak/labuan closer to semenanjung
+  //=====================
 
-	[land,states].forEach(d=>{
-		d.features
-			.forEach(d=>{
-				d.geometry.coordinates.forEach(d=>{
-					d[0].forEach(_shift);
-				});
-			});
-	});
+  [land,states].forEach(d=>{
+    d.features
+      .forEach(d=>{
+        d.geometry.coordinates.forEach(d=>{
+          d[0].forEach(_shift);
+        });
+      });
+  });
 
-	function _shift(d)	{
-		if (typeof d=='object' && d.length==2)	{
-			if (d[0]>105) d[0] += -5;
-		}
-	}
+  function _shift(d)  {
+    if (typeof d=='object' && d.length==2)  {
+      if (d[0]>105) d[0] += -5;
+    }
+  }
 
 
 
   my.selectAll(".state").data(states.features)
     .enter()
       .append("path")
-      	.attr('class','state')
-	      .attr("d", path)
-	    	.attr('stroke','gray')
-	    	.attr('fill', 'white' );
+        .attr('class','state')
+        .attr("d", path)
+        .attr('stroke','gray')
+        .attr('fill', 'white' );
 
 
 
-	recolorMap();
+  recolorMap();
 
 
 

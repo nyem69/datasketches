@@ -109,56 +109,56 @@ d3.json("malaysia.json").then(function(malaysia) {
   var land = topojson.feature(malaysia, malaysia.objects.land);
 
 
-	//=====================
-	// shift sabah/sarawak/labuan closer to semenanjung
-	//=====================
+  //=====================
+  // shift sabah/sarawak/labuan closer to semenanjung
+  //=====================
 
-//	[land,states].forEach(d=>{
-	[land,states].forEach(d=>{
-		d.features
-			.forEach(d=>{
-				d.geometry.coordinates.forEach(d=>{
-					if (d.length==2)	{
-						_shift(d);
-					}else	{
-						d[0].forEach(_shift);
-					}
-				});
-			});
-	});
-
-
-	function _shift(d,n)	{
-		if (!n) n=0;
-		n++;
-
-		if (typeof d=='object' && d.length==2)	{
-			// apple shift for longitude > 5
-			if (d[0]>105) d[0] += -5;
-
-		/*
-		}else if (typeof d=='object' && d.length==1)	{
-			console.warn('_shift',n,typeof d, d.length);
-			d = _shift(d, n);
-		}else if (typeof d=='object' && d.length>2)	{
-			console.warn('_shift',n,typeof d, d.length);
-			d = _shift(d, n);
-		}else if (typeof d=='string')	{
-			console.warn('_shift',n,typeof d, d);
-		}else if (typeof d=='number')	{
-			console.warn('_shift',n,typeof d, d);
-		}else	{
-			console.warn('_shift',n,typeof d, d);
-		*/
-		}
-
-		return d;
-	}
+//  [land,states].forEach(d=>{
+  [land,states].forEach(d=>{
+    d.features
+      .forEach(d=>{
+        d.geometry.coordinates.forEach(d=>{
+          if (d.length==2)  {
+            _shift(d);
+          }else  {
+            d[0].forEach(_shift);
+          }
+        });
+      });
+  });
 
 
-	//=====================
-	//
-	//=====================
+  function _shift(d,n)  {
+    if (!n) n=0;
+    n++;
+
+    if (typeof d=='object' && d.length==2)  {
+      // apple shift for longitude > 5
+      if (d[0]>105) d[0] += -5;
+
+    /*
+    }else if (typeof d=='object' && d.length==1)  {
+      console.warn('_shift',n,typeof d, d.length);
+      d = _shift(d, n);
+    }else if (typeof d=='object' && d.length>2)  {
+      console.warn('_shift',n,typeof d, d.length);
+      d = _shift(d, n);
+    }else if (typeof d=='string')  {
+      console.warn('_shift',n,typeof d, d);
+    }else if (typeof d=='number')  {
+      console.warn('_shift',n,typeof d, d);
+    }else  {
+      console.warn('_shift',n,typeof d, d);
+    */
+    }
+
+    return d;
+  }
+
+
+  //=====================
+  //
+  //=====================
 
   my.selectAll(".land")
       .data(land.features)
