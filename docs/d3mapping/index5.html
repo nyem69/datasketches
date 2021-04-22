@@ -245,6 +245,9 @@ function colorGrid()  {
           .attr('transform',(d,i)=>'translate('+[30*i, 0]+')')
           .attr('width',30)
           .attr('height',30)
+          .on('click', function(e,d){
+          	window.prompt('color:', d);
+          })
       .merge(r)
           .transition()
             .delay((d,i)=>i*10)
@@ -393,8 +396,7 @@ d3.json("malaysia.json").then(function(malaysia) {
 <br>
 <button onclick="document.location='index.html'">Main Menu</button>
 <button onclick="document.location='index4.html'">Back</button>
-<!--
 <button onclick="document.location='index6.html'">Next</button>
--->
+
 </body>
 </html>
