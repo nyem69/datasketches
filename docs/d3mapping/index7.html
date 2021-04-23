@@ -173,12 +173,12 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 						if (k['longitude'] > 105) k['longitude'] += -5;
 
 						// max active date
-						k.max_active_date = d3.max(k.active, d=>d.date);
+						k.max_active_date = d3.max(k.active.filter(d=>d.value>0), d=>d.date);
 						let p1 = k.active.find(d=>d.date==k.max_active_date);
 						k.latest_active_value = p1 && p1.value || null;
 
 						// max total date
-						k.max_total_date = d3.max(k.total, d=>d.date);
+						k.max_total_date = d3.max(k.total.filter(d=>d.value>0), d=>d.date);
 						let p2 = k.total.find(d=>d.date==k.max_total_date);
 						k.latest_total_value = p2 && p2.value || null;
 
