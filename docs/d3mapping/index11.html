@@ -27,7 +27,7 @@ slider
   width: 100%;
 }
 .bubble {
-  background: #0075FF;
+  background: rgb(128,0,0);
   color: white;
   padding: 4px 12px;
   position: absolute;
@@ -40,7 +40,7 @@ slider
   position: absolute;
   width: 2px;
   height: 2px;
-  background: #0075FF;
+  background: rgb(128,0,0);
   top: -1px;
   left: 50%;
 }
@@ -55,6 +55,8 @@ slider
 <script type="text/javascript" src="//lib.aga.my/moment/2.24.0/moment.min.js"></script>
 <script type="text/javascript" src="//lib.aga.my/textures/1.2.3/textures.js"></script>
 <script type="text/javascript" src="//lib.aga.my/chroma/2.1.1/chroma.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/turf/5.1.16/turf.min.js"></script>
+
 <link type="text/css" rel="stylesheet" href="//lib.aga.my/font/awesome/5.15.2/css/all.min.css"/>
 
 
@@ -63,7 +65,6 @@ slider
 
 var width = 960,
     height = 400;
-
 
 var projection = d3.geoMercator()
     .center([0, 0 ])
@@ -162,10 +163,17 @@ svg.append('defs')
 
 
 
+
+
+//=====================
+// create containers
+//=====================
+
 let g 							= svg.append("g"),
 
 		map_border 			= svg.append("g").attr('class','map-border-states'),
 		map_fill 				= svg.append("g").attr('class','map-fill-states'),
+		map_label 			= svg.append("g").attr('class','map-label-states'),
 
 		circles_border	= svg.append('g').attr('class','cities-malaysia-mouseover'),
     circles					= svg.append('g').attr('class','cities-malaysia'),
@@ -176,14 +184,29 @@ let g 							= svg.append("g"),
 
 
 
+
+
+
+
+
+
+
 //=====================
 // global variables
 //=====================
 
 let states,
-    land;
+    land,
 
-let timer;
+		timer,
+		playdate,
+		transition_duration = 500,
+
+		comma = d3.format(',');
+
+
+
+
 
 
 //=====================
@@ -198,6 +221,8 @@ Promise.all([
 	//d3.csv('../_data/20210423-coronavirus_malaysia - Hotspot.csv'),
 
 ]).then(loaded);
+
+
 
 
 
@@ -262,6 +287,8 @@ function loaded(raw)	{
 	        });
 
 	console.groupEnd('map');
+
+
 
 
 	//====================================================================================
@@ -387,38 +414,62 @@ function loaded(raw)	{
 
 
 	// large circle to capture mouseover
-   circles_border
-     .selectAll('circle').data(data)
-      .enter()
-        .append('circle')
-          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
-          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-          .attr('r',d=>(scaleRadius(d.latest_active_value)||0)+10)
-          .attr('fill',d=>scaleColorCircle(d.latest_active_value))
-          .attr('stroke',d=>scaleColorCircle(d.latest_active_value))
-          .attr('fill-opacity',.1)
-          .attr('stroke-opacity',.2)
-          .attr('stroke-width',.5)
-          .on('mouseover',function(e,d){
+   let b = circles_border
+     .selectAll('circle').data(data);
 
-          	d3.select('.cities-malaysia-label')
-          		.selectAll('text')
-				      	.attr('display',k=>k.Daerah==d.Daerah ? 'block':'none')
+	b.exit()
+    	.transition()
+    		.duration(300)
+    		.ease(d3.easeBounce)
+        .attr('r',0)
+        .remove()
+
+   b.enter()
+      .append('circle')
+        .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+        .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+        .attr('r',0)
+        .attr('fill',d=>scaleColorCircle(d.latest_active_value))
+        .attr('stroke',d=>scaleColorCircle(d.latest_active_value))
+        .attr('fill-opacity',.1)
+        .attr('stroke-opacity',.2)
+        .attr('stroke-width',.5)
+        .on('mouseover',function(e,d){
+
+        	d3.select('.cities-malaysia-label')
+        		.selectAll('text')
+			      	.attr('display',k=>k.Daerah==d.Daerah ? 'block':'none')
 
 
-          })
+        })
+     .merge(b)
+    	.transition()
+    		.duration(300)
+    		.ease(d3.easeBounce)
+        	.attr('r',d=>(scaleRadius(d.latest_active_value)||0)+10)
+    	;
+
+
 
 
 
 	// circle fill
-  	//.attr('pointer-events','none')
-  circles
-    .selectAll('circle').data(data)
-    .enter()
+
+  let c = circles
+    .selectAll('circle').data(data);
+
+	c.exit()
+    	.transition()
+    		.duration(300)
+    		.ease(d3.easeBounce)
+        .attr('r',0)
+        .remove()
+
+  c.enter()
       .append('circle')
         .attr('cx', d=>projection([d.longitude,d.latitude])[0])
         .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-        .attr('r',d=>scaleRadius(d.latest_active_value))
+        .attr('r',0)
         .attr('fill',d=>d.latest_active_value > 500 ? 'url(#Red)'
         								: d.latest_active_value > 100 ? 'url(#Orange)'
         								: d.latest_active_value > 20 ? 'url(#Yellow)'
@@ -449,14 +500,19 @@ function loaded(raw)	{
 			    		.ease(d3.easeBounce)
 				    	.attr('r', scaleRadius(d.latest_active_value))
 
-        });
+        })
+    .merge(c)
+    	.transition()
+    		.duration(300)
+    		.ease(d3.easeBounce)
+        .attr('r',d=>scaleRadius(d.latest_active_value))
+    	;
 
 
 
 
 	// text
 
-	let comma = d3.format(',');
 
   circles_label
   	.attr('pointer-events','none')
@@ -495,7 +551,7 @@ function loaded(raw)	{
 	        	sel.append('tspan')
 	        		.attr('x',d=>0)
 	        		.attr('y',d=>0)
-	        		.attr('fill','steelblue')
+	        		.attr('fill','darkcyan')
 	        		.attr('font-size','60%')
 	        		.text(d=>d.Daerah)
 
@@ -561,9 +617,11 @@ function loaded(raw)	{
 
 
 
-	//=====================
+
+
+	//====================================================================================
 	// textures.js
-	//=====================
+	//====================================================================================
 	// https://riccardoscalco.it/textures/
 
 
@@ -600,31 +658,31 @@ function loaded(raw)	{
 	// title
 	//=====================
 	page_title
-		.attr('y','30%')
+		.attr('y','10%')
 		.attr('text-anchor','middle')
 		.attr('fill','steelblue')
 		.call(sel=>{
 
 			sel.append('tspan')
-				.attr('x','46%')
+				.attr('x','50%')
 				.attr('font-size','120%')
-				.text('Active covid-19 cases by districts');
+				.text('covid-19 active cases by districts');
 
 			sel.append('tspan')
 				.attr('class','title-date')
-				.attr('x','46%')
+				.attr('x','50%')
 				.attr('dy','1.2em')
 				.text(moment(max_date).format('D MMM YYYY'));
 
 			sel.append('tspan')
 				.attr('class','title-total')
-				.attr('x','46%')
+				.attr('x','50%')
 				.attr('dy','1.4em')
 				.attr('font-size','110%')
 				.text(comma(d3.sum(data, d=>d.latest_active_value)));
 
 			sel.append('tspan')
-				.attr('x','46%')
+				.attr('x','50%')
 				.attr('dy','1em')
 				.attr('font-size','90%')
 				.text('active cases');
@@ -633,6 +691,12 @@ function loaded(raw)	{
 
 
 	console.groupEnd('hotspots');
+
+
+
+
+
+
 
 
 
@@ -659,9 +723,21 @@ function loaded(raw)	{
 	  const bubble = wrap.querySelector(".bubble");
 
 	  range.addEventListener("input", () => {
+
+
+			if (playtimer) {
+				window.clearInterval(playtimer);
+				playtimer=null;
+
+				d3.select('.fa-play').style('display',null);
+				d3.select('.fa-pause').style('display','none');
+			}
+
 	    setBubble(range, bubble);
 	  });
+
 	  setBubble(range, bubble);
+
 	});
 
 	function setBubble(range, bubble) {
@@ -681,6 +757,8 @@ function loaded(raw)	{
 	  // Sorta magic numbers based on size of the native UI thumb
 	  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
 
+		// snap time to 00:00:00
+		playdate = new Date( +moment(moment(+val).format('YYYY-MM-DD')) );
 
 		// delay execution
 		if (timer) {
@@ -702,7 +780,6 @@ function loaded(raw)	{
 		//console.group('%c' +'slideTime '+ymd, 'color:magenta');
 
 
-
 		//=====================
 		// hide text
 		//=====================
@@ -715,10 +792,12 @@ function loaded(raw)	{
 		//=====================
 		circles_border
 			.selectAll('circle')
-				.attr('r',d=>{
-					let p = d.active.find(d=>d.date==date);
-					return p && +p.value>0 ? scaleRadius(p.value)+10 : 0;
-				})
+				.transition()
+					.duration(300)
+					.attr('r',d=>{
+						let p = d.active.find(d=>d.date==date);
+						return p && +p.value>0 ? scaleRadius(p.value)+10 : 0;
+					})
 
 		//=====================
 		// circle
@@ -726,10 +805,20 @@ function loaded(raw)	{
 		circles
 			.selectAll('circle')
 				//.attr('filter', null)
-				.attr('r',d=>{
-					let p = d.active.find(d=>d.date==date);
-					return p && +p.value>0 ? scaleRadius(p.value) : 0;
-				})
+				.transition()
+					.duration(300)
+	        .attr('fill',d=>{
+													let p = d.active.find(d=>d.date==date);
+													if (!p)	return null;
+	        								return p.value > 500 ? 'url(#Red)'
+					        								: p.value > 100 ? 'url(#Orange)'
+					        								: p.value > 20 ? 'url(#Yellow)'
+					        								: 'url(#Lime)'
+	        })
+					.attr('r',d=>{
+						let p = d.active.find(d=>d.date==date);
+						return p && +p.value>0 ? scaleRadius(p.value) : 0;
+					})
 
 		//=====================
 		// map
@@ -765,6 +854,17 @@ function loaded(raw)	{
     map_fill.selectAll(".state")
       .attr('fill',d=>d.properties.texture.url())
 
+		//=====================
+		// state-value
+		//=====================
+
+		d3.selectAll('.state-value')
+			.text(d=>d.properties.cases.value ? comma(d.properties.cases.value) : '')
+			.transition()
+				.attr('fill', d=>d.properties.cases.value > 40 ? 'orangered'
+													: d.properties.cases.value > 20 ? 'orange'
+													: d.properties.cases.value > 0 ? 'yellow'
+													: 'lime')
 
 		//=====================
 		// title-date, total
@@ -772,13 +872,23 @@ function loaded(raw)	{
 
 		d3.select('.title-date')
 			.text(moment(date).format('D MMM YYYY'));
-			//.text(ymd);
 
 		d3.select('.title-total')
 			.text(()=>{
 				let total = d3.sum(active_cases_by_states, d=>d.value);
+
+				//console.log('total', total);
+
 				return total ? comma(total) : ' '
-			});
+			})
+			.transition()
+				.attr('fill', d=>{
+					let total = d3.sum(active_cases_by_states, d=>d.value);
+					return total > 40 ? 'orangered'
+														: total > 20 ? 'orange'
+														: total > 0 ? 'yellow'
+														: 'lime'
+				})
 
 
 
@@ -797,8 +907,7 @@ function loaded(raw)	{
 
 	console.group('%c' +'playback', 'color:magenta');
 
-	let playdate,
-			playtimer,
+	let playtimer;
 			date_range 	= d3.timeDay.range(
 											moment(min_date),
 											moment(max_date).add(1,'days'),
@@ -828,12 +937,15 @@ function loaded(raw)	{
 
 		})
 		.on('click', function(e,d)	{
+			console.group('%c' +'play', 'color:magenta');
 
 			d3.select(this)
 				.style('display','none')
 
 			d3.select('.fa-pause')
 				.style('display', null)
+
+			console.log('playdate', playdate);
 
 			play();
 			if (playtimer)	{
@@ -843,7 +955,7 @@ function loaded(raw)	{
 
 			playtimer=window.setInterval(play, 300);
 
-
+			console.groupEnd('play');
 		});
 
 
@@ -855,14 +967,12 @@ function loaded(raw)	{
 				idx = 0;
 				playdate = date_range[0];
 			}else	{
-				idx = date_range.indexOf(playdate);
+				//idx = date_range.indexOf(playdate);
+				idx = date_range.map(d=>moment(d).format('YYYY-MM-DD')).indexOf(moment(playdate).format('YYYY-MM-DD'));
 			}
 
-
-			//console.log('idx',idx);
-			//console.log('playdate', playdate);
-
 			idx++;
+			if (idx>date_range.length-1) idx=0;
 			playdate = date_range[idx];
 
 			let dt 	= +moment(playdate);
@@ -876,18 +986,6 @@ function loaded(raw)	{
 	//=====================
 	d3.select('.fa-pause')
 		.style('cursor','pointer')
-//		.on('mouseover', function(e,d){
-//
-//			d3.select(this).style('color','lime')
-//
-//		})
-//		.on('mouseout', function(e,d){
-//
-//			d3.select(this)
-//				.transition()
-//					.style('color','white')
-//
-//		})
 		.on('click', function(e,d)	{
 
 			d3.select(this)
@@ -896,18 +994,240 @@ function loaded(raw)	{
 			d3.select('.fa-play')
 				.style('display', null)
 
-//			if (playtimer)	{
+			if (playtimer)	{
 				window.clearInterval(playtimer);
 				playtimer=null;
-//			}
+			}
 
 		});
+
+
+
+
+
+	//====================================================================================
+	//
+	//====================================================================================
+
+	mapLabel();
+
 
 
 
 	console.groupEnd('playback');
 
 
+}
+
+
+
+//====================================================================================
+//
+//====================================================================================
+
+function mapLabel()	{
+	console.group('%c' +'mapLabel', 'color:magenta');
+
+	map_fill.selectAll('.state')
+		.each(function(d){
+
+			// SVG getBBox centroid
+			// https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox
+			let bb = d3.select(this).node().getBBox();
+			d.properties.bbox = bb;
+
+			d.properties.centroid = {
+																x:bb.x+(bb.width/2),
+																y:bb.y+(bb.height/2)
+															};
+
+			// turf.js centerOfMass
+			// https://turfjs.org/docs/#centerOfMass
+			let center = turf.centerOfMass(d);
+			d.properties.center = {
+															x: projection(center.geometry.coordinates)[0],
+															y: projection(center.geometry.coordinates)[1]
+														};
+
+
+			// custom offset for each state
+			d.properties.offset = {
+				"Johor"						:[[-10,10],[-50,50]],
+				"Melaka"					:[[0,0],[-40,40]],
+				"Negeri Sembilan"	:[[0,0],[-40,40]],
+				"Putrajaya"				:[[0,0],[-20,20]],
+				"Kuala Lumpur"		:[[0,0],[0,0]],
+				"Selangor"				:[[-10,-10],[-13,-13]],
+				"Pulau Pinang"		:[[0,0],[-20,20]],
+
+				"Kedah"						:[[0,0],[-10,10]],
+				"Perak"						:[[0,0],[-20,20]],
+				"Perlis"					:[[0,0],[-20,-20]],
+
+				"Pahang"					:[[0,0],[40,-40]],
+				"Terengganu"			:[[0,0],[10,-10]],
+				"Kelantan"				:[[0,-10],[10,-10]],
+
+				"Sabah"						:[[-10,0],[100,100]],
+				"Sarawak"					:[[20,10],[70,70]],
+				//"Labuan"					:[[0,0],[160,160]],
+				"Labuan"					:[[0,0],[-20,-20]],
+			}[d.properties.cases.negeri];
+
+			d.properties.label_anchor = ['Sarawak','Sabah'].indexOf(d.properties.cases.negeri)>-1 ? 'end'
+								: ['Pahang','Terengganu','Kelantan'].indexOf(d.properties.cases.negeri)>-1 ? 'end'
+								: ['Labuan'].indexOf(d.properties.cases.negeri)>-1 ? 'begin'
+								: 'begin';
+
+		});
+
+	console.log('states.features',states.features.map(d=>d.properties));
+
+	let l = map_label.selectAll('g').data(states.features);
+	l.exit().remove();
+	l.enter()
+			.append('g')
+				.call(sel=>{
+
+//					sel.append('line')
+//						.attr('class','centroid')
+//						.attr('x1',d=>d.properties.centroid.x)
+//						.attr('x2',d=>d.properties.centroid.x)
+//						.attr('y1',d=>d.properties.centroid.y)
+//						.attr('y2',d=>d.properties.centroid.y)
+//						.attr('stroke','#ddd');
+//
+//
+//					sel.append('line')
+//						.attr('class','center')
+//						.attr('x1',d=>d.properties.center.x)
+//						.attr('x2',d=>d.properties.center.x)
+//						.attr('y1',d=>d.properties.center.y)
+//						.attr('y2',d=>d.properties.center.y)
+//						.attr('stroke','#f00');
+
+					let colors 	= [
+													'#2458B3',
+													'steelblue',
+												];
+
+					sel.append('circle')
+						.attr('fill',colors[0])
+						.attr('cx', d=>d.properties.center.x + d.properties.offset[0][0])
+						.attr('cy', d=>d.properties.center.y + d.properties.offset[0][1])
+						.attr('r', 4)
+
+
+					sel.append('path')
+						.attr('stroke',colors[0])
+						.attr('fill','none')
+						.attr('stroke-width',3)
+						.attr('d',d=>{
+							let pathdata = pathLiner(d);
+							//console.log('pathdata',pathdata);
+							return pathdata;
+						})
+
+
+					sel.append('circle')
+						.attr('fill',colors[1])
+						.attr('cx', d=>d.properties.center.x + d.properties.offset[0][0])
+						.attr('cy', d=>d.properties.center.y + d.properties.offset[0][1])
+						.attr('r', 3)
+
+					sel.append('path')
+						.attr('stroke',colors[1])
+						.attr('fill','none')
+						.attr('d',d=>{
+							let pathdata = pathLiner(d);
+							//console.log('pathdata',pathdata);
+							return pathdata;
+						})
+
+
+					sel.append('text')
+						.attr('transform',d=>'translate('+ pathLinerTail(d) +')')
+						.attr('fill','cyan')
+						.attr('text-anchor',d=>d.properties.label_anchor)
+						.attr('font-size','70%')
+						.attr('y',-3)
+						.text(d=>d.properties.cases.negeri);
+
+					sel.append('text')
+						.attr('class','state-value')
+						.attr('transform',d=>'translate('+ pathLinerTail(d) +')')
+						.attr('fill',colors[1])
+						.attr('text-anchor',d=>d.properties.label_anchor=='begin' ? 'end' : 'begin')
+						.attr('font-size','100%')
+						.attr('x',d=>d.properties.label_anchor=='begin' ? -5 : 5)
+						//.attr('y',0)
+						.attr('fill','crimson')
+						.attr('font-weight',500)
+						.text(d=>comma(d.properties.cases.value));
+
+				})
+			.merge(l)
+				.call(sel=>{
+
+					sel.select('.state-value')
+						.text(d=>comma(d.properties.cases.value));
+
+//					sel.select('line.centroid')
+//						.transition()
+//							.delay((d,i)=>i*10)
+//							.attr('x2', d=>['Sarawak','Sabah','Labuan'].indexOf(d.properties.cases.negeri)>-1 ? width : 0);
+//
+//					sel.select('line.center')
+//						.transition()
+//							.delay((d,i)=>i*10)
+//							.attr('x2', d=>['Sarawak','Sabah','Labuan'].indexOf(d.properties.cases.negeri)>-1 ? width : 0);
+
+				});
+
+
+	//=====================
+	// build line
+	//=====================
+	function pathLiner(d) {
+		//console.log('d',d);
+		if (!d.properties.center) return null;
+		return [
+
+			// head position
+
+			'M', // absolute
+			[
+				d.properties.center.x + d.properties.offset[0][0],
+				d.properties.center.y + d.properties.offset[0][1]
+			].join(','),
+
+			// neck position
+
+			'l', // relative offset
+			[
+				d.properties.offset[1][0],
+				d.properties.offset[1][1]
+			].join(','),
+
+			// tail end
+
+			'L', // absolute
+			pathLinerTail(d),
+
+		].join(' ');
+	}
+
+	function pathLinerTail(d) {
+		return	[
+							['Sarawak','Sabah'].indexOf(d.properties.cases.negeri)>-1 ? width-50
+								: ['Pahang','Terengganu','Kelantan'].indexOf(d.properties.cases.negeri)>-1 ? 340
+								: ['Labuan'].indexOf(d.properties.cases.negeri)>-1 ? 600
+								: 50,
+							d.properties.center.y + d.properties.offset[0][1] + d.properties.offset[1][1]
+						]
+	}
+
+	console.groupEnd('mapLabel');
 }
 
 
@@ -940,12 +1260,19 @@ function loaded(raw)	{
 </div>
 
 <div>
-		Playback
+		Map label placement using
+		<a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox" target="_blank" style="color:#ddd">svg getBBox</a> or
+		<a href="https://turfjs.org/docs/#centerOfMass" target="_blank" style="color:#ddd">turf.js centerOfMass</a>
 </div>
 <br>
 <button onclick="document.location='index.html'">Main Menu</button>
-<button onclick="document.location='index9.html'">Back</button>
-<button onclick="document.location='index11.html'">Next</button>
+<button onclick="document.location='index10.html'">Back</button>
+<!--
+<button onclick="document.location='index8.html'">Next</button>
+-->
+
+
+
 
 
 </body>

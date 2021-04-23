@@ -42,11 +42,11 @@ var projection = d3.geoMercator()
     .scale(2800 + 5*100)
     .rotate([-109.45 + 5/2,-3]);
 
-var svg = d3.select("body").append("svg")
-//    .attr("width", width)
-//    .attr("height", height);
-  .attr('viewBox', [0,0,width,height].join(' ')) // fill screen
-;
+var svg = d3.select("body")
+								.append("svg")
+ 									.attr('viewBox', [0,0,width,height].join(' ')) // fill screen
+						 				.style('max-height', (innerHeight-200)+'px')
+									;
 
 var path = d3.geoPath()
     .projection(projection);
