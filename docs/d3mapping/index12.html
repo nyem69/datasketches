@@ -63,18 +63,20 @@ slider
 
 <script>
 
-var width = 960,
+//var width = 960,
+var width = 1060,
     height = 400;
 
 var projection = d3.geoMercator()
     .center([0, 0 ])
     .scale(2800 + 5*100)
-    .rotate([-109.45 + 5/2,-3.2]);
+    //.rotate([-109.45 + 5/2,-3.2]);
+    .rotate([-109.45 + 5/2 + 1,-3.2]);
 
 var svg = d3.select("body")
 								.append("svg")
  									.attr('viewBox', [0,0,width,height].join(' ')) // fill screen
-						 				.style('max-height', (innerHeight-200)+'px')
+						 				.style('max-height', (innerHeight-300)+'px') // adjust to fit slider + bar chart
 									;
 
 var path = d3.geoPath()
@@ -199,10 +201,15 @@ let states,
     land,
 
 		timer,
+		timer_barchart,
+
+
 		playdate,
 		transition_duration = 500,
 
-		comma = d3.format(',');
+		// number format
+		comma = d3.format(','),
+		z2 		= d3.format('02d');
 
 
 
@@ -217,8 +224,8 @@ Promise.all([
 
 	d3.json("malaysia.json"),
 
-	d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv'),
-	//d3.csv('../_data/20210423-coronavirus_malaysia - Hotspot.csv'),
+	//d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv'),
+	d3.csv('../_data/20210423-coronavirus_malaysia - Hotspot.csv'),
 
 ]).then(loaded);
 
@@ -298,11 +305,70 @@ function loaded(raw)	{
 	console.group('%c' +'hotspots', 'color:magenta');
 
 	let hotspots = raw[1];
+  //console.log('hotspots', hotspots);
 
   //console.log('hotspots.columns', hotspots.columns);
-  //console.log('hotspots', raw);
+
+
+	//=====================
+	// cleanup date on column name
+	//=====================
+	let columns = hotspots.columns.map(j=>{
+
+		// "Active 2020-04-20"
+		let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
+
+		if (r1)	{
+
+			// "2020-06-1"
+			// "2020-06-1".match(/^(\d{4})\-(\d{2})\-(\d{1})$/)
+			// => ["2020-06-1","2020","06","1"]
+			let r3 = r1[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
+
+			if (r3)	{
+				return 'Active '+[r3[1], r3[2], z2(r3[3])].join('-')
+			}else	{
+				return 'Active '+r1[1];
+			}
+
+
+		}else {
+
+			// "2020-04-20"
+			let r2 = j.match(/^(\d+\-\d+\-\d+)$/);
+
+			if (r2)	{
+
+				// "2020-06-1"
+				// "2020-06-1".match(/^(\d{4})\-(\d{2})\-(\d{1})$/)
+				// => ["2020-06-1","2020","06","1"]
+				let r3 = r2[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
+
+				if (r3)	{
+					return [r3[1], r3[2], z2(r3[3])].join('-')
+				}else	{
+					return r2[1];
+				}
+
+			}else	{
+				return j
+			}
+
+		}
+
+	});
+
+  //console.log('columns', columns);
+
+
+
+
+	//=====================
+	// rebuild data structure
+	//=====================
 
   let data = [];
+
   hotspots.filter(d=>d.Longitude && d.Latitude)
       .forEach(d=>{
 
@@ -315,13 +381,15 @@ function loaded(raw)	{
         	active:[],
 				};
 
-				hotspots.columns.forEach(j=>{
+				//hotspots.columns.forEach(j=>{
+				columns.forEach(j=>{
 
 					// "Active 2020-04-20"
 					let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
 
 					// "2020-04-20"
 					let r2 = j.match(/^(\d+\-\d+\-\d+)$/);
+
 
 					if (r1)	{
 
@@ -666,12 +734,14 @@ function loaded(raw)	{
 			sel.append('tspan')
 				.attr('x','50%')
 				.attr('font-size','120%')
+				.attr('fill', 'orange')
 				.text('covid-19 active cases by districts');
 
 			sel.append('tspan')
 				.attr('class','title-date')
 				.attr('x','50%')
 				.attr('dy','1.2em')
+				.attr('fill','url(#Orange)')
 				.text(moment(max_date).format('D MMM YYYY'));
 
 			sel.append('tspan')
@@ -892,6 +962,20 @@ function loaded(raw)	{
 
 
 
+			//=====================
+			// bar chart update
+			//=====================
+
+			// render
+			barChart(
+				by_date.filter(d=>d.date <= date), // data
+				x,	// x scale
+				y,	// y scale
+				d3.max(by_date.filter(d=>d.date <= date), d=>d.value) // y_max
+			);
+
+
+
 		//console.groupEnd('slideTime '+ymd);
 
 	}
@@ -899,6 +983,11 @@ function loaded(raw)	{
 
 
 	console.groupEnd('slider');
+
+
+
+
+
 
 
 	//====================================================================================
@@ -959,6 +1048,9 @@ function loaded(raw)	{
 		});
 
 
+	//=====================
+	// play
+	//=====================
 	function play()	{
 
 			let idx;
@@ -978,6 +1070,24 @@ function loaded(raw)	{
 			let dt 	= +moment(playdate);
 			d3.select('.range').property('value', dt);
 			setBubble(d3.select('.range').node(), d3.select('.bubble').node());
+
+
+
+			// end of date -> pause
+			if (moment(playdate).format('YYYY-MM-DD') == max_date)	{
+
+				if (playtimer)	{
+					window.clearInterval(playtimer);
+					playtimer=null;
+				}
+
+				// delay before restarting loop
+				window.setTimeout(()=>{
+					playtimer=window.setInterval(play, 300);
+				},10000)
+
+			}
+
 
 	}
 
@@ -1002,17 +1112,94 @@ function loaded(raw)	{
 		});
 
 
+	console.groupEnd('playback');
+
+
+
 
 
 
 	//====================================================================================
-	//
+	// labels & pointer lines
 	//====================================================================================
 
 	mapLabel();
 
 
 
+
+
+
+
+
+	//====================================================================================
+	// bar chart
+	//====================================================================================
+	console.group('%c' +'bar chart', 'color:magenta');
+
+
+	// active cases
+	let daily_data = d3.merge(data.map(d=>d.active));
+
+	//console.log('daily_data', daily_data);
+
+	// group by date
+	let by_date = d3.groups(daily_data, d=>d.date).map(d=>{
+																						return {
+																							date	: d[0],
+																							value	: d3.sum(d[1], d=>d.value)
+																						}
+																					});
+
+	// dates with value
+	by_date = by_date.filter(d=>d.value);
+	by_date.sort((a,b)=>a.date < b.date);
+
+
+	//=====================
+	// y scale
+	//=====================
+
+	// y max
+	let y_max		= d3.max(by_date, d=>d.value);
+			y 			= d3.scaleLinear().domain([0,y_max]);
+
+
+	//=====================
+	// x scale
+	//=====================
+
+	// extent of dates
+	let date_extent 	= d3.extent(by_date, d=>d.date);
+
+	//console.log('date_extent', date_extent);
+
+	let date_range_all = d3.timeDay.range(moment(date_extent[0]), moment(date_extent[1]));
+
+	//console.log('date_range', d3.extent(date_range));
+
+	let x = d3.scaleTime().domain(d3.extent(date_range_all)).range([0,width]);
+
+
+	// render
+	barChart(by_date, x, y, y_max);
+
+
+	console.groupEnd('bar chart');
+
+
+
+
+
+	//====================================================================================
+	// END
+	//====================================================================================
+
+
+	// delay before starting playback
+	window.setTimeout(()=>{
+		playtimer=window.setInterval(play, 300);
+	},120000)
 
 	console.groupEnd('playback');
 
@@ -1071,7 +1258,7 @@ function mapLabel()	{
 				"Sabah"						:[[-10,0],[100,100]],
 				"Sarawak"					:[[20,10],[70,70]],
 				//"Labuan"					:[[0,0],[160,160]],
-				"Labuan"					:[[0,0],[-20,-20]],
+				"Labuan"					:[[0,0],[-25,-25]],
 			}[d.properties.cases.negeri];
 
 			d.properties.label_anchor = ['Sarawak','Sabah'].indexOf(d.properties.cases.negeri)>-1 ? 'end'
@@ -1107,11 +1294,17 @@ function mapLabel()	{
 //						.attr('stroke','#f00');
 
 					let colors 	= [
-													'#2458B3',
-													'steelblue',
+													//'#2458B3',
+													'yellow',
+													'orange',
 												];
 
+					//=====================
+					// label line
+					//=====================
+
 					sel.append('circle')
+						.attr('class','outer')
 						.attr('fill',colors[0])
 						.attr('cx', d=>d.properties.center.x + d.properties.offset[0][0])
 						.attr('cy', d=>d.properties.center.y + d.properties.offset[0][1])
@@ -1119,6 +1312,7 @@ function mapLabel()	{
 
 
 					sel.append('path')
+						.attr('class','outer')
 						.attr('stroke',colors[0])
 						.attr('fill','none')
 						.attr('stroke-width',3)
@@ -1130,12 +1324,14 @@ function mapLabel()	{
 
 
 					sel.append('circle')
+						.attr('class','inner')
 						.attr('fill',colors[1])
 						.attr('cx', d=>d.properties.center.x + d.properties.offset[0][0])
 						.attr('cy', d=>d.properties.center.y + d.properties.offset[0][1])
 						.attr('r', 3)
 
 					sel.append('path')
+						.attr('class','inner')
 						.attr('stroke',colors[1])
 						.attr('fill','none')
 						.attr('d',d=>{
@@ -1145,13 +1341,21 @@ function mapLabel()	{
 						})
 
 
+					//=====================
+					// negeri
+					//=====================
+
 					sel.append('text')
 						.attr('transform',d=>'translate('+ pathLinerTail(d) +')')
-						.attr('fill','cyan')
+						.attr('fill',colors[1])
 						.attr('text-anchor',d=>d.properties.label_anchor)
 						.attr('font-size','70%')
 						.attr('y',-3)
 						.text(d=>d.properties.cases.negeri);
+
+					//=====================
+					// value
+					//=====================
 
 					sel.append('text')
 						.attr('class','state-value')
@@ -1220,8 +1424,8 @@ function mapLabel()	{
 	function pathLinerTail(d) {
 		return	[
 							['Sarawak','Sabah'].indexOf(d.properties.cases.negeri)>-1 ? width-50
-								: ['Pahang','Terengganu','Kelantan'].indexOf(d.properties.cases.negeri)>-1 ? 340
-								: ['Labuan'].indexOf(d.properties.cases.negeri)>-1 ? 600
+								: ['Pahang','Terengganu','Kelantan'].indexOf(d.properties.cases.negeri)>-1 ? 400
+								: ['Labuan'].indexOf(d.properties.cases.negeri)>-1 ? 650
 								: 50,
 							d.properties.center.y + d.properties.offset[0][1] + d.properties.offset[1][1]
 						]
@@ -1233,12 +1437,208 @@ function mapLabel()	{
 
 
 
+
+
+
+
+
+
+//====================================================================================
+//
+//====================================================================================
+
+function barChart(data, x, y, y_max)	{
+
+	if (timer_barchart) {
+		window.clearTimeout(timer_barchart);
+		timer_barchart = null;
+	}
+
+	timer_barchart = window.setTimeout(function(){
+
+		//console.group('%c' +'barChart', 'color:magenta');
+		//console.log('data', data);
+
+
+
+		// chart size to be the same as slider size
+		// get slider position & width/height
+		let slider_bb	= d3.select('.range').node().getBoundingClientRect();
+
+		//console.log('slider_bb', slider_bb);
+
+		let width 	= +d3.select('.range').style('width').replace('px',''),
+				height	= 100,
+				margin	= {
+										top			:10,
+										left		:40,
+										right		:40,
+										bottom	:40
+									};
+
+
+		//=====================
+		// y scale
+		//=====================
+
+		y.domain([0,y_max]);
+		y.range([0,height]);
+
+		let	y2 			= d3.scaleLinear().domain([0,y_max]).range([height,0]),
+				y_axis 	= d3.axisLeft(y2)
+										.ticks(5)
+										.tickFormat(d3.format('~s'));
+
+
+		//=====================
+		// date
+		//=====================
+
+		x.range([0,width]);
+
+				// daily date axis
+		let x_axis 	= d3.axisBottom(x)
+										//.tickFormat((t)=>moment(t).date() < 4 ?'':moment(t).date());
+
+	//							// monthly date axis
+	//					let x_axis2	= d3.axisBottom(x)
+	//													//.tickFormat((t)=>moment(t).date() == 1 ? moment(t).format('MMM') : '');
+
+
+		//console.log('x', x.domain(), x.range());
+		let bw = data.length ? x(moment(data[1].date)) - x(moment(data[0].date)) : 3;
+
+		//console.log('bw', data[1].date, data[0].date, bw);
+
+		//=====================
+		// svg
+		//=====================
+		let svg = d3.select('.bar_chart_holder')
+								.style('padding-left', (slider_bb.x - margin.left) +'px')
+								.style('height', (height + margin.top + margin.bottom)+'px')
+								.style('padding-right', (innerWidth - slider_bb.x - width - margin.right) +'px')
+									.selectAll('svg').data([1]);
+
+		//=====================
+		// enter
+		//=====================
+		svg
+			.enter()
+				.append('svg')
+					//.attr('width', width + margin.left + margin.right) // fixed width
+					.attr('viewBox', 	[
+															0,0,
+															width + margin.left + margin.right,
+															height + margin.top + margin.bottom
+														].join(' '))
+
+
+					.call(sel=>{
+
+						// check plot areas
+//						sel.append('rect').attr('class','bg')
+//							.attr('width', width + margin.left + margin.right)
+//							.attr('height', height + margin.top + margin.bottom)
+//							.attr('stroke','lime');
+
+//						sel.append('rect').attr('class','bg-plot')
+//							.attr('transform', 'translate('+[ margin.left, margin.top ]+')')
+//							.attr('width', width)
+//							.attr('height', height)
+//							.attr('fill',chroma('steelblue').alpha(.2).hex() );
+
+
+						//=====================
+						// axis
+						//=====================
+						sel.append('g').attr('class','axes')
+							.attr('transform', 'translate('+[ margin.left, margin.top ]+')')
+							.call(sel=>{
+
+								sel.append('g').attr('class','axis-y')
+									.call(y_axis);
+
+								sel.append('g').attr('class','axis-x1')
+									.attr('transform', 'translate('+[ 0, height ]+')')
+									.call(x_axis);
+
+	//							sel.append('g').attr('class','axis-x2')
+	//								.attr('transform', 'translate('+[ 0, height ]+')')
+	//								.call(x_axis2);
+
+							});
+
+
+						//=====================
+						// chart
+						//=====================
+						sel.append('g')
+									.attr('class','plot-area')
+									.attr('transform', 'translate('+[ margin.left, margin.top ]+')')
+
+
+					})
+
+
+			//=====================
+			// enter + update
+			//=====================
+			.merge(svg)
+				.call(sel=>{
+
+						//=====================
+						// axis
+						//=====================
+						sel.select('.axis-y').call(y_axis);
+
+						//=====================
+						// chart
+						//=====================
+
+						let b = sel.select('.plot-area')
+											.selectAll('.bar').data(data, d=>d.date);
+
+						b.exit().remove();
+
+						b.enter()
+								.append('rect')
+									.attr('class','bar')
+									.attr('width', bw-1)
+									.attr('fill','#7474CD')
+									.attr('x',(d,i)=>i==0 ? x(moment(d.date)) : x(moment(d.date)) - bw)
+									.attr('y',(d,i,j)=>height - (i==0 ? y(d.value) : y(data[i-1].value) ))
+									.attr('height',(d,i,j)=>i==0 ? y(d.value) : y(data[i-1].value))
+
+							.merge(b)
+								.transition()
+									.duration(transition_duration-100)
+										.attr('x',d=>x(moment(d.date)))
+										.attr('y',d=>height - y(d.value) )
+										.attr('height',d=>y(d.value))
+
+
+
+				});
+
+
+		//console.groupEnd('barChart');
+
+	}, 100);
+
+}
+
+
+
+
+
+
 </script>
 
+<div style="display:flex" class="bar_chart">
+	<div class="bar_chart_holder" style="flex:1 1 auto"></div>
+</div>
 
-
-
-<div style="display:flex">
+<div style="display:flex" class="slider_bubble">
 	<div style="flex:0 1 100px">
 
 		<!-- font-awesome icons https://fontawesome.com/icons?d=gallery&p=2 -->
@@ -1260,14 +1660,13 @@ function mapLabel()	{
 </div>
 
 <div>
-		Map label placement using
-		<a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox" target="_blank" style="color:#ddd">svg getBBox</a> or
-		<a href="https://turfjs.org/docs/#centerOfMass" target="_blank" style="color:#ddd">turf.js centerOfMass</a>
+	Bar chart of daily cases
 </div>
 <br>
 <button onclick="document.location='index.html'">Main Menu</button>
 <button onclick="document.location='index10.html'">Back</button>
-<button onclick="document.location='index12.html'">Next</button>
+<!--
+<button onclick="document.location='index8.html'">Next</button>
 -->
 
 
