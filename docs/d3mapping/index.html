@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
+
+<title>Displaying map with d3.js</title>
+
+<meta property="og:title" content="Displaying map with d3.js"/>
+<meta property="og:description" content="d3.js exercises - render map and points from topojson and csv files"/>
+<meta property="og:url" content="https://nyem69.github.io/datasketches/d3mapping/"/>
+<meta property="og:image" content="../assets/d3mapping.png"/>
+<meta name="twitter:card" content="../assets/d3mapping.png"/>
+<meta name="twitter:site" content="@nyem"/>
+<meta property="og:type" content="website"/>
+
+
+
 <style>
 path {
   stroke: white;
@@ -8,8 +22,10 @@ path {
 }
 </style>
 <body>
-<script src="https://d3js.org/d3.v6.min.js"></script>
-<script src="https://unpkg.com/topojson@3"></script>
+
+<script type="text/javascript" src="//lib.aga.my/d3/6.7.0/d3.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/topojson/3.0.2/topojson.min.js"></script>
+
 <script>
 var width = 960,
     height = 400;
@@ -183,8 +199,6 @@ d3.json("malaysia.json").then(function(malaysia) {
 
 //=====================
 // load districts from google sheets
-// sheet: https://docs.google.com/spreadsheets/d/17vLxlZGl1cOTpjFqQhh1x_ABVKbh4muUOh1hFK0XYhg/edit?usp=sharing
-// csv: https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv
 //=====================
 
 d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv')
@@ -232,7 +246,7 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 
 </script>
 <br>
-<p>Pointing and Label in a map</p>
+<p>Points and Labels on map</p>
 
 <br>
 <button onclick="document.location='index.html'">Main Menu</button>
