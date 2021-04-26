@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <meta name="viewport" content="width=device-width" />
 
-<title>d3.js map</title>
+<title>Time slider</title>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Displaying map with d3.js"/>
 <meta property="og:description" content="d3.js exercises - render map and points from topojson and csv files"/>
@@ -17,14 +17,17 @@
 
 
 <style>
-html {
+html, body, svg {
+	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
 	background:#30404D;
 	color:#ffffff;
-	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+
 }
 
+
+
 a {
-	color:
+	color: cyan;
 }
 
 
@@ -65,8 +68,9 @@ slider
 
 <body>
 
-<script src="https://d3js.org/d3.v6.min.js"></script>
-<script src="https://unpkg.com/topojson@3"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/6.7.0/d3.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/topojson/3.0.2/topojson.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
 <script type="text/javascript" src="//lib.aga.my/moment/2.24.0/moment.min.js"></script>
 <script type="text/javascript" src="//lib.aga.my/textures/1.2.3/textures.js"></script>
 <script type="text/javascript" src="//lib.aga.my/chroma/2.1.1/chroma.min.js"></script>
@@ -184,11 +188,65 @@ let states,
 
 let timer;
 
+
+let scale = {};
+
+
+// formatting
+let z2 = d3.format('02d'),
+		comma = d3.format(',');
+
+
+
+
+
+
 //=====================
-// from mapv4.html
+// create containers
+// - order layer level here
 //=====================
 
-d3.json("malaysia.json").then(function(malaysia) {
+let map_border 			= svg.append("g").attr('class','map-border-states'),
+		map_fill 				= svg.append("g").attr('class','map-fill-states'),
+
+		circles_border	= svg.append('g').attr('class','cities-malaysia-mouseover'),
+    circles					= svg.append('g').attr('class','cities-malaysia'),
+    circles_label		= svg.append('g').attr('class','cities-malaysia-label');
+
+		map_label 			= svg.append("g").attr('class','map-label-states'),
+
+
+
+
+
+
+
+console.time('load');
+
+
+
+
+//=====================
+// load data
+//=====================
+
+Promise.all([
+
+	d3.json("malaysia.json"),
+
+	//d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv'),
+	d3.csv('../_data/20210423-coronavirus_malaysia - Hotspot.csv'),
+
+]).then(loaded);
+
+
+function loaded(raw)	{
+
+	console.group('%c' +'map', 'color:magenta');
+	console.timeEnd('load');
+	console.time('map');
+
+	let malaysia = raw[0];
 
   states = topojson.feature(malaysia, malaysia.objects.states);
   land = topojson.feature(malaysia, malaysia.objects.land);
@@ -213,545 +271,766 @@ d3.json("malaysia.json").then(function(malaysia) {
   }
 
 
-	svg.append("g").attr('class','map-border-states')
+	map_border
 		.selectAll(".land").data(land.features)
-    .enter()
-      .append("path")
-        .attr('class','land')
-        .attr("d", path)
-        .attr('stroke','steelblue')
-        .attr('stroke-width',1)
-        .attr('fill', 'none' )
-  	    .attr('filter','url(#fshadow02)')
+	    .enter()
+	      .append("path")
+	        .attr('class','land')
+	        .attr("d", path)
+	        .attr('stroke','steelblue')
+	        .attr('stroke-width',1)
+	        .attr('fill', 'none' )
 
-	svg.append("g").attr('class','map-fill-states')
-  	.selectAll(".state").data(states.features)
+					//=====================
+	        // shadow filter
+					//=====================
+	  	    .attr('filter','url(#fshadow02)')
+
+
+	map_fill
+		.selectAll(".state").data(states.features)
 	    .enter()
 	      .append("path")
 	        .attr('class','state')
 	        .attr("d", path)
-	        .attr('stroke','#666')
-	        .attr('fill', '#30404D' )
+	        .attr('stroke','#ccc')
+	        .attr('fill', '#f2f2f2' )
 	        .attr('stroke-width',.5)
 	        .attr('fill-opacity',1)
 	        .on('click',function(e,d){
-	        	//console.log('d.properties',d.properties.id, d.properties.cases.negeri);
+	        	console.log('d.properties', d.properties);
 	        	window.prompt('map id: '+d.properties.id, d.properties.cases.negeri);
 	        });
 
 
-});
+	console.timeEnd('map');
+	console.groupEnd('map');
 
 
 
+	console.group('%c' +'loaded', 'color:magenta');
+	console.time('loaded');
+
+  console.log('raw', raw[1].slice(0,10));
 
 
-//=====================
-// load districts from google sheets
-// sheet: https://docs.google.com/spreadsheets/d/17vLxlZGl1cOTpjFqQhh1x_ABVKbh4muUOh1hFK0XYhg/edit?usp=sharing
-// csv: https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv
-//=====================
+	//=====================
+	// rebuild data structure
+	// columns -> rows
+	//=====================
 
-d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv')
-  .then(function(raw){
+	//console.log(JSON.stringify(hotspots.filter(d=>d.Latitude),null,2));
 
-  	console.group('%c' +'hotspot', 'color:magenta');
-    //console.log('raw.columns', raw.columns);
-    //console.log('raw', raw);
+	// original structure:
+	/*
+		[
+		  {
+		    "no": "1",
+		    "Negeri": "Johor",
+		    "kod_daerah": "2",
+		    "kod_mukim": "",
+		    "daerah": "Johor Bahru",
+		    "sort D": "20",
+		    "sort E": "19",
+		    "Pdm": "",
+		    "Pdm Population": "",
+		    "note": "",
+		    "Latitude": "1.5192",
+		    "Longitude": "103.7852",
+		    "Latlong": "1.51915967306,103.785177766",
+		    "Population": "1600300",
+		    "Population DOSM": "",
+		    "2020-03-21": "52",
+		    "2020-03-22": "52",
+		    "2020-03-23": "",
+		    "2020-03-24": "59",
+		    "2020-03-25": "68",
+		    "2020-03-26": "73",
+		    ...
+			}
+		]
+	*/
 
-    let data = [];
-    raw.filter(d=>d.Longitude && d.Latitude)
-        .forEach(d=>{
 
-					//=====================
-					// convert columns into arrays of [date, value]
-					//=====================
+  let data = [];
 
-          let k = {
-          	total:[],
-          	active:[],
-					};
+  raw[1].filter(d=>d.Longitude && d.Latitude)
+      .forEach(d=>{
 
-					raw.columns.forEach(j=>{
+				raw[1].columns.forEach(j=>{
 
-						// "Active 2020-04-20"
-						let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
+					// "Active 2020-04-20"
+					let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
 
-						// "2020-04-20"
-						let r2 = j.match(/^(\d+\-\d+\-\d+)$/);
+					if (r1 && d[j] && typeof +d[j]=='number')	{
 
-						if (r1)	{
+						let date;
 
-							k.active.push({
-								date	: r1[1],
-								value	: +d[j],
-								column: j,
-								str		: d[j],
-							});
-
-						}else if (r2)	{
-							k.total.push({
-								date	: r2[1],
-								value	: +d[j],
-								column: j,
-								str		: d[j],
-							});
-
-						}else	if (d[j]) {
-						//}else	{
-							k[j] = d[j];
+						// "2020-06-01"
+						let r3 = r1[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
+						if (r3)	{
+							date = [r3[1], r3[2], z2(r3[3])].join('-');
+						}else	{
+							date = r1[1];
 						}
 
+						//=====================
+						// skip invalid date and value
+						//=====================
+						if (moment(date,'YYYY-MM-DD').isValid() && typeof +d[j]=='number')	{
 
-						// convert numeric
-						['Longitude','Latitude','Population','kod_daerah','no','sort D','sort E'].forEach(j=>{
-							k[j] = +k[j];
-						});
+							let k = {
+								date	: date,
+								value	: +d[j],
 
-						// lowercase
-						k.longitude = k.Longitude;
-						k.latitude = k.Latitude;
+								//column: j,
+								//str		: d[j],
 
-						// shift longitude
-						if (k['longitude'] > 105) k['longitude'] += -5;
+								negeri			: d['Negeri'],
+								daerah			: d['Daerah'],
+								latitude		: +d['Latitude'],
+								longitude		:	+d['Longitude'],
 
-						// max active date
-						k.max_active_date = d3.max(k.active.filter(d=>d.value>0), d=>d.date);
-						let p1 = k.active.find(d=>d.date==k.max_active_date);
-						k.latest_active_value = p1 && p1.value || null;
+							}
 
-						// max total date
-						k.max_total_date = d3.max(k.total.filter(d=>d.value>0), d=>d.date);
-						let p2 = k.total.find(d=>d.date==k.max_total_date);
-						k.latest_total_value = p2 && p2.value || null;
+							// shift coordinates
+							if (k['longitude'] > 105) k['longitude'] += -5;
 
-						// min active date
-						k.min_active_date = d3.min(k.active, d=>d.date);
+							data.push(k);
 
-					});
+						}
 
-					data.push(k);
-
-        });
-
-		let min_date = d3.min(data, d=>d.min_active_date);
-    console.log('min_date', min_date);
+					}
 
 
-		let max_date = d3.max(data, d=>d.max_active_date);
-    console.log('max_date', max_date);
-
-    // filter data with latest date
-    data = data.filter(d=>d.max_active_date==max_date && d.latest_active_value);
-
-		// sort descending
-		data.sort((a,b)=>{ return a.latest_active_value > b.latest_active_value });
-
-   //console.log('data', data);
+				});
 
 
-		//=====================
-		// radius scale
-		//=====================
+      });
 
-    let max_value = d3.max(data, d=>d.latest_active_value);
-		//let scaleRadius = d3.scaleLinear().domain([0,max_value]).range([0,10]);
-		let scaleRadius = d3.scaleSqrt().domain([0,max_value]).range([0,15]);
-		let scaleColorCircle = d3.scaleLinear()
+
+	//=====================
+	// new structure:
+	//=====================
+
+	console.log('data',data.length, data.slice(0,10));
+
+	/*
+		[
+			{
+				"date":"2021-04-22",
+				"value":784,
+				"negeri":"Johor",
+				"daerah":"Johor Bahru",
+				"latitude":1.5192,
+				"longitude":103.7852
+			}
+		]
+
+	*/
+
+
+
+	// remove data without values
+	data = data.filter(d=>d.value);
+
+
+
+	console.timeEnd('loaded');
+	console.groupEnd('loaded');
+
+
+
+
+
+
+
+	//====================================================================================
+	// render
+	//====================================================================================
+
+	console.group('%c' +'render', 'color:magenta');
+	console.time('render');
+
+
+	let min_date = d3.min(data, d=>d.date);
+  console.log('min_date', min_date);
+
+	// max date
+	let max_date = d3.max(data, d=>d.date);
+  console.log('max_date', max_date);
+
+  // data with latest date
+  let data_latest = data.filter(d=>d.date==max_date);
+
+  console.log('data_latest', data_latest);
+
+
+
+	hotspots(data_latest);
+
+	map_textures(data_latest);
+
+	page_title(data_latest);
+
+	slider(data, min_date, max_date);
+
+
+	console.timeEnd('render');
+	console.groupEnd('render');
+
+
+}
+
+
+
+
+
+//====================================================================================
+// hotspots
+//====================================================================================
+function hotspots(data)	{
+	console.group('%c' +'hotspots', 'color:magenta');
+	console.time('hotspots');
+
+	let scaleRadius,
+			scaleColorCircle;
+
+
+
+	if (!scale['hotspots'])	{
+
+	  let max_value 		= d3.max(data, d=>d.value);
+		// scaleRadius = d3.scaleLinear().domain([0,max_value]).range([0,10]);
+		scaleRadius 			= d3.scaleSqrt().domain([0,max_value]).range([0,15]);
+		scaleColorCircle 	= d3.scaleLinear()
 														//.domain([0,50,100,500,max_value])
 														//.range( d3.schemeYlOrBr[5] );
 														.domain([0,20,40,max_value])
 														.range(['white','yellow','orange','crimson'])
 
 
-
-		var color = d3.scaleThreshold()
-		    .domain([0, 40])
-		    .range(["lime", "yellow", "red"]);
-
-
-		// large circle to capture mouseover
-    svg.append('g').attr('class','cities-malaysia-mouseover')
-      .selectAll('circle').data(data)
-      .enter()
-        .append('circle')
-          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
-          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-          .attr('r',d=>(scaleRadius(d.latest_active_value)||0)+10)
-          .attr('fill',d=>scaleColorCircle(d.latest_active_value))
-          .attr('stroke',d=>scaleColorCircle(d.latest_active_value))
-          .attr('fill-opacity',.1)
-          .attr('stroke-opacity',.2)
-          .attr('stroke-width',.5)
-          .on('mouseover',function(e,d){
-
-          	d3.select('.cities-malaysia-label')
-          		.selectAll('text')
-				      	.attr('display',k=>k.Daerah==d.Daerah ? 'block':'none')
-
-
-          })
-
-
-
-		// circle fill
-    svg.append('g').attr('class','cities-malaysia')
-    	//.attr('pointer-events','none')
-      .selectAll('circle').data(data)
-      .enter()
-        .append('circle')
-          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
-          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-          .attr('r',d=>scaleRadius(d.latest_active_value))
-          .attr('fill',d=>d.latest_active_value > 500 ? 'url(#Red)'
-          								: d.latest_active_value > 100 ? 'url(#Orange)'
-          								: d.latest_active_value > 20 ? 'url(#Yellow)'
-          								: 'url(#Lime)'
-          )
-          .attr('filter','url(#fshadow01)')
-          .on('mouseover',function(e,d){
-
-          	d3.select('.cities-malaysia-label')
-          		.selectAll('text')
-				      	.attr('display',k=>k.Daerah==d.Daerah ? 'block':'none')
-
-
-
-				    d3.select(this)
-				    	.transition()
-				    		.duration(100)
-				    		.ease(d3.easeBounce)
-					    	.attr('r', scaleRadius(d.latest_active_value)+10)
-
-
-          })
-          .on('mouseout', function(e,d){
-
-				    d3.select(this)
-				    	.transition()
-				    		//.duration(100)
-				    		.ease(d3.easeBounce)
-					    	.attr('r', scaleRadius(d.latest_active_value))
-
-          });
-
-
-
-
-		// text
-
-		let comma = d3.format(',');
-
-    svg.append('g').attr('class','cities-malaysia-label')
-    	.attr('pointer-events','none')
-      .selectAll('text').data(data.filter(d=>d.latest_active_value > 0))
-		    .enter()
-		      .append('text')
-		        .attr('display','none')
-		        .attr('text-anchor','middle')
-		        .attr('font-weight',500)
-		        .attr('transform',d=>'translate('+[
-		        												projection([d.longitude,d.latitude])[0],
-		        												projection([d.longitude,d.latitude])[1] - 30
-		        										]+')')
-		        .call(sel=>{
-
-
-		        	sel.append('tspan')
-		        		.attr('x',d=>0)
-		        		.attr('y',d=>0)
-		        		.attr('stroke','#fff')
-		        		.attr('fill','#fff')
-		        		.attr('stroke-width',2)
-		        		.attr('font-size','60%')
-		        		.attr('filter','url(#fshadow01)')
-		        		.text(d=>d.Daerah)
-
-		        	sel.append('tspan')
-		        		.attr('x',d=>0)
-		        		.attr('dy','1em')
-		        		.attr('stroke','#fff')
-		        		.attr('fill','#fff')
-		        		.attr('stroke-width',2)
-		        		.attr('filter','url(#fshadow01)')
-		        		.text(d=>comma(d.latest_active_value))
-
-		        	sel.append('tspan')
-		        		.attr('x',d=>0)
-		        		.attr('y',d=>0)
-		        		.attr('fill','steelblue')
-		        		.attr('font-size','60%')
-		        		.text(d=>d.Daerah)
-
-		        	sel.append('tspan')
-		        		.attr('x',d=>0)
-		        		.attr('dy','1em')
-		        		.attr('fill','crimson')
-		        		.text(d=>comma(d.latest_active_value))
-
-		        })
-
-
-
-
-
 		//=====================
-		// map color by total active cases by state
+		// store as global
 		//=====================
-
-		let active_cases_by_states = d3.groups(data, d=>d.Negeri)
-												.map(d=>{
-													return {
-														negeri	: d[0],
-														value		: d3.sum(d[1], d=>d.latest_active_value),
-													}
-												});
-
-		console.log('active_cases_by_states',active_cases_by_states);
-
-		// join map properties.id -> active_cases_by_states.negeri
-
-		let map_id = {
-			1:"Johor",
-			2:"Kedah",
-			3:"Kelantan",
-			4:"Kuala Lumpur",
-			5:"Labuan",
-			6:"Melaka",
-			7:"Negeri Sembilan",
-			8:"Pahang",
-			9:"Perak",
-			10:"Perlis",
-			11:"Pulau Pinang",
-			12:"Putrajaya",
-			13:"Sabah",
-			14:"Sarawak",
-			15:"Selangor",
-			16:"Terengganu",
+		scale['hotspots'] = {
+			radius: scaleRadius,
+			color	: scaleColorCircle
 		};
 
-		states.features.forEach(d=>{
-			d.properties.cases = active_cases_by_states.find(k=>k.negeri == map_id[ d.properties.id ] );
-		});
 
-		//console.log('states', states);
+	}else	{
 
-		let max_by_states = d3.max(states.features,d=>d.properties.cases.value);
-		let scaleColor = d3.scaleLinear()
-												.domain([0,50,100,500,max_by_states])
-												.range( d3.schemeYlGnBu[5] );
-												//.range( d3.schemeYlOrRd[5] );
+
+		scaleRadius 			= scale['hotspots'].radius;
+		scaleColorCircle	= scale['hotspots'].color;
+
+	}
+
+
+
+	var color = d3.scaleThreshold()
+	    .domain([0, 40])
+	    .range(["lime", "yellow", "red"]);
+
+
+	//=====================
+	// large background bubble to capture mouseover
+	//=====================
+	/*
+  svg.append('g').attr('class','cities-malaysia-mouseover')
+    .selectAll('circle').data(data)
+    .enter()
+      .append('circle')
+        .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+        .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+        .attr('r',d=>(scaleRadius(d.value)||0)+10)
+        .attr('fill',d=>scaleColorCircle(d.value))
+        .attr('stroke',d=>scaleColorCircle(d.value))
+        .attr('fill-opacity',.1)
+        .attr('stroke-opacity',.2)
+        .attr('stroke-width',.5)
+        .on('mouseover',function(e,d){
+        	d3.select('.cities-malaysia-label')
+        		.selectAll('text')
+			      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
+        })
+	*/
+
+  let b = circles_border.selectAll('circle').data(data, d=>d.daerah);
+	b.exit().remove();
+  b.enter()
+      .append('circle')
+        .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+        .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+        .attr('r',0)
+        .attr('fill','#fff')
+        .attr('stroke','#ddd')
+        .attr('fill-opacity',.1)
+        .attr('stroke-opacity',.2)
+        .attr('stroke-width',.5)
+        .on('mouseover',function(e,d){
+        	d3.select('.cities-malaysia-label')
+        		.selectAll('text')
+			      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
+        })
+		.merge(b)
+			.transition()
+        .attr('r',d=>(scaleRadius(d.value)||0)+10)
+        .attr('fill',d=>scaleColorCircle(d.value))
+        .attr('stroke',d=>scaleColorCircle(d.value))
+
+
+
+
+	//=====================
+	// bubble fill
+	//=====================
+	/*
+  svg.append('g').attr('class','cities-malaysia')
+    .selectAll('circle').data(data)
+    .enter()
+      .append('circle')
+        .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+        .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+        .attr('r',d=>scaleRadius(d.value))
+        .on('mouseover',function(e,d){
+
+        	d3.select('.cities-malaysia-label')
+        		.selectAll('text')
+			      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
+
+        })
+
+				//=====================
+				// bubble gradient
+				//=====================
+        .attr('fill',d=>d.value > 500 ? 'url(#Red)'
+        								: d.value > 100 ? 'url(#Orange)'
+        								: d.value > 20 ? 'url(#Yellow)'
+        								: 'url(#Lime)'
+        )
+
+				//=====================
+				// shadow filter
+				//=====================
+        .attr('filter','url(#fshadow01)')
+	*/
+
+	let c = circles.selectAll('circle').data(data, d=>d.daerah);
+	c.exit()
+		.transition()
+			.attr('r',0)
+		.remove();
+
+	c.enter()
+      .append('circle')
+        .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+        .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+        .attr('r',0)
+
+        .on('mouseover',function(e,d){
+
+        	circles_label
+        		.selectAll('text')
+			      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
+
+        })
+
+
+				//---------------------
+				// shadow filter
+				//---------------------
+        .attr('filter','url(#fshadow01)')
+
+				//---------------------
+				// bubble gradient
+				//---------------------
+        .attr('fill','url(#Lime)')
+
+		.merge(c)
+			.transition()
+        .attr('r',d=>scaleRadius(d.value))
+        .on('end', function(d){
+
+        		//console.log('d', d);
+        		d3.select(this)
+									.attr('fill',d=>d.value > 500 ? 'url(#Red)'
+      								: d.value > 100 ? 'url(#Orange)'
+      								: d.value > 20 ? 'url(#Yellow)'
+      								: 'url(#Lime)')
+
+        });
+
+
+
+
+
+	//=====================
+	// text
+	//=====================
+
+	let t = circles_label
+		.attr('pointer-events','none')
+    .selectAll('text').data(data, d=>d.daerah);
+
+	t.exit().remove();
+	t.enter()
+	      .append('text')
+	        .attr('display','none')
+	        .attr('text-anchor','middle')
+	        .attr('font-weight',500)
+
+	        .attr('filter','url(#fshadow01)')
+
+	        .attr('transform',d=>'translate('+[
+	        												projection([d.longitude,d.latitude])[0],
+	        												projection([d.longitude,d.latitude])[1] - 30
+	        										]+')')
+	        .call(sel=>{
+
+	        	sel.append('tspan')
+	        		.attr('x',d=>0)
+	        		.attr('y',d=>0)
+	        		.attr('fill','#f2f2f2')
+	        		.attr('font-size','60%')
+	        		.text(d=>d.daerah)
+
+	        	sel.append('tspan')
+	        		.attr('class','value')
+	        		.attr('x',d=>0)
+	        		.attr('dy','1em')
+	        		.attr('fill','crimson')
+
+
+	        })
+	  .merge(t)
+	  	.call(sel=>{
+
+				sel.select('.value')
+					.text(d=>comma(d.value))
+	        .attr('fill',d=>d.value > 40 ? 'red'
+	        								: d.value > 20 ? 'orange'
+	        								: 'yellow')
+
+	  	});
+
+
+
+
+
+
+	console.timeEnd('hotspots');
+	console.groupEnd('hotspots');
+
+
+}
+
+
+
+
+
+
+
+
+//====================================================================================
+// map pattern color by total active cases by state
+//====================================================================================
+function map_textures(data)	{
+
+	console.group('%c' +'map_textures', 'color:magenta');
+	console.time('map_textures');
+
+	// join map properties.id -> active_cases_by_states.negeri
+
+	let map_id = {
+		1:"Johor",
+		2:"Kedah",
+		3:"Kelantan",
+		4:"Kuala Lumpur",
+		5:"Labuan",
+		6:"Melaka",
+		7:"Negeri Sembilan",
+		8:"Pahang",
+		9:"Perak",
+		10:"Perlis",
+		11:"Pulau Pinang",
+		12:"Putrajaya",
+		13:"Sabah",
+		14:"Sarawak",
+		15:"Selangor",
+		16:"Terengganu",
+	};
+
+	states.features.forEach(d=>{
+		d.properties.negeri = map_id[ d.properties.id ];
+		d.properties.cases 	= {
+			negeri: map_id[ d.properties.id ],
+			value	: d3.sum(data.filter(k=>k.negeri==d.properties.negeri), d=>d.value)
+		}
+	});
+
+	console.log('states', states);
+
+
+
+	//=====================
+	// textures.js
+	//=====================
+
+	let max_by_states 		= d3.max(states.features,d=>d.properties.cases.value),
+
+			scheme			= ['#aca'].concat(d3.schemeOranges[4]),
+
+			scaleColor	= d3.scaleLinear().domain([ 0,50,100,500, max_by_states ])
+													.range(scheme);
+
+			scaleColorStroke 	= d3.scaleLinear()
+													.domain([ 0,50,100,500, d3.max([max_by_states, 1000]) ])
+													.range(
+																scheme
+																	.map(d=>chroma(d).darken().hex())
+													),
+
+
+	states.features.forEach(d=>{
 
 		//=====================
-		// textures.js
+		// create texture patten
 		//=====================
-		// https://riccardoscalco.it/textures/
-
-		states.features.forEach(d=>{
+		if (!d.properties.texture_id)	{
 
 			let t = textures.lines()
-						.size(4)
-						.strokeWidth(1)
-						.shapeRendering("crispEdges")
-
-						// https://gka.github.io/chroma.js/
-						.stroke( chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
-						.background( chroma(scaleColor(d.properties.cases.value)).brighten().hex() );
-
-			d.properties.texture = t;
-			svg.call(t);
-
-		});
-
-
-
-    d3.select('.map-fill-states').selectAll(".state")
-        .attr('fill',d=>d.properties.texture.url())
-      	.attr('stroke','#999')
-      	.attr('fill-opacity',.8)
-
-
-
-
-
-		//=====================
-		// title
-		//=====================
-		svg.append('text')
-			.attr('y','30%')
-			.attr('text-anchor','middle')
-			.attr('fill','steelblue')
-			.call(sel=>{
-
-				sel.append('tspan')
-					.attr('x','46%')
-					.attr('font-size','120%')
-					.text('Active covid-19 cases by districts');
-
-				sel.append('tspan')
-					.attr('class','title-date')
-					.attr('x','46%')
-					.attr('dy','1.2em')
-					.text(moment(max_date).format('D MMM YYYY'));
-
-				sel.append('tspan')
-					.attr('class','title-total')
-					.attr('x','46%')
-					.attr('dy','1.4em')
-					.attr('font-size','110%')
-					.text(comma(d3.sum(data, d=>d.latest_active_value)));
-
-				sel.append('tspan')
-					.attr('x','46%')
-					.attr('dy','1em')
-					.attr('font-size','90%')
-					.text('active cases');
-
-			});
-
-
-
-
-
-
-
-
-		//====================================================================================
-		// slider
-		//====================================================================================
-		// https://css-tricks.com/value-bubbles-for-range-inputs/
-
-		d3.select('.range')
-				.attr('min', +moment(min_date,'YYYY-MM-DD'))
-				.attr('max', +moment(max_date,'YYYY-MM-DD'))
-				.attr('step',1)
-				.attr('value', +moment(max_date,'YYYY-MM-DD'));
-
-		const allRanges = document.querySelectorAll(".range-wrap");
-		allRanges.forEach(wrap => {
-		  const range = wrap.querySelector(".range");
-		  const bubble = wrap.querySelector(".bubble");
-
-		  range.addEventListener("input", () => {
-		    setBubble(range, bubble);
-		  });
-		  setBubble(range, bubble);
-		});
-
-		function setBubble(range, bubble) {
-		  const val = range.value;
-		  const min = range.min ? range.min : 0;
-		  const max = range.max ? range.max : 100;
-		  const newVal = Number(((val - min) * 100) / (max - min));
-
-		  //console.log('val', val, moment(val));
-
-		  //bubble.innerHTML = val;
-		  bubble.innerHTML = moment(+val).format('D MMM YYYY');
-
-		  // Sorta magic numbers based on size of the native UI thumb
-		  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
-
-
-			// delay execution
-			if (timer) {
-				window.clearTimeout(timer);
-				timer=null;
-			}
-			timer = window.setTimeout(()=>{
-				slideTime(moment(+val).format('YYYY-MM-DD'));
-			},10);
-
-		}
-
-
-		//=====================
-		//
-		//=====================
-		function slideTime(date)	{
-
-			//=====================
-			// hide text
-			//=====================
-			d3.select('.cities-malaysia-label')
-				.selectAll('text')
-					.attr('display','none');
-
-			//=====================
-			// big circle
-			//=====================
-			d3.select('.cities-malaysia-mouseover')
-				.selectAll('circle')
-					.attr('r',d=>{
-						let p = d.active.find(d=>d.date==date);
-						return p && +p.value>0 ? scaleRadius(p.value)+10 : 0;
-					})
-
-			//=====================
-			// circle
-			//=====================
-			d3.select('.cities-malaysia')
-				.selectAll('circle')
-					//.attr('filter', null)
-					.attr('r',d=>{
-						let p = d.active.find(d=>d.date==date);
-						return p && +p.value>0 ? scaleRadius(p.value) : 0;
-					})
-
-			//=====================
-			// map
-			//=====================
-			let active_cases_by_states = d3.groups(data, d=>d.Negeri)
-													.map(d=>{
-														return {
-															negeri	: d[0],
-															values	: d[1],
-															value		: d3.sum(d[1], d=>d3.sum(d.active.filter(d=>d.date==date), d=>d.value)),
-														}
-													});
-
-			//console.log('active_cases_by_states', active_cases_by_states);
-
-			states.features.forEach(d=>{
-
-				d.properties.cases = active_cases_by_states.find(k=>k.negeri == map_id[ d.properties.id ] );
-
-				let t = textures.lines()
 							.size(4)
 							.strokeWidth(1)
 							.shapeRendering("crispEdges")
-							.stroke( chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
-							.background( chroma(scaleColor(d.properties.cases.value)).brighten().hex() );
 
-				d.properties.texture = t;
+							.background( scaleColor(d.properties.cases.value) )
 
-				svg.call(d.properties.texture);
-
-			});
-
-	    d3.select('.map-fill-states').selectAll(".state")
-        .attr('fill',d=>d.properties.texture.url())
+							.stroke( scaleColorStroke(d.properties.cases.value) )
 
 
-			//=====================
-			// title-date, total
-			//=====================
-			d3.select('.title-date')
-				.text(moment(date).format('D MMM YYYY'));
+			svg.call(t);
 
-			d3.select('.title-total')
-				.text(()=>{
-					let total = d3.sum(active_cases_by_states, d=>d.value);
-					return total ? comma(total) : ' '
-				});
+			d.properties.texture_id = t.id(); // texture id
+
+
+
+
+
+		//=====================
+		// modify existing pattern
+		//=====================
+		}else	{
+
+			let t = d3.transition()
+								.duration(100);
+
+			svg.select('#'+d.properties.texture_id)
+				.call(sel=>{
+
+					sel.select('rect')
+						.transition(t)
+							.attr('fill', scaleColor(d.properties.cases.value) )
+
+					sel.select('path')
+						.transition(t)
+							.attr('stroke', scaleColorStroke(d.properties.cases.value) )
+
+				})
 
 		}
 
+	});
+
+	// render pattern
+	d3.select('.map-fill-states')
+  	.selectAll(".state")
+      .attr('fill',d=>'url(#'+d.properties.texture_id+')')
+
+
+	console.timeEnd('map_textures');
+	console.groupEnd('map_textures');
+
+
+}
 
 
 
-		console.groupEnd('hotspot');
-  });
+
+
+
+
+
+//====================================================================================
+// page title
+//====================================================================================
+function page_title(data)	{
+
+	console.group('%c' +'page title', 'color:magenta');
+	console.time('page title');
+
+
+	let info = {
+		date	: d3.max(data, d=>d.date),
+		value	: d3.sum(data, d=>d.value)
+	};
+
+	console.log('info', info);
+
+
+	let p = svg.selectAll('.page_title').data([info]);
+	p.exit().remove();
+
+	// enter
+	p.enter()
+			.append('text')
+				.attr('class','page_title')
+				.attr('y',100)
+				.attr('text-anchor','middle')
+				.attr('fill','steelblue')
+				.call(sel=>{
+
+					sel.append('tspan')
+						.attr('x','46%')
+						.attr('font-size','120%')
+						.text('Active covid-19 cases by districts');
+
+					sel.append('tspan')
+						.attr('class','date')
+						.attr('x','46%')
+						.attr('dy','1.2em')
+						.text(moment( d3.max(data,d=>d.date) ).format('D MMM YYYY'));
+
+					sel.append('tspan')
+						.attr('class','value')
+						.attr('x','46%')
+						.attr('dy','1.4em')
+						.attr('font-size','110%')
+
+					sel.append('tspan')
+						.attr('x','46%')
+						.attr('dy','1em')
+						.attr('font-size','90%')
+						.text('active cases');
+
+				})
+
+		// update
+		.merge(p)
+			.call(sel=>{
+
+				sel.select('.date')
+						.text(d=>moment(d.date).format('D MMM YYYY'))
+
+				sel.select('.value')
+						.text(d=>d.value ? comma( d.value ) : ' ');
+
+			});
+
+
+	console.timeEnd('page title');
+	console.groupEnd('page title');
+
+}
+
+
+
+
+
+
+//====================================================================================
+// slider
+// https://css-tricks.com/value-bubbles-for-range-inputs/
+//====================================================================================
+
+function slider(data, min_date, max_date)	{
+
+	console.group('%c' +'slider', 'color:magenta');
+	console.time('slider');
+
+	console.log('min_date', min_date);
+	console.log('max_date', max_date);
+
+
+	d3.select('.range')
+			.attr('min', +moment(min_date,'YYYY-MM-DD'))
+			.attr('max', +moment(max_date,'YYYY-MM-DD'))
+			.attr('step',1)
+			.attr('value', +moment(max_date,'YYYY-MM-DD'));
+
+	const allRanges = document.querySelectorAll(".range-wrap");
+	allRanges.forEach(wrap => {
+
+	  const range = wrap.querySelector(".range");
+	  const bubble = wrap.querySelector(".bubble");
+
+	  range.addEventListener("input", () => {
+	    setBubble(range, bubble);
+	  });
+
+	  setBubble(range, bubble);
+
+	});
+
+
+
+	function setBubble(range, bubble) {
+	  const val = range.value;
+	  const min = range.min ? range.min : 0;
+	  const max = range.max ? range.max : 100;
+	  const newVal = Number(((val - min) * 100) / (max - min));
+
+	  //console.log('val', val, moment(val));
+
+	  //bubble.innerHTML = val;
+	  bubble.innerHTML = moment(+val).format('D MMM YYYY');
+
+	  // Sorta magic numbers based on size of the native UI thumb
+	  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+
+
+		// delay execution
+		if (timer) {
+			window.clearTimeout(timer);
+			timer=null;
+		}
+		timer = window.setTimeout(()=>{
+			slideTime(moment(+val).format('YYYY-MM-DD'));
+		},10);
+
+	}
+
+
+	//=====================
+	//
+	//=====================
+	function slideTime(date)	{
+		console.group('%c' +'slideTime '+date, 'color:magenta');
+		console.time('slideTime '+date);
+
+		let data_current = data.filter(d=>d.date==date);
+
+		page_title( data_current );
+
+		hotspots( data_current );
+
+		map_textures( data_current );
+
+
+		console.timeEnd('slideTime '+date);
+		console.groupEnd('slideTime '+date);
+
+	}
+
+	console.timeEnd('slider');
+	console.groupEnd('slider');
+
+}
+
+
+
+
 
 
 
