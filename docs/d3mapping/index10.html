@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <meta name="viewport" content="width=device-width" />
 
-<title>d3.js map</title>
+<title>Playback</title>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Displaying map with d3.js"/>
 <meta property="og:description" content="d3.js exercises - render map and points from topojson and csv files"/>
@@ -17,14 +17,17 @@
 
 
 <style>
-html {
+html, body, svg {
+	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
 	background:#30404D;
 	color:#ffffff;
-	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+
 }
 
+
+
 a {
-	color:
+	color: cyan;
 }
 
 
@@ -42,7 +45,7 @@ slider
   width: 100%;
 }
 .bubble {
-  background: #0075FF;
+  background: rgb(128,0,0);
   color: white;
   padding: 4px 12px;
   position: absolute;
@@ -55,7 +58,7 @@ slider
   position: absolute;
   width: 2px;
   height: 2px;
-  background: #0075FF;
+  background: rgb(128,0,0);
   top: -1px;
   left: 50%;
 }
@@ -67,12 +70,12 @@ slider
 
 <script type="text/javascript" src="//lib.aga.my/d3/6.7.0/d3.min.js"></script>
 <script type="text/javascript" src="//lib.aga.my/topojson/3.0.2/topojson.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
 <script type="text/javascript" src="//lib.aga.my/moment/2.24.0/moment.min.js"></script>
 <script type="text/javascript" src="//lib.aga.my/textures/1.2.3/textures.js"></script>
 <script type="text/javascript" src="//lib.aga.my/chroma/2.1.1/chroma.min.js"></script>
+
 <link type="text/css" rel="stylesheet" href="//lib.aga.my/font/awesome/5.15.2/css/all.min.css"/>
-
-
 
 <script>
 
@@ -176,19 +179,7 @@ svg.append('defs')
 `);
 
 
-
-let g 							= svg.append("g"),
-
-		map_border 			= svg.append("g").attr('class','map-border-states'),
-		map_fill 				= svg.append("g").attr('class','map-fill-states'),
-
-		circles_border	= svg.append('g').attr('class','cities-malaysia-mouseover'),
-    circles					= svg.append('g').attr('class','cities-malaysia'),
-    circles_label		= svg.append('g').attr('class','cities-malaysia-label'),
-
-    page_title			= svg.append('text');
-
-
+var g = svg.append("g");
 
 
 //=====================
@@ -201,6 +192,39 @@ let states,
 let timer;
 
 
+let scale = {};
+
+
+// formatting
+let z2 = d3.format('02d'),
+		comma = d3.format(',');
+
+
+//=====================
+// create containers
+// - order layer level here
+//=====================
+
+let map_border 			= svg.append("g").attr('class','map-border-states'),
+		map_fill 				= svg.append("g").attr('class','map-fill-states'),
+
+		circles_border	= svg.append('g').attr('class','cities-malaysia-mouseover'),
+    circles					= svg.append('g').attr('class','cities-malaysia'),
+    circles_label		= svg.append('g').attr('class','cities-malaysia-label');
+
+		map_label 			= svg.append("g").attr('class','map-label-states'),
+
+
+
+
+
+
+
+console.time('load');
+
+
+
+
 //=====================
 // load data
 //=====================
@@ -209,25 +233,19 @@ Promise.all([
 
 	d3.json("malaysia.json"),
 
-	d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv'),
-	//d3.csv('../_data/20210423-coronavirus_malaysia - Hotspot.csv'),
+	//d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv'),
+	d3.csv('../_data/20210423-coronavirus_malaysia - Hotspot.csv'),
 
 ]).then(loaded);
 
 
-
 function loaded(raw)	{
 
-
-	//=====================
-	// from mapv4.html
-	//=====================
-
 	console.group('%c' +'map', 'color:magenta');
+	console.timeEnd('load');
+	console.time('map');
 
 	let malaysia = raw[0];
-
-
 
   states = topojson.feature(malaysia, malaysia.objects.states);
   land = topojson.feature(malaysia, malaysia.objects.land);
@@ -252,147 +270,262 @@ function loaded(raw)	{
   }
 
 
-	map_border.selectAll(".land").data(land.features)
-    .enter()
-      .append("path")
-        .attr('class','land')
-        .attr("d", path)
-        .attr('stroke','steelblue')
-        .attr('stroke-width',1)
-        .attr('fill', 'none' )
-  	    .attr('filter','url(#fshadow02)')
+	map_border
+		.selectAll(".land").data(land.features)
+	    .enter()
+	      .append("path")
+	        .attr('class','land')
+	        .attr("d", path)
+	        .attr('stroke','steelblue')
+	        .attr('stroke-width',1)
+	        .attr('fill', 'none' )
 
-	map_fill.selectAll(".state").data(states.features)
+					//=====================
+	        // shadow filter
+					//=====================
+	  	    .attr('filter','url(#fshadow02)')
+
+
+	map_fill
+		.selectAll(".state").data(states.features)
 	    .enter()
 	      .append("path")
 	        .attr('class','state')
 	        .attr("d", path)
-	        .attr('stroke','#666')
-	        .attr('fill', '#30404D' )
+	        .attr('stroke','#ccc')
+	        .attr('fill', '#f2f2f2' )
 	        .attr('stroke-width',.5)
 	        .attr('fill-opacity',1)
 	        .on('click',function(e,d){
-	        	//console.log('d.properties',d.properties.id, d.properties.cases.negeri);
+	        	console.log('d.properties', d.properties);
 	        	window.prompt('map id: '+d.properties.id, d.properties.cases.negeri);
 	        });
 
+
+	console.timeEnd('map');
 	console.groupEnd('map');
 
 
-	//====================================================================================
-	// hotspots
-	//====================================================================================
 
-	console.group('%c' +'hotspots', 'color:magenta');
+	console.group('%c' +'loaded', 'color:magenta');
+	console.time('loaded');
 
-	let hotspots = raw[1];
+  console.log('raw', raw[1].slice(0,10));
 
-  //console.log('hotspots.columns', hotspots.columns);
-  //console.log('hotspots', raw);
+
+	//=====================
+	// rebuild data structure
+	// columns -> rows
+	//=====================
+
+	//console.log(JSON.stringify(hotspots.filter(d=>d.Latitude),null,2));
+
+	// original structure:
+	/*
+		[
+		  {
+		    "no": "1",
+		    "Negeri": "Johor",
+		    "kod_daerah": "2",
+		    "kod_mukim": "",
+		    "daerah": "Johor Bahru",
+		    "sort D": "20",
+		    "sort E": "19",
+		    "Pdm": "",
+		    "Pdm Population": "",
+		    "note": "",
+		    "Latitude": "1.5192",
+		    "Longitude": "103.7852",
+		    "Latlong": "1.51915967306,103.785177766",
+		    "Population": "1600300",
+		    "Population DOSM": "",
+		    "2020-03-21": "52",
+		    "2020-03-22": "52",
+		    "2020-03-23": "",
+		    "2020-03-24": "59",
+		    "2020-03-25": "68",
+		    "2020-03-26": "73",
+		    ...
+			}
+		]
+	*/
+
 
   let data = [];
-  hotspots.filter(d=>d.Longitude && d.Latitude)
+
+  raw[1].filter(d=>d.Longitude && d.Latitude)
       .forEach(d=>{
 
-				//=====================
-				// convert columns into arrays of [date, value]
-				//=====================
-
-        let k = {
-        	total:[],
-        	active:[],
-				};
-
-				hotspots.columns.forEach(j=>{
+				raw[1].columns.forEach(j=>{
 
 					// "Active 2020-04-20"
 					let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
 
-					// "2020-04-20"
-					let r2 = j.match(/^(\d+\-\d+\-\d+)$/);
+					if (r1 && d[j] && typeof +d[j]=='number')	{
 
-					if (r1)	{
+						let date;
 
-						k.active.push({
-							date	: r1[1],
-							value	: +d[j],
-							column: j,
-							str		: d[j],
-						});
+						// "2020-06-01"
+						let r3 = r1[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
+						if (r3)	{
+							date = [r3[1], r3[2], z2(r3[3])].join('-');
+						}else	{
+							date = r1[1];
+						}
 
-					}else if (r2)	{
-						k.total.push({
-							date	: r2[1],
-							value	: +d[j],
-							column: j,
-							str		: d[j],
-						});
+						//=====================
+						// skip invalid date and value
+						//=====================
+						if (moment(date,'YYYY-MM-DD').isValid() && typeof +d[j]=='number')	{
 
-					}else	if (d[j]) {
-					//}else	{
-						k[j] = d[j];
+							let k = {
+								date	: date,
+								value	: +d[j],
+
+								//column: j,
+								//str		: d[j],
+
+								negeri			: d['Negeri'],
+								daerah			: d['Daerah'],
+								latitude		: +d['Latitude'],
+								longitude		:	+d['Longitude'],
+
+							}
+
+							// shift coordinates
+							if (k['longitude'] > 105) k['longitude'] += -5;
+
+							data.push(k);
+
+						}
+
 					}
 
 
-					// convert numeric
-					['Longitude','Latitude','Population','kod_daerah','no','sort D','sort E'].forEach(j=>{
-						k[j] = +k[j];
-					});
-
-					// lowercase
-					k.longitude = k.Longitude;
-					k.latitude = k.Latitude;
-
-					// shift longitude
-					if (k['longitude'] > 105) k['longitude'] += -5;
-
-					// max active date
-					k.max_active_date = d3.max(k.active.filter(d=>d.value>0), d=>d.date);
-					let p1 = k.active.find(d=>d.date==k.max_active_date);
-					k.latest_active_value = p1 && p1.value || null;
-
-					// max total date
-					k.max_total_date = d3.max(k.total.filter(d=>d.value>0), d=>d.date);
-					let p2 = k.total.find(d=>d.date==k.max_total_date);
-					k.latest_total_value = p2 && p2.value || null;
-
-					// min active date
-					k.min_active_date = d3.min(k.active, d=>d.date);
-
 				});
 
-				data.push(k);
 
       });
 
-	let min_date = d3.min(data, d=>d.min_active_date);
+
+	//=====================
+	// new structure:
+	//=====================
+
+	console.log('data',data.length, data.slice(0,10));
+
+	/*
+		[
+			{
+				"date":"2021-04-22",
+				"value":784,
+				"negeri":"Johor",
+				"daerah":"Johor Bahru",
+				"latitude":1.5192,
+				"longitude":103.7852
+			}
+		]
+
+	*/
+
+
+
+	// remove data without values
+	data = data.filter(d=>d.value);
+
+
+
+	console.timeEnd('loaded');
+	console.groupEnd('loaded');
+
+
+
+
+
+
+
+	//====================================================================================
+	// render
+	//====================================================================================
+
+	console.group('%c' +'render', 'color:magenta');
+	console.time('render');
+
+	// max_date
+	let min_date = d3.min(data, d=>d.date);
   console.log('min_date', min_date);
 
-
-	let max_date = d3.max(data, d=>d.max_active_date);
+	// max date
+	let max_date = d3.max(data, d=>d.date);
   console.log('max_date', max_date);
 
-  // filter data with latest date
-  data = data.filter(d=>d.max_active_date==max_date && d.latest_active_value);
+  // data with latest date
+  let data_latest = data.filter(d=>d.date==max_date);
 
-	// sort descending
-	data.sort((a,b)=>{ return a.latest_active_value > b.latest_active_value });
-
- //console.log('data', data);
+  console.log('data_latest', data_latest);
 
 
-	//=====================
-	// radius scale
-	//=====================
 
-  let max_value = d3.max(data, d=>d.latest_active_value);
-	//let scaleRadius = d3.scaleLinear().domain([0,max_value]).range([0,10]);
-	let scaleRadius = d3.scaleSqrt().domain([0,max_value]).range([0,15]);
-	let scaleColorCircle = d3.scaleLinear()
-													//.domain([0,50,100,500,max_value])
-													//.range( d3.schemeYlOrBr[5] );
-													.domain([0,20,40,max_value])
-													.range(['white','yellow','orange','crimson'])
+	hotspots(data_latest);
+
+	map_textures(data_latest);
+
+	page_title(data_latest);
+
+	slider(data, min_date, max_date);
+
+	playback(data, min_date, max_date);
+
+	console.timeEnd('render');
+	console.groupEnd('render');
+
+
+}
+
+
+
+
+
+//====================================================================================
+// hotspots
+//====================================================================================
+function hotspots(data)	{
+//	console.group('%c' +'hotspots', 'color:magenta');
+//	console.time('hotspots');
+
+	let scaleRadius,
+			scaleColorCircle;
+
+
+
+	if (!scale['hotspots'])	{
+
+	  let max_value 		= d3.max(data, d=>d.value);
+		// scaleRadius = d3.scaleLinear().domain([0,max_value]).range([0,10]);
+		scaleRadius 			= d3.scaleSqrt().domain([0,max_value]).range([0,15]);
+		scaleColorCircle 	= d3.scaleLinear()
+														//.domain([0,50,100,500,max_value])
+														//.range( d3.schemeYlOrBr[5] );
+														.domain([0,20,40,max_value])
+														.range(['white','yellow','orange','crimson'])
+
+
+		//=====================
+		// store as global
+		//=====================
+		scale['hotspots'] = {
+			radius: scaleRadius,
+			color	: scaleColorCircle
+		};
+
+
+	}else	{
+
+
+		scaleRadius 			= scale['hotspots'].radius;
+		scaleColorCircle	= scale['hotspots'].color;
+
+	}
 
 
 
@@ -401,144 +534,163 @@ function loaded(raw)	{
 	    .range(["lime", "yellow", "red"]);
 
 
-	// large circle to capture mouseover
-   circles_border
-     .selectAll('circle').data(data)
-      .enter()
-        .append('circle')
-          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
-          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-          .attr('r',d=>(scaleRadius(d.latest_active_value)||0)+10)
-          .attr('fill',d=>scaleColorCircle(d.latest_active_value))
-          .attr('stroke',d=>scaleColorCircle(d.latest_active_value))
-          .attr('fill-opacity',.1)
-          .attr('stroke-opacity',.2)
-          .attr('stroke-width',.5)
-          .on('mouseover',function(e,d){
+	//=====================
+	// large background bubble to capture mouseover
+	//=====================
 
-          	d3.select('.cities-malaysia-label')
-          		.selectAll('text')
-				      	.attr('display',k=>k.Daerah==d.Daerah ? 'block':'none')
-
-
-          })
-
-
-
-	// circle fill
-  	//.attr('pointer-events','none')
-  circles
-    .selectAll('circle').data(data)
-    .enter()
+  let b = circles_border.selectAll('circle').data(data, d=>d.daerah);
+	b.exit().remove();
+  b.enter()
       .append('circle')
         .attr('cx', d=>projection([d.longitude,d.latitude])[0])
         .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-        .attr('r',d=>scaleRadius(d.latest_active_value))
-        .attr('fill',d=>d.latest_active_value > 500 ? 'url(#Red)'
-        								: d.latest_active_value > 100 ? 'url(#Orange)'
-        								: d.latest_active_value > 20 ? 'url(#Yellow)'
-        								: 'url(#Lime)'
-        )
-        .attr('filter','url(#fshadow01)')
+        .attr('r',0)
+        .attr('fill','#fff')
+        .attr('stroke','#ddd')
+        .attr('fill-opacity',.1)
+        .attr('stroke-opacity',.2)
+        .attr('stroke-width',.5)
+        .on('mouseover',function(e,d){
+        	d3.select('.cities-malaysia-label')
+        		.selectAll('text')
+			      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
+        })
+		.merge(b)
+			.transition()
+        .attr('r',d=>(scaleRadius(d.value)||0)+10)
+        .attr('fill',d=>scaleColorCircle(d.value))
+        .attr('stroke',d=>scaleColorCircle(d.value))
+
+
+
+
+	//=====================
+	// bubble fill
+	//=====================
+
+	let c = circles.selectAll('circle').data(data, d=>d.daerah);
+	c.exit()
+		.transition()
+			.attr('r',0)
+		.remove();
+
+	c.enter()
+      .append('circle')
+        .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+        .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+        .attr('r',0)
+
         .on('mouseover',function(e,d){
 
         	circles_label
         		.selectAll('text')
-			      	.attr('display',k=>k.Daerah==d.Daerah ? 'block':'none')
-
-
-
-			    d3.select(this)
-			    	.transition()
-			    		.duration(100)
-			    		.ease(d3.easeBounce)
-				    	.attr('r', scaleRadius(d.latest_active_value)+10)
-
+			      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
 
         })
-        .on('mouseout', function(e,d){
 
-			    d3.select(this)
-			    	.transition()
-			    		//.duration(100)
-			    		.ease(d3.easeBounce)
-				    	.attr('r', scaleRadius(d.latest_active_value))
+
+				//---------------------
+				// shadow filter
+				//---------------------
+        .attr('filter','url(#fshadow01)')
+
+				//---------------------
+				// bubble gradient
+				//---------------------
+        .attr('fill','url(#Lime)')
+
+		.merge(c)
+			.transition()
+        .attr('r',d=>scaleRadius(d.value))
+        .on('end', function(d){
+
+        		//console.log('d', d);
+        		d3.select(this)
+									.attr('fill',d=>d.value > 500 ? 'url(#Red)'
+      								: d.value > 100 ? 'url(#Orange)'
+      								: d.value > 20 ? 'url(#Yellow)'
+      								: 'url(#Lime)')
 
         });
 
 
 
 
+
+	//=====================
 	// text
+	//=====================
 
-	let comma = d3.format(',');
+	let t = circles_label
+		.attr('pointer-events','none')
+    .selectAll('text').data(data, d=>d.daerah);
 
-  circles_label
-  	.attr('pointer-events','none')
-    .selectAll('text').data(data.filter(d=>d.latest_active_value > 0))
-	    .enter()
+	t.exit().remove();
+	t.enter()
 	      .append('text')
 	        .attr('display','none')
 	        .attr('text-anchor','middle')
 	        .attr('font-weight',500)
+
+	        .attr('filter','url(#fshadow01)')
+
 	        .attr('transform',d=>'translate('+[
 	        												projection([d.longitude,d.latitude])[0],
 	        												projection([d.longitude,d.latitude])[1] - 30
 	        										]+')')
 	        .call(sel=>{
 
-
 	        	sel.append('tspan')
 	        		.attr('x',d=>0)
 	        		.attr('y',d=>0)
-	        		.attr('stroke','#fff')
-	        		.attr('fill','#fff')
-	        		.attr('stroke-width',2)
+	        		.attr('fill','#f2f2f2')
 	        		.attr('font-size','60%')
-	        		.attr('filter','url(#fshadow01)')
-	        		.text(d=>d.Daerah)
+	        		.text(d=>d.daerah)
 
 	        	sel.append('tspan')
-	        		.attr('x',d=>0)
-	        		.attr('dy','1em')
-	        		.attr('stroke','#fff')
-	        		.attr('fill','#fff')
-	        		.attr('stroke-width',2)
-	        		.attr('filter','url(#fshadow01)')
-	        		.text(d=>comma(d.latest_active_value))
-
-	        	sel.append('tspan')
-	        		.attr('x',d=>0)
-	        		.attr('y',d=>0)
-	        		.attr('fill','steelblue')
-	        		.attr('font-size','60%')
-	        		.text(d=>d.Daerah)
-
-	        	sel.append('tspan')
+	        		.attr('class','value')
 	        		.attr('x',d=>0)
 	        		.attr('dy','1em')
 	        		.attr('fill','crimson')
-	        		.text(d=>comma(d.latest_active_value))
+
 
 	        })
+	  .merge(t)
+	  	.call(sel=>{
+
+				sel.select('.value')
+					.text(d=>comma(d.value))
+	        .attr('fill',d=>d.value > 40 ? 'red'
+	        								: d.value > 20 ? 'orange'
+	        								: 'yellow')
+
+	  	});
 
 
 
 
 
-	//=====================
-	// map color by total active cases by state
-	//=====================
 
-	let active_cases_by_states = d3.groups(data, d=>d.Negeri)
-											.map(d=>{
-												return {
-													negeri	: d[0],
-													value		: d3.sum(d[1], d=>d.latest_active_value),
-												}
-											});
+//	console.timeEnd('hotspots');
+//	console.groupEnd('hotspots');
 
-	console.log('active_cases_by_states',active_cases_by_states);
+
+}
+
+
+
+
+
+
+
+
+//====================================================================================
+// map pattern color by total active cases by state
+//====================================================================================
+function map_textures(data)	{
+
+//	console.group('%c' +'map_textures', 'color:magenta');
+//	console.time('map_textures');
 
 	// join map properties.id -> active_cases_by_states.negeri
 
@@ -562,104 +714,194 @@ function loaded(raw)	{
 	};
 
 	states.features.forEach(d=>{
-		d.properties.cases = active_cases_by_states.find(k=>k.negeri == map_id[ d.properties.id ] );
+		d.properties.negeri = map_id[ d.properties.id ];
+		d.properties.cases 	= {
+			negeri: map_id[ d.properties.id ],
+			value	: d3.sum(data.filter(k=>k.negeri==d.properties.negeri), d=>d.value)
+		}
 	});
 
-	//console.log('states', states);
-
-	let max_by_states = d3.max(states.features,d=>d.properties.cases.value);
-	let scaleColor = d3.scaleLinear()
-											.domain([0,50,100,500,max_by_states])
-											.range( d3.schemeYlGnBu[5] );
-											//.range( d3.schemeYlOrRd[5] );
-
+//	console.log('states', states);
 
 
 
 	//=====================
 	// textures.js
 	//=====================
-	// https://riccardoscalco.it/textures/
 
+	let max_by_states 		= d3.max(states.features,d=>d.properties.cases.value),
+
+			scheme			= ['#aca'].concat(d3.schemeOranges[4]),
+
+			scaleColor	= d3.scaleLinear().domain([ 0,50,100,500, max_by_states ])
+													.range(scheme);
+
+			scaleColorStroke 	= d3.scaleLinear()
+													.domain([ 0,50,100,500, d3.max([max_by_states, 1000]) ])
+													.range(
+																scheme
+																	.map(d=>chroma(d).darken().hex())
+													),
 
 
 	states.features.forEach(d=>{
 
-		let t = textures.lines()
-					.size(4)
-					.strokeWidth(1)
-					.shapeRendering("crispEdges")
+		//=====================
+		// create texture patten
+		//=====================
+		if (!d.properties.texture_id)	{
 
-					// https://gka.github.io/chroma.js/
-					.stroke( chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
-					.background( chroma(scaleColor(d.properties.cases.value)).brighten().hex() );
+			let t = textures.lines()
+							.size(4)
+							.strokeWidth(1)
+							.shapeRendering("crispEdges")
 
-		d.properties.texture = t;
-		svg.call(t);
+							.background( scaleColor(d.properties.cases.value) )
+
+							.stroke( scaleColorStroke(d.properties.cases.value) )
+
+
+			svg.call(t);
+
+			d.properties.texture_id = t.id(); // texture id
+
+
+
+
+
+		//=====================
+		// modify existing pattern
+		//=====================
+		}else	{
+
+			let t = d3.transition()
+								.duration(100);
+
+			svg.select('#'+d.properties.texture_id)
+				.call(sel=>{
+
+					sel.select('rect')
+						.transition(t)
+							.attr('fill', scaleColor(d.properties.cases.value) )
+
+					sel.select('path')
+						.transition(t)
+							.attr('stroke', scaleColorStroke(d.properties.cases.value) )
+
+				})
+
+		}
 
 	});
 
-
-
-  map_fill
+	// render pattern
+	d3.select('.map-fill-states')
   	.selectAll(".state")
-      .attr('fill',d=>d.properties.texture.url())
-    	.attr('stroke','#999')
-    	.attr('fill-opacity',.8)
+      .attr('fill',d=>'url(#'+d.properties.texture_id+')')
 
 
+//	console.timeEnd('map_textures');
+//	console.groupEnd('map_textures');
 
 
-
-	//=====================
-	// title
-	//=====================
-	page_title
-		.attr('y','30%')
-		.attr('text-anchor','middle')
-		.attr('fill','steelblue')
-		.call(sel=>{
-
-			sel.append('tspan')
-				.attr('x','46%')
-				.attr('font-size','120%')
-				.text('Active covid-19 cases by districts');
-
-			sel.append('tspan')
-				.attr('class','title-date')
-				.attr('x','46%')
-				.attr('dy','1.2em')
-				.text(moment(max_date).format('D MMM YYYY'));
-
-			sel.append('tspan')
-				.attr('class','title-total')
-				.attr('x','46%')
-				.attr('dy','1.4em')
-				.attr('font-size','110%')
-				.text(comma(d3.sum(data, d=>d.latest_active_value)));
-
-			sel.append('tspan')
-				.attr('x','46%')
-				.attr('dy','1em')
-				.attr('font-size','90%')
-				.text('active cases');
-
-		});
-
-
-	console.groupEnd('hotspots');
+}
 
 
 
 
 
 
-	//====================================================================================
-	// slider
-	//====================================================================================
-	// https://css-tricks.com/value-bubbles-for-range-inputs/
+
+
+//====================================================================================
+// page title
+//====================================================================================
+function page_title(data)	{
+
+//	console.group('%c' +'page title', 'color:magenta');
+//	console.time('page title');
+
+
+	let info = {
+		date	: d3.max(data, d=>d.date),
+		value	: d3.sum(data, d=>d.value)
+	};
+
+//	console.log('info', info);
+
+
+	let p = svg.selectAll('.page_title').data([info]);
+	p.exit().remove();
+
+	// enter
+	p.enter()
+			.append('text')
+				.attr('class','page_title')
+				.attr('y',100)
+				.attr('text-anchor','middle')
+				.attr('fill','steelblue')
+				.call(sel=>{
+
+					sel.append('tspan')
+						.attr('x','46%')
+						.attr('font-size','120%')
+						.text('Active covid-19 cases by districts');
+
+					sel.append('tspan')
+						.attr('class','date')
+						.attr('x','46%')
+						.attr('dy','1.2em')
+						.text(moment( d3.max(data,d=>d.date) ).format('D MMM YYYY'));
+
+					sel.append('tspan')
+						.attr('class','value')
+						.attr('x','46%')
+						.attr('dy','1.4em')
+						.attr('font-size','110%')
+
+					sel.append('tspan')
+						.attr('x','46%')
+						.attr('dy','1em')
+						.attr('font-size','90%')
+						.text('active cases');
+
+				})
+
+		// update
+		.merge(p)
+			.call(sel=>{
+
+				sel.select('.date')
+						.text(d=>moment(d.date).format('D MMM YYYY'))
+
+				sel.select('.value')
+						.text(d=>d.value ? comma( d.value ) : ' ');
+
+			});
+
+
+//	console.timeEnd('page title');
+//	console.groupEnd('page title');
+
+}
+
+
+
+
+
+
+//====================================================================================
+// slider
+// https://css-tricks.com/value-bubbles-for-range-inputs/
+//====================================================================================
+
+function slider(data, min_date, max_date)	{
 
 	console.group('%c' +'slider', 'color:magenta');
+	console.time('slider');
+
+	console.log('min_date', min_date);
+	console.log('max_date', max_date);
 
 
 	d3.select('.range')
@@ -670,19 +912,25 @@ function loaded(raw)	{
 
 	const allRanges = document.querySelectorAll(".range-wrap");
 	allRanges.forEach(wrap => {
+
 	  const range = wrap.querySelector(".range");
 	  const bubble = wrap.querySelector(".bubble");
 
 	  range.addEventListener("input", () => {
 	    setBubble(range, bubble);
 	  });
+
 	  setBubble(range, bubble);
+
 	});
 
+
+
+	//=====================
+	// setBubble
+	//=====================
+
 	function setBubble(range, bubble) {
-
-		//console.log('range',range);
-
 	  const val = range.value;
 	  const min = range.min ? range.min : 0;
 	  const max = range.max ? range.max : 100;
@@ -710,107 +958,42 @@ function loaded(raw)	{
 
 
 	//=====================
-	// slide
+	//
 	//=====================
 	function slideTime(date)	{
+		console.group('%c' +'slideTime '+date, 'color:magenta');
+		//console.time('slideTime '+date);
 
-		//console.group('%c' +'slideTime '+ymd, 'color:magenta');
+		let data_current = data.filter(d=>d.date==date);
 
+		page_title( data_current );
 
+		hotspots( data_current );
 
-		//=====================
-		// hide text
-		//=====================
-		circles_label
-			.selectAll('text')
-				.attr('display','none');
-
-		//=====================
-		// big circle
-		//=====================
-		circles_border
-			.selectAll('circle')
-				.attr('r',d=>{
-					let p = d.active.find(d=>d.date==date);
-					return p && +p.value>0 ? scaleRadius(p.value)+10 : 0;
-				})
-
-		//=====================
-		// circle
-		//=====================
-		circles
-			.selectAll('circle')
-				//.attr('filter', null)
-				.attr('r',d=>{
-					let p = d.active.find(d=>d.date==date);
-					return p && +p.value>0 ? scaleRadius(p.value) : 0;
-				})
-
-		//=====================
-		// map
-		//=====================
-		let active_cases_by_states = d3.groups(data, d=>d.Negeri)
-												.map(d=>{
-													return {
-														negeri	: d[0],
-														values	: d[1],
-														value		: d3.sum(d[1], d=>d3.sum(d.active.filter(d=>d.date==date), d=>d.value)),
-													}
-												});
-
-		//console.log('active_cases_by_states', active_cases_by_states);
-
-		states.features.forEach(d=>{
-
-			d.properties.cases = active_cases_by_states.find(k=>k.negeri == map_id[ d.properties.id ] );
-
-			let t = textures.lines()
-						.size(4)
-						.strokeWidth(1)
-						.shapeRendering("crispEdges")
-						.stroke( chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
-						.background( chroma(scaleColor(d.properties.cases.value)).brighten().hex() );
-
-			d.properties.texture = t;
-
-			svg.call(d.properties.texture);
-
-		});
-
-    map_fill.selectAll(".state")
-      .attr('fill',d=>d.properties.texture.url())
+		map_textures( data_current );
 
 
-		//=====================
-		// title-date, total
-		//=====================
-
-		d3.select('.title-date')
-			.text(moment(date).format('D MMM YYYY'));
-			//.text(ymd);
-
-		d3.select('.title-total')
-			.text(()=>{
-				let total = d3.sum(active_cases_by_states, d=>d.value);
-				return total ? comma(total) : ' '
-			});
-
-
-
-		//console.groupEnd('slideTime '+ymd);
+		//console.timeEnd('slideTime '+date);
+		console.groupEnd('slideTime '+date);
 
 	}
 
 
-
+	console.timeEnd('slider');
 	console.groupEnd('slider');
 
+}
 
-	//====================================================================================
-	// playback
-	//====================================================================================
+
+//====================================================================================
+// playback
+//====================================================================================
+function playback(data, min_date, max_date)	{
 
 	console.group('%c' +'playback', 'color:magenta');
+	console.time('playback');
+
+
 
 	let playdate,
 			playtimer,
@@ -818,15 +1001,22 @@ function loaded(raw)	{
 											moment(min_date),
 											moment(max_date).add(1,'days'),
 											1
-										);
+										),
 
+		 	sliderWidth = d3.select('.range').node().getBoundingClientRect().width;
+			scaleTime = d3.scaleTime()
+										.domain([moment(min_date),moment(max_date).add(1,'days')])
+										.range([0,sliderWidth]);
 
-	console.log( 'date_range', d3.extent(date_range) );
-
+//
+//	console.log( 'date_range', d3.extent(date_range) );
+//	console.log( 'scaleTime', scaleTime.domain(), scaleTime.range());
+//	console.log( 'scaleTime date=>range :', moment(max_date),'=>', scaleTime(moment(max_date)));
+//	console.log( 'scaleTime.invert() range=>date :', sliderWidth,'=>', scaleTime.invert(sliderWidth) );
 
 
 	//=====================
-	// play
+	// play button
 	//=====================
 	d3.select('.fa-play')
 		.style('cursor','pointer')
@@ -862,47 +1052,46 @@ function loaded(raw)	{
 		});
 
 
+	//=====================
+	// play
+	//=====================
 	function play()	{
 
-			let idx;
+		// current
+		let value = +d3.select('.range').property('value');
+		let idx = date_range.map(d=>moment(d).format('YYYY-MM-DD')).indexOf( moment(value).format('YYYY-MM-DD') );
 
-			if (!playdate)	{
-				idx = 0;
-				playdate = date_range[0];
-			}else	{
-				idx = date_range.indexOf(playdate);
-			}
+		// next
+		idx++;
+		if (idx > date_range.length-1) idx=0;
+		let playdate = date_range[idx];
 
 
-			//console.log('idx',idx);
-			//console.log('playdate', playdate);
+		d3.select('.range').property('value', +moment(playdate));
 
-			idx++;
-			playdate = date_range[idx];
+		//setBubble(d3.select('.range').node(), d3.select('.bubble').node());
+		d3.select('.bubble')
+			.html(moment(playdate).format('D MMM YYYY'))
+			.style('left', scaleTime(moment(playdate))+'px' )
 
-			let dt 	= +moment(playdate);
-			d3.select('.range').property('value', dt);
-			setBubble(d3.select('.range').node(), d3.select('.bubble').node());
+
+		// slideTime(playdate)
+		let data_current = data.filter(d=>d.date==moment(playdate).format('YYYY-MM-DD') );
+
+		page_title( data_current );
+
+		hotspots( data_current );
+
+		map_textures( data_current );
+
 
 	}
 
 	//=====================
-	// pause
+	// pause button
 	//=====================
 	d3.select('.fa-pause')
 		.style('cursor','pointer')
-//		.on('mouseover', function(e,d){
-//
-//			d3.select(this).style('color','lime')
-//
-//		})
-//		.on('mouseout', function(e,d){
-//
-//			d3.select(this)
-//				.transition()
-//					.style('color','white')
-//
-//		})
 		.on('click', function(e,d)	{
 
 			d3.select(this)
@@ -911,15 +1100,14 @@ function loaded(raw)	{
 			d3.select('.fa-play')
 				.style('display', null)
 
-//			if (playtimer)	{
-				window.clearInterval(playtimer);
-				playtimer=null;
-//			}
+			window.clearInterval(playtimer);
+			playtimer=null;
 
 		});
 
 
 
+	console.timeEnd('playback');
 	console.groupEnd('playback');
 
 
@@ -931,13 +1119,10 @@ function loaded(raw)	{
 </script>
 
 
-
-
 <div style="display:flex">
 	<div style="flex:0 1 100px">
 
 		<!-- font-awesome icons https://fontawesome.com/icons?d=gallery&p=2 -->
-
 		<i class="fas fa-play" 	style="font-size:200%; margin-left:20px; "></i>
 		<i class="fas fa-pause" style="font-size:200%; margin-left:20px; display:none;"></i>
 
@@ -961,7 +1146,6 @@ function loaded(raw)	{
 <button onclick="document.location='index.html'">Main Menu</button>
 <button onclick="document.location='index9.html'">Back</button>
 <button onclick="document.location='index11.html'">Next</button>
-
 
 </body>
 </html>
