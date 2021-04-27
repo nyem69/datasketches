@@ -30,31 +30,6 @@ path {
 <script>
 var width = 960,
     height = 400;
-//
-//var flags = [{},
-//            {'name': 'Johor'},
-//            {'name': 'Kedah'},
-//            {'name': 'Kelantan'},
-//            {'name': 'Kuala Lumpur'},
-//            {'name': 'Labuan'},
-//            {'name': 'Melaka'},
-//            {'name': 'Negeri Sembilan'},
-//            {'name': 'Pahang'},
-//            {'name': 'Perak'},
-//            {'name': 'Perlis'},
-//            {'name': 'Pulau Pinang'},
-//            {'name': 'Putrajaya'},
-//            {'name': 'Sabah'},
-//            {'name': 'Sarawak'},
-//            {'name': 'Selangor'},
-//            {'name': 'Terengganu'},
-//          ]
-//
-
-//var projection = d3.geoMercator()
-//    .center([0, 5 ])
-//    .scale(150)
-//    .rotate([-180,0]);
 
 var projection = d3.geoMercator()
     .center([0, 0 ])
@@ -75,77 +50,16 @@ var my = svg.append("g").attr('class','map-malaysia');
 
 
 
-
-
-
-// load and display the World
-// d3.json("world-110m2.json").then(function(topology) {
-/*
-d3.json("https://raw.githubusercontent.com/cszang/dendrobox/master/data/world-110m2.json").then(function(topology) {
-
-
-    // load and display the cities
-    d3.csv("cities.csv").then(function(data) {
-        g.selectAll("circle")
-           .data(data)
-           .enter()
-           .append("a")
-              .attr("xlink:href", function(d) {
-                return "https://www.google.com/search?q="+d.city;}
-              )
-           .append("circle")
-           .attr("cx", function(d) {
-                   return projection([d.lon, d.lat])[0];
-           })
-           .attr("cy", function(d) {
-                   return projection([d.lon, d.lat])[1];
-           })
-           .attr("r", 5)
-           .style("fill", "red");
-
-           g.selectAll("text")
-            .data(data)
-            .enter()
-            .append("text") // append text
-            .attr("x", function(d) {
-            return projection([d.lon, d.lat])[0];
-            })
-            .attr("y", function(d) {
-            return projection([d.lon, d.lat])[1];
-            })
-            .attr("dy", -7) // set y position of bottom of text
-            .style("fill", "black") // fill the text with the colour black
-            .attr("text-anchor", "middle") // set anchor y justification
-            .text(function(d) {return d.city;}); // define the text to display
-
-    });
-
-    g.selectAll("path")
-       .data(topojson.feature(topology, topology.objects.countries)
-           .features)
-       .enter().append("path")
-       .attr("d", path);
-
-});
-*/
-
-
-
-
-
-
 //=====================
 // from mapv4.html
 //=====================
 
-//d3.json("malaysia.json", function(error, malaysia) {
 d3.json("malaysia.json").then(function(malaysia) {
 
 
   var states = topojson.feature(malaysia, malaysia.objects.states);
   var land = topojson.feature(malaysia, malaysia.objects.land);
 
-  console.log('states', states);
 
 
   my.selectAll(".land")
@@ -157,6 +71,35 @@ d3.json("malaysia.json").then(function(malaysia) {
       .style("fill", "#aca")
       .style("stroke", "#000")
       .style("stroke-width", "1px");
+
+
+	states.features.forEach(d=>{
+
+		// join map id with flag id
+		d.properties.flag_id = 	{
+															1 :	{flag_id:1,	negeri:"Johor"},
+															2 :	{flag_id:2,	negeri:"Kedah"},
+															3 :	{flag_id:3,	negeri:"Kelantan"},
+															4 :	{flag_id:14,negeri:"Kuala Lumpur"},
+															5 :	{flag_id:15,negeri:"Labuan"},
+															6 :	{flag_id:4,	negeri:"Melaka"},
+															7 :	{flag_id:5,	negeri:"Negeri Sembilan"},
+															8 :	{flag_id:6,	negeri:"Pahang"},
+															9 :	{flag_id:8,	negeri:"Perak"},
+															10:	{flag_id:9,	negeri:"Perlis"},
+															11:	{flag_id:7,	negeri:"Pulau Pinang"},
+															12:	{flag_id:12,negeri:"Putrajaya"},
+															13:	{flag_id:12,negeri:"Sabah"},
+															14:	{flag_id:13,negeri:"Sarawak"},
+															15:	{flag_id:10,negeri:"Selangor"},
+															16:	{flag_id:11,negeri:"Terengganu"},
+														}[d.properties.id].flag_id;
+
+	});
+
+ 	console.log('states', states);
+
+
 
   var statesEnter = my.selectAll(".state")
     .data(states.features)
@@ -170,7 +113,7 @@ d3.json("malaysia.json").then(function(malaysia) {
 
   statesEnter.append("image")
       //.attr("xlink:href",function(d){return flags[d.properties.id].img;})
-      .attr("xlink:href",function(d){return '//static.aga.my/bendera/circle/'+d.properties.id+'.svg';})
+      .attr("xlink:href",function(d){return '//static.aga.my/bendera/circle/'+d.properties.flag_id+'.svg';})
       .attr("x", function(d){return path.bounds(d)[0][0];})
       .attr("y", function(d){return path.bounds(d)[0][1];})
       .attr("width", function(d){var bounds = path.bounds(d); return bounds[1][0] - bounds[0][0];})
@@ -186,69 +129,8 @@ d3.json("malaysia.json").then(function(malaysia) {
     .style("stroke-width", "1px")
     ;
 
-//  my
-//    .append("path")
-//      .style("fill","none")
-//      //.style("stroke","#000")
-//      .style("stroke",'none')
-//      //.attr("d", projection.getCompositionBorders());
-//      .attr("d", path);
-
 });
 
-
-
-
-
-
-//=====================
-// load districts from google sheets
-// sheet: https://docs.google.com/spreadsheets/d/17vLxlZGl1cOTpjFqQhh1x_ABVKbh4muUOh1hFK0XYhg/edit?usp=sharing
-// csv: https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv
-//=====================
-/*
-d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv')
-  .then(function(raw){
-
-    console.log('raw', raw);
-
-    let data = raw.filter(d=>d.Longitude && d.Latitude)
-                  .map(d=>{
-                    d.longitude = +d.Longitude;
-                    d.latitude = +d.Latitude;
-                    return d;
-                  })
-
-    console.log('data', data);
-
-    // https://www.d3indepth.com/geographic/
-
-    svg.append('g').attr('class','cities-malaysia')
-      .selectAll('circle').data(data)
-      .enter()
-        .append('circle')
-          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
-          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-          .attr('r',3)
-          .attr('fill','magenta')
-
-
-    svg.append('g').attr('class','cities-malaysia-label')
-      .selectAll('text').data(data)
-      .enter()
-        .append('text')
-          .attr('x', d=>projection([d.longitude,d.latitude])[0])
-          .attr('y', d=>projection([d.longitude,d.latitude])[1])
-          .attr('fill','purple')
-          .attr('text-anchor','middle')
-          .attr('font-size','60%')
-          .attr('transform','translate(0,-7)')
-          .text(d=>d.Daerah);
-
-
-
-  });
-*/
 
 </script>
 <br>

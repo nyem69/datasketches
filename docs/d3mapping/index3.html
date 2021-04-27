@@ -66,7 +66,6 @@ d3.json("malaysia.json").then(function(malaysia) {
   // shift sabah/sarawak/labuan closer to semenanjung
   //=====================
 
-//  [land,states].forEach(d=>{
   [land,states].forEach(d=>{
     d.features
       .forEach(d=>{
@@ -111,7 +110,33 @@ d3.json("malaysia.json").then(function(malaysia) {
       .style("stroke-width", 1);
 
 
-  var statesEnter = my.selectAll(".state")
+	states.features.forEach(d=>{
+
+		// join map id with negeri
+		d.properties.negeri = 	{
+															1 :	{flag_id:1,	negeri:"Johor"},
+															2 :	{flag_id:2,	negeri:"Kedah"},
+															3 :	{flag_id:3,	negeri:"Kelantan"},
+															4 :	{flag_id:14,negeri:"Kuala Lumpur"},
+															5 :	{flag_id:15,negeri:"Labuan"},
+															6 :	{flag_id:4,	negeri:"Melaka"},
+															7 :	{flag_id:5,	negeri:"Negeri Sembilan"},
+															8 :	{flag_id:6,	negeri:"Pahang"},
+															9 :	{flag_id:8,	negeri:"Perak"},
+															10:	{flag_id:9,	negeri:"Perlis"},
+															11:	{flag_id:7,	negeri:"Pulau Pinang"},
+															12:	{flag_id:12,negeri:"Putrajaya"},
+															13:	{flag_id:12,negeri:"Sabah"},
+															14:	{flag_id:13,negeri:"Sarawak"},
+															15:	{flag_id:10,negeri:"Selangor"},
+															16:	{flag_id:11,negeri:"Terengganu"},
+														}[d.properties.id].negeri;
+
+	});
+
+	console.log('states.features', states.features);
+
+  my.selectAll(".state")
     .data(states.features)
     .enter()
     	.append('path')
@@ -120,94 +145,19 @@ d3.json("malaysia.json").then(function(malaysia) {
     		.attr('stroke','#ddd')
 
 
-//
-//  statesEnter.append("clipPath")
-//    .attr("class","mask")
-//    .attr("id",function(d){return "clip"+d.properties.id;})
-//    .append("path")
-//    .attr("d",path);
-//
-//  statesEnter.append("image")
-//      //.attr("xlink:href",function(d){return flags[d.properties.id].img;})
-//      .attr("xlink:href",function(d){return '//static.aga.my/bendera/circle/'+d.properties.id+'.svg';})
-//      .attr("x", function(d){return path.bounds(d)[0][0];})
-//      .attr("y", function(d){return path.bounds(d)[0][1];})
-//      .attr("width", function(d){var bounds = path.bounds(d); return bounds[1][0] - bounds[0][0];})
-//      .attr("height", function(d){var bounds = path.bounds(d); return bounds[1][1] - bounds[0][1];})
-//      .attr("preserveAspectRatio","none")
-//      .attr("clip-path", function(d){return "url(#clip"+d.properties.id+")";});
-//
-//  statesEnter.append("path")
-//    .attr("class", "states")
-//    .attr("d", path)
-//    .style("stroke", "white")
-//    .style("fill", "none")
-//    .style("stroke-width", "1px")
-//    ;
+  my.selectAll("text")
+    .data(states.features)
+    .enter()
+    	.append('text')
+    		.attr('x',d=>path.centroid(d)[0])
+    		.attr('y',d=>path.centroid(d)[1])
+    		.attr('fill','#00f')
+    		.attr('text-anchor','middle')
+    		.text(d=>d.properties.negeri)
 
-//  my
-//    .append("path")
-//      .style("fill","none")
-//      //.style("stroke","#000")
-//      .style("stroke",'none')
-//      //.attr("d", projection.getCompositionBorders());
-//      .attr("d", path);
 
 });
 
-
-
-
-
-
-//=====================
-// load districts from google sheets
-// sheet: https://docs.google.com/spreadsheets/d/17vLxlZGl1cOTpjFqQhh1x_ABVKbh4muUOh1hFK0XYhg/edit?usp=sharing
-// csv: https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv
-//=====================
-/*
-d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv')
-  .then(function(raw){
-
-    console.log('raw', raw);
-
-    let data = raw.filter(d=>d.Longitude && d.Latitude)
-                  .map(d=>{
-                    d.longitude = +d.Longitude;
-                    d.latitude = +d.Latitude;
-                    return d;
-                  })
-
-    console.log('data', data);
-
-    // https://www.d3indepth.com/geographic/
-
-    svg.append('g').attr('class','cities-malaysia')
-      .selectAll('circle').data(data)
-      .enter()
-        .append('circle')
-          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
-          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-          .attr('r',3)
-          .attr('fill','magenta')
-
-
-    svg.append('g').attr('class','cities-malaysia-label')
-      .selectAll('text').data(data)
-      .enter()
-        .append('text')
-          .attr('x', d=>projection([d.longitude,d.latitude])[0])
-          .attr('y', d=>projection([d.longitude,d.latitude])[1])
-          .attr('fill','purple')
-          .attr('text-anchor','middle')
-          .attr('font-size','60%')
-          .attr('transform','translate(0,-7)')
-          .text(d=>d.Daerah);
-
-
-
-  });
-*/
 
 </script>
 <br>

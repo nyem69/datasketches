@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <meta name="viewport" content="width=device-width" />
 
-<title>Map centroid using getBBox() or centerOfMass</title>
+<title>Map centroid using path.centroid, getBBox() or centerOfMass</title>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Displaying map with d3.js"/>
 <meta property="og:description" content="d3.js exercises - render map and points from topojson and csv files"/>
@@ -256,30 +256,47 @@ function loaded(raw)	{
 	//
 	//====================================================================================
 
-
-	let map_id = {
-		1:"Johor",
-		2:"Kedah",
-		3:"Kelantan",
-		4:"Kuala Lumpur",
-		5:"Labuan",
-		6:"Melaka",
-		7:"Negeri Sembilan",
-		8:"Pahang",
-		9:"Perak",
-		10:"Perlis",
-		11:"Pulau Pinang",
-		12:"Putrajaya",
-		13:"Sabah",
-		14:"Sarawak",
-		15:"Selangor",
-		16:"Terengganu",
-	};
+//
+//	let map_id = {
+//		1:"Johor",
+//		2:"Kedah",
+//		3:"Kelantan",
+//		4:"Kuala Lumpur",
+//		5:"Labuan",
+//		6:"Melaka",
+//		7:"Negeri Sembilan",
+//		8:"Pahang",
+//		9:"Perak",
+//		10:"Perlis",
+//		11:"Pulau Pinang",
+//		12:"Putrajaya",
+//		13:"Sabah",
+//		14:"Sarawak",
+//		15:"Selangor",
+//		16:"Terengganu",
+//	};
 
 	// assign negeri name to map based on properties.id
 
 	states.features.forEach(d=>{
-		d.properties.negeri = map_id[ d.properties.id ];
+		d.properties.negeri = {
+														1:"Johor",
+														2:"Kedah",
+														3:"Kelantan",
+														4:"Kuala Lumpur",
+														5:"Labuan",
+														6:"Melaka",
+														7:"Negeri Sembilan",
+														8:"Pahang",
+														9:"Perak",
+														10:"Perlis",
+														11:"Pulau Pinang",
+														12:"Putrajaya",
+														13:"Sabah",
+														14:"Sarawak",
+														15:"Selangor",
+														16:"Terengganu",
+													}[d.properties.id];
 	});
 
 
@@ -302,14 +319,25 @@ function mapCentroid()	{
 		.each(function(d){
 
 			//=====================
-			// SVG getBBox centroid
+			// d3.js path.centroid
+			// https://github.com/d3/d3-geo#path_centroid
+			//=====================
+
+			d.properties.centroid = {
+																x:path.centroid(d)[0],
+																y:path.centroid(d)[1]
+															};
+
+
+			//=====================
+			// SVG getBBox center
 			// https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox
 			//=====================
 
 			let bb = d3.select(this).node().getBBox();
 			d.properties.bbox = bb;
 
-			d.properties.centroid = {
+			d.properties.bbox_center = {
 																x:bb.x+(bb.width/2),
 																y:bb.y+(bb.height/2)
 															};
@@ -325,42 +353,9 @@ function mapCentroid()	{
 															y: projection(center.geometry.coordinates)[1]
 														};
 
-			//=====================
-			// custom offset to centerOfMass
-			//=====================
-			d.properties.offset = {
-				"Johor"						:[-10, 10],
-				"Melaka"					:[  0,  0],
-				"Negeri Sembilan"	:[  0,  0],
-				"Putrajaya"				:[  0,  0],
-				"Kuala Lumpur"		:[  0,  0],
-				"Selangor"				:[-10,-10],
-				"Pulau Pinang"		:[  0,  0],
-
-				"Kedah"						:[  0,  0],
-				"Perak"						:[  0,  0],
-				"Perlis"					:[  0,  0],
-
-				"Pahang"					:[  0,  0],
-				"Terengganu"			:[  0,  0],
-				"Kelantan"				:[  0,-10],
-
-				"Sabah"						:[-10,  0],
-				"Sarawak"					:[ 20, 10],
-				"Labuan"					:[  0,  0],
-			}[d.properties.negeri];
-
-
-
 		});
 
 
-
-	let colors 	= [
-									'lime',
-									'yellow',
-									'red',
-								];
 
 	states.features.sort(function(a,b){ return a.properties.bbox.x < b.properties.bbox.x });
 	states.features.forEach((d,i)=>{
@@ -368,11 +363,20 @@ function mapCentroid()	{
 	});
 
 
-	console.log('states.features', states.features.map(d=>[d.properties.sequence, d.properties.id, d.properties.negeri]));
+	console.log('states.features properties', states.features.map(d=>d.properties));
 
 
 	let t = 100,
 			delay = 1000;
+
+
+	let _bubbles =[
+									'bbox_center',
+									'center',
+									'centroid'
+								];
+
+
 
 
 	d3.selectAll('.state')
@@ -393,10 +397,11 @@ function mapCentroid()	{
 												];
 
 					//=====================
-					// getBBox box
+					// getBBox bounding box
 					//=====================
 
 					sel.append('path')
+						.attr('class','getBBox')
 						.attr('stroke',colors[1])
 						.attr('stroke-width',1)
 						.attr('fill','none')
@@ -431,58 +436,26 @@ function mapCentroid()	{
 						})
 						.attr("stroke-dashoffset", 0)
 
-					//=====================
-					// offset path
-					//=====================
 
-					sel.append('line')
-						.attr('class','line-centroid-centerOfMass')
-						.attr('stroke',colors[0])
-						.attr('x1', d=>d.properties.centroid.x)
-						.attr('y1', d=>d.properties.centroid.y)
-						.attr('x2', d=>d.properties.centroid.x)
-						.attr('y2', d=>d.properties.centroid.y)
-						.attr('stroke-width',1)
-						.attr('opacity',1)
-
-					sel.append('line')
-						.attr('class','line-centerOfMass-offset')
-						.attr('stroke','yellow')
-						.attr('x1', d=>d.properties.center.x)
-						.attr('y1', d=>d.properties.center.y)
-						.attr('x2', d=>d.properties.center.x)
-						.attr('y2', d=>d.properties.center.y)
-						.attr('stroke-width',1)
-						.attr('opacity',1)
 
 					//=====================
 					// bubbles
 					//=====================
 
-					sel.append('circle')
-						.attr('class','getBBox-centroid')
-						.attr('fill',colors[0])
-						.attr('cx', d=>d.properties.centroid.x)
-						.attr('cy', d=>d.properties.centroid.y)
-						.attr('r', 0)
-						.attr('opacity',1)
 
+					_bubbles
+						.forEach((k,i)=>{
 
-					sel.append('circle')
-						.attr('class','centerOfMass')
-						.attr('fill',colors[0])
-						.attr('cx', d=>d.properties.centroid.x)
-						.attr('cy', d=>d.properties.centroid.y)
-						.attr('r', 0)
-						.attr('opacity',1)
+							sel.append('circle')
+								.attr('class','bubble-'+k)
+								.attr('fill', ['cyan','yellow','red'][i])
+								.attr('cx', d=>d.properties[k].x)
+								.attr('cy', d=>d.properties[k].y)
+								.attr('r', 0)
+								.attr('opacity',1);
 
-					sel.append('circle')
-						.attr('class','centerOfMass-offset')
-						.attr('fill','yellow')
-						.attr('cx', d=>d.properties.center.x)
-						.attr('cy', d=>d.properties.center.y)
-						.attr('r', 0)
-						.attr('opacity',1)
+						});
+
 
 				})
 			.merge(l)
@@ -499,8 +472,8 @@ function mapCentroid()	{
 						d3.selectAll('.state')
 							.attr('fill-opacity',0)
 							.transition()
-								.delay((d,i)=>500 + t + (d.properties.sequence * delay))
-								.duration(t)
+								.delay((d,i)=>500  + (d.properties.sequence * delay))
+								.duration(t*20)
 									.attr('fill','steelblue')
 									.attr('fill-opacity',1)
 							.transition()
@@ -528,83 +501,28 @@ function mapCentroid()	{
 								.duration(1000)
 									.attr('opacity',.1)
 
-						//=====================
-						//
-						//=====================
-
-						sel.select('.getBBox-centroid')
-							.transition()
-									.delay(d=>500 + (t*5) + (d.properties.sequence*delay))
-									.duration(t*2)
-										.attr('r',3)
-							.transition()
-								.delay(1000)
-									.duration(2000)
-									.attr('opacity',.1)
-
 
 						//=====================
-						//
+						// bubbles
 						//=====================
 
+						_bubbles
+							.forEach((k,i)=>{
 
-						t5 = sel.transition()
-									.delay(d=>500 + (t*6) + (d.properties.sequence*delay))
-									.duration(t*3)
+								sel
+									.select('.bubble-'+k)
+										.transition()
+											.delay(d=>500 + (t*(5+(i*3))) + (d.properties.sequence*delay))
+											.duration(t*2)
+												.attr('r',3)
+									.transition()
+										.delay(1000)
+											.duration(2000)
+											.attr('r', k=='centroid' ? 3 : 1)
 
-
-						sel.select('.line-centroid-centerOfMass')
-							.transition(t5)
-										.attr('x2', d=>d.properties.center.x)
-										.attr('y2', d=>d.properties.center.y)
-										.attr('stroke','yellow')
-							.transition()
-								.delay(1000)
-									.duration(2000)
-									.attr('opacity',.1)
-
-						sel.select('.centerOfMass')
-							.transition(t5)
-										.attr('cx', d=>d.properties.center.x)
-										.attr('cy', d=>d.properties.center.y)
-										.attr('r',3)
-										.attr('fill','yellow')
-							.transition()
-								.delay(1000)
-									.duration(2000)
-									.attr('opacity',.1)
-
-						//=====================
-						//
-						//=====================
-
-						t6 = sel.transition()
-									.delay(d=>500 + (t*7) + (d.properties.sequence*delay))
-									.duration(t*4)
+							});
 
 
-
-						sel.select('.line-centerOfMass-offset')
-							.transition(t6)
-										.attr('x2', d=>d.properties.center.x + d.properties.offset[0])
-										.attr('y2', d=>d.properties.center.y + d.properties.offset[1])
-										.attr('stroke','red')
-							.transition()
-								.delay(1000)
-									.duration(2000)
-									.attr('opacity',.1)
-
-						sel.select('.centerOfMass-offset')
-							.transition(t6)
-										.attr('cx', d=>d.properties.center.x + d.properties.offset[0])
-										.attr('cy', d=>d.properties.center.y + d.properties.offset[1])
-										.attr('r',3)
-										.attr('fill','red');
-
-
-						//=====================
-						//
-						//=====================
 
 
 					},1000);
@@ -681,7 +599,7 @@ function mapCentroid()	{
 					let sel = d3.select(this),
 							tf = sel.classed('hidden');
 
-					d3.selectAll('.getBBox-centroid')
+					d3.selectAll('.bubble-bbox_center')
 						.transition()
 							.delay((d,i)=>i*50)
 								.attr('display', tf ? null : 'none')
@@ -702,7 +620,7 @@ function mapCentroid()	{
 							.attr('ry',3)
 
 					sel.append('circle')
-							.attr('fill', 'lime' )
+							.attr('fill', 'cyan' )
 							.attr('cx', 15)
 							.attr('cy', 7)
 							.attr('r', 3)
@@ -712,7 +630,7 @@ function mapCentroid()	{
 							.attr('y',10)
 							.attr('font-size', '70%')
 							.attr('fill','white')
-							.text('centroid from getBBox()')
+							.text('getBBox() center')
 
 				})
 				.attr('opacity',0)
@@ -722,16 +640,19 @@ function mapCentroid()	{
 
 
 
+			//---------------------
+			// center
+			//---------------------
 
 			sel.append('g')
-				.attr('class','legend-centerOfMass')
+				.attr('class','legend-center')
 				.attr('transform','translate(0,40)')
 				.on('click', function(e,d)	{
 
 					let sel = d3.select(this),
 							tf = sel.classed('hidden');
 
-					d3.selectAll('.centerOfMass')
+					d3.selectAll('.bubble-center')
 						.transition()
 							.delay((d,i)=>i*50)
 								.attr('display', tf ? null : 'none')
@@ -763,7 +684,7 @@ function mapCentroid()	{
 							.attr('y',10)
 							.attr('font-size', '70%')
 							.attr('fill','white')
-							.text('centerOfMass')
+							.text('turf.js centerOfMass')
 
 				})
 				.attr('opacity',0)
@@ -774,15 +695,18 @@ function mapCentroid()	{
 
 
 
+			//---------------------
+			// bubble-centroid
+			//---------------------
 			sel.append('g')
-				.attr('class','legend-centerOfMass-offset')
+				.attr('class','legend-bubble-centroid')
 				.attr('transform','translate(0,60)')
 				.on('click', function(e,d)	{
 
 					let sel = d3.select(this),
 							tf = sel.classed('hidden');
 
-					d3.selectAll('.centerOfMass-offset')
+					d3.selectAll('.bubble-centroid')
 						.transition()
 							.delay((d,i)=>i*50)
 								.attr('fill','red')
@@ -815,7 +739,7 @@ function mapCentroid()	{
 							.attr('y',10)
 							.attr('font-size', '70%')
 							.attr('fill','white')
-							.text('centerOfMass + custom offset')
+							.text('d3.geoPath.centroid')
 
 				})
 				.attr('opacity',0)
@@ -839,9 +763,10 @@ function mapCentroid()	{
 
 
 <div>
-		Finding map centroid using
-		<a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox" target="_blank" style="color:#ddd">svg getBBox</a> or
-		<a href="https://turfjs.org/docs/#centerOfMass" target="_blank" style="color:#ddd">turf.js centerOfMass</a>
+		Finding best map centroid using
+		<a href="https://github.com/d3/d3-geo#path_centroid" target="_blank" style="color:#ddd">path.centroid</a>,
+		<a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox" target="_blank" style="color:#ddd">getBBox</a> or
+		turf.js <a href="https://turfjs.org/docs/#centerOfMass" target="_blank" style="color:#ddd">centerOfMass</a>
 </div>
 <br>
 <button onclick="document.location='index.html'">Main Menu</button>
