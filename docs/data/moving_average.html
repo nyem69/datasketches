@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="viewport" content="width=device-width" />
+
+<title>moving average</title>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="data visualization exercises"/>
+<meta property="og:description" content="basic visualization exercises using d3.js"/>
+<meta property="og:url" content="https://nyem69.github.io/datasketches/"/>
+<meta property="og:image" content="../assets/d3mapping.png"/>
+<meta name="twitter:card" content="../assets/d3mapping.png"/>
+<meta name="twitter:site" content="@nyem"/>
+
+
+<!-- Blueprint v3 -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/normalize.css"/>
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint-icons.css"/>
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint.css"/>
+
+
+<style>
+html, body, svg {
+	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+	background:#30404D;
+	color:#ffffff;
+
+}
+
+
+
+a {
+	color: cyan;
+}
+
+
+.numeric {
+	text-align:right;
+}
+
+/*-------
+
+slider
+
+---------*/
+
+.range-wrap {
+  position: relative;
+  margin: 0 auto 3rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: rgb(128,0,0);
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgb(128,0,0);
+  top: -1px;
+  left: 50%;
+}
+
+
+</style>
+
+<body>
+
+<script type="text/javascript" src="//lib.aga.my/d3/6.7.0/d3.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3-array/2.3.1/d3-array.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.aga.my/moment/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/chroma/2.1.1/chroma.min.js"></script>
+
+
+
+<script>
+
+
+
+//=======================================
+// moving average
+//=======================================
+
+
+let dsl = {
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string":{
+            "query":"code:0116"
+          }
+        },
+        {
+          "range": {
+            "date": {
+              "gte": "now-30d"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "AGG": {
+      "date_histogram": {
+        "field": "date",
+        "calendar_interval": "1d"
+      },
+      "aggs": {
+
+        "VALUE": {
+          "top_hits": {
+            "sort":[
+              {
+                "date":{
+                  "order":"desc"
+                }
+              }
+            ],
+            "_source":{
+              "includes":["code","date","close","volume"]
+            },
+            "size":1
+          }
+        },
+
+
+        "CLOSE": {
+          "avg": {
+            "field":"close"
+          }
+         },
+
+        "MOVING_AVERAGE_7": {
+          "moving_avg": {
+            "buckets_path": "CLOSE",
+            "model": "simple",
+            "window":7,
+            "gap_policy": "skip"
+          }
+        }
+
+
+      }
+    }
+  }
+};
+
+
+
+
+
+d3.json('//api.aga.my/_es/104/yahoo_finance/_search', {
+  method: 'POST',
+  headers: {"Content-type": "application/json; charset=UTF-8"},
+  body:JSON.stringify(dsl)
+})
+.then((res)=>{
+
+  console.log('res', res);
+
+  let sequence=[];
+
+  let data = res.aggregations.AGG.buckets
+              .filter(d=>d['VALUE'].hits.hits.length)
+              .map((d,i)=>{
+
+
+                let k = d['VALUE'].hits.hits[0]._source;
+
+                if (d['MOVING_AVERAGE_7'])  {
+                  k.moving_average_7 = d['MOVING_AVERAGE_7'].value;
+                }
+
+								// previous_7days
+               	k['p7days'] = sequence.slice(-7);
+               	k.psma7 = d3.mean(k['p7days']);
+
+                sequence.push(k.close);
+
+								// 7days
+
+                k['7days'] = sequence.slice(-7);
+                //if (k['7days'].length==7)  {
+                  k.sma7 = d3.mean(k['7days']);
+               	//}
+
+                return k;
+
+              });
+
+  console.log('data', data);
+
+
+  let f3 = d3.format('.3f');
+
+
+	d3.select('body').classed('bp3-dark',true)
+		.append('table').attr('class','bp3-html-table bp3-html-table-bordered bp3-html-table-condensed')
+			.call(sel=>{
+
+				sel.append('thead')
+					.append('tr')
+						.selectAll('td').data([
+							['date'],
+							['close'],
+							['elasticsearch','moving average'],
+							['previous','7 points'],
+							['avg of previous','7 points'],
+							['7 points data','(today + previous','6 points)'],
+							['7 points','moving average'],
+						])
+						.enter()
+							.append('td')
+								.html(d=>d.join('<br>'));
+
+
+				sel.append('tbody')
+					.selectAll('tr').data(data)
+						.enter()
+							.append('tr')
+								.call(sel=>{
+									sel.append('td').html(d=>d.date);
+									sel.append('td').attr('class','numeric').html(d=>d.close);
+									sel.append('td').attr('class','numeric').html(d=>d.moving_average_7 ? f3(d.moving_average_7) : '');
+
+									sel.append('td').attr('class','numeric').html(d=>d['p7days'].join(', '));
+									sel.append('td').attr('class','numeric').html(d=>d.psma7?f3(d.psma7):'');
+
+									sel.append('td').attr('class','numeric').html(d=>d['7days'].join(', '));
+									sel.append('td').attr('class','numeric').html(d=>d.sma7?f3(d.sma7):'');
+								});
+
+			});
+
+});
+
+/*
+[
+{"date":"2021-04-07","volume":88254000,"code":"0116","close":0.455,"7days":[0.455]},
+{"date":"2021-04-08","volume":89238800,"code":"0116","close":0.48,"moving_average_7":0.45500001311302185,"7days":[0.455,0.48]},
+{"date":"2021-04-09","volume":123998800,"code":"0116","close":0.5,"moving_average_7":0.4675000011920929,"7days":[0.455,0.48,0.5]},
+{"date":"2021-04-12","volume":83178800,"code":"0116","close":0.46,"moving_average_7":0.47833333412806195,"7days":[0.455,0.48,0.5,0.46]},
+{"date":"2021-04-13","volume":91648300,"code":"0116","close":0.405,"moving_average_7":0.473750002682209,"7days":[0.455,0.48,0.5,0.46,0.405]},
+{"date":"2021-04-14","volume":131093400,"code":"0116","close":0.35,"moving_average_7":0.4600000023841858,"7days":[0.455,0.48,0.5,0.46,0.405,0.35]},
+{"date":"2021-04-15","volume":204223100,"code":"0116","close":0.24,"moving_average_7":0.4416666676600774,"7days":[0.455,0.48,0.5,0.46,0.405,0.35,0.24],"sma7":0.4128571428571428},
+{"date":"2021-04-16","volume":328440400,"code":"0116","close":0.15,"moving_average_7":0.41285714294229237,"7days":[0.48,0.5,0.46,0.405,0.35,0.24,0.15],"sma7":0.3692857142857142},
+{"date":"2021-04-19","volume":419392400,"code":"0116","close":0.125,"moving_average_7":0.36928571334906984,"7days":[0.5,0.46,0.405,0.35,0.24,0.15,0.125],"sma7":0.31857142857142856},
+{"date":"2021-04-20","volume":355384900,"code":"0116","close":0.13,"moving_average_7":0.318571429167475,"7days":[0.46,0.405,0.35,0.24,0.15,0.125,0.13],"sma7":0.2657142857142857},
+{"date":"2021-04-21","volume":235643500,"code":"0116","close":0.115,"moving_average_7":0.26571428562913624,"7days":[0.405,0.35,0.24,0.15,0.125,0.13,0.115],"sma7":0.21642857142857141},
+{"date":"2021-04-22","volume":247917100,"code":"0116","close":0.115,"moving_average_7":0.21642857044935226,"7days":[0.35,0.24,0.15,0.125,0.13,0.115,0.115],"sma7":0.17500000000000002},
+{"date":"2021-04-23","volume":461200600,"code":"0116","close":0.125,"moving_average_7":0.1749999991485051,"7days":[0.24,0.15,0.125,0.13,0.115,0.115,0.125],"sma7":0.14285714285714285},
+{"date":"2021-04-26","volume":444455800,"code":"0116","close":0.145,"moving_average_7":0.14285714285714285,"7days":[0.15,0.125,0.13,0.115,0.115,0.125,0.145],"sma7":0.12928571428571428},
+{"date":"2021-04-27","volume":786729600,"code":"0116","close":0.13,"moving_average_7":0.12928571445601328,"7days":[0.125,0.13,0.115,0.115,0.125,0.145,0.13],"sma7":0.12642857142857142},
+{"date":"2021-04-28","volume":520039200,"code":"0116","close":0.13,"moving_average_7":0.12642857006617955,"7days":[0.13,0.115,0.115,0.125,0.145,0.13,0.13],"sma7":0.12714285714285714},
+{"date":"2021-04-30","volume":605880000,"code":"0116","close":0.115,"moving_average_7":0.12714285509926931,"7days":[0.115,0.115,0.125,0.145,0.13,0.13,0.115],"sma7":0.125},
+{"date":"2021-05-03","volume":306021600,"code":"0116","close":0.115,"moving_average_7":0.12499999893563134,"7days":[0.115,0.125,0.145,0.13,0.13,0.115,0.115],"sma7":0.125},
+{"date":"2021-05-04","volume":707991600,"code":"0116","close":0.105,"moving_average_7":0.12499999893563134,"7days":[0.125,0.145,0.13,0.13,0.115,0.115,0.105],"sma7":0.12357142857142857},
+{"date":"2021-05-05","volume":501203900,"code":"0116","close":0.1,"moving_average_7":0.12357142674071449,"7days":[0.145,0.13,0.13,0.115,0.115,0.105,0.1],"sma7":0.12},
+{"date":"2021-05-06","volume":325187300,"code":"0116","close":0.09,"moving_average_7":0.11999999838215965,"7days":[0.13,0.13,0.115,0.115,0.105,0.1,0.09],"sma7":0.11214285714285713}
+]
+*/
+
+</script>
+
+
+</body>
+</html>
