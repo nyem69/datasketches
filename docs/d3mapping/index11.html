@@ -18,13 +18,13 @@
 
 <style>
 html {
-	background:#30404D;
-	color:#ffffff;
-	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+  background:#30404D;
+  color:#ffffff;
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 
 a {
-	color:
+  color:
 }
 
 
@@ -89,26 +89,26 @@ var projection = d3.geoMercator()
     .rotate([-109.45 + 5/2,-3.2]);
 
 var svg = d3.select("body")
-								.append("svg")
- 									.attr('viewBox', [0,0,width,height].join(' ')) // fill screen
-						 				.style('max-height', (innerHeight-200)+'px')
-									;
+                .append("svg")
+                   .attr('viewBox', [0,0,width,height].join(' ')) // fill screen
+                     .style('max-height', (innerHeight-200)+'px')
+                  ;
 
 var path = d3.geoPath()
     .projection(projection);
 
 
 svg.append('defs')
-	.html(`
+  .html(`
 
-	<filter id="fshadow02" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
-		<feGaussianBlur in="SourceAlpha" stdDeviation="3" result="BlurAlpha"/>
-		<feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
-		<feMerge>
-			<feMergeNode in="OffsetBlurAlpha"/>
-			<feMergeNode in="SourceGraphic"/>
-		</feMerge>
-	</filter>
+  <filter id="fshadow02" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="BlurAlpha"/>
+    <feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
+    <feMerge>
+      <feMergeNode in="OffsetBlurAlpha"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 
 
 `);
@@ -121,17 +121,17 @@ svg.append('defs')
 // create containers
 //=====================
 
-let g 							= svg.append("g"),
+let g               = svg.append("g"),
 
-		map_border 			= svg.append("g").attr('class','map-border-states'),
-		map_fill 				= svg.append("g").attr('class','map-fill-states'),
-		map_label 			= svg.append("g").attr('class','map-label-states');
+    map_border       = svg.append("g").attr('class','map-border-states'),
+    map_fill         = svg.append("g").attr('class','map-fill-states'),
+    map_label       = svg.append("g").attr('class','map-label-states');
 
-//		circles_border	= svg.append('g').attr('class','cities-malaysia-mouseover'),
-//    circles					= svg.append('g').attr('class','cities-malaysia'),
-//    circles_label		= svg.append('g').attr('class','cities-malaysia-label'),
+//    circles_border  = svg.append('g').attr('class','cities-malaysia-mouseover'),
+//    circles          = svg.append('g').attr('class','cities-malaysia'),
+//    circles_label    = svg.append('g').attr('class','cities-malaysia-label'),
 
-//    page_title			= svg.append('text');
+//    page_title      = svg.append('text');
 
 
 
@@ -150,11 +150,11 @@ let g 							= svg.append("g"),
 let states,
     land,
 
-//		timer,
-//		playdate,
-//		transition_duration = 500,
+//    timer,
+//    playdate,
+//    transition_duration = 500,
 //
-		comma = d3.format(',');
+    comma = d3.format(',');
 
 
 
@@ -167,7 +167,7 @@ let states,
 
 Promise.all([
 
-	d3.json("malaysia.json"),
+  d3.json("malaysia.json"),
 
 ]).then(loaded);
 
@@ -175,16 +175,16 @@ Promise.all([
 
 
 
-function loaded(raw)	{
+function loaded(raw)  {
 
 
-	//=====================
-	// from mapv4.html
-	//=====================
+  //=====================
+  // from mapv4.html
+  //=====================
 
-	console.group('%c' +'map', 'color:magenta');
+  console.group('%c' +'map', 'color:magenta');
 
-	let malaysia = raw[0];
+  let malaysia = raw[0];
 
 
 
@@ -211,7 +211,7 @@ function loaded(raw)	{
   }
 
 
-	map_border.selectAll(".land").data(land.features)
+  map_border.selectAll(".land").data(land.features)
     .enter()
       .append("path")
         .attr('class','land')
@@ -219,25 +219,23 @@ function loaded(raw)	{
         .attr('stroke','steelblue')
         .attr('stroke-width',1)
         .attr('fill', 'none' )
-  	    .attr('filter','url(#fshadow02)')
+        .attr('filter','url(#fshadow02)')
 
-	map_fill.selectAll(".state").data(states.features)
-	    .enter()
-	      .append("path")
-	        .attr('class','state')
-	        .attr("d", path)
-	        .attr('stroke','#666')
-	        .attr('fill', '#30404D' )
-	        .attr('stroke-width',.5)
-	        .attr('fill-opacity',1)
-	        .on('click',function(e,d){
-	        	//console.log('d.properties',d.properties.id, d.properties.cases.negeri);
-	        	window.prompt('map id: '+d.properties.id, d.properties.cases.negeri);
-	        });
+  map_fill.selectAll(".state").data(states.features)
+      .enter()
+        .append("path")
+          .attr('class','state')
+          .attr("d", path)
+          .attr('stroke','#666')
+          .attr('fill', '#30404D' )
+          .attr('stroke-width',.5)
+          .attr('fill-opacity',1)
+          .on('click',function(e,d){
+            //console.log('d.properties',d.properties.id, d.properties.cases.negeri);
+            window.prompt('map id: '+d.properties.id, d.properties.cases.negeri);
+          });
 
-	console.groupEnd('map');
-
-
+  console.groupEnd('map');
 
 
 
@@ -252,56 +250,58 @@ function loaded(raw)	{
 
 
 
-	//====================================================================================
-	//
-	//====================================================================================
+
+
+  //====================================================================================
+  //
+  //====================================================================================
 
 //
-//	let map_id = {
-//		1:"Johor",
-//		2:"Kedah",
-//		3:"Kelantan",
-//		4:"Kuala Lumpur",
-//		5:"Labuan",
-//		6:"Melaka",
-//		7:"Negeri Sembilan",
-//		8:"Pahang",
-//		9:"Perak",
-//		10:"Perlis",
-//		11:"Pulau Pinang",
-//		12:"Putrajaya",
-//		13:"Sabah",
-//		14:"Sarawak",
-//		15:"Selangor",
-//		16:"Terengganu",
-//	};
+//  let map_id = {
+//    1:"Johor",
+//    2:"Kedah",
+//    3:"Kelantan",
+//    4:"Kuala Lumpur",
+//    5:"Labuan",
+//    6:"Melaka",
+//    7:"Negeri Sembilan",
+//    8:"Pahang",
+//    9:"Perak",
+//    10:"Perlis",
+//    11:"Pulau Pinang",
+//    12:"Putrajaya",
+//    13:"Sabah",
+//    14:"Sarawak",
+//    15:"Selangor",
+//    16:"Terengganu",
+//  };
 
-	// assign negeri name to map based on properties.id
+  // assign negeri name to map based on properties.id
 
-	states.features.forEach(d=>{
-		d.properties.negeri = {
-														1:"Johor",
-														2:"Kedah",
-														3:"Kelantan",
-														4:"Kuala Lumpur",
-														5:"Labuan",
-														6:"Melaka",
-														7:"Negeri Sembilan",
-														8:"Pahang",
-														9:"Perak",
-														10:"Perlis",
-														11:"Pulau Pinang",
-														12:"Putrajaya",
-														13:"Sabah",
-														14:"Sarawak",
-														15:"Selangor",
-														16:"Terengganu",
-													}[d.properties.id];
-	});
+  states.features.forEach(d=>{
+    d.properties.negeri = {
+                            1:"Johor",
+                            2:"Kedah",
+                            3:"Kelantan",
+                            4:"Kuala Lumpur",
+                            5:"Labuan",
+                            6:"Melaka",
+                            7:"Negeri Sembilan",
+                            8:"Pahang",
+                            9:"Perak",
+                            10:"Perlis",
+                            11:"Pulau Pinang",
+                            12:"Putrajaya",
+                            13:"Sabah",
+                            14:"Sarawak",
+                            15:"Selangor",
+                            16:"Terengganu",
+                          }[d.properties.id];
+  });
 
 
 
-	mapCentroid();
+  mapCentroid();
 
 
 }
@@ -312,446 +312,446 @@ function loaded(raw)	{
 //
 //====================================================================================
 
-function mapCentroid()	{
-	console.group('%c' +'mapCentroid', 'color:magenta');
+function mapCentroid()  {
+  console.group('%c' +'mapCentroid', 'color:magenta');
 
-	map_fill.selectAll('.state')
-		.each(function(d){
+  map_fill.selectAll('.state')
+    .each(function(d){
 
-			//=====================
-			// d3.js path.centroid
-			// https://github.com/d3/d3-geo#path_centroid
-			//=====================
+      //=====================
+      // d3.js path.centroid
+      // https://github.com/d3/d3-geo#path_centroid
+      //=====================
 
-			d.properties.centroid = {
-																x:path.centroid(d)[0],
-																y:path.centroid(d)[1]
-															};
+      d.properties.centroid = {
+                                x:path.centroid(d)[0],
+                                y:path.centroid(d)[1]
+                              };
 
 
-			//=====================
-			// SVG getBBox center
-			// https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox
-			//=====================
-
-			let bb = d3.select(this).node().getBBox();
-			d.properties.bbox = bb;
-
-			d.properties.bbox_center = {
-																x:bb.x+(bb.width/2),
-																y:bb.y+(bb.height/2)
-															};
-
-			//=====================
-			// turf.js centerOfMass
-			// https://turfjs.org/docs/#centerOfMass
-			//=====================
+      //=====================
+      // SVG getBBox center
+      // https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox
+      //=====================
+
+      let bb = d3.select(this).node().getBBox();
+      d.properties.bbox = bb;
+
+      d.properties.bbox_center = {
+                                x:bb.x+(bb.width/2),
+                                y:bb.y+(bb.height/2)
+                              };
+
+      //=====================
+      // turf.js centerOfMass
+      // https://turfjs.org/docs/#centerOfMass
+      //=====================
 
-			let center = turf.centerOfMass(d);
-			d.properties.center = {
-															x: projection(center.geometry.coordinates)[0],
-															y: projection(center.geometry.coordinates)[1]
-														};
+      let center = turf.centerOfMass(d);
+      d.properties.center = {
+                              x: projection(center.geometry.coordinates)[0],
+                              y: projection(center.geometry.coordinates)[1]
+                            };
 
-		});
+    });
 
 
 
-	states.features.sort(function(a,b){ return a.properties.bbox.x < b.properties.bbox.x });
-	states.features.forEach((d,i)=>{
-		d.properties.sequence = i;
-	});
+  states.features.sort(function(a,b){ return a.properties.bbox.x < b.properties.bbox.x });
+  states.features.forEach((d,i)=>{
+    d.properties.sequence = i;
+  });
 
 
-	console.log('states.features properties', states.features.map(d=>d.properties));
+  console.log('states.features properties', states.features.map(d=>d.properties));
 
 
-	let t = 100,
-			delay = 1000;
+  let t = 100,
+      delay = 1000;
 
 
-	let _bubbles =[
-									'bbox_center',
-									'center',
-									'centroid'
-								];
+  let _bubbles =[
+                  'bbox_center',
+                  'center',
+                  'centroid'
+                ];
 
 
 
 
-	d3.selectAll('.state')
-		.attr('fill-opacity',0)
+  d3.selectAll('.state')
+    .attr('fill-opacity',0)
 
 
-	let l = map_label.selectAll('g').data(d3.shuffle(states.features));
-	l.exit().remove();
-	l.enter()
-			.append('g')
-				.attr('shape-rendering','geometricPrecision')
-				.call(sel=>{
+  let l = map_label.selectAll('g').data(d3.shuffle(states.features));
+  l.exit().remove();
+  l.enter()
+      .append('g')
+        .attr('shape-rendering','geometricPrecision')
+        .call(sel=>{
 
 
-					let colors = [
-													'#62D96B',
-													'cyan',
-												];
+          let colors = [
+                          '#62D96B',
+                          'cyan',
+                        ];
 
-					//=====================
-					// getBBox bounding box
-					//=====================
-
-					sel.append('path')
-						.attr('class','getBBox')
-						.attr('stroke',colors[1])
-						.attr('stroke-width',1)
-						.attr('fill','none')
-						.attr('opacity',1)
-						.attr('d',d=>[
-							'M',
-							[
-								d.properties.bbox.x,
-								d.properties.bbox.y
-							],
-							'L',
-							[
-								d.properties.bbox.x + d.properties.bbox.width,
-								d.properties.bbox.y
-							],
-							[
-								d.properties.bbox.x + d.properties.bbox.width,
-								d.properties.bbox.y + d.properties.bbox.height
-							],
-							[
-								d.properties.bbox.x,
-								d.properties.bbox.y + d.properties.bbox.height
-							],
-							[
-								d.properties.bbox.x,
-								d.properties.bbox.y
-							],
-							'Z',
-						].join(' '))
-						.attr('stroke-dasharray',function(d){
-							return 0+' '+Math.ceil(d3.select(this).node().getTotalLength())
-						})
-						.attr("stroke-dashoffset", 0)
+          //=====================
+          // getBBox bounding box
+          //=====================
+
+          sel.append('path')
+            .attr('class','getBBox')
+            .attr('stroke',colors[1])
+            .attr('stroke-width',1)
+            .attr('fill','none')
+            .attr('opacity',1)
+            .attr('d',d=>[
+              'M',
+              [
+                d.properties.bbox.x,
+                d.properties.bbox.y
+              ],
+              'L',
+              [
+                d.properties.bbox.x + d.properties.bbox.width,
+                d.properties.bbox.y
+              ],
+              [
+                d.properties.bbox.x + d.properties.bbox.width,
+                d.properties.bbox.y + d.properties.bbox.height
+              ],
+              [
+                d.properties.bbox.x,
+                d.properties.bbox.y + d.properties.bbox.height
+              ],
+              [
+                d.properties.bbox.x,
+                d.properties.bbox.y
+              ],
+              'Z',
+            ].join(' '))
+            .attr('stroke-dasharray',function(d){
+              return 0+' '+Math.ceil(d3.select(this).node().getTotalLength())
+            })
+            .attr("stroke-dashoffset", 0)
 
 
-
-					//=====================
-					// bubbles
-					//=====================
-
-
-					_bubbles
-						.forEach((k,i)=>{
-
-							sel.append('circle')
-								.attr('class','bubble-'+k)
-								.attr('fill', ['cyan','yellow','red'][i])
-								.attr('cx', d=>d.properties[k].x)
-								.attr('cy', d=>d.properties[k].y)
-								.attr('r', 0)
-								.attr('opacity',1);
-
-						});
+
+          //=====================
+          // bubbles
+          //=====================
+
+
+          _bubbles
+            .forEach((k,i)=>{
+
+              sel.append('circle')
+                .attr('class','bubble-'+k)
+                .attr('fill', ['cyan','yellow','red'][i])
+                .attr('cx', d=>d.properties[k].x)
+                .attr('cy', d=>d.properties[k].y)
+                .attr('r', 0)
+                .attr('opacity',1);
+
+            });
 
 
-				})
-			.merge(l)
-				.call(sel=>{
+        })
+      .merge(l)
+        .call(sel=>{
 
-
-
-					d3.timeout(()=>{
-
-						//=====================
-						// map
-						//=====================
-
-						d3.selectAll('.state')
-							.attr('fill-opacity',0)
-							.transition()
-								.delay((d,i)=>500  + (d.properties.sequence * delay))
-								.duration(t*20)
-									.attr('fill','steelblue')
-									.attr('fill-opacity',1)
-							.transition()
-								.delay(t)
-								.duration(3000)
-									.attr('fill-opacity',.1)
-
-
-						//=====================
-						// box
-						//=====================
-
-						sel.select('path')
-							.transition()
-								.delay((d,i)=>500 + t + (d.properties.sequence * delay))
-								.duration(1000)
-								.ease(d3.easeLinear)
-									.attr('stroke-dasharray',function(d,i){
-										let p = Math.ceil(d3.select(this).node().getTotalLength());
-										//return p+' '+p;
-										return [p,0].join(' ');
-									})
-							.transition()
-								.delay(100)
-								.duration(1000)
-									.attr('opacity',.1)
-
-
-						//=====================
-						// bubbles
-						//=====================
-
-						_bubbles
-							.forEach((k,i)=>{
-
-								sel
-									.select('.bubble-'+k)
-										.transition()
-											.delay(d=>500 + (t*(5+(i*3))) + (d.properties.sequence*delay))
-											.duration(t*2)
-												.attr('r',3)
-									.transition()
-										.delay(1000)
-											.duration(2000)
-											.attr('r', k=='centroid' ? 3 : 1)
-
-							});
-
-
-
-
-					},1000);
-
-				});
-
-
-
-	//=====================
-	// legends
-	//=====================
-
-	svg.append('g')
-		.attr('transform','translate('+[width/2 - 150,50]+')')
-		.style('cursor','pointer')
-		.call(sel=>{
-
-			sel.append('g')
-				.attr('class','legend-bbox')
-				.on('click', function(e,d)	{
-
-					let sel = d3.select(this),
-							tf = sel.classed('hidden');
-
-					d3.selectAll('.getBBox')
-						.transition()
-							.delay((d,i)=>i*50)
-								.attr('display', tf ? null : 'none')
-
-					sel.classed('hidden',!tf);
-
-				})
-				.call(sel=>{
-
-					sel.append('rect')
-							.attr('fill',chroma('steelblue').alpha(.1).hex())
-							.attr('stroke','#333')
-							.attr('x',-3)
-							.attr('y', -5)
-							.attr('width', 200)
-							.attr('height', 20)
-							.attr('rx',3)
-							.attr('ry',3)
-
-					sel.append('rect')
-							.attr('stroke', 'cyan' )
-							.attr('stroke-width',.5)
-							.attr('fill','none')
-							.attr('x',7)
-							.attr('y', -3)
-							.attr('width', 16)
-							.attr('height', 16)
-
-					sel.append('text')
-							.attr('x',30)
-							.attr('y',10)
-							.attr('font-size', '70%')
-							.attr('fill','white')
-							.text('getBBox()')
-
-				})
-				.attr('opacity',0)
-				.transition()
-					.delay(1000)
-					.attr('opacity',1)
-
-
-
-			sel.append('g')
-				.attr('class','legend-bbox-centroid')
-				.attr('transform','translate(0,20)')
-				.on('click', function(e,d)	{
-
-					let sel = d3.select(this),
-							tf = sel.classed('hidden');
-
-					d3.selectAll('.bubble-bbox_center')
-						.transition()
-							.delay((d,i)=>i*50)
-								.attr('display', tf ? null : 'none')
-
-					sel.classed('hidden',!tf);
-
-				})
-				.call(sel=>{
-
-					sel.append('rect')
-							.attr('fill',chroma('steelblue').alpha(.1).hex())
-							.attr('stroke','#333')
-							.attr('x',-3)
-							.attr('y', -5)
-							.attr('width', 200)
-							.attr('height', 20)
-							.attr('rx',3)
-							.attr('ry',3)
-
-					sel.append('circle')
-							.attr('fill', 'cyan' )
-							.attr('cx', 15)
-							.attr('cy', 7)
-							.attr('r', 3)
-
-					sel.append('text')
-							.attr('x',30)
-							.attr('y',10)
-							.attr('font-size', '70%')
-							.attr('fill','white')
-							.text('getBBox() center')
-
-				})
-				.attr('opacity',0)
-				.transition()
-					.delay(2000)
-					.attr('opacity',1)
-
-
-
-			//---------------------
-			// center
-			//---------------------
-
-			sel.append('g')
-				.attr('class','legend-center')
-				.attr('transform','translate(0,40)')
-				.on('click', function(e,d)	{
-
-					let sel = d3.select(this),
-							tf = sel.classed('hidden');
-
-					d3.selectAll('.bubble-center')
-						.transition()
-							.delay((d,i)=>i*50)
-								.attr('display', tf ? null : 'none')
-
-					sel.classed('hidden',!tf);
-
-				})
-				.call(sel=>{
-
-					sel.append('rect')
-							.attr('fill',chroma('steelblue').alpha(.1).hex())
-							.attr('stroke','#333')
-							.attr('x',-3)
-							.attr('y', -5)
-							.attr('width', 200)
-							.attr('height', 20)
-							.attr('rx',3)
-							.attr('ry',3)
-
-
-					sel.append('circle')
-							.attr('fill', 'yellow' )
-							.attr('cx', 15)
-							.attr('cy', 7)
-							.attr('r', 3)
-
-					sel.append('text')
-							.attr('x',30)
-							.attr('y',10)
-							.attr('font-size', '70%')
-							.attr('fill','white')
-							.text('turf.js centerOfMass')
-
-				})
-				.attr('opacity',0)
-				.transition()
-					.delay(3000)
-					.attr('opacity',1)
-
-
-
-
-			//---------------------
-			// bubble-centroid
-			//---------------------
-			sel.append('g')
-				.attr('class','legend-bubble-centroid')
-				.attr('transform','translate(0,60)')
-				.on('click', function(e,d)	{
-
-					let sel = d3.select(this),
-							tf = sel.classed('hidden');
-
-					d3.selectAll('.bubble-centroid')
-						.transition()
-							.delay((d,i)=>i*50)
-								.attr('fill','red')
-								.attr('display', tf ? null : 'none')
-
-					sel.classed('hidden',!tf);
-
-				})
-				.call(sel=>{
-
-					sel.append('rect')
-							.attr('fill',chroma('steelblue').alpha(.1).hex())
-							.attr('stroke','#333')
-							.attr('x',-3)
-							.attr('y', -5)
-							.attr('width', 200)
-							.attr('height', 20)
-							.attr('rx',3)
-							.attr('ry',3)
-
-
-					sel.append('circle')
-							.attr('fill', 'red' )
-							.attr('cx', 15)
-							.attr('cy', 7)
-							.attr('r', 3)
-
-					sel.append('text')
-							.attr('x',30)
-							.attr('y',10)
-							.attr('font-size', '70%')
-							.attr('fill','white')
-							.text('d3.geoPath.centroid')
-
-				})
-				.attr('opacity',0)
-				.transition()
-					.delay(4000)
-					.attr('opacity',1)
-
-
-
-		});
-
-	console.groupEnd('mapCentroid');
+
+
+          d3.timeout(()=>{
+
+            //=====================
+            // map
+            //=====================
+
+            d3.selectAll('.state')
+              .attr('fill-opacity',0)
+              .transition()
+                .delay((d,i)=>500  + (d.properties.sequence * delay))
+                .duration(t*20)
+                  .attr('fill','steelblue')
+                  .attr('fill-opacity',1)
+              .transition()
+                .delay(t)
+                .duration(3000)
+                  .attr('fill-opacity',.1)
+
+
+            //=====================
+            // box
+            //=====================
+
+            sel.select('path')
+              .transition()
+                .delay((d,i)=>500 + t + (d.properties.sequence * delay))
+                .duration(1000)
+                .ease(d3.easeLinear)
+                  .attr('stroke-dasharray',function(d,i){
+                    let p = Math.ceil(d3.select(this).node().getTotalLength());
+                    //return p+' '+p;
+                    return [p,0].join(' ');
+                  })
+              .transition()
+                .delay(100)
+                .duration(1000)
+                  .attr('opacity',.1)
+
+
+            //=====================
+            // bubbles
+            //=====================
+
+            _bubbles
+              .forEach((k,i)=>{
+
+                sel
+                  .select('.bubble-'+k)
+                    .transition()
+                      .delay(d=>500 + (t*(5+(i*3))) + (d.properties.sequence*delay))
+                      .duration(t*2)
+                        .attr('r',3)
+                  .transition()
+                    .delay(1000)
+                      .duration(2000)
+                      .attr('r', k=='centroid' ? 3 : 1)
+
+              });
+
+
+
+
+          },1000);
+
+        });
+
+
+
+  //=====================
+  // legends
+  //=====================
+
+  svg.append('g')
+    .attr('transform','translate('+[width/2 - 150,50]+')')
+    .style('cursor','pointer')
+    .call(sel=>{
+
+      sel.append('g')
+        .attr('class','legend-bbox')
+        .on('click', function(e,d)  {
+
+          let sel = d3.select(this),
+              tf = sel.classed('hidden');
+
+          d3.selectAll('.getBBox')
+            .transition()
+              .delay((d,i)=>i*50)
+                .attr('display', tf ? null : 'none')
+
+          sel.classed('hidden',!tf);
+
+        })
+        .call(sel=>{
+
+          sel.append('rect')
+              .attr('fill',chroma('steelblue').alpha(.1).hex())
+              .attr('stroke','#333')
+              .attr('x',-3)
+              .attr('y', -5)
+              .attr('width', 200)
+              .attr('height', 20)
+              .attr('rx',3)
+              .attr('ry',3)
+
+          sel.append('rect')
+              .attr('stroke', 'cyan' )
+              .attr('stroke-width',.5)
+              .attr('fill','none')
+              .attr('x',7)
+              .attr('y', -3)
+              .attr('width', 16)
+              .attr('height', 16)
+
+          sel.append('text')
+              .attr('x',30)
+              .attr('y',10)
+              .attr('font-size', '70%')
+              .attr('fill','white')
+              .text('getBBox()')
+
+        })
+        .attr('opacity',0)
+        .transition()
+          .delay(1000)
+          .attr('opacity',1)
+
+
+
+      sel.append('g')
+        .attr('class','legend-bbox-centroid')
+        .attr('transform','translate(0,20)')
+        .on('click', function(e,d)  {
+
+          let sel = d3.select(this),
+              tf = sel.classed('hidden');
+
+          d3.selectAll('.bubble-bbox_center')
+            .transition()
+              .delay((d,i)=>i*50)
+                .attr('display', tf ? null : 'none')
+
+          sel.classed('hidden',!tf);
+
+        })
+        .call(sel=>{
+
+          sel.append('rect')
+              .attr('fill',chroma('steelblue').alpha(.1).hex())
+              .attr('stroke','#333')
+              .attr('x',-3)
+              .attr('y', -5)
+              .attr('width', 200)
+              .attr('height', 20)
+              .attr('rx',3)
+              .attr('ry',3)
+
+          sel.append('circle')
+              .attr('fill', 'cyan' )
+              .attr('cx', 15)
+              .attr('cy', 7)
+              .attr('r', 3)
+
+          sel.append('text')
+              .attr('x',30)
+              .attr('y',10)
+              .attr('font-size', '70%')
+              .attr('fill','white')
+              .text('getBBox() center')
+
+        })
+        .attr('opacity',0)
+        .transition()
+          .delay(2000)
+          .attr('opacity',1)
+
+
+
+      //---------------------
+      // center
+      //---------------------
+
+      sel.append('g')
+        .attr('class','legend-center')
+        .attr('transform','translate(0,40)')
+        .on('click', function(e,d)  {
+
+          let sel = d3.select(this),
+              tf = sel.classed('hidden');
+
+          d3.selectAll('.bubble-center')
+            .transition()
+              .delay((d,i)=>i*50)
+                .attr('display', tf ? null : 'none')
+
+          sel.classed('hidden',!tf);
+
+        })
+        .call(sel=>{
+
+          sel.append('rect')
+              .attr('fill',chroma('steelblue').alpha(.1).hex())
+              .attr('stroke','#333')
+              .attr('x',-3)
+              .attr('y', -5)
+              .attr('width', 200)
+              .attr('height', 20)
+              .attr('rx',3)
+              .attr('ry',3)
+
+
+          sel.append('circle')
+              .attr('fill', 'yellow' )
+              .attr('cx', 15)
+              .attr('cy', 7)
+              .attr('r', 3)
+
+          sel.append('text')
+              .attr('x',30)
+              .attr('y',10)
+              .attr('font-size', '70%')
+              .attr('fill','white')
+              .text('turf.js centerOfMass')
+
+        })
+        .attr('opacity',0)
+        .transition()
+          .delay(3000)
+          .attr('opacity',1)
+
+
+
+
+      //---------------------
+      // bubble-centroid
+      //---------------------
+      sel.append('g')
+        .attr('class','legend-bubble-centroid')
+        .attr('transform','translate(0,60)')
+        .on('click', function(e,d)  {
+
+          let sel = d3.select(this),
+              tf = sel.classed('hidden');
+
+          d3.selectAll('.bubble-centroid')
+            .transition()
+              .delay((d,i)=>i*50)
+                .attr('fill','red')
+                .attr('display', tf ? null : 'none')
+
+          sel.classed('hidden',!tf);
+
+        })
+        .call(sel=>{
+
+          sel.append('rect')
+              .attr('fill',chroma('steelblue').alpha(.1).hex())
+              .attr('stroke','#333')
+              .attr('x',-3)
+              .attr('y', -5)
+              .attr('width', 200)
+              .attr('height', 20)
+              .attr('rx',3)
+              .attr('ry',3)
+
+
+          sel.append('circle')
+              .attr('fill', 'red' )
+              .attr('cx', 15)
+              .attr('cy', 7)
+              .attr('r', 3)
+
+          sel.append('text')
+              .attr('x',30)
+              .attr('y',10)
+              .attr('font-size', '70%')
+              .attr('fill','white')
+              .text('d3.geoPath.centroid')
+
+        })
+        .attr('opacity',0)
+        .transition()
+          .delay(4000)
+          .attr('opacity',1)
+
+
+
+    });
+
+  console.groupEnd('mapCentroid');
 }
 
 
@@ -763,13 +763,13 @@ function mapCentroid()	{
 
 
 <div>
-		Finding best map centroid using
-		<a href="https://github.com/d3/d3-geo#path_centroid" target="_blank" style="color:#ddd">path.centroid</a>,
-		<a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox" target="_blank" style="color:#ddd">getBBox</a> or
-		turf.js <a href="https://turfjs.org/docs/#centerOfMass" target="_blank" style="color:#ddd">centerOfMass</a>
+    Finding best map centroid using
+    <a href="https://github.com/d3/d3-geo#path_centroid" target="_blank" style="color:#ddd">path.centroid</a>,
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox" target="_blank" style="color:#ddd">getBBox</a> or
+    turf.js <a href="https://turfjs.org/docs/#centerOfMass" target="_blank" style="color:#ddd">centerOfMass</a>
 </div>
 <br>
-<button onclick="document.location='index.html'">Main Menu</button>
+<a href="../">Main Menu</a>
 <button onclick="document.location='index10.html'">Back</button>
 <button onclick="document.location='index12.html'">Next</button>
 

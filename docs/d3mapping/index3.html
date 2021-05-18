@@ -110,50 +110,50 @@ d3.json("malaysia.json").then(function(malaysia) {
       .style("stroke-width", 1);
 
 
-	states.features.forEach(d=>{
+  states.features.forEach(d=>{
 
-		// join map id with negeri
-		d.properties.negeri = 	{
-															1 :	{flag_id:1,	negeri:"Johor"},
-															2 :	{flag_id:2,	negeri:"Kedah"},
-															3 :	{flag_id:3,	negeri:"Kelantan"},
-															4 :	{flag_id:14,negeri:"Kuala Lumpur"},
-															5 :	{flag_id:15,negeri:"Labuan"},
-															6 :	{flag_id:4,	negeri:"Melaka"},
-															7 :	{flag_id:5,	negeri:"Negeri Sembilan"},
-															8 :	{flag_id:6,	negeri:"Pahang"},
-															9 :	{flag_id:8,	negeri:"Perak"},
-															10:	{flag_id:9,	negeri:"Perlis"},
-															11:	{flag_id:7,	negeri:"Pulau Pinang"},
-															12:	{flag_id:12,negeri:"Putrajaya"},
-															13:	{flag_id:12,negeri:"Sabah"},
-															14:	{flag_id:13,negeri:"Sarawak"},
-															15:	{flag_id:10,negeri:"Selangor"},
-															16:	{flag_id:11,negeri:"Terengganu"},
-														}[d.properties.id].negeri;
+    // join map id with negeri
+    d.properties.negeri =   {
+                              1 :  {flag_id:1,  negeri:"Johor"},
+                              2 :  {flag_id:2,  negeri:"Kedah"},
+                              3 :  {flag_id:3,  negeri:"Kelantan"},
+                              4 :  {flag_id:14, negeri:"Kuala Lumpur"},
+                              5 :  {flag_id:15, negeri:"Labuan"},
+                              6 :  {flag_id:4,  negeri:"Melaka"},
+                              7 :  {flag_id:5,  negeri:"Negeri Sembilan"},
+                              8 :  {flag_id:6,  negeri:"Pahang"},
+                              9 :  {flag_id:8,  negeri:"Perak"},
+                              10:  {flag_id:9,  negeri:"Perlis"},
+                              11:  {flag_id:7,  negeri:"Pulau Pinang"},
+                              12:  {flag_id:12, negeri:"Putrajaya"},
+                              13:  {flag_id:12, negeri:"Sabah"},
+                              14:  {flag_id:13, negeri:"Sarawak"},
+                              15:  {flag_id:10, negeri:"Selangor"},
+                              16:  {flag_id:11, negeri:"Terengganu"},
+                            }[d.properties.id].negeri;
 
-	});
+  });
 
-	console.log('states.features', states.features);
+  console.log('states.features', states.features);
 
   my.selectAll(".state")
     .data(states.features)
     .enter()
-    	.append('path')
-    		.attr('d',path)
-    		.attr('fill','none')
-    		.attr('stroke','#ddd')
+      .append('path')
+        .attr('d',path)
+        .attr('fill','none')
+        .attr('stroke','#ddd')
 
 
   my.selectAll("text")
     .data(states.features)
     .enter()
-    	.append('text')
-    		.attr('x',d=>path.centroid(d)[0])
-    		.attr('y',d=>path.centroid(d)[1])
-    		.attr('fill','#00f')
-    		.attr('text-anchor','middle')
-    		.text(d=>d.properties.negeri)
+      .append('text')
+        .attr('x',d=>path.centroid(d)[0])
+        .attr('y',d=>path.centroid(d)[1])
+        .attr('fill','#00f')
+        .attr('text-anchor','middle')
+        .text(d=>d.properties.negeri)
 
 
 });
@@ -164,7 +164,7 @@ d3.json("malaysia.json").then(function(malaysia) {
 <p>Shift Borneo by -5 degree longitude</p>
 
 <br>
-<button onclick="document.location='index.html'">Main Menu</button>
+<a href="../">Main Menu</a>
 <button onclick="document.location='index2.html'">Back</button>
 <button onclick="document.location='index4.html'">Next</button>
 </body>

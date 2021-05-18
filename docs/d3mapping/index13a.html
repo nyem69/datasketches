@@ -18,13 +18,13 @@
 
 <style>
 html {
-	background:#30404D;
-	color:#ffffff;
-	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+  background:#30404D;
+  color:#ffffff;
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 
 a {
-	color:
+  color:
 }
 
 
@@ -89,93 +89,93 @@ var projection = d3.geoMercator()
     .rotate([-109.45 + 5/2 + 1,-3.2]);
 
 var svg = d3.select("body")
-								.append("svg")
- 									.attr('viewBox', [0,0,width,height].join(' ')) // fill screen
-						 				.style('max-height', (innerHeight-300)+'px') // adjust to fit slider + bar chart
-									;
+                .append("svg")
+                   .attr('viewBox', [0,0,width,height].join(' ')) // fill screen
+                     .style('max-height', (innerHeight-300)+'px') // adjust to fit slider + bar chart
+                  ;
 
 var path = d3.geoPath()
     .projection(projection);
 
 
 svg.append('defs')
-	.html(`
+  .html(`
 
-	<filter id="fshadow01" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
-		<feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="BlurAlpha"/>
-		<feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
-		<feMerge>
-			<feMergeNode in="OffsetBlurAlpha"/>
-			<feMergeNode in="SourceGraphic"/>
-		</feMerge>
-	</filter>
+  <filter id="fshadow01" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="BlurAlpha"/>
+    <feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
+    <feMerge>
+      <feMergeNode in="OffsetBlurAlpha"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 
-	<filter id="fshadow02" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
-		<feGaussianBlur in="SourceAlpha" stdDeviation="3" result="BlurAlpha"/>
-		<feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
-		<feMerge>
-			<feMergeNode in="OffsetBlurAlpha"/>
-			<feMergeNode in="SourceGraphic"/>
-		</feMerge>
-	</filter>
+  <filter id="fshadow02" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="BlurAlpha"/>
+    <feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
+    <feMerge>
+      <feMergeNode in="OffsetBlurAlpha"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 
-	<filter id="fshadow03" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
-		<feGaussianBlur in="SourceAlpha" stdDeviation="7" result="BlurAlpha"/>
-		<feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
-		<feMerge>
-			<feMergeNode in="OffsetBlurAlpha"/>
-			<feMergeNode in="SourceGraphic"/>
-		</feMerge>
-	</filter>
+  <filter id="fshadow03" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="BlurAlpha"/>
+    <feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
+    <feMerge>
+      <feMergeNode in="OffsetBlurAlpha"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 
-	<radialGradient id="Red" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:rgb(255,0,0)"/>
-		<stop offset="1" style="stop-color:rgb(128,0,0)"/>
-	</radialGradient>
-	<radialGradient id="Yellow" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:rgb(255,255,0)"/>
-		<stop offset="1" style="stop-color:rgb(128,128,0)"/>
-	</radialGradient>
-	<radialGradient id="Orange" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:#ff0"/>
-		<stop offset="1" style="stop-color:#f90"/>
-	</radialGradient>
-	<radialGradient id="Cyan" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:rgb(0,255,255)"/>
-		<stop offset="1" style="stop-color:rgb(0,128,128)"/>
-	</radialGradient>
-	<radialGradient id="WildStrawberry" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:rgb(255,10,155)"/>
-		<stop offset="1" style="stop-color:rgb(128,5,78)"/>
-	</radialGradient>
-	<radialGradient id="Blue" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:rgb(0,0,255)"/>
-		<stop offset="1" style="stop-color:rgb(0,0,128)"/>
-	</radialGradient>
-	<radialGradient id="Purple" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:rgb(140,35,255)"/>
-		<stop offset="1" style="stop-color:rgb(70,18,128)"/>
-	</radialGradient>
-	<radialGradient id="Lime" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:rgb(127,255,0)"/>
-		<stop offset="1" style="stop-color:rgb(64,128,0)"/>
-	</radialGradient>
-	<radialGradient id="Silver" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:#fff"/>
-		<stop offset="1" style="stop-color:#999"/>
-	</radialGradient>
-	<radialGradient id="Brown" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:#fff"/>
-		<stop offset="1" style="stop-color:#E18400"/>
-	</radialGradient>
-	<radialGradient id="SkyBlue" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:#fff"/>
-		<stop offset="1" style="stop-color:#87CEFA"/>
-	</radialGradient>
-	<radialGradient id="Tomato" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
-		<stop offset="0" style="stop-color:#fff"/>
-		<stop offset="1" style="stop-color:#FF6347"/>
-	</radialGradient>
+  <radialGradient id="Red" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:rgb(255,0,0)"/>
+    <stop offset="1" style="stop-color:rgb(128,0,0)"/>
+  </radialGradient>
+  <radialGradient id="Yellow" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:rgb(255,255,0)"/>
+    <stop offset="1" style="stop-color:rgb(128,128,0)"/>
+  </radialGradient>
+  <radialGradient id="Orange" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:#ff0"/>
+    <stop offset="1" style="stop-color:#f90"/>
+  </radialGradient>
+  <radialGradient id="Cyan" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:rgb(0,255,255)"/>
+    <stop offset="1" style="stop-color:rgb(0,128,128)"/>
+  </radialGradient>
+  <radialGradient id="WildStrawberry" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:rgb(255,10,155)"/>
+    <stop offset="1" style="stop-color:rgb(128,5,78)"/>
+  </radialGradient>
+  <radialGradient id="Blue" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:rgb(0,0,255)"/>
+    <stop offset="1" style="stop-color:rgb(0,0,128)"/>
+  </radialGradient>
+  <radialGradient id="Purple" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:rgb(140,35,255)"/>
+    <stop offset="1" style="stop-color:rgb(70,18,128)"/>
+  </radialGradient>
+  <radialGradient id="Lime" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:rgb(127,255,0)"/>
+    <stop offset="1" style="stop-color:rgb(64,128,0)"/>
+  </radialGradient>
+  <radialGradient id="Silver" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:#fff"/>
+    <stop offset="1" style="stop-color:#999"/>
+  </radialGradient>
+  <radialGradient id="Brown" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:#fff"/>
+    <stop offset="1" style="stop-color:#E18400"/>
+  </radialGradient>
+  <radialGradient id="SkyBlue" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:#fff"/>
+    <stop offset="1" style="stop-color:#87CEFA"/>
+  </radialGradient>
+  <radialGradient id="Tomato" cx="30%" cy="30%" fx="30%" fy="30%" r="50%" gradientUnits="objectBoundingBox">
+    <stop offset="0" style="stop-color:#fff"/>
+    <stop offset="1" style="stop-color:#FF6347"/>
+  </radialGradient>
 `);
 
 
@@ -187,18 +187,18 @@ svg.append('defs')
 // - order layer level here
 //=====================
 
-let g 							= svg.append("g"),
+let g               = svg.append("g"),
 
-		map_border 			= svg.append("g").attr('class','map-border-states'),
-		map_fill 				= svg.append("g").attr('class','map-fill-states'),
+    map_border       = svg.append("g").attr('class','map-border-states'),
+    map_fill         = svg.append("g").attr('class','map-fill-states'),
 
-		circles_border	= svg.append('g').attr('class','cities-malaysia-mouseover'),
-    circles					= svg.append('g').attr('class','cities-malaysia'),
+    circles_border  = svg.append('g').attr('class','cities-malaysia-mouseover'),
+    circles          = svg.append('g').attr('class','cities-malaysia'),
 
-		map_label 			= svg.append("g").attr('class','map-label-states'),
-    circles_label		= svg.append('g').attr('class','cities-malaysia-label'),
+    map_label       = svg.append("g").attr('class','map-label-states'),
+    circles_label    = svg.append('g').attr('class','cities-malaysia-label'),
 
-    page_title			= svg.append('text');
+    page_title      = svg.append('text');
 
 
 
@@ -217,19 +217,19 @@ let g 							= svg.append("g"),
 let states,
     land,
 
-		timer,
-		timer_barchart,
+    timer,
+    timer_barchart,
 
 
-		playdate,
-		transition_duration = 500,
+    playdate,
+    transition_duration = 500,
 
-		// number format
-		comma = d3.format(','),
-		z2 		= d3.format('02d'),
+    // number format
+    comma = d3.format(','),
+    z2     = d3.format('02d'),
 
-		// just a counter
-		fc = 0;
+    // just a counter
+    fc = 0;
 
 
 
@@ -242,10 +242,10 @@ let states,
 
 Promise.all([
 
-	d3.json("malaysia.json"),
+  d3.json("malaysia.json"),
 
-	//d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv'),
-	d3.csv('../_data/20210423-coronavirus_malaysia - Hotspot.csv'),
+  //d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv'),
+  d3.csv('../_data/20210423-coronavirus_malaysia - Hotspot.csv'),
 
 ]).then(loaded);
 
@@ -253,18 +253,18 @@ Promise.all([
 
 
 
-function loaded(raw)	{
+function loaded(raw)  {
 
 
-	//=====================
-	// from mapv4.html
-	//=====================
+  //=====================
+  // from mapv4.html
+  //=====================
 
-	console.group('%c' +'map', 'color:magenta');
-	console.time('map');
+  console.group('%c' +'map', 'color:magenta');
+  console.time('map');
 
 
-	let malaysia = raw[0];
+  let malaysia = raw[0];
 
 
 
@@ -291,7 +291,7 @@ function loaded(raw)	{
   }
 
 
-	map_border.selectAll(".land").data(land.features)
+  map_border.selectAll(".land").data(land.features)
     .enter()
       .append("path")
         .attr('class','land')
@@ -299,424 +299,424 @@ function loaded(raw)	{
         .attr('stroke','steelblue')
         .attr('stroke-width',1)
         .attr('fill', 'none' )
-  	    .attr('filter','url(#fshadow02)')
+        .attr('filter','url(#fshadow02)')
 
-	map_fill.selectAll(".state").data(states.features)
-	    .enter()
-	      .append("path")
-	        .attr('class','state')
-	        .attr("d", path)
-	        .attr('stroke','#666')
-	        .attr('fill', '#30404D' )
-	        .attr('stroke-width',.5)
-	        .attr('fill-opacity',1)
-	        .on('click',function(e,d){
-	        	//console.log('d.properties',d.properties.id, d.properties.cases.negeri);
-	        	//window.prompt('map id: '+d.properties.id, d.properties.cases.negeri);
-	        });
-
-
-
-
-	console.timeEnd('map');
-	console.groupEnd('map');
+  map_fill.selectAll(".state").data(states.features)
+      .enter()
+        .append("path")
+          .attr('class','state')
+          .attr("d", path)
+          .attr('stroke','#666')
+          .attr('fill', '#30404D' )
+          .attr('stroke-width',.5)
+          .attr('fill-opacity',1)
+          .on('click',function(e,d){
+            //console.log('d.properties',d.properties.id, d.properties.cases.negeri);
+            //window.prompt('map id: '+d.properties.id, d.properties.cases.negeri);
+          });
 
 
 
 
-	//====================================================================================
-	// hotspots
-	//====================================================================================
+  console.timeEnd('map');
+  console.groupEnd('map');
 
-	console.group('%c' +'loaded', 'color:magenta');
-	console.time('loaded');
 
-	let hotspots = raw[1];
+
+
+  //====================================================================================
+  // hotspots
+  //====================================================================================
+
+  console.group('%c' +'loaded', 'color:magenta');
+  console.time('loaded');
+
+  let hotspots = raw[1];
   //console.log('hotspots', hotspots);
 
   //console.log('hotspots.columns', hotspots.columns);
 
 
-	//=====================
-	// reformat columns into rows
-	//=====================
+  //=====================
+  // reformat columns into rows
+  //=====================
 
-	//console.log(JSON.stringify(hotspots.filter(d=>d.Latitude),null,2));
+  //console.log(JSON.stringify(hotspots.filter(d=>d.Latitude),null,2));
 
-	// original structure:
-	/*
-		[
-		  {
-		    "no": "1",
-		    "Negeri": "Johor",
-		    "kod_daerah": "2",
-		    "kod_mukim": "",
-		    "Daerah": "Johor Bahru",
-		    "sort D": "20",
-		    "sort E": "19",
-		    "Pdm": "",
-		    "Pdm Population": "",
-		    "note": "",
-		    "Latitude": "1.5192",
-		    "Longitude": "103.7852",
-		    "Latlong": "1.51915967306,103.785177766",
-		    "Population": "1600300",
-		    "Population DOSM": "",
-		    "2020-03-21": "52",
-		    "2020-03-22": "52",
-		    "2020-03-23": "",
-		    "2020-03-24": "59",
-		    "2020-03-25": "68",
-		    "2020-03-26": "73",
-		    ...
-			}
-		]
-	*/
-
-
-
-	//=====================
-	// cleanup date on column name
-	//=====================
-	let columns = hotspots.columns.map(j=>{
-
-		// "Active 2020-04-20"
-		let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
-
-		if (r1)	{
-
-			// "2020-06-1"
-			// "2020-06-1".match(/^(\d{4})\-(\d{2})\-(\d{1})$/)
-			// => ["2020-06-1","2020","06","1"]
-			let r3 = r1[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
-
-			if (r3)	{
-				return 'Active '+[r3[1], r3[2], z2(r3[3])].join('-')
-			}else	{
-				return 'Active '+r1[1];
-			}
+  // original structure:
+  /*
+    [
+      {
+        "no": "1",
+        "Negeri": "Johor",
+        "kod_daerah": "2",
+        "kod_mukim": "",
+        "Daerah": "Johor Bahru",
+        "sort D": "20",
+        "sort E": "19",
+        "Pdm": "",
+        "Pdm Population": "",
+        "note": "",
+        "Latitude": "1.5192",
+        "Longitude": "103.7852",
+        "Latlong": "1.51915967306,103.785177766",
+        "Population": "1600300",
+        "Population DOSM": "",
+        "2020-03-21": "52",
+        "2020-03-22": "52",
+        "2020-03-23": "",
+        "2020-03-24": "59",
+        "2020-03-25": "68",
+        "2020-03-26": "73",
+        ...
+      }
+    ]
+  */
 
 
-		}else {
 
-			// "2020-04-20"
-			let r2 = j.match(/^(\d+\-\d+\-\d+)$/);
+  //=====================
+  // cleanup date on column name
+  //=====================
+  let columns = hotspots.columns.map(j=>{
 
-			if (r2)	{
+    // "Active 2020-04-20"
+    let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
 
-				// "2020-06-1"
-				// "2020-06-1".match(/^(\d{4})\-(\d{2})\-(\d{1})$/)
-				// => ["2020-06-1","2020","06","1"]
-				let r3 = r2[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
+    if (r1)  {
 
-				if (r3)	{
-					return [r3[1], r3[2], z2(r3[3])].join('-')
-				}else	{
-					return r2[1];
-				}
+      // "2020-06-1"
+      // "2020-06-1".match(/^(\d{4})\-(\d{2})\-(\d{1})$/)
+      // => ["2020-06-1","2020","06","1"]
+      let r3 = r1[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
 
-			}else	{
-				return j
-			}
+      if (r3)  {
+        return 'Active '+[r3[1], r3[2], z2(r3[3])].join('-')
+      }else  {
+        return 'Active '+r1[1];
+      }
 
-		}
 
-	});
+    }else {
+
+      // "2020-04-20"
+      let r2 = j.match(/^(\d+\-\d+\-\d+)$/);
+
+      if (r2)  {
+
+        // "2020-06-1"
+        // "2020-06-1".match(/^(\d{4})\-(\d{2})\-(\d{1})$/)
+        // => ["2020-06-1","2020","06","1"]
+        let r3 = r2[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
+
+        if (r3)  {
+          return [r3[1], r3[2], z2(r3[3])].join('-')
+        }else  {
+          return r2[1];
+        }
+
+      }else  {
+        return j
+      }
+
+    }
+
+  });
 
   //console.log('columns', columns);
 
 
 
 
-	//=====================
-	// rebuild data structure
-	// columns -> rows
-	//=====================
+  //=====================
+  // rebuild data structure
+  // columns -> rows
+  //=====================
 
   let data = [];
 
   hotspots.filter(d=>d.Longitude && d.Latitude)
       .forEach(d=>{
 
-				columns.forEach(j=>{
+        columns.forEach(j=>{
 
-					// "Active 2020-04-20"
-					let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
+          // "Active 2020-04-20"
+          let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
 
-					// "2020-04-20"
-					let r2 = j.match(/^(\d+\-\d+\-\d+)$/);
-
-
-					if (r1 && d[j] && typeof +d[j]=='number')	{
-
-						let k = {
-							date	: r1[1],
-							value	: +d[j],
-
-							//column: j,
-							//str		: d[j],
-
-							negeri			: d['Negeri'],
-							daerah			: d['Daerah'],
-							latitude		: +d['Latitude'],
-							longitude		:	+d['Longitude'],
-
-						}
-
-						if (k['longitude'] > 105) k['longitude'] += -5;
-						data.push(k);
-
-					}
+          // "2020-04-20"
+          let r2 = j.match(/^(\d+\-\d+\-\d+)$/);
 
 
-				});
+          if (r1 && d[j] && typeof +d[j]=='number')  {
+
+            let k = {
+              date  : r1[1],
+              value  : +d[j],
+
+              //column: j,
+              //str    : d[j],
+
+              negeri      : d['Negeri'],
+              daerah      : d['Daerah'],
+              latitude    : +d['Latitude'],
+              longitude    :  +d['Longitude'],
+
+            }
+
+            if (k['longitude'] > 105) k['longitude'] += -5;
+            data.push(k);
+
+          }
+
+
+        });
 
 
       });
 
 
-	//=====================
-	// new structure:
-	//=====================
+  //=====================
+  // new structure:
+  //=====================
 
-	console.log('data',data.length, data.slice(0,10));
+  console.log('data',data.length, data.slice(0,10));
 
-	/*
-		[
-			{
-				"date":"2021-04-22",
-				"value":784,
-				"negeri":"Johor",
-				"daerah":"Johor Bahru",
-				"latitude":1.5192,
-				"longitude":103.7852
-			}
-		]
+  /*
+    [
+      {
+        "date":"2021-04-22",
+        "value":784,
+        "negeri":"Johor",
+        "daerah":"Johor Bahru",
+        "latitude":1.5192,
+        "longitude":103.7852
+      }
+    ]
 
-	*/
-
-
-	console.timeEnd('loaded');
-	console.groupEnd('loaded');
+  */
 
 
-	//=====================
-	// meta
-	//=====================
-
-	console.group('%c' +'hotspots', 'color:magenta');
-	console.time('hotspots');
+  console.timeEnd('loaded');
+  console.groupEnd('loaded');
 
 
-	let min_date = d3.min(data.filter(d=>d.value), d=>d.date);
+  //=====================
+  // meta
+  //=====================
+
+  console.group('%c' +'hotspots', 'color:magenta');
+  console.time('hotspots');
+
+
+  let min_date = d3.min(data.filter(d=>d.value), d=>d.date);
   console.log('min_date', min_date);
 
 
-	let max_date = d3.max(data.filter(d=>d.value), d=>d.date);
+  let max_date = d3.max(data.filter(d=>d.value), d=>d.date);
   console.log('max_date', max_date);
 
   // filter data with latest date
   let data_latest = data.filter(d=>d.date==max_date);
 
-	// sort descending
-	//data_latest.sort((a,b)=>{ return a.value > b.value });
+  // sort descending
+  //data_latest.sort((a,b)=>{ return a.value > b.value });
 
- 	console.log('data_latest', data_latest);
+   console.log('data_latest', data_latest);
 
 
-	//=====================
-	// radius scale
-	//=====================
+  //=====================
+  // radius scale
+  //=====================
 
   let max_value = d3.max(data_latest, d=>d.value);
-	//let scaleRadius = d3.scaleLinear().domain([0,max_value]).range([0,10]);
-	let scaleRadius = d3.scaleSqrt().domain([0,max_value]).range([0,15]);
-	let scaleColorCircle = d3.scaleLinear()
-													//.domain([0,50,100,500,max_value])
-													//.range( d3.schemeYlOrBr[5] );
-													.domain([0,20,40,max_value])
-													.range(['white','yellow','orange','crimson'])
+  //let scaleRadius = d3.scaleLinear().domain([0,max_value]).range([0,10]);
+  let scaleRadius = d3.scaleSqrt().domain([0,max_value]).range([0,15]);
+  let scaleColorCircle = d3.scaleLinear()
+                          //.domain([0,50,100,500,max_value])
+                          //.range( d3.schemeYlOrBr[5] );
+                          .domain([0,20,40,max_value])
+                          .range(['white','yellow','orange','crimson'])
 
 
 
-	update_bubbles(data_latest);
+  update_bubbles(data_latest);
 
-	//=====================
-	// update_bubbles
-	//=====================
-	function update_bubbles(_data)	{
-//		console.group('%c' +'update_bubbles', 'color:lime');
-//		console.time('update_bubbles');
-
-
-
-		// shared transition
-		let t = d3.transition()
-			    		.duration(300)
-			    		.ease(d3.easeBounce);
+  //=====================
+  // update_bubbles
+  //=====================
+  function update_bubbles(_data)  {
+//    console.group('%c' +'update_bubbles', 'color:lime');
+//    console.time('update_bubbles');
 
 
 
-		// large circle to capture mouseover
-		let b = circles_border
-		 	.selectAll('circle').data(_data.filter(d=>d.value>0), d=>d.daerah);
-
-		b.exit()
-	    	.transition()
-	    		.duration(t)
-		        .attr('r',0)
-		        	.remove();
-
-	   b.enter()
-	      .append('circle')
-	        .attr('cx', d=>projection([d.longitude,d.latitude])[0])
-	        .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-	        .attr('r',0)
-	        .attr('fill',d=>scaleColorCircle(d.value))
-	        .attr('stroke',d=>scaleColorCircle(d.value))
-	        .attr('fill-opacity',.1)
-	        .attr('stroke-opacity',.2)
-	        .attr('stroke-width',.5)
-	        .on('mouseover',function(e,d){
-
-	        	d3.select('.cities-malaysia-label')
-	        		.selectAll('text')
-				      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
-
-	        })
-	     .merge(b)
-	     		.transition(t)
-	        	.attr('r',d=>(scaleRadius(d.value)||0)+10)
-		        .attr('fill',d=>scaleColorCircle(d.value))
-		        .attr('stroke',d=>scaleColorCircle(d.value))
-	    	;
+    // shared transition
+    let t = d3.transition()
+              .duration(300)
+              .ease(d3.easeBounce);
 
 
 
+    // large circle to capture mouseover
+    let b = circles_border
+       .selectAll('circle').data(_data.filter(d=>d.value>0), d=>d.daerah);
 
-		//=====================
-		// circle fill
-		//=====================
+    b.exit()
+        .transition()
+          .duration(t)
+            .attr('r',0)
+              .remove();
 
+     b.enter()
+        .append('circle')
+          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+          .attr('r',0)
+          .attr('fill',d=>scaleColorCircle(d.value))
+          .attr('stroke',d=>scaleColorCircle(d.value))
+          .attr('fill-opacity',.1)
+          .attr('stroke-opacity',.2)
+          .attr('stroke-width',.5)
+          .on('mouseover',function(e,d){
 
-	  let c = circles
-	    .selectAll('circle').data(_data, d=>d.daerah);
+            d3.select('.cities-malaysia-label')
+              .selectAll('text')
+                .attr('display',k=>k.daerah==d.daerah ? 'block':'none')
 
-		c.exit()
-	    	.transition()
-	    		.duration(300)
-	    		.ease(d3.easeBounce)
-	        .attr('r',0)
-	        .remove()
-
-	  c.enter()
-	      .append('circle')
-	        .attr('cx', d=>projection([d.longitude,d.latitude])[0])
-	        .attr('cy', d=>projection([d.longitude,d.latitude])[1])
-	        .attr('r',0)
-	        .attr('fill',d=>d.value > 500 ? 'url(#Red)'
-	        								: d.value > 100 ? 'url(#Orange)'
-	        								: d.value > 20 ? 'url(#Yellow)'
-	        								: 'url(#Lime)'
-	        )
-	        .attr('filter','url(#fshadow01)')
-	        .on('mouseover',function(e,d){
-
-	        	circles_label
-	        		.selectAll('text')
-				      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
-
-
-
-				    d3.select(this)
-				    	.transition()
-				    		.duration(100)
-				    		.ease(d3.easeBounce)
-					    	.attr('r', scaleRadius(d.value)+10)
-
-
-	        })
-	        .on('mouseout', function(e,d){
-
-				    d3.select(this)
-				    	.transition()
-				    		//.duration(100)
-				    		.ease(d3.easeBounce)
-					    	.attr('r', scaleRadius(d.value))
-
-	        })
-	    .merge(c)
-	     		.transition(t)
-		        .attr('r',d=>scaleRadius(d.value))
-		        .attr('fill',d=>d.value > 500 ? 'url(#Red)'
-		        								: d.value > 100 ? 'url(#Orange)'
-		        								: d.value > 20 ? 'url(#Yellow)'
-		        								: 'url(#Lime)'
-		        )
-	    	;
+          })
+       .merge(b)
+           .transition(t)
+            .attr('r',d=>(scaleRadius(d.value)||0)+10)
+            .attr('fill',d=>scaleColorCircle(d.value))
+            .attr('stroke',d=>scaleColorCircle(d.value))
+        ;
 
 
 
-		//=====================
-		// text
-		//=====================
 
-		circles_label
-	  	.attr('pointer-events','none')
-	    .selectAll('text').data(_data, d=>d.daerah)
-		    .enter()
-		      .append('text')
-		        .attr('display','none')
-		        .attr('text-anchor','middle')
-		        .attr('font-weight',500)
-		        .attr('transform',d=>'translate('+[
-		        												projection([d.longitude,d.latitude])[0],
-		        												projection([d.longitude,d.latitude])[1] - 30
-		        										]+')')
-		        .call(sel=>{
+    //=====================
+    // circle fill
+    //=====================
 
 
-		        	sel.append('tspan')
-		        		.attr('x',d=>0)
-		        		.attr('y',d=>0)
-		        		.attr('stroke','#fff')
-		        		.attr('fill','#fff')
-		        		.attr('stroke-width',2)
-		        		.attr('font-size','60%')
-		        		.attr('filter','url(#fshadow01)')
-		        		.text(d=>d.daerah)
+    let c = circles
+      .selectAll('circle').data(_data, d=>d.daerah);
 
-		        	sel.append('tspan')
-		        		.attr('x',d=>0)
-		        		.attr('dy','1em')
-		        		.attr('stroke','#fff')
-		        		.attr('fill','#fff')
-		        		.attr('stroke-width',2)
-		        		.attr('filter','url(#fshadow01)')
-		        		.text(d=>comma(d.value))
+    c.exit()
+        .transition()
+          .duration(300)
+          .ease(d3.easeBounce)
+          .attr('r',0)
+          .remove()
 
-		        	sel.append('tspan')
-		        		.attr('x',d=>0)
-		        		.attr('y',d=>0)
-		        		.attr('fill','darkcyan')
-		        		.attr('font-size','60%')
-		        		.text(d=>d.daerah)
+    c.enter()
+        .append('circle')
+          .attr('cx', d=>projection([d.longitude,d.latitude])[0])
+          .attr('cy', d=>projection([d.longitude,d.latitude])[1])
+          .attr('r',0)
+          .attr('fill',d=>d.value > 500 ? 'url(#Red)'
+                          : d.value > 100 ? 'url(#Orange)'
+                          : d.value > 20 ? 'url(#Yellow)'
+                          : 'url(#Lime)'
+          )
+          .attr('filter','url(#fshadow01)')
+          .on('mouseover',function(e,d){
 
-		        	sel.append('tspan')
-		        		.attr('x',d=>0)
-		        		.attr('dy','1em')
-		        		.attr('fill','crimson')
-		        		.text(d=>comma(d.value))
+            circles_label
+              .selectAll('text')
+                .attr('display',k=>k.daerah==d.daerah ? 'block':'none')
 
-		        })
 
-//		console.timeEnd('update_bubbles');
-//		console.groupEnd('update_bubbles');
+
+            d3.select(this)
+              .transition()
+                .duration(100)
+                .ease(d3.easeBounce)
+                .attr('r', scaleRadius(d.value)+10)
+
+
+          })
+          .on('mouseout', function(e,d){
+
+            d3.select(this)
+              .transition()
+                //.duration(100)
+                .ease(d3.easeBounce)
+                .attr('r', scaleRadius(d.value))
+
+          })
+      .merge(c)
+           .transition(t)
+            .attr('r',d=>scaleRadius(d.value))
+            .attr('fill',d=>d.value > 500 ? 'url(#Red)'
+                            : d.value > 100 ? 'url(#Orange)'
+                            : d.value > 20 ? 'url(#Yellow)'
+                            : 'url(#Lime)'
+            )
+        ;
+
+
+
+    //=====================
+    // text
+    //=====================
+
+    circles_label
+      .attr('pointer-events','none')
+      .selectAll('text').data(_data, d=>d.daerah)
+        .enter()
+          .append('text')
+            .attr('display','none')
+            .attr('text-anchor','middle')
+            .attr('font-weight',500)
+            .attr('transform',d=>'translate('+[
+                                    projection([d.longitude,d.latitude])[0],
+                                    projection([d.longitude,d.latitude])[1] - 30
+                                ]+')')
+            .call(sel=>{
+
+
+              sel.append('tspan')
+                .attr('x',d=>0)
+                .attr('y',d=>0)
+                .attr('stroke','#fff')
+                .attr('fill','#fff')
+                .attr('stroke-width',2)
+                .attr('font-size','60%')
+                .attr('filter','url(#fshadow01)')
+                .text(d=>d.daerah)
+
+              sel.append('tspan')
+                .attr('x',d=>0)
+                .attr('dy','1em')
+                .attr('stroke','#fff')
+                .attr('fill','#fff')
+                .attr('stroke-width',2)
+                .attr('filter','url(#fshadow01)')
+                .text(d=>comma(d.value))
+
+              sel.append('tspan')
+                .attr('x',d=>0)
+                .attr('y',d=>0)
+                .attr('fill','darkcyan')
+                .attr('font-size','60%')
+                .text(d=>d.daerah)
+
+              sel.append('tspan')
+                .attr('x',d=>0)
+                .attr('dy','1em')
+                .attr('fill','crimson')
+                .text(d=>comma(d.value))
+
+            })
+
+//    console.timeEnd('update_bubbles');
+//    console.groupEnd('update_bubbles');
   }
 
 
-	console.timeEnd('hotspots');
-	console.groupEnd('hotspots');
+  console.timeEnd('hotspots');
+  console.groupEnd('hotspots');
 
 
 
@@ -726,134 +726,134 @@ function loaded(raw)	{
 
 
 
-	//=====================
-	// map color by total active cases by state
-	//=====================
+  //=====================
+  // map color by total active cases by state
+  //=====================
 
-	console.group('%c' +'map_textures', 'color:magenta');
-	console.time('map_textures');
+  console.group('%c' +'map_textures', 'color:magenta');
+  console.time('map_textures');
 
-	// join map properties.id -> data_states.negeri
+  // join map properties.id -> data_states.negeri
 
-	let map_id = {
-		1:"Johor",
-		2:"Kedah",
-		3:"Kelantan",
-		4:"Kuala Lumpur",
-		5:"Labuan",
-		6:"Melaka",
-		7:"Negeri Sembilan",
-		8:"Pahang",
-		9:"Perak",
-		10:"Perlis",
-		11:"Pulau Pinang",
-		12:"Putrajaya",
-		13:"Sabah",
-		14:"Sarawak",
-		15:"Selangor",
-		16:"Terengganu",
-	};
+  let map_id = {
+    1:"Johor",
+    2:"Kedah",
+    3:"Kelantan",
+    4:"Kuala Lumpur",
+    5:"Labuan",
+    6:"Melaka",
+    7:"Negeri Sembilan",
+    8:"Pahang",
+    9:"Perak",
+    10:"Perlis",
+    11:"Pulau Pinang",
+    12:"Putrajaya",
+    13:"Sabah",
+    14:"Sarawak",
+    15:"Selangor",
+    16:"Terengganu",
+  };
 
-	states.features.forEach(d=>{
-		d.properties.negeri = map_id[ d.properties.id ];
-		d.properties.cases 	= {
-			negeri: map_id[ d.properties.id ],
-			value	: d3.sum(data_latest.filter(k=>k.negeri==map_id[ d.properties.id ]), d=>d.value)
-		}
-	});
+  states.features.forEach(d=>{
+    d.properties.negeri = map_id[ d.properties.id ];
+    d.properties.cases   = {
+      negeri: map_id[ d.properties.id ],
+      value  : d3.sum(data_latest.filter(k=>k.negeri==map_id[ d.properties.id ]), d=>d.value)
+    }
+  });
 
-	//console.log('states', states);
+  //console.log('states', states);
 
-	let max_by_states = d3.max(states.features,d=>d.properties.cases.value);
-	let scaleColor = d3.scaleLinear()
-											.domain([0,50,100,500,max_by_states])
-											.range( d3.schemeYlGnBu[5] );
-											//.range( d3.schemeYlOrRd[5] );
-
-
+  let max_by_states = d3.max(states.features,d=>d.properties.cases.value);
+  let scaleColor = d3.scaleLinear()
+                      .domain([0,50,100,500,max_by_states])
+                      .range( d3.schemeYlGnBu[5] );
+                      //.range( d3.schemeYlOrRd[5] );
 
 
 
 
-	//====================================================================================
-	// textures.js
-	//====================================================================================
-	// https://riccardoscalco.it/textures/
-
-	states.features.forEach(d=>{
-
-		let t = textures.lines()
-					.size(4)
-					.strokeWidth(1)
-					.shapeRendering("crispEdges")
-
-					// https://gka.github.io/chroma.js/
-					.stroke( chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
-					.background( chroma(scaleColor(d.properties.cases.value)).brighten().hex() );
-
-		//console.log('t.id()', t.id());
-		svg.call(t);
-
-		d.properties.texture_id = t.id();
 
 
-	});
+  //====================================================================================
+  // textures.js
+  //====================================================================================
+  // https://riccardoscalco.it/textures/
 
-	console.log('states.features', states.features.map(d=>d.properties) );
+  states.features.forEach(d=>{
+
+    let t = textures.lines()
+          .size(4)
+          .strokeWidth(1)
+          .shapeRendering("crispEdges")
+
+          // https://gka.github.io/chroma.js/
+          .stroke( chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
+          .background( chroma(scaleColor(d.properties.cases.value)).brighten().hex() );
+
+    //console.log('t.id()', t.id());
+    svg.call(t);
+
+    d.properties.texture_id = t.id();
+
+
+  });
+
+  console.log('states.features', states.features.map(d=>d.properties) );
 
   map_fill
-  	.selectAll(".state")
+    .selectAll(".state")
       //.attr('fill',d=>d.properties.texture.url())
       .attr('fill',d=>'url(#'+d.properties.texture_id+')')
-    	.attr('stroke','#999')
-    	.attr('fill-opacity',.8)
+      .attr('stroke','#999')
+      .attr('fill-opacity',.8)
 
 
 
 
-	console.timeEnd('map_textures');
-	console.groupEnd('map_textures');
+  console.timeEnd('map_textures');
+  console.groupEnd('map_textures');
 
 
-	//=====================
-	// title
-	//=====================
-	page_title
-		.attr('y','10%')
-		.attr('text-anchor','middle')
-		.attr('fill','steelblue')
-		.call(sel=>{
+  //=====================
+  // title
+  //=====================
+  page_title
+    .attr('y','10%')
+    .attr('text-anchor','middle')
+    .attr('fill','steelblue')
+    .call(sel=>{
 
-			sel.append('tspan')
-				.attr('x','50%')
-				.attr('font-size','120%')
-				.attr('fill', 'orange')
-				.text('covid-19 active cases by districts');
+      sel.append('tspan')
+        .attr('x','50%')
+        .attr('font-size','120%')
+        .attr('fill', 'orange')
+        .text('covid-19 active cases by districts');
 
-			sel.append('tspan')
-				.attr('class','title-date')
-				.attr('x','50%')
-				.attr('dy','1.2em')
-				.attr('fill','url(#Orange)')
-				.text(moment(max_date).format('D MMM YYYY'));
+      sel.append('tspan')
+        .attr('class','title-date')
+        .attr('x','50%')
+        .attr('dy','1.2em')
+        .attr('fill','url(#Orange)')
+        .text(moment(max_date).format('D MMM YYYY'));
 
-			sel.append('tspan')
-				.attr('class','title-total')
-				.attr('x','50%')
-				.attr('dy','1.4em')
-				.attr('font-size','110%')
-				.text(comma(d3.sum(data, d=>d.value)));
+      sel.append('tspan')
+        .attr('class','title-total')
+        .attr('x','50%')
+        .attr('dy','1.4em')
+        .attr('font-size','110%')
+        .text(comma(d3.sum(data, d=>d.value)));
 
-			sel.append('tspan')
-				.attr('x','50%')
-				.attr('dy','1em')
-				.attr('font-size','90%')
-				.text('active cases');
+      sel.append('tspan')
+        .attr('x','50%')
+        .attr('dy','1em')
+        .attr('font-size','90%')
+        .text('active cases');
 
-		});
+    });
 
 
-	console.groupEnd('hotspots');
+  console.groupEnd('hotspots');
 
 
 
@@ -866,181 +866,181 @@ function loaded(raw)	{
 
 
 
-	//====================================================================================
-	// slider
-	//====================================================================================
-	// https://css-tricks.com/value-bubbles-for-range-inputs/
+  //====================================================================================
+  // slider
+  //====================================================================================
+  // https://css-tricks.com/value-bubbles-for-range-inputs/
 
-	console.group('%c' +'slider', 'color:magenta');
-	console.time('slider');
+  console.group('%c' +'slider', 'color:magenta');
+  console.time('slider');
 
-	d3.select('.range')
-			.attr('min', +moment(min_date,'YYYY-MM-DD'))
-			.attr('max', +moment(max_date,'YYYY-MM-DD'))
-			.attr('step',1)
-			.attr('value', +moment(max_date,'YYYY-MM-DD'));
+  d3.select('.range')
+      .attr('min', +moment(min_date,'YYYY-MM-DD'))
+      .attr('max', +moment(max_date,'YYYY-MM-DD'))
+      .attr('step',1)
+      .attr('value', +moment(max_date,'YYYY-MM-DD'));
 
-	const allRanges = document.querySelectorAll(".range-wrap");
-	allRanges.forEach(wrap => {
-	  const range = wrap.querySelector(".range");
-	  const bubble = wrap.querySelector(".bubble");
+  const allRanges = document.querySelectorAll(".range-wrap");
+  allRanges.forEach(wrap => {
+    const range = wrap.querySelector(".range");
+    const bubble = wrap.querySelector(".bubble");
 
-	  range.addEventListener("input", () => {
+    range.addEventListener("input", () => {
 
 
-			if (playtimer) {
-				window.clearInterval(playtimer);
-				playtimer=null;
+      if (playtimer) {
+        window.clearInterval(playtimer);
+        playtimer=null;
 
-				d3.select('.fa-play').style('display',null);
-				d3.select('.fa-pause').style('display','none');
-			}
+        d3.select('.fa-play').style('display',null);
+        d3.select('.fa-pause').style('display','none');
+      }
 
-	    setBubble(range, bubble);
-	  });
+      setBubble(range, bubble);
+    });
 
-	  setBubble(range, bubble);
+    setBubble(range, bubble);
 
-	});
+  });
 
-	function setBubble(range, bubble) {
+  function setBubble(range, bubble) {
 
-		//console.log('range',range);
+    //console.log('range',range);
 
-	  const val = range.value;
-	  const min = range.min ? range.min : 0;
-	  const max = range.max ? range.max : 100;
-	  const newVal = Number(((val - min) * 100) / (max - min));
+    const val = range.value;
+    const min = range.min ? range.min : 0;
+    const max = range.max ? range.max : 100;
+    const newVal = Number(((val - min) * 100) / (max - min));
 
-	  //console.log('val', val, moment(val));
+    //console.log('val', val, moment(val));
 
-	  //bubble.innerHTML = val;
-	  bubble.innerHTML = moment(+val).format('D MMM YYYY');
+    //bubble.innerHTML = val;
+    bubble.innerHTML = moment(+val).format('D MMM YYYY');
 
-	  // Sorta magic numbers based on size of the native UI thumb
-	  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+    // Sorta magic numbers based on size of the native UI thumb
+    bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
 
-		// snap time to 00:00:00
-		playdate = new Date( +moment(moment(+val).format('YYYY-MM-DD')) );
+    // snap time to 00:00:00
+    playdate = new Date( +moment(moment(+val).format('YYYY-MM-DD')) );
 
-		// delay execution
-		if (timer) {
-			window.clearTimeout(timer);
-			timer=null;
-		}
-		timer = window.setTimeout(()=>{
-			slideTime(moment(+val).format('YYYY-MM-DD'));
-		},10);
+    // delay execution
+    if (timer) {
+      window.clearTimeout(timer);
+      timer=null;
+    }
+    timer = window.setTimeout(()=>{
+      slideTime(moment(+val).format('YYYY-MM-DD'));
+    },10);
 
-	}
+  }
 
 
-	//=====================
-	// slide
-	//=====================
-	function slideTime(date)	{
+  //=====================
+  // slide
+  //=====================
+  function slideTime(date)  {
 
-//		console.group('%c' +'slideTime '+date, 'color:magenta');
-//		console.time('slideTime '+date);
+//    console.group('%c' +'slideTime '+date, 'color:magenta');
+//    console.time('slideTime '+date);
 
-		//=====================
-		// hide text
-		//=====================
-		circles_label
-			.selectAll('text')
-				.attr('display','none');
+    //=====================
+    // hide text
+    //=====================
+    circles_label
+      .selectAll('text')
+        .attr('display','none');
 
-		//=====================
-		// update_bubbles
-		//=====================
-		update_bubbles(data.filter(d=>d.date==date));
+    //=====================
+    // update_bubbles
+    //=====================
+    update_bubbles(data.filter(d=>d.date==date));
 
 
-		//=====================
-		// animate map texture
-		//=====================
+    //=====================
+    // animate map texture
+    //=====================
 
-		let t = d3.transition()
-							.duration(100);
+    let t = d3.transition()
+              .duration(100);
 
-		states.features.forEach(d=>{
+    states.features.forEach(d=>{
 
-			d.properties.cases 	= {
-				negeri: map_id[ d.properties.id ],
-				value	: d3.sum(data.filter(k=>k.negeri==d.properties.negeri && k.date==date), d=>d.value)
-			}
+      d.properties.cases   = {
+        negeri: map_id[ d.properties.id ],
+        value  : d3.sum(data.filter(k=>k.negeri==d.properties.negeri && k.date==date), d=>d.value)
+      }
 
-			// modify existing texture
-			svg.select('#'+d.properties.texture_id)
-				.call(sel=>{
+      // modify existing texture
+      svg.select('#'+d.properties.texture_id)
+        .call(sel=>{
 
-					sel.select('rect')
-						.transition(t)
-							.attr('fill', 	chroma(scaleColor(d.properties.cases.value)).brighten().hex() )
+          sel.select('rect')
+            .transition(t)
+              .attr('fill',   chroma(scaleColor(d.properties.cases.value)).brighten().hex() )
 
-					sel.select('path')
-						.transition(t)
-							.attr('stroke', chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
+          sel.select('path')
+            .transition(t)
+              .attr('stroke', chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex() )
 
-				})
+        })
 
-		});
+    });
 
 
-		//=====================
-		// state-value
-		//=====================
+    //=====================
+    // state-value
+    //=====================
 
-		d3.selectAll('.state-value')
-			.text(d=>d.properties.cases.value ? comma(d.properties.cases.value) : '')
-			.transition()
-				.attr('fill', d=>d.properties.cases.value > 40 ? 'orangered'
-													: d.properties.cases.value > 20 ? 'orange'
-													: d.properties.cases.value > 0 ? 'yellow'
-													: 'lime')
+    d3.selectAll('.state-value')
+      .text(d=>d.properties.cases.value ? comma(d.properties.cases.value) : '')
+      .transition()
+        .attr('fill', d=>d.properties.cases.value > 40 ? 'orangered'
+                          : d.properties.cases.value > 20 ? 'orange'
+                          : d.properties.cases.value > 0 ? 'yellow'
+                          : 'lime')
 
-		//=====================
-		// title-date, total
-		//=====================
+    //=====================
+    // title-date, total
+    //=====================
 
-		d3.select('.title-date')
-			.text(moment(date).format('D MMM YYYY'));
+    d3.select('.title-date')
+      .text(moment(date).format('D MMM YYYY'));
 
-		d3.select('.title-total')
-			.datum({
-				total: d3.sum(data.filter(d=>d.date==date), d=>d.value),
-			})
-			.text(d=>d.total ? comma(d.total) : ' ')
-			.transition()
-				.attr('fill', d=>d.total > 40 ? 'orangered'
-														: d.total > 20 ? 'orange'
-														: d.total > 0 ? 'yellow'
-														: 'lime')
+    d3.select('.title-total')
+      .datum({
+        total: d3.sum(data.filter(d=>d.date==date), d=>d.value),
+      })
+      .text(d=>d.total ? comma(d.total) : ' ')
+      .transition()
+        .attr('fill', d=>d.total > 40 ? 'orangered'
+                            : d.total > 20 ? 'orange'
+                            : d.total > 0 ? 'yellow'
+                            : 'lime')
 
 
 
-			//=====================
-			// bar chart update
-			//=====================
+      //=====================
+      // bar chart update
+      //=====================
 
-//			// render
-//			barChart(
-//				by_date.filter(d=>d.date <= date), // data
-//				x,	// x scale
-//				y,	// y scale
-//				d3.max(by_date.filter(d=>d.date <= date), d=>d.value) // y_max
-//			);
+//      // render
+//      barChart(
+//        by_date.filter(d=>d.date <= date), // data
+//        x,  // x scale
+//        y,  // y scale
+//        d3.max(by_date.filter(d=>d.date <= date), d=>d.value) // y_max
+//      );
 
 
 
-//		console.timeEnd('slideTime '+date);
-//		console.groupEnd('slideTime '+date);
+//    console.timeEnd('slideTime '+date);
+//    console.groupEnd('slideTime '+date);
 
-	}
+  }
 
 
-	console.timeEnd('slider');
-	console.groupEnd('slider');
+  console.timeEnd('slider');
+  console.groupEnd('slider');
 
 
 
@@ -1052,131 +1052,131 @@ function loaded(raw)	{
 
 
 
-	//====================================================================================
-	// playback
-	//====================================================================================
+  //====================================================================================
+  // playback
+  //====================================================================================
 
-	console.group('%c' +'playback', 'color:magenta');
-	console.time('playback');
+  console.group('%c' +'playback', 'color:magenta');
+  console.time('playback');
 
-	let playtimer;
-			date_range 	= d3.timeDay.range(
-											moment(min_date),
-											moment(max_date).add(1,'days'),
-											1
-										);
+  let playtimer;
+      date_range   = d3.timeDay.range(
+                      moment(min_date),
+                      moment(max_date).add(1,'days'),
+                      1
+                    );
 
 
-	console.log( 'date_range', d3.extent(date_range) );
+  console.log( 'date_range', d3.extent(date_range) );
 
 
 
-	//=====================
-	// play
-	//=====================
-	d3.select('.fa-play')
-		.style('cursor','pointer')
-		.on('mouseover', function(e,d){
+  //=====================
+  // play
+  //=====================
+  d3.select('.fa-play')
+    .style('cursor','pointer')
+    .on('mouseover', function(e,d){
 
-			d3.select(this).style('color','lime')
+      d3.select(this).style('color','lime')
 
-		})
-		.on('mouseout', function(e,d){
+    })
+    .on('mouseout', function(e,d){
 
-			d3.select(this)
-				.transition()
-					.style('color','white')
+      d3.select(this)
+        .transition()
+          .style('color','white')
 
-		})
-		.on('click', function(e,d)	{
-			console.group('%c' +'play', 'color:magenta');
+    })
+    .on('click', function(e,d)  {
+      console.group('%c' +'play', 'color:magenta');
 
-			d3.select(this)
-				.style('display','none')
+      d3.select(this)
+        .style('display','none')
 
-			d3.select('.fa-pause')
-				.style('display', null)
+      d3.select('.fa-pause')
+        .style('display', null)
 
-			console.log('playdate', playdate);
+      console.log('playdate', playdate);
 
-			play();
-			if (playtimer)	{
-				window.clearInterval(playtimer);
-				playtimer=null;
-			}
+      play();
+      if (playtimer)  {
+        window.clearInterval(playtimer);
+        playtimer=null;
+      }
 
-			playtimer=window.setInterval(play, 300);
+      playtimer=window.setInterval(play, 300);
 
-			console.groupEnd('play');
-		});
+      console.groupEnd('play');
+    });
 
 
-	//=====================
-	// play
-	//=====================
-	function play()	{
+  //=====================
+  // play
+  //=====================
+  function play()  {
 
-			let idx;
+      let idx;
 
-			if (!playdate)	{
-				idx = 0;
-				playdate = date_range[0];
-			}else	{
-				//idx = date_range.indexOf(playdate);
-				idx = date_range.map(d=>moment(d).format('YYYY-MM-DD')).indexOf(moment(playdate).format('YYYY-MM-DD'));
-			}
+      if (!playdate)  {
+        idx = 0;
+        playdate = date_range[0];
+      }else  {
+        //idx = date_range.indexOf(playdate);
+        idx = date_range.map(d=>moment(d).format('YYYY-MM-DD')).indexOf(moment(playdate).format('YYYY-MM-DD'));
+      }
 
-			idx++;
-			if (idx>date_range.length-1) idx=0;
-			playdate = date_range[idx];
+      idx++;
+      if (idx>date_range.length-1) idx=0;
+      playdate = date_range[idx];
 
-			let dt 	= +moment(playdate);
-			d3.select('.range').property('value', dt);
-			setBubble(d3.select('.range').node(), d3.select('.bubble').node());
+      let dt   = +moment(playdate);
+      d3.select('.range').property('value', dt);
+      setBubble(d3.select('.range').node(), d3.select('.bubble').node());
 
 
 
-			// end of date -> pause
-			if (moment(playdate).format('YYYY-MM-DD') == max_date)	{
+      // end of date -> pause
+      if (moment(playdate).format('YYYY-MM-DD') == max_date)  {
 
-				if (playtimer)	{
-					window.clearInterval(playtimer);
-					playtimer=null;
-				}
+        if (playtimer)  {
+          window.clearInterval(playtimer);
+          playtimer=null;
+        }
 
-				// delay before restarting loop
-				window.setTimeout(()=>{
-					playtimer=window.setInterval(play, 300);
-				},10000)
+        // delay before restarting loop
+        window.setTimeout(()=>{
+          playtimer=window.setInterval(play, 300);
+        },10000)
 
-			}
+      }
 
 
-	}
+  }
 
-	//=====================
-	// pause
-	//=====================
-	d3.select('.fa-pause')
-		.style('cursor','pointer')
-		.on('click', function(e,d)	{
+  //=====================
+  // pause
+  //=====================
+  d3.select('.fa-pause')
+    .style('cursor','pointer')
+    .on('click', function(e,d)  {
 
-			d3.select(this)
-				.style('display','none')
+      d3.select(this)
+        .style('display','none')
 
-			d3.select('.fa-play')
-				.style('display', null)
+      d3.select('.fa-play')
+        .style('display', null)
 
-			if (playtimer)	{
-				window.clearInterval(playtimer);
-				playtimer=null;
-			}
+      if (playtimer)  {
+        window.clearInterval(playtimer);
+        playtimer=null;
+      }
 
-		});
+    });
 
 
-	console.timeEnd('playback');
-	console.groupEnd('playback');
+  console.timeEnd('playback');
+  console.groupEnd('playback');
 
 
 
@@ -1187,11 +1187,11 @@ function loaded(raw)	{
 
 
 
-	//====================================================================================
-	// labels & pointer lines
-	//====================================================================================
+  //====================================================================================
+  // labels & pointer lines
+  //====================================================================================
 
-	mapLabel();
+  mapLabel();
 
 
 
@@ -1200,76 +1200,76 @@ function loaded(raw)	{
 
 
 //
-//	//====================================================================================
-//	// bar chart
-//	//====================================================================================
-//	console.group('%c' +'bar chart', 'color:magenta');
+//  //====================================================================================
+//  // bar chart
+//  //====================================================================================
+//  console.group('%c' +'bar chart', 'color:magenta');
 //
 //
-//	// active cases
-////	let daily_data = d3.merge(latestdata.map(d=>d.active));
+//  // active cases
+////  let daily_data = d3.merge(latestdata.map(d=>d.active));
 //
-//	//console.log('daily_data', daily_data);
+//  //console.log('daily_data', daily_data);
 //
-//	// group by date
-//	let by_date = d3.groups(data, d=>d.date).map(d=>{
-//																						return {
-//																							date	: d[0],
-//																							value	: d3.sum(d[1], d=>d.value)
-//																						}
-//																					});
+//  // group by date
+//  let by_date = d3.groups(data, d=>d.date).map(d=>{
+//                                            return {
+//                                              date  : d[0],
+//                                              value  : d3.sum(d[1], d=>d.value)
+//                                            }
+//                                          });
 //
-//	// dates with value
-//	by_date = by_date.filter(d=>d.value);
-//	by_date.sort((a,b)=>a.date < b.date);
-//
-//
-//	//=====================
-//	// y scale
-//	//=====================
-//
-//	// y max
-//	let y_max		= d3.max(by_date, d=>d.value);
-//			y 			= d3.scaleLinear().domain([0,y_max]);
+//  // dates with value
+//  by_date = by_date.filter(d=>d.value);
+//  by_date.sort((a,b)=>a.date < b.date);
 //
 //
-//	//=====================
-//	// x scale
-//	//=====================
+//  //=====================
+//  // y scale
+//  //=====================
 //
-//	// extent of dates
-//	let date_extent 	= d3.extent(by_date, d=>d.date);
-//
-//	//console.log('date_extent', date_extent);
-//
-//	let date_range_all = d3.timeDay.range(moment(date_extent[0]), moment(date_extent[1]));
-//
-//	//console.log('date_range', d3.extent(date_range));
-//
-//	let x = d3.scaleTime().domain(d3.extent(date_range_all)).range([0,width]);
+//  // y max
+//  let y_max    = d3.max(by_date, d=>d.value);
+//      y       = d3.scaleLinear().domain([0,y_max]);
 //
 //
-//	// render
-//	barChart(by_date, x, y, y_max);
+//  //=====================
+//  // x scale
+//  //=====================
+//
+//  // extent of dates
+//  let date_extent   = d3.extent(by_date, d=>d.date);
+//
+//  //console.log('date_extent', date_extent);
+//
+//  let date_range_all = d3.timeDay.range(moment(date_extent[0]), moment(date_extent[1]));
+//
+//  //console.log('date_range', d3.extent(date_range));
+//
+//  let x = d3.scaleTime().domain(d3.extent(date_range_all)).range([0,width]);
 //
 //
-//	console.groupEnd('bar chart');
+//  // render
+//  barChart(by_date, x, y, y_max);
 //
 //
+//  console.groupEnd('bar chart');
 //
 //
 //
-//	//====================================================================================
-//	// END
-//	//====================================================================================
 //
 //
-//	// delay before starting playback
-//	window.setTimeout(()=>{
-//		playtimer=window.setInterval(play, 300);
-//	},120000)
+//  //====================================================================================
+//  // END
+//  //====================================================================================
+//
+//
+//  // delay before starting playback
+//  window.setTimeout(()=>{
+//    playtimer=window.setInterval(play, 300);
+//  },120000)
 
-//	console.groupEnd('playback');
+//  console.groupEnd('playback');
 
 
 }
@@ -1285,259 +1285,259 @@ function loaded(raw)	{
 //
 //====================================================================================
 
-function mapLabel()	{
-	console.group('%c' +'mapLabel', 'color:magenta');
+function mapLabel()  {
+  console.group('%c' +'mapLabel', 'color:magenta');
 
-	map_fill.selectAll('.state')
-		.each(function(d){
+  map_fill.selectAll('.state')
+    .each(function(d){
 
-			// SVG getBBox centroid
-			// https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox
-			let bb = d3.select(this).node().getBBox();
-			d.properties.bbox = bb;
+      // SVG getBBox centroid
+      // https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox
+      let bb = d3.select(this).node().getBBox();
+      d.properties.bbox = bb;
 
-			d.properties.centroid = {
-																x:bb.x+(bb.width/2),
-																y:bb.y+(bb.height/2)
-															};
+      d.properties.centroid = {
+                                x:bb.x+(bb.width/2),
+                                y:bb.y+(bb.height/2)
+                              };
 
-			// turf.js centerOfMass
-			// https://turfjs.org/docs/#centerOfMass
-			let center = turf.centerOfMass(d);
-			d.properties.center = {
-															x: projection(center.geometry.coordinates)[0],
-															y: projection(center.geometry.coordinates)[1]
-														};
-
-
-			// custom offset for each state
-			d.properties.offset = {
-				"Johor"						:[[-10,10],[-50,50]],
-				"Melaka"					:[[0,0],[-40,40]],
-				"Negeri Sembilan"	:[[0,0],[-40,40]],
-				"Putrajaya"				:[[0,0],[-20,20]],
-				"Kuala Lumpur"		:[[0,0],[0,0]],
-				"Selangor"				:[[-10,-10],[-13,-13]],
-				"Pulau Pinang"		:[[0,0],[-20,20]],
-
-				"Kedah"						:[[0,0],[-10,10]],
-				"Perak"						:[[0,0],[-20,20]],
-				"Perlis"					:[[0,0],[-20,-20]],
-
-				"Pahang"					:[[0,0],[40,-40]],
-				"Terengganu"			:[[0,0],[10,-10]],
-				"Kelantan"				:[[0,-10],[10,-10]],
-
-				"Sabah"						:[[-10,0],[50,-50]],
-				"Sarawak"					:[[20,10],[70,70]],
-				//"Labuan"					:[[0,0],[160,160]],
-				"Labuan"					:[[0,0],[-25,-25]],
-			}[d.properties.cases.negeri];
-
-			d.properties.label_anchor = ['Sarawak','Sabah'].indexOf(d.properties.cases.negeri)>-1 ? 'end'
-								: ['Pahang','Terengganu','Kelantan'].indexOf(d.properties.cases.negeri)>-1 ? 'end'
-								: ['Labuan'].indexOf(d.properties.cases.negeri)>-1 ? 'begin'
-								: 'begin';
-
-		});
-
-	console.log('states.features',states.features.map(d=>d.properties));
+      // turf.js centerOfMass
+      // https://turfjs.org/docs/#centerOfMass
+      let center = turf.centerOfMass(d);
+      d.properties.center = {
+                              x: projection(center.geometry.coordinates)[0],
+                              y: projection(center.geometry.coordinates)[1]
+                            };
 
 
+      // custom offset for each state
+      d.properties.offset = {
+        "Johor"            :[[-10,10],[-50,50]],
+        "Melaka"          :[[0,0],[-40,40]],
+        "Negeri Sembilan"  :[[0,0],[-40,40]],
+        "Putrajaya"        :[[0,0],[-20,20]],
+        "Kuala Lumpur"    :[[0,0],[0,0]],
+        "Selangor"        :[[-10,-10],[-13,-13]],
+        "Pulau Pinang"    :[[0,0],[-20,20]],
 
-	let colors 	= [
-									//'#2458B3',
-									'#003',
-									'cyan',
-								];
+        "Kedah"            :[[0,0],[-10,10]],
+        "Perak"            :[[0,0],[-20,20]],
+        "Perlis"          :[[0,0],[-20,-20]],
 
-	//=====================
-	// render
-	//=====================
+        "Pahang"          :[[0,0],[40,-40]],
+        "Terengganu"      :[[0,0],[10,-10]],
+        "Kelantan"        :[[0,-10],[10,-10]],
 
-	let l = map_label.selectAll('g').data(states.features);
-	l.exit().remove();
-	l.enter()
-			.append('g')
-				.call(sel=>{
+        "Sabah"            :[[-10,0],[50,-50]],
+        "Sarawak"          :[[20,10],[70,70]],
+        //"Labuan"          :[[0,0],[160,160]],
+        "Labuan"          :[[0,0],[-25,-25]],
+      }[d.properties.cases.negeri];
 
-					//=====================
-					// outer line
-					//=====================
+      d.properties.label_anchor = ['Sarawak','Sabah'].indexOf(d.properties.cases.negeri)>-1 ? 'end'
+                : ['Pahang','Terengganu','Kelantan'].indexOf(d.properties.cases.negeri)>-1 ? 'end'
+                : ['Labuan'].indexOf(d.properties.cases.negeri)>-1 ? 'begin'
+                : 'begin';
 
-					sel.append('circle')
-						.attr('class','circle-outer')
-						.attr('fill', colors[0])
-						.attr('cx', d=>d.properties.center.x + d.properties.offset[0][0])
-						.attr('cy', d=>d.properties.center.y + d.properties.offset[0][1])
-						.attr('r', 0)
+    });
 
-
-//					sel.append('path')
-//						.attr('class','connector outer')
-//						.attr('stroke',colors[0])
-//						.attr('fill','none')
-//						.attr('stroke-width',3)
-//						.attr('d',d=>{
-//							let pathdata = pathLiner(d);
-//							//console.log('pathdata',pathdata);
-//							return pathdata;
-//						})
-//						.attr('stroke-dasharray',function(d){
-//							return 0+' '+Math.ceil(d3.select(this).node().getTotalLength())+200
-//						})
-//						.attr("stroke-dashoffset", 0)
-
-					//=====================
-					// inner line
-					//=====================
-
-					sel.append('circle')
-						.attr('class','circle-inner')
-						.attr('fill',colors[1])
-						.attr('cx', d=>d.properties.center.x + d.properties.offset[0][0])
-						.attr('cy', d=>d.properties.center.y + d.properties.offset[0][1])
-						.attr('r', 0)
-
-					sel.append('path')
-						.attr('class','connector inner')
-						.attr('stroke',colors[1])
-						.attr('fill','none')
-						.attr('d',d=>{
-							let pathdata = pathLiner(d);
-							//console.log('pathdata',pathdata);
-							return pathdata;
-						})
-						.attr('stroke-dasharray',function(d){
-							return 0+' '+Math.ceil(d3.select(this).node().getTotalLength())+200
-						})
-						.attr("stroke-dashoffset", 0)
-
-
-					//=====================
-					// negeri
-					//=====================
-
-					sel.append('text')
-						.attr('class','label-state-text')
-						.attr('transform',d=>'translate('+ pathLinerTail(d) +')')
-						.attr('fill',colors[1])
-						.attr('text-anchor',d=>d.properties.label_anchor)
-						.attr('font-size','70%')
-						.attr('y',-3)
-						.text(d=>d.properties.cases.negeri)
-							.attr('opacity',0)
-
-					//=====================
-					// value
-					//=====================
-
-					sel.append('text')
-						.attr('class','state-value')
-						.attr('transform',d=>'translate('+ pathLinerTail(d) +')')
-						.attr('fill',colors[1])
-						.attr('text-anchor',d=>d.properties.label_anchor=='begin' ? 'end' : 'begin')
-						.attr('font-size','100%')
-						.attr('x',d=>d.properties.label_anchor=='begin' ? -5 : 5)
-						//.attr('y',0)
-						.attr('fill','crimson')
-						.attr('font-weight',500)
-							.attr('opacity',0)
-						.text(d=>comma(d.properties.cases.value))
-
-
-				})
-			.merge(l)
-				.call(sel=>{
-
-
-					sel.select('.state-value')
-						.text(d=>comma(d.properties.cases.value))
-
-
-				});
-
-	//=====================
-	// transitions
-	//=====================
-
-	d3.timeout(()=>{
-
-		map_label.selectAll('.circle-inner')
-			.transition()
-				.delay((d,i)=>250 + (i*220))
-					.attr('r',3);
-
-		map_label.selectAll('.circle-inner')
-			.transition()
-				.delay((d,i)=>500 + (i*220))
-					.attr('r',3);
-
-		map_label.selectAll('.inner')
-									.transition()
-										.delay((d,i)=>500 + (i*220) )
-										.duration(1000)
-										.attr('stroke-dasharray',function(d,i){
-											let p = Math.ceil(d3.select(this).node().getTotalLength())+200;
-											return p+' '+p;
-										});
-
-		map_label.selectAll('.label-state-text')
-								.transition()
-									.delay((d,i)=>500 + (i*220) + 500)
-									.attr('opacity',1)
-
-		map_label.selectAll('.state-value')
-								.transition()
-									.delay((d,i)=>500 + (i*220) + 500)
-									.attr('opacity',1)
-	},1000);
+  console.log('states.features',states.features.map(d=>d.properties));
 
 
 
-	//=====================
-	// build line
-	//=====================
-	function pathLiner(d) {
-		//console.log('d',d);
-		if (!d.properties.center) return null;
-		return [
+  let colors   = [
+                  //'#2458B3',
+                  '#003',
+                  'cyan',
+                ];
 
-			// head position
+  //=====================
+  // render
+  //=====================
 
-			'M', // absolute
-			[
-				d.properties.center.x + d.properties.offset[0][0],
-				d.properties.center.y + d.properties.offset[0][1]
-			].join(','),
+  let l = map_label.selectAll('g').data(states.features);
+  l.exit().remove();
+  l.enter()
+      .append('g')
+        .call(sel=>{
 
-			// neck position
+          //=====================
+          // outer line
+          //=====================
 
-			'l', // relative offset
-			[
-				d.properties.offset[1][0],
-				d.properties.offset[1][1]
-			].join(','),
+          sel.append('circle')
+            .attr('class','circle-outer')
+            .attr('fill', colors[0])
+            .attr('cx', d=>d.properties.center.x + d.properties.offset[0][0])
+            .attr('cy', d=>d.properties.center.y + d.properties.offset[0][1])
+            .attr('r', 0)
 
-			// tail end
 
-			'L', // absolute
-			pathLinerTail(d),
+//          sel.append('path')
+//            .attr('class','connector outer')
+//            .attr('stroke',colors[0])
+//            .attr('fill','none')
+//            .attr('stroke-width',3)
+//            .attr('d',d=>{
+//              let pathdata = pathLiner(d);
+//              //console.log('pathdata',pathdata);
+//              return pathdata;
+//            })
+//            .attr('stroke-dasharray',function(d){
+//              return 0+' '+Math.ceil(d3.select(this).node().getTotalLength())+200
+//            })
+//            .attr("stroke-dashoffset", 0)
 
-		].join(' ');
-	}
+          //=====================
+          // inner line
+          //=====================
 
-	function pathLinerTail(d) {
-		return	[
-							['Sarawak','Sabah'].indexOf(d.properties.cases.negeri)>-1 ? width-50
-								: ['Pahang','Terengganu','Kelantan'].indexOf(d.properties.cases.negeri)>-1 ? 400
-								: ['Labuan'].indexOf(d.properties.cases.negeri)>-1 ? 650
-								: 50,
-							d.properties.center.y + d.properties.offset[0][1] + d.properties.offset[1][1]
-						]
-	}
+          sel.append('circle')
+            .attr('class','circle-inner')
+            .attr('fill',colors[1])
+            .attr('cx', d=>d.properties.center.x + d.properties.offset[0][0])
+            .attr('cy', d=>d.properties.center.y + d.properties.offset[0][1])
+            .attr('r', 0)
 
-	console.groupEnd('mapLabel');
+          sel.append('path')
+            .attr('class','connector inner')
+            .attr('stroke',colors[1])
+            .attr('fill','none')
+            .attr('d',d=>{
+              let pathdata = pathLiner(d);
+              //console.log('pathdata',pathdata);
+              return pathdata;
+            })
+            .attr('stroke-dasharray',function(d){
+              return 0+' '+Math.ceil(d3.select(this).node().getTotalLength())+200
+            })
+            .attr("stroke-dashoffset", 0)
+
+
+          //=====================
+          // negeri
+          //=====================
+
+          sel.append('text')
+            .attr('class','label-state-text')
+            .attr('transform',d=>'translate('+ pathLinerTail(d) +')')
+            .attr('fill',colors[1])
+            .attr('text-anchor',d=>d.properties.label_anchor)
+            .attr('font-size','70%')
+            .attr('y',-3)
+            .text(d=>d.properties.cases.negeri)
+              .attr('opacity',0)
+
+          //=====================
+          // value
+          //=====================
+
+          sel.append('text')
+            .attr('class','state-value')
+            .attr('transform',d=>'translate('+ pathLinerTail(d) +')')
+            .attr('fill',colors[1])
+            .attr('text-anchor',d=>d.properties.label_anchor=='begin' ? 'end' : 'begin')
+            .attr('font-size','100%')
+            .attr('x',d=>d.properties.label_anchor=='begin' ? -5 : 5)
+            //.attr('y',0)
+            .attr('fill','crimson')
+            .attr('font-weight',500)
+              .attr('opacity',0)
+            .text(d=>comma(d.properties.cases.value))
+
+
+        })
+      .merge(l)
+        .call(sel=>{
+
+
+          sel.select('.state-value')
+            .text(d=>comma(d.properties.cases.value))
+
+
+        });
+
+  //=====================
+  // transitions
+  //=====================
+
+  d3.timeout(()=>{
+
+    map_label.selectAll('.circle-inner')
+      .transition()
+        .delay((d,i)=>250 + (i*220))
+          .attr('r',3);
+
+    map_label.selectAll('.circle-inner')
+      .transition()
+        .delay((d,i)=>500 + (i*220))
+          .attr('r',3);
+
+    map_label.selectAll('.inner')
+                  .transition()
+                    .delay((d,i)=>500 + (i*220) )
+                    .duration(1000)
+                    .attr('stroke-dasharray',function(d,i){
+                      let p = Math.ceil(d3.select(this).node().getTotalLength())+200;
+                      return p+' '+p;
+                    });
+
+    map_label.selectAll('.label-state-text')
+                .transition()
+                  .delay((d,i)=>500 + (i*220) + 500)
+                  .attr('opacity',1)
+
+    map_label.selectAll('.state-value')
+                .transition()
+                  .delay((d,i)=>500 + (i*220) + 500)
+                  .attr('opacity',1)
+  },1000);
+
+
+
+  //=====================
+  // build line
+  //=====================
+  function pathLiner(d) {
+    //console.log('d',d);
+    if (!d.properties.center) return null;
+    return [
+
+      // head position
+
+      'M', // absolute
+      [
+        d.properties.center.x + d.properties.offset[0][0],
+        d.properties.center.y + d.properties.offset[0][1]
+      ].join(','),
+
+      // neck position
+
+      'l', // relative offset
+      [
+        d.properties.offset[1][0],
+        d.properties.offset[1][1]
+      ].join(','),
+
+      // tail end
+
+      'L', // absolute
+      pathLinerTail(d),
+
+    ].join(' ');
+  }
+
+  function pathLinerTail(d) {
+    return  [
+              ['Sarawak','Sabah'].indexOf(d.properties.cases.negeri)>-1 ? width-50
+                : ['Pahang','Terengganu','Kelantan'].indexOf(d.properties.cases.negeri)>-1 ? 400
+                : ['Labuan'].indexOf(d.properties.cases.negeri)>-1 ? 650
+                : 50,
+              d.properties.center.y + d.properties.offset[0][1] + d.properties.offset[1][1]
+            ]
+  }
+
+  console.groupEnd('mapLabel');
 }
 
 
@@ -1553,183 +1553,183 @@ function mapLabel()	{
 ////
 ////====================================================================================
 //
-//function barChart(data, x, y, y_max)	{
+//function barChart(data, x, y, y_max)  {
 //
-//	if (timer_barchart) {
-//		window.clearTimeout(timer_barchart);
-//		timer_barchart = null;
-//	}
+//  if (timer_barchart) {
+//    window.clearTimeout(timer_barchart);
+//    timer_barchart = null;
+//  }
 //
-//	timer_barchart = window.setTimeout(function(){
+//  timer_barchart = window.setTimeout(function(){
 //
-//		//console.group('%c' +'barChart', 'color:magenta');
-//		//console.log('data', data);
-//
-//
-//
-//		// chart size to be the same as slider size
-//		// get slider position & width/height
-//		let slider_bb	= d3.select('.range').node().getBoundingClientRect();
-//
-//		//console.log('slider_bb', slider_bb);
-//
-//		let width 	= +d3.select('.range').style('width').replace('px',''),
-//				height	= 100,
-//				margin	= {
-//										top			:10,
-//										left		:40,
-//										right		:40,
-//										bottom	:40
-//									};
-//
-//
-//		//=====================
-//		// y scale
-//		//=====================
-//
-//		y.domain([0,y_max]);
-//		y.range([0,height]);
-//
-//		let	y2 			= d3.scaleLinear().domain([0,y_max]).range([height,0]),
-//				y_axis 	= d3.axisLeft(y2)
-//										.ticks(5)
-//										.tickFormat(d3.format('~s'));
-//
-//
-//		//=====================
-//		// date
-//		//=====================
-//
-//		x.range([0,width]);
-//
-//				// daily date axis
-//		let x_axis 	= d3.axisBottom(x)
-//										//.tickFormat((t)=>moment(t).date() < 4 ?'':moment(t).date());
-//
-//	//							// monthly date axis
-//	//					let x_axis2	= d3.axisBottom(x)
-//	//													//.tickFormat((t)=>moment(t).date() == 1 ? moment(t).format('MMM') : '');
-//
-//
-//		//console.log('x', x.domain(), x.range());
-//		let bw = data.length ? x(moment(data[1].date)) - x(moment(data[0].date)) : 3;
-//
-//		//console.log('bw', data[1].date, data[0].date, bw);
-//
-//		//=====================
-//		// svg
-//		//=====================
-//		let svg = d3.select('.bar_chart_holder')
-//								.style('padding-left', (slider_bb.x - margin.left) +'px')
-//								.style('height', (height + margin.top + margin.bottom)+'px')
-//								.style('padding-right', (innerWidth - slider_bb.x - width - margin.right) +'px')
-//									.selectAll('svg').data([1]);
-//
-//		//=====================
-//		// enter
-//		//=====================
-//		svg
-//			.enter()
-//				.append('svg')
-//					//.attr('width', width + margin.left + margin.right) // fixed width
-//					.attr('viewBox', 	[
-//															0,0,
-//															width + margin.left + margin.right,
-//															height + margin.top + margin.bottom
-//														].join(' '))
-//
-//
-//					.call(sel=>{
-//
-//						// check plot areas
-////						sel.append('rect').attr('class','bg')
-////							.attr('width', width + margin.left + margin.right)
-////							.attr('height', height + margin.top + margin.bottom)
-////							.attr('stroke','lime');
-//
-////						sel.append('rect').attr('class','bg-plot')
-////							.attr('transform', 'translate('+[ margin.left, margin.top ]+')')
-////							.attr('width', width)
-////							.attr('height', height)
-////							.attr('fill',chroma('steelblue').alpha(.2).hex() );
-//
-//
-//						//=====================
-//						// axis
-//						//=====================
-//						sel.append('g').attr('class','axes')
-//							.attr('transform', 'translate('+[ margin.left, margin.top ]+')')
-//							.call(sel=>{
-//
-//								sel.append('g').attr('class','axis-y')
-//									.call(y_axis);
-//
-//								sel.append('g').attr('class','axis-x1')
-//									.attr('transform', 'translate('+[ 0, height ]+')')
-//									.call(x_axis);
-//
-//	//							sel.append('g').attr('class','axis-x2')
-//	//								.attr('transform', 'translate('+[ 0, height ]+')')
-//	//								.call(x_axis2);
-//
-//							});
-//
-//
-//						//=====================
-//						// chart
-//						//=====================
-//						sel.append('g')
-//									.attr('class','plot-area')
-//									.attr('transform', 'translate('+[ margin.left, margin.top ]+')')
-//
-//
-//					})
-//
-//
-//			//=====================
-//			// enter + update
-//			//=====================
-//			.merge(svg)
-//				.call(sel=>{
-//
-//						//=====================
-//						// axis
-//						//=====================
-//						sel.select('.axis-y').call(y_axis);
-//
-//						//=====================
-//						// chart
-//						//=====================
-//
-//						let b = sel.select('.plot-area')
-//											.selectAll('.bar').data(data, d=>d.date);
-//
-//						b.exit().remove();
-//
-//						b.enter()
-//								.append('rect')
-//									.attr('class','bar')
-//									.attr('width', bw-1)
-//									.attr('fill','#7474CD')
-//									.attr('x',(d,i)=>i==0 ? x(moment(d.date)) : x(moment(d.date)) - bw)
-//									.attr('y',(d,i,j)=>height - (i==0 ? y(d.value) : y(data[i-1].value) ))
-//									.attr('height',(d,i,j)=>i==0 ? y(d.value) : y(data[i-1].value))
-//
-//							.merge(b)
-//								.transition()
-//									.duration(transition_duration-100)
-//										.attr('x',d=>x(moment(d.date)))
-//										.attr('y',d=>height - y(d.value) )
-//										.attr('height',d=>y(d.value))
+//    //console.group('%c' +'barChart', 'color:magenta');
+//    //console.log('data', data);
 //
 //
 //
-//				});
+//    // chart size to be the same as slider size
+//    // get slider position & width/height
+//    let slider_bb  = d3.select('.range').node().getBoundingClientRect();
+//
+//    //console.log('slider_bb', slider_bb);
+//
+//    let width   = +d3.select('.range').style('width').replace('px',''),
+//        height  = 100,
+//        margin  = {
+//                    top      :10,
+//                    left    :40,
+//                    right    :40,
+//                    bottom  :40
+//                  };
 //
 //
-//		//console.groupEnd('barChart');
+//    //=====================
+//    // y scale
+//    //=====================
 //
-//	}, 100);
+//    y.domain([0,y_max]);
+//    y.range([0,height]);
+//
+//    let  y2       = d3.scaleLinear().domain([0,y_max]).range([height,0]),
+//        y_axis   = d3.axisLeft(y2)
+//                    .ticks(5)
+//                    .tickFormat(d3.format('~s'));
+//
+//
+//    //=====================
+//    // date
+//    //=====================
+//
+//    x.range([0,width]);
+//
+//        // daily date axis
+//    let x_axis   = d3.axisBottom(x)
+//                    //.tickFormat((t)=>moment(t).date() < 4 ?'':moment(t).date());
+//
+//  //              // monthly date axis
+//  //          let x_axis2  = d3.axisBottom(x)
+//  //                          //.tickFormat((t)=>moment(t).date() == 1 ? moment(t).format('MMM') : '');
+//
+//
+//    //console.log('x', x.domain(), x.range());
+//    let bw = data.length ? x(moment(data[1].date)) - x(moment(data[0].date)) : 3;
+//
+//    //console.log('bw', data[1].date, data[0].date, bw);
+//
+//    //=====================
+//    // svg
+//    //=====================
+//    let svg = d3.select('.bar_chart_holder')
+//                .style('padding-left', (slider_bb.x - margin.left) +'px')
+//                .style('height', (height + margin.top + margin.bottom)+'px')
+//                .style('padding-right', (innerWidth - slider_bb.x - width - margin.right) +'px')
+//                  .selectAll('svg').data([1]);
+//
+//    //=====================
+//    // enter
+//    //=====================
+//    svg
+//      .enter()
+//        .append('svg')
+//          //.attr('width', width + margin.left + margin.right) // fixed width
+//          .attr('viewBox',   [
+//                              0,0,
+//                              width + margin.left + margin.right,
+//                              height + margin.top + margin.bottom
+//                            ].join(' '))
+//
+//
+//          .call(sel=>{
+//
+//            // check plot areas
+////            sel.append('rect').attr('class','bg')
+////              .attr('width', width + margin.left + margin.right)
+////              .attr('height', height + margin.top + margin.bottom)
+////              .attr('stroke','lime');
+//
+////            sel.append('rect').attr('class','bg-plot')
+////              .attr('transform', 'translate('+[ margin.left, margin.top ]+')')
+////              .attr('width', width)
+////              .attr('height', height)
+////              .attr('fill',chroma('steelblue').alpha(.2).hex() );
+//
+//
+//            //=====================
+//            // axis
+//            //=====================
+//            sel.append('g').attr('class','axes')
+//              .attr('transform', 'translate('+[ margin.left, margin.top ]+')')
+//              .call(sel=>{
+//
+//                sel.append('g').attr('class','axis-y')
+//                  .call(y_axis);
+//
+//                sel.append('g').attr('class','axis-x1')
+//                  .attr('transform', 'translate('+[ 0, height ]+')')
+//                  .call(x_axis);
+//
+//  //              sel.append('g').attr('class','axis-x2')
+//  //                .attr('transform', 'translate('+[ 0, height ]+')')
+//  //                .call(x_axis2);
+//
+//              });
+//
+//
+//            //=====================
+//            // chart
+//            //=====================
+//            sel.append('g')
+//                  .attr('class','plot-area')
+//                  .attr('transform', 'translate('+[ margin.left, margin.top ]+')')
+//
+//
+//          })
+//
+//
+//      //=====================
+//      // enter + update
+//      //=====================
+//      .merge(svg)
+//        .call(sel=>{
+//
+//            //=====================
+//            // axis
+//            //=====================
+//            sel.select('.axis-y').call(y_axis);
+//
+//            //=====================
+//            // chart
+//            //=====================
+//
+//            let b = sel.select('.plot-area')
+//                      .selectAll('.bar').data(data, d=>d.date);
+//
+//            b.exit().remove();
+//
+//            b.enter()
+//                .append('rect')
+//                  .attr('class','bar')
+//                  .attr('width', bw-1)
+//                  .attr('fill','#7474CD')
+//                  .attr('x',(d,i)=>i==0 ? x(moment(d.date)) : x(moment(d.date)) - bw)
+//                  .attr('y',(d,i,j)=>height - (i==0 ? y(d.value) : y(data[i-1].value) ))
+//                  .attr('height',(d,i,j)=>i==0 ? y(d.value) : y(data[i-1].value))
+//
+//              .merge(b)
+//                .transition()
+//                  .duration(transition_duration-100)
+//                    .attr('x',d=>x(moment(d.date)))
+//                    .attr('y',d=>height - y(d.value) )
+//                    .attr('height',d=>y(d.value))
+//
+//
+//
+//        });
+//
+//
+//    //console.groupEnd('barChart');
+//
+//  }, 100);
 //
 //}
 
@@ -1741,35 +1741,35 @@ function mapLabel()	{
 </script>
 
 <div style="display:flex" class="bar_chart">
-	<div class="bar_chart_holder" style="flex:1 1 auto"></div>
+  <div class="bar_chart_holder" style="flex:1 1 auto"></div>
 </div>
 
 <div style="display:flex" class="slider_bubble">
-	<div style="flex:0 1 100px">
+  <div style="flex:0 1 100px">
 
-		<!-- font-awesome icons https://fontawesome.com/icons?d=gallery&p=2 -->
+    <!-- font-awesome icons https://fontawesome.com/icons?d=gallery&p=2 -->
 
-		<i class="fas fa-play" 	style="font-size:200%; margin-left:20px; "></i>
-		<i class="fas fa-pause" style="font-size:200%; margin-left:20px; display:none;"></i>
+    <i class="fas fa-play"   style="font-size:200%; margin-left:20px; "></i>
+    <i class="fas fa-pause" style="font-size:200%; margin-left:20px; display:none;"></i>
 
 
-	</div>
-	<div class="slider" style="flex:1 1 auto">
-		<div class="range-wrap" style="width: 100%;">
-		  <input type="range" class="range">
-		  <output class="bubble"></output>
-		</div>
-	</div>
+  </div>
+  <div class="slider" style="flex:1 1 auto">
+    <div class="range-wrap" style="width: 100%;">
+      <input type="range" class="range">
+      <output class="bubble"></output>
+    </div>
+  </div>
 
-	<div style="flex:0 1 100px"></div>
+  <div style="flex:0 1 100px"></div>
 
 </div>
 
 <div>
-	Map labels
+  Map labels
 </div>
 <br>
-<button onclick="document.location='index.html'">Main Menu</button>
+<a href="../">Main Menu</a>
 <button onclick="document.location='index12.html'">Back</button>
 <!--
 <button onclick="document.location='index14.html'">Next</button>

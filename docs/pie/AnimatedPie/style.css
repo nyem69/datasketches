@@ -1,0 +1,27 @@
+.container{
+    width: 960px;
+    height: 500px;
+    border: 1px solid black;
+}
+
+.bar{
+    fill:lightblue;
+}
+
+.label{
+    color:black;
+}
+
+
+path.color0 {
+    fill: green;
+}
+path.color1 {
+    fill: yellow;
+}
+text {
+    font-size: 7em;
+    font-weight: 400;
+    line-height: 16em;
+    fill: black;
+}

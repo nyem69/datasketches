@@ -18,7 +18,7 @@
 
 <style>
 html {
-	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 </style>
 
@@ -41,10 +41,10 @@ var projection = d3.geoMercator()
     .rotate([-109.45 + 5/2,-3.2]);
 
 var svg = d3.select("body")
-								.append("svg")
- 									.attr('viewBox', [0,0,width,height].join(' ')) // fill screen
-						 				.style('max-height', (innerHeight-200)+'px')
-									;
+                .append("svg")
+                   .attr('viewBox', [0,0,width,height].join(' ')) // fill screen
+                     .style('max-height', (innerHeight-200)+'px')
+                  ;
 
 var path = d3.geoPath()
     .projection(projection);
@@ -63,7 +63,7 @@ let states,
 
 // formatting
 let z2 = d3.format('02d'),
-		comma = d3.format(',');
+    comma = d3.format(',');
 
 
 
@@ -77,9 +77,9 @@ console.time('load data');
 
 d3.json("malaysia.json").then(function(malaysia) {
 
-	console.group('%c' +'map', 'color:magenta');
-	console.timeEnd('load map');
-	console.time('map');
+  console.group('%c' +'map', 'color:magenta');
+  console.timeEnd('load map');
+  console.time('map');
 
   states = topojson.feature(malaysia, malaysia.objects.states);
   land = topojson.feature(malaysia, malaysia.objects.land);
@@ -104,8 +104,8 @@ d3.json("malaysia.json").then(function(malaysia) {
   }
 
 
-	svg.append("g").attr('class','map-border-states')
-		.selectAll(".land").data(land.features)
+  svg.append("g").attr('class','map-border-states')
+    .selectAll(".land").data(land.features)
     .enter()
       .append("path")
         .attr('class','land')
@@ -114,24 +114,24 @@ d3.json("malaysia.json").then(function(malaysia) {
         .attr('stroke-width',1)
         .attr('fill', 'none' )
 
-	svg.append("g").attr('class','map-fill-states')
-  	.selectAll(".state").data(states.features)
-	    .enter()
-	      .append("path")
-	        .attr('class','state')
-	        .attr("d", path)
-	        .attr('stroke','#ccc')
-	        .attr('fill', '#f2f2f2' )
-	        .attr('stroke-width',.5)
-	        .attr('fill-opacity',1)
-	        .on('click',function(e,d){
-	        	console.log('d.properties', d.properties);
-	        	window.prompt('map id: '+d.properties.id, d.properties.cases.negeri);
-	        });
+  svg.append("g").attr('class','map-fill-states')
+    .selectAll(".state").data(states.features)
+      .enter()
+        .append("path")
+          .attr('class','state')
+          .attr("d", path)
+          .attr('stroke','#ccc')
+          .attr('fill', '#f2f2f2' )
+          .attr('stroke-width',.5)
+          .attr('fill-opacity',1)
+          .on('click',function(e,d){
+            console.log('d.properties', d.properties);
+            window.prompt('map id: '+d.properties.id, d.properties.cases.negeri);
+          });
 
 
-	console.timeEnd('map');
-	console.groupEnd('map');
+  console.timeEnd('map');
+  console.groupEnd('map');
 
 });
 
@@ -146,9 +146,9 @@ d3.json("malaysia.json").then(function(malaysia) {
 d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpAFmbFBN6_F7CKD9Boww_11al2PlMILTZOOCtC5FVC2keEqHW_KvQpBeC/pub?gid=572100186&single=true&output=csv')
   .then(function(raw){
 
-  	console.group('%c' +'loaded', 'color:magenta');
-		console.timeEnd('load data');
-  	console.time('loaded');
+    console.group('%c' +'loaded', 'color:magenta');
+    console.timeEnd('load data');
+    console.time('loaded');
 
 
 //   console.log('raw.columns', raw.columns);
@@ -157,141 +157,141 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 
 
 
-		//=====================
-		// rebuild data structure
-		// columns -> rows
-		//=====================
+    //=====================
+    // rebuild data structure
+    // columns -> rows
+    //=====================
 
-		//console.log(JSON.stringify(hotspots.filter(d=>d.Latitude),null,2));
+    //console.log(JSON.stringify(hotspots.filter(d=>d.Latitude),null,2));
 
-		// original structure:
-		/*
-			[
-			  {
-			    "no": "1",
-			    "Negeri": "Johor",
-			    "kod_daerah": "2",
-			    "kod_mukim": "",
-			    "daerah": "Johor Bahru",
-			    "sort D": "20",
-			    "sort E": "19",
-			    "Pdm": "",
-			    "Pdm Population": "",
-			    "note": "",
-			    "Latitude": "1.5192",
-			    "Longitude": "103.7852",
-			    "Latlong": "1.51915967306,103.785177766",
-			    "Population": "1600300",
-			    "Population DOSM": "",
-			    "2020-03-21": "52",
-			    "2020-03-22": "52",
-			    "2020-03-23": "",
-			    "2020-03-24": "59",
-			    "2020-03-25": "68",
-			    "2020-03-26": "73",
-			    ...
-				}
-			]
-		*/
-
-
-	  let data = [];
-
-	  raw.filter(d=>d.Longitude && d.Latitude)
-	      .forEach(d=>{
-
-					raw.columns.forEach(j=>{
-
-						// "Active 2020-04-20"
-						let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
-
-						if (r1 && d[j] && typeof +d[j]=='number')	{
-
-							let date;
-
-							// "2020-06-01"
-							let r3 = r1[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
-							if (r3)	{
-								date = [r3[1], r3[2], z2(r3[3])].join('-');
-							}else	{
-								date = r1[1];
-							}
+    // original structure:
+    /*
+      [
+        {
+          "no": "1",
+          "Negeri": "Johor",
+          "kod_daerah": "2",
+          "kod_mukim": "",
+          "daerah": "Johor Bahru",
+          "sort D": "20",
+          "sort E": "19",
+          "Pdm": "",
+          "Pdm Population": "",
+          "note": "",
+          "Latitude": "1.5192",
+          "Longitude": "103.7852",
+          "Latlong": "1.51915967306,103.785177766",
+          "Population": "1600300",
+          "Population DOSM": "",
+          "2020-03-21": "52",
+          "2020-03-22": "52",
+          "2020-03-23": "",
+          "2020-03-24": "59",
+          "2020-03-25": "68",
+          "2020-03-26": "73",
+          ...
+        }
+      ]
+    */
 
 
-							let k = {
-								date	: date,
-								value	: +d[j],
+    let data = [];
 
-								//column: j,
-								//str		: d[j],
+    raw.filter(d=>d.Longitude && d.Latitude)
+        .forEach(d=>{
 
-								negeri			: d['Negeri'],
-								daerah			: d['Daerah'],
-								latitude		: +d['Latitude'],
-								longitude		:	+d['Longitude'],
+          raw.columns.forEach(j=>{
 
-							}
+            // "Active 2020-04-20"
+            let r1 = j.match(/^active\s+(\d+\-\d+\-\d+)$/i);
 
-							// shift coordinates
-							if (k['longitude'] > 105) k['longitude'] += -5;
+            if (r1 && d[j] && typeof +d[j]=='number')  {
 
-							data.push(k);
+              let date;
 
-						}
-
-
-					});
+              // "2020-06-01"
+              let r3 = r1[1].match(/^(\d{4})\-(\d{2})\-(\d{1})$/);
+              if (r3)  {
+                date = [r3[1], r3[2], z2(r3[3])].join('-');
+              }else  {
+                date = r1[1];
+              }
 
 
-	      });
+              let k = {
+                date  : date,
+                value  : +d[j],
+
+                //column: j,
+                //str    : d[j],
+
+                negeri      : d['Negeri'],
+                daerah      : d['Daerah'],
+                latitude    : +d['Latitude'],
+                longitude    :  +d['Longitude'],
+
+              }
+
+              // shift coordinates
+              if (k['longitude'] > 105) k['longitude'] += -5;
+
+              data.push(k);
+
+            }
 
 
-		//=====================
-		// new structure:
-		//=====================
-
-		console.log('data',data.length, data.slice(0,10));
-
-		/*
-			[
-				{
-					"date":"2021-04-22",
-					"value":784,
-					"negeri":"Johor",
-					"daerah":"Johor Bahru",
-					"latitude":1.5192,
-					"longitude":103.7852
-				}
-			]
-
-		*/
+          });
 
 
+        });
 
-		// remove data without values
-		data = data.filter(d=>d.value);
+
+    //=====================
+    // new structure:
+    //=====================
+
+    console.log('data',data.length, data.slice(0,10));
+
+    /*
+      [
+        {
+          "date":"2021-04-22",
+          "value":784,
+          "negeri":"Johor",
+          "daerah":"Johor Bahru",
+          "latitude":1.5192,
+          "longitude":103.7852
+        }
+      ]
+
+    */
 
 
 
-		console.timeEnd('loaded');
-		console.groupEnd('loaded');
+    // remove data without values
+    data = data.filter(d=>d.value);
 
 
+
+    console.timeEnd('loaded');
+    console.groupEnd('loaded');
 
 
 
 
 
 
-		//====================================================================================
-		// render
-		//====================================================================================
 
-  	console.group('%c' +'render', 'color:magenta');
-  	console.time('render');
 
-		// max date
-		let max_date = d3.max(data, d=>d.date);
+    //====================================================================================
+    // render
+    //====================================================================================
+
+    console.group('%c' +'render', 'color:magenta');
+    console.time('render');
+
+    // max date
+    let max_date = d3.max(data, d=>d.date);
     console.log('max_date', max_date);
 
     // data with latest date
@@ -301,16 +301,16 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 
 
 
-		hotspots(data_latest);
+    hotspots(data_latest);
 
-		map_textures(data_latest);
+    map_textures(data_latest);
 
-		page_title(data_latest);
+    page_title(data_latest);
 
 
 
-		console.timeEnd('render');
-		console.groupEnd('render');
+    console.timeEnd('render');
+    console.groupEnd('render');
 
 
   });
@@ -323,28 +323,28 @@ d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR94XOsvxFUtkF_csctKSZpA
 //====================================================================================
 // hotspots
 //====================================================================================
-function hotspots(data)	{
-	console.group('%c' +'hotspots', 'color:magenta');
-	console.time('hotspots');
+function hotspots(data)  {
+  console.group('%c' +'hotspots', 'color:magenta');
+  console.time('hotspots');
 
 
   let max_value = d3.max(data, d=>d.value);
-	//let scaleRadius = d3.scaleLinear().domain([0,max_value]).range([0,10]);
-	let scaleRadius = d3.scaleSqrt().domain([0,max_value]).range([0,15]);
-	let scaleColorCircle = d3.scaleLinear()
-													//.domain([0,50,100,500,max_value])
-													//.range( d3.schemeYlOrBr[5] );
-													.domain([0,20,40,max_value])
-													.range(['white','yellow','orange','crimson'])
+  //let scaleRadius = d3.scaleLinear().domain([0,max_value]).range([0,10]);
+  let scaleRadius = d3.scaleSqrt().domain([0,max_value]).range([0,15]);
+  let scaleColorCircle = d3.scaleLinear()
+                          //.domain([0,50,100,500,max_value])
+                          //.range( d3.schemeYlOrBr[5] );
+                          .domain([0,20,40,max_value])
+                          .range(['white','yellow','orange','crimson'])
 
 
 
-	var color = d3.scaleThreshold()
-	    .domain([0, 40])
-	    .range(["lime", "yellow", "red"]);
+  var color = d3.scaleThreshold()
+      .domain([0, 40])
+      .range(["lime", "yellow", "red"]);
 
 
-	// large background bubble to capture mouseover
+  // large background bubble to capture mouseover
   svg.append('g').attr('class','cities-malaysia-mouseover')
     .selectAll('circle').data(data)
     .enter()
@@ -358,14 +358,14 @@ function hotspots(data)	{
         .attr('stroke-opacity',.2)
         .attr('stroke-width',.5)
         .on('mouseover',function(e,d){
-        	d3.select('.cities-malaysia-label')
-        		.selectAll('text')
-			      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
+          d3.select('.cities-malaysia-label')
+            .selectAll('text')
+              .attr('display',k=>k.daerah==d.daerah ? 'block':'none')
         })
 
 
 
-	// bubble fill
+  // bubble fill
   svg.append('g').attr('class','cities-malaysia')
     .selectAll('circle').data(data)
     .enter()
@@ -379,69 +379,69 @@ function hotspots(data)	{
         .attr('fill-opacity',.8)
         .on('mouseover',function(e,d){
 
-        	d3.select('.cities-malaysia-label')
-        		.selectAll('text')
-			      	.attr('display',k=>k.daerah==d.daerah ? 'block':'none')
+          d3.select('.cities-malaysia-label')
+            .selectAll('text')
+              .attr('display',k=>k.daerah==d.daerah ? 'block':'none')
 
         })
 
 
 
 
-	// text
+  // text
 
   svg.append('g').attr('class','cities-malaysia-label')
-  	.attr('pointer-events','none')
+    .attr('pointer-events','none')
     .selectAll('text').data(data)
-	    .enter()
-	      .append('text')
-	        .attr('display','none')
-	        .attr('text-anchor','middle')
-	        .attr('font-weight',500)
-	        .attr('transform',d=>'translate('+[
-	        												projection([d.longitude,d.latitude])[0],
-	        												projection([d.longitude,d.latitude])[1] - 30
-	        										]+')')
-	        .call(sel=>{
+      .enter()
+        .append('text')
+          .attr('display','none')
+          .attr('text-anchor','middle')
+          .attr('font-weight',500)
+          .attr('transform',d=>'translate('+[
+                                  projection([d.longitude,d.latitude])[0],
+                                  projection([d.longitude,d.latitude])[1] - 30
+                              ]+')')
+          .call(sel=>{
 
 
-	        	sel.append('tspan')
-	        		.attr('x',d=>0)
-	        		.attr('y',d=>0)
-	        		.attr('stroke','#fff')
-	        		.attr('fill','#fff')
-	        		.attr('stroke-width',2)
-	        		.attr('font-size','60%')
-	        		.text(d=>d.daerah)
+            sel.append('tspan')
+              .attr('x',d=>0)
+              .attr('y',d=>0)
+              .attr('stroke','#fff')
+              .attr('fill','#fff')
+              .attr('stroke-width',2)
+              .attr('font-size','60%')
+              .text(d=>d.daerah)
 
-	        	sel.append('tspan')
-	        		.attr('x',d=>0)
-	        		.attr('dy','1em')
-	        		.attr('stroke','#fff')
-	        		.attr('fill','#fff')
-	        		.attr('stroke-width',2)
-	        		.text(d=>comma(d.value))
+            sel.append('tspan')
+              .attr('x',d=>0)
+              .attr('dy','1em')
+              .attr('stroke','#fff')
+              .attr('fill','#fff')
+              .attr('stroke-width',2)
+              .text(d=>comma(d.value))
 
-	        	sel.append('tspan')
-	        		.attr('x',d=>0)
-	        		.attr('y',d=>0)
-	        		.attr('fill','steelblue')
-	        		.attr('font-size','60%')
-	        		.text(d=>d.daerah)
+            sel.append('tspan')
+              .attr('x',d=>0)
+              .attr('y',d=>0)
+              .attr('fill','steelblue')
+              .attr('font-size','60%')
+              .text(d=>d.daerah)
 
-	        	sel.append('tspan')
-	        		.attr('x',d=>0)
-	        		.attr('dy','1em')
-	        		.attr('fill','crimson')
-	        		.text(d=>comma(d.value))
+            sel.append('tspan')
+              .attr('x',d=>0)
+              .attr('dy','1em')
+              .attr('fill','crimson')
+              .text(d=>comma(d.value))
 
-	        })
-
-
+          })
 
 
-	console.timeEnd('hotspots');
-	console.groupEnd('hotspots');
+
+
+  console.timeEnd('hotspots');
+  console.groupEnd('hotspots');
 
 
 }
@@ -451,75 +451,75 @@ function hotspots(data)	{
 //====================================================================================
 // map pattern color by total active cases by state
 //====================================================================================
-function map_textures(data)	{
-	console.group('%c' +'map_textures', 'color:magenta');
-	console.time('map_textures');
+function map_textures(data)  {
+  console.group('%c' +'map_textures', 'color:magenta');
+  console.time('map_textures');
 
-	// join map properties.id -> active_cases_by_states.negeri
+  // join map properties.id -> active_cases_by_states.negeri
 
-	let map_id = {
-		1:"Johor",
-		2:"Kedah",
-		3:"Kelantan",
-		4:"Kuala Lumpur",
-		5:"Labuan",
-		6:"Melaka",
-		7:"Negeri Sembilan",
-		8:"Pahang",
-		9:"Perak",
-		10:"Perlis",
-		11:"Pulau Pinang",
-		12:"Putrajaya",
-		13:"Sabah",
-		14:"Sarawak",
-		15:"Selangor",
-		16:"Terengganu",
-	};
+  let map_id = {
+    1:"Johor",
+    2:"Kedah",
+    3:"Kelantan",
+    4:"Kuala Lumpur",
+    5:"Labuan",
+    6:"Melaka",
+    7:"Negeri Sembilan",
+    8:"Pahang",
+    9:"Perak",
+    10:"Perlis",
+    11:"Pulau Pinang",
+    12:"Putrajaya",
+    13:"Sabah",
+    14:"Sarawak",
+    15:"Selangor",
+    16:"Terengganu",
+  };
 
-	states.features.forEach(d=>{
-		d.properties.negeri = map_id[ d.properties.id ];
-		d.properties.cases 	= {
-			negeri: map_id[ d.properties.id ],
-			value	: d3.sum(data.filter(k=>k.negeri==map_id[ d.properties.id ]), d=>d.value)
-		}
-	});
+  states.features.forEach(d=>{
+    d.properties.negeri = map_id[ d.properties.id ];
+    d.properties.cases   = {
+      negeri: map_id[ d.properties.id ],
+      value  : d3.sum(data.filter(k=>k.negeri==map_id[ d.properties.id ]), d=>d.value)
+    }
+  });
 
-	console.log('states', states);
+  console.log('states', states);
 
 
 
-	//=====================
-	// textures.js
-	//=====================
+  //=====================
+  // textures.js
+  //=====================
 
-	let max_by_states = d3.max(states.features,d=>d.properties.cases.value),
-			scaleColor 		= d3.scaleLinear().domain([0,50,100,500,max_by_states])
-												.range( d3.schemeYlGnBu[5] );
-												//.range( d3.schemeYlOrRd[5] );
+  let max_by_states = d3.max(states.features,d=>d.properties.cases.value),
+      scaleColor     = d3.scaleLinear().domain([0,50,100,500,max_by_states])
+                        .range( d3.schemeYlGnBu[5] );
+                        //.range( d3.schemeYlOrRd[5] );
 
-	states.features.forEach(d=>{
+  states.features.forEach(d=>{
 
-		let t = textures.lines()
-						.size(4)
-						.strokeWidth(1)
-						.shapeRendering("crispEdges")
-						.stroke(chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex())
-						.background(chroma(scaleColor(d.properties.cases.value)).brighten().hex());
+    let t = textures.lines()
+            .size(4)
+            .strokeWidth(1)
+            .shapeRendering("crispEdges")
+            .stroke(chroma(scaleColor(d.properties.cases.value)).brighten().brighten().hex())
+            .background(chroma(scaleColor(d.properties.cases.value)).brighten().hex());
 
-		svg.call(t);
+    svg.call(t);
 
-		d.properties.texture_id = t.id(); // texture id
+    d.properties.texture_id = t.id(); // texture id
 
-	});
+  });
 
-	// render pattern
-	d3.select('.map-fill-states')
-  	.selectAll(".state")
+  // render pattern
+  d3.select('.map-fill-states')
+    .selectAll(".state")
       .attr('fill',d=>'url(#'+d.properties.texture_id+')')
 
 
-	console.timeEnd('map_textures');
-	console.groupEnd('map_textures');
+  console.timeEnd('map_textures');
+  console.groupEnd('map_textures');
 
 
 }
@@ -528,48 +528,48 @@ function map_textures(data)	{
 //====================================================================================
 // page title
 //====================================================================================
-function page_title(data)	{
+function page_title(data)  {
 
-	console.group('%c' +'page title', 'color:magenta');
-	console.time('page title');
+  console.group('%c' +'page title', 'color:magenta');
+  console.time('page title');
 
-	svg.append('text')
-		.attr('y',100)
-		.attr('text-anchor','middle')
-		.attr('fill','steelblue')
-		.call(sel=>{
+  svg.append('text')
+    .attr('y',100)
+    .attr('text-anchor','middle')
+    .attr('fill','steelblue')
+    .call(sel=>{
 
-			sel.append('tspan')
-				.attr('x','46%')
-				.attr('font-size','120%')
-				.text('Active covid-19 cases by districts');
+      sel.append('tspan')
+        .attr('x','46%')
+        .attr('font-size','120%')
+        .text('Active covid-19 cases by districts');
 
-			sel.append('tspan')
-				.attr('x','46%')
-				.attr('dy','1.2em')
-				.text(moment( d3.max(data,d=>d.date) ).format('D MMM YYYY'));
+      sel.append('tspan')
+        .attr('x','46%')
+        .attr('dy','1.2em')
+        .text(moment( d3.max(data,d=>d.date) ).format('D MMM YYYY'));
 
-			sel.append('tspan')
-				.attr('class','title-total')
-				.attr('x','46%')
-				.attr('dy','1.4em')
-				.attr('font-size','110%')
-				.text(()=>{
-					let total = d3.sum(data, d=>d.value);
-					console.log('total', total);
-					return total ? comma( total ) : ' '
-				});
+      sel.append('tspan')
+        .attr('class','title-total')
+        .attr('x','46%')
+        .attr('dy','1.4em')
+        .attr('font-size','110%')
+        .text(()=>{
+          let total = d3.sum(data, d=>d.value);
+          console.log('total', total);
+          return total ? comma( total ) : ' '
+        });
 
-			sel.append('tspan')
-				.attr('x','46%')
-				.attr('dy','1em')
-				.attr('font-size','90%')
-				.text('active cases');
+      sel.append('tspan')
+        .attr('x','46%')
+        .attr('dy','1em')
+        .attr('font-size','90%')
+        .text('active cases');
 
-		});
+    });
 
-	console.timeEnd('page title');
-	console.groupEnd('page title');
+  console.timeEnd('page title');
+  console.groupEnd('page title');
 
 }
 
@@ -581,11 +581,11 @@ function page_title(data)	{
 
 <br>
 <p>Map patterns with
-	<a href="https://riccardoscalco.it/textures/" target="_blank">textures.js</a>
+  <a href="https://riccardoscalco.it/textures/" target="_blank">textures.js</a>
 </p>
 
 <br>
-<button onclick="document.location='index.html'">Main Menu</button>
+<a href="../">Main Menu</a>
 <button onclick="document.location='index6.html'">Back</button>
 <button onclick="document.location='index8.html'">Next</button>
 
