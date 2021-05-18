@@ -82,6 +82,8 @@ d3.csv('attendancePerc.csv').then(function(data){
 	              	return arc( i[k](t) );
 	            };
         });
+
+
     }, 200);
 
 })
