@@ -33,13 +33,18 @@ d3.csv('attendancePerc.csv').then(function(data){
         d.total = +d.total;
         console.log(d.attended, d.total);
 
-        dataset = {
-            percent : d.attended/d.total *100,
-            lower: calcPercent(0,d.total),
-            upper: calcPercent(d.attended,d.total)
-        }
-
     });
+
+
+
+	  dataset = {
+	      percent : data[0].attended/data[0].total *100,
+	      lower: calcPercent(0,data[0].total),
+	      upper: calcPercent(data[0].attended,data[0].total)
+	  }
+
+
+    console.log('data', data);
 
     //lower = function(d){ return calcPercent(0, d.total); }
     //upper = function(d){ return calcPercent(d.attended, d.total); }
@@ -75,12 +80,18 @@ d3.csv('attendancePerc.csv').then(function(data){
 	            i[k] = d3.interpolate(this._current, a);
 	            this._current = i[k](0);
 
-	            i2 = d3.interpolate(progress, dataset.percent )
 
 	            return function (t) {
-	                text.text(format(i2(t) /100));
 	              	return arc( i[k](t) );
 	            };
+        });
+
+
+        text.transition().duration(duration).attrTween("d", function (a,k) {
+            i2 = d3.interpolate(progress, dataset.percent )
+	          return function (t) {
+	            text.text(format(i2(t) /100));
+	          }
         });
 
 
