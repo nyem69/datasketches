@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="viewport" content="width=device-width" />
+
+<title>moving function</title>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="data visualization exercises"/>
+<meta property="og:description" content="basic visualization exercises using d3.js"/>
+<meta property="og:url" content="https://nyem69.github.io/datasketches/"/>
+<meta property="og:image" content="../assets/d3mapping.png"/>
+<meta name="twitter:card" content="../assets/d3mapping.png"/>
+<meta name="twitter:site" content="@nyem"/>
+
+
+<!-- Blueprint v3 -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/normalize.css"/>
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint-icons.css"/>
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint.css"/>
+
+
+<style>
+html, body, svg {
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+  background:#30404D;
+  color:#ffffff;
+
+}
+
+
+
+a {
+  color: cyan;
+}
+
+
+</style>
+
+<body class="bp3-dark">
+
+<script type="text/javascript" src="//lib.aga.my/d3/6.7.0/d3.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3-array/2.3.1/d3-array.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.aga.my/moment/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/chroma/2.1.1/chroma.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3-legend/2.25.6/d3-legend.min.js"></script>
+
+<script>
+
+let timeline;
+
+d3.select('body')
+	.append('svg')
+		//.attr('viewBox','0 0 800 444')
+		.attr('viewBox','-40 40 880 700')
+		.call(sel=>{
+
+
+			let width = 650;
+
+			let t = moment('2021-06-07 21:00:00');
+			let r = [];
+
+			[22,23,24,1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9].forEach(d=>{
+				let k = t.add(1,'hours').format('YYYY-MM-DD HH:mm:ss');
+				let j = moment(k).add(8,'hours');
+				let p = j.format('h');
+				r.push({
+					time: k,
+					hr: p,
+					myt: j,
+				});
+			});
+
+			console.log('r',r);
+			let ext = d3.extent(r,d=>d.time);
+			console.log('ext',ext);
+
+			let scaleX = d3.scaleLinear().domain([0,r.length-1]).range([0,width]);
+
+
+			let scaleTime = d3.scaleLinear()
+												.domain([
+													78+40,
+													78+40+scaleX(r.length-1)
+												])
+												.range([
+													moment(r[0].time),
+													moment(r[r.length-1].time)
+												])
+
+			console.log('scaleTime', scaleTime.domain(), scaleTime.range());
+
+
+			sel.append('image')
+				.attr('href', 'forextime.png')
+				.attr('x',0)
+				.attr('y',0)
+				.attr('width',800 )
+				.attr('height',444)
+				.attr('pointer-events','none')
+			;
+
+
+			sel.append('rect')
+				.attr('x',-40)
+				.attr('y',40)
+				.attr('width',880)
+				.attr('height',444)
+				.attr('opacity',0)
+				.attr('fill','#30404D')
+				.on('mousemove', function(e,d){
+					console.log('e',e.clientX, moment(scaleTime(e.clientX)).format('YYYY-MM-DD HH:mm:ss') );
+
+					timeline.attr('transform','translate('+[e.clientX - 40,0]+')')
+						.attr('opacity',1)
+
+					timetext.attr('transform','translate('+[e.clientX - 40,0]+')')
+						.text( 'KL '+ moment(scaleTime(e.clientX)).format('HH:mm') )
+						;
+
+				});
+
+
+
+			sel.append('g').attr('transform','translate(78,78)')
+				.attr('pointer-events','none')
+				.append('text')
+						.attr('text-anchor','end')
+						.attr('x',-20)
+						.attr('fill','#666')
+						.attr('font-weight',600)
+						.text('UTC');
+
+
+
+			sel.append('rect')
+				.attr('pointer-events','none')
+				.attr('x',-40)
+				.attr('y',270)
+				.attr('width',1000)
+				.attr('height',500)
+				.attr('fill','#30404D')
+
+			sel.append('g').attr('transform','translate(78,270)')
+				.attr('pointer-events','none')
+				.call(sel=>{
+
+					sel.append('g').attr('transform','translate(0,0)')
+						.selectAll('line').data(r)
+						.enter()
+							.append('line')
+								.attr('x1', (d,i)=>scaleX(i))
+								.attr('x2', (d,i)=>scaleX(i))
+								.attr('y1',0)
+								.attr('y2',10)
+								.attr('stroke','#fff')
+								.attr('stroke-width',4)
+
+
+				});
+
+
+//			//=====================
+//			//  MYT
+//			//=====================
+//			sel.append('g').attr('transform','translate(78,300)')
+//				.call(sel=>{
+//
+//					sel.append('g').attr('transform','translate(0,0)')
+//						.append('text')
+//								.attr('text-anchor','end')
+//								.attr('x',-20)
+//								.attr('fill','#fff')
+//								.attr('font-weight',600)
+//								.text('KL');
+//
+//					sel.append('g').attr('transform','translate(0,0)')
+//						.selectAll('text').data(r)
+//						.enter()
+//							.append('text')
+//								.attr('text-anchor','middle')
+//								.attr('x', (d,i)=>scaleX(i))
+//								.attr('y',0)
+//								.attr('fill','#fff')
+//								.attr('font-weight',600)
+//								//.text(d=>d.hr==12 ? d.hr+ d.myt.format('a').slice(0,1) : d.hr);
+//								.text(d=>d.myt.format('H') );
+//
+//				});
+
+
+			//=====================
+			//  Sydney
+			//=====================
+			let bh = 25;
+			let i = 1;
+
+			[
+				['NZ',12],
+				['Sydney',10],
+				['Tokyo',9],
+				['Hong Kong',8],
+				['KL',8],
+				['Dubai',4],
+				['London',1],
+				['New York',-4],
+			].forEach((k,i)=>{
+
+				sel.append('g').attr('transform','translate(78,'+(300 + (bh * (i++)))+')')
+					.attr('pointer-events','none')
+					.call(sel=>{
+
+						sel.append('g').attr('transform','translate(0,0)')
+							.append('text')
+									.attr('text-anchor','end')
+									.attr('x',-20)
+									.attr('fill',k[0]=='KL' ? 'yellow' : '#fff')
+									.attr('font-weight',600)
+									.text(k[0]);
+
+						sel.append('g').attr('transform','translate(0,0)')
+							.selectAll('text').data(r)
+							.enter()
+								.append('text')
+									.attr('text-anchor','middle')
+									.attr('x', (d,i)=>scaleX(i))
+									.attr('y',0)
+									.attr('fill',k[0]=='KL' ? 'yellow' : '#fff')
+									.attr('font-weight',600)
+									//.text(d=>d.hr==12 ? d.hr+ d.myt.format('a').slice(0,1) : d.hr);
+									.text(d=>moment(d.time).add(k[1],'hours').format('H') );
+
+					});
+
+			});
+
+//			nowline = sel.append('line')
+//				.attr('class','timeline')
+//				.attr('transform','translate(0,0)')
+//				.attr('y1',0)
+//				.attr('y2',500)
+//				.attr('stroke','magenta')
+//				.attr('stroke-width',4);
+//
+//			nowtext = sel.append('text')
+//				.attr('class','timetext')
+//				.attr('transform','translate(0,0)')
+//				.attr('text-anchor','end')
+//				.attr('x',-10)
+//				.attr('y',500)
+//				.attr('fill','magenta')
+//				.attr('font-weight',600)
+//
+
+
+			timeline = sel.append('line')
+				.attr('class','timeline')
+				.attr('transform','translate(0,0)')
+				.attr('y1',0)
+				.attr('y2',500)
+				.attr('stroke','magenta')
+				.attr('stroke-width',4)
+				.attr('opacity',0);
+
+			timetext = sel.append('text')
+				.attr('class','timetext')
+				.attr('transform','translate(0,0)')
+				.attr('text-anchor','end')
+				.attr('x',-10)
+				.attr('y',500)
+				.attr('fill','magenta')
+				.attr('font-weight',600)
+
+
+
+		});
+
+
+</script>
+
+
+</body>
+</html>

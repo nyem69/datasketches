@@ -1,8 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="viewport" content="width=device-width" />
+
+<title>data sketches</title>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="data visualization exercises"/>
+<meta property="og:description" content="basic visualization exercises using d3.js"/>
+<meta property="og:url" content="https://nyem69.github.io/datasketches/"/>
+<meta property="og:image" content="../assets/d3mapping.png"/>
+<meta name="twitter:card" content="../assets/d3mapping.png"/>
+<meta name="twitter:site" content="@nyem"/>
+
+
+<!-- Blueprint v3 -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/normalize.css"/>
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint-icons.css"/>
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint.css"/>
+
+
+
+<style>
+html, body, svg {
+	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+	background:#30404D;
+	color:#ffffff;
+	margin:12px;
+
+}
+
+a {
+	color: #A7B6C2;
+}
+
+
+</style>
+
+
 <body>
 <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
 <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.1"></script>
-<script>
 
-document.body.appendChild(Plot.plot(options));
+<h2>Tutorial</h2>
+<ul>
+
+<li>
+	<a href="https://observablehq.com/@observablehq/introducing-observable-plot" target="_blank">Introducing Observable Plot</a>
+
+<li>Observable Plot
+		<a href="https://observablehq.com/@observablehq/plot?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot" target="_blank">api</a>
+
+<li>Plot: Marks
+		<a href="https://observablehq.com/@observablehq/plot-marks?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#marks" target="_blank">api</a>
+
+<li>Plot: Scales
+		<a href="https://observablehq.com/@observablehq/plot-scales?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#scales" target="_blank">api</a>
+
+<li>Plot: Transforms
+		<a href="https://observablehq.com/@observablehq/plot-transforms?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#transforms" target="_blank">api</a>
+
+<li>Plot: Facets
+		<a href="https://observablehq.com/@observablehq/plot-facets?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#facet-options" target="_blank">api</a>
+
+<li>Plot: Area
+		<a href="https://observablehq.com/@observablehq/plot-area?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#area" target="_blank">api</a>
+
+<li>Plot: Bar
+		<a href="https://observablehq.com/@observablehq/plot-bar?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#bar" target="_blank">api</a>
+
+<li>Plot: Cell
+		<a href="https://observablehq.com/@observablehq/plot-cell?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#cell" target="_blank">api</a>
+
+<li>Plot: Dot
+		<a href="https://observablehq.com/@observablehq/plot-dot?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#dot" target="_blank">api</a>
+
+<li>Plot: Line
+		<a href="https://observablehq.com/@observablehq/plot-line?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#line" target="_blank">api</a>
+
+<li>Plot: Link
+		<a href="https://observablehq.com/@observablehq/plot-link?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#link" target="_blank">api</a>
+
+<li>Plot: Rect
+		<a href="https://observablehq.com/@observablehq/plot-rect?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#rect" target="_blank">api</a>
+
+<li>Plot: Rule
+		<a href="https://observablehq.com/@observablehq/plot-rule?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#rule" target="_blank">api</a>
+
+<li>Plot: Text
+		<a href="https://observablehq.com/@observablehq/plot-text?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#text" target="_blank">api</a>
+
+<li>Plot: Tick
+		<a href="https://observablehq.com/@observablehq/plot-tick?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#tick" target="_blank">api</a>
+
+<li>Plot: Frame
+		<a href="https://observablehq.com/@observablehq/plot-frame?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#frame" target="_blank">api</a>
+
+<li>Plot: Group
+		<a href="https://observablehq.com/@observablehq/plot-group?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#group" target="_blank">api</a>
+
+<li>Plot: Bin
+		<a href="https://observablehq.com/@observablehq/plot-bin?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#bin" target="_blank">api</a>
+
+<li>Plot: Stack
+		<a href="https://observablehq.com/@observablehq/plot-stack?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#stack" target="_blank">api</a>
+
+<li>Plot: Select
+		<a href="https://observablehq.com/@observablehq/plot-select?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#select" target="_blank">api</a>
+
+<li>Plot: Map
+		<a href="https://observablehq.com/@observablehq/plot-map?collection=@observablehq/plot" target="_blank">observablehq</a>,
+		<a href="https://github.com/observablehq/plot/blob/main/README.md#map" target="_blank">api</a>
+
+</ul>
+
+
+
+<h2>Examples</h2>
+<ul>
+<li><a href="https://observablehq.com/@analyzer2004/plot-gallery?collection=@observablehq/featured-creators" target="_blank">Hello, Plot!</a>
+<li><a href="https://observablehq.com/@observablehq/plot-exploration-penguins" target="_blank">Plot Exploration: Penguins</a>
+<li><a href="https://observablehq.com/@observablehq/plot-exploration-weather?collection=@observablehq/plot-explorations" target="_blank">Plot Exploration: Weather</a>
+</ul>
+
+
+
+<h2>Tests</h2>
+<ul>
+<li><a href="covid_cases/area.html" target="_blank">area chart</a>
+<li><a href="plots" target="_blank">parallel coordinates</a>
+</ul>
+
+
+<h2>Selected visualizations</h2>
+<ul>
+<li><a href="https://observablehq.com/@elaval/coronavirus-worldwide-evolution?collection=@observablehq/2020-most-viewed-notebooks" target="_blank">Coronavirus evolution: Growth curve per country</a>
+</ul>
+
+
+<script>
 
 </script>

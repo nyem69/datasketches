@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="viewport" content="width=device-width" />
+
+
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/font/roboto/roboto.css"/>
+
+<!-- Blueprint v3 -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/normalize.css"/>
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint-icons.css"/>
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint.css"/>
+
+<!-- fontawesome, d3, moment, chroma -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/font/awesome/5.15.2/css/all.min.css"/>
+<script type="text/javascript" src="//lib.aga.my/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/6.3.1/d3.v6.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3-array/2.3.1/d3-array.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.aga.my/chroma/2.0.3/chroma.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/URI/1.14.1/src/URI.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/moment/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/js-cookie/2.2.0/js.cookie.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/pym/1.3.2/pym.v1.min.js"></script>
+
+<!-- maps: topojson, turf -->
+<script type="text/javascript" src="//lib.aga.my/turf/5.1.16/turf.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/topojson/3.0.2/topojson.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/geohash/geohash.js"></script>
+
+<!-- leaflet -->
+<!--
+<link type="text/css" rel="stylesheet" href="//lib.analitik.my/leaflet/leaflet.css"/>
+<script type="text/javascript" src="//lib.aga.my/leaflet/1.6.0/leaflet.js"></script>
+<script type="text/javascript" src="//lib.aga.my/leaflet/plugin/gmap/Google.js"></script>
+<script type="text/javascript" src="//lib.aga.my/leaflet-providers/1.11.0/leaflet-providers.js"></script>
+-->
+
+<!-- mapbox -->
+<!--
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/mapbox-gl/2.2.0/mapbox-gl.css"/>
+<script type="text/javascript" src="//lib.aga.my/mapbox-gl/2.2.0/mapbox-gl.js"></script>
+-->
+
+
+<!--
+<script type="text/javascript" src="//lib.aga.my/requirejs/2.1.15/require.js"></script>
+<script type="text/javascript" src="//lib.aga.my/params-hashes.js?asd"></script>
+<script type="text/javascript" src="//lib.aga.my/csv/export-csv.js"></script>
+-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.1"></script>
+
+
+<style>
+
+html, body, svg {
+	/*
+	font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+	*/
+	font-family: -apple-system, 'Roboto', sans-serif;
+}
+
+
+/*
+::selection { background: transparent; }
+::-moz-selection { background: transparent; }
+*/
+
+.table td {
+	padding:2px;
+}
+
+</style>
+</head>
+<body>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;
+i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
+m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create','UA-30759456-3',document.location.host);ga('send','pageview');
+</script>
+
+
+<script>
+
+let root = document.location.host.match(/diablo/) ? '/analitik/_data/docs' : '/_data',
+ 		reqs = 	[
+							d3.csv(root+'/health/covid/active-20210520.csv'),
+						];
+Promise.all(reqs).then(function(raw){
+	console.log('raw',raw);
+
+	let dates = d3.groups(raw[0], d=>d.date).map(d=>{ return {date:moment(d[0]), value:d3.sum(d[1],d=>+d.confirmed)} });
+	dates.sort(d3.comparator().order(d3.ascending,d=>d.date));
+	console.log('dates', dates);
+
+	let label_points = 		dates.filter(d=>d.value==d3.min(dates.filter(d=>moment(d.date).format('YYYY-MM-DD') > '2021-01-01'), d=>d.value)
+													||d.value==d3.max(dates, d=>d.value)
+													||d.value==d3.max(dates.filter(d=>moment(d.date).format('YYYY-MM-DD') < '2021-05-01'), d=>d.value)
+													||d.value==d3.mean(dates.filter(d=>moment(d.date).format('YYYY-MM-DD') == '2020-12-01'), d=>d.value)
+												);
+
+	console.log('label_points',label_points);
+
+	console.log('Plot.areaY', Plot.areaY(dates, {x:'date', y:'value', fill:'steelblue'}));
+
+	let p = Plot.plot({
+		marks: [
+			Plot.areaY(dates, {x:'date', y:'value', fill:'steelblue'}),
+			Plot.lineY(dates, {x:'date', y:'value'}),
+			//Plot.ruleY([0]),
+			Plot.ruleY([0], {stroke: "steelblue"}),
+
+			//Plot.barY(dates, {x:'date', y:'value', fill:'#ffc'}),
+			//Plot.frame({stroke: "blue"}),
+
+			// single point label
+			// Plot.text(dates.filter(d=>d.value==d3.max(dates, d=>d.value), {x: "date", y: "value", text: d => d.value, dy: -5}),
+
+			// multiple points label
+			Plot.text( label_points, {x: "date", y: "value", text: d => d.value, dy:-5}),
+		],
+		x:{
+			domain: d3.extent(dates, d=>d.date).map(d=>new Date(d)),
+		},
+		y:{
+			domain:[0, d3.max(dates, d=>d.value)],
+			label:'active cases',
+			//grid: true,
+		},
+		width:400,
+		height:200,
+		marginLeft:50,
+		marginRight:50,
+		style: {
+			background: 'white',
+			color: 'steelblue',
+		},
+		caption: `Figure 1. This chart has a <i>fancy</i> caption.`,
+		grid: true,
+	});
+
+	console.log('p',p);
+
+	d3.select('body')
+		.append('div')
+			.node().appendChild(p)
+
+
+});
+
+</script>
+
+
+</body>
+</html>
+
+
