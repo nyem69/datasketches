@@ -1,0 +1,13 @@
+
+https://query1.finance.yahoo.com/v7/finance/download/GC=F?period1=1585454956&period2=1616990956&interval=1d&events=history
+
+
++moment('2019-01-01')/1000
+1546272000
+
++moment()/1000
+1623127468
+
+https://query1.finance.yahoo.com/v7/finance/download/GC=F?period1=1546272000&period2=1623127468&interval=1d&events=history
+
+https://query1.finance.yahoo.com/v7/finance/download/GC=F?period1=1546272000&period2=1623127468&interval=1h&events=history

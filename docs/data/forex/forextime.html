@@ -6,14 +6,34 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <meta name="viewport" content="width=device-width" />
 
-<title>moving function</title>
+<title>FOREX sessions & time in selected cities</title>
+
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="data visualization exercises"/>
-<meta property="og:description" content="basic visualization exercises using d3.js"/>
+<meta property="og:title" content="FOREX sessions"/>
+<meta property="og:description" content="FOREX sessions & time in selected cities"/>
 <meta property="og:url" content="https://nyem69.github.io/datasketches/"/>
 <meta property="og:image" content="../assets/d3mapping.png"/>
 <meta name="twitter:card" content="../assets/d3mapping.png"/>
 <meta name="twitter:site" content="@nyem"/>
+
+<link rel="apple-touch-icon" sizes="57x57" href="//static.analitik.my/favicon/corona/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="//static.analitik.my/favicon/corona/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="//static.analitik.my/favicon/corona/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="//static.analitik.my/favicon/corona/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="//static.analitik.my/favicon/corona/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="//static.analitik.my/favicon/corona/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="//static.analitik.my/favicon/corona/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="//static.analitik.my/favicon/corona/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="//static.analitik.my/favicon/corona/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="//static.analitik.my/favicon/corona/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//static.analitik.my/favicon/corona/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="//static.analitik.my/favicon/corona/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="//static.analitik.my/favicon/corona/favicon-16x16.png">
+<link rel="manifest" href="//static.analitik.my/favicon/corona/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="//static.analitik.my/favicon/corona/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<meta http-equiv="imagetoolbar" content="no">
 
 
 <!-- Blueprint v3 -->
@@ -53,47 +73,38 @@ a {
 
 let timeline;
 
+
+let width = 650;
+
+let t = moment('2021-06-07 21:00:00');
+
+let r = [22,23,24,1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9].map(d=>{
+
+	let k = t.add(1,'hours').format('YYYY-MM-DD HH:mm:ss');
+	let j = moment(k).add(8,'hours');
+	let p = j.format('h');
+
+	return {
+		time: k,
+		hr: p,
+		myt: j,
+	}
+
+});
+
+
+let scaleX = d3.scaleLinear().domain([0,r.length-1]).range([0,width]);
+
+
+
+
+
 d3.select('body')
 	.append('svg')
 		//.attr('viewBox','0 0 800 444')
 		.attr('viewBox','-40 40 880 700')
 		.call(sel=>{
 
-
-			let width = 650;
-
-			let t = moment('2021-06-07 21:00:00');
-			let r = [];
-
-			[22,23,24,1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9].forEach(d=>{
-				let k = t.add(1,'hours').format('YYYY-MM-DD HH:mm:ss');
-				let j = moment(k).add(8,'hours');
-				let p = j.format('h');
-				r.push({
-					time: k,
-					hr: p,
-					myt: j,
-				});
-			});
-
-			console.log('r',r);
-			let ext = d3.extent(r,d=>d.time);
-			console.log('ext',ext);
-
-			let scaleX = d3.scaleLinear().domain([0,r.length-1]).range([0,width]);
-
-
-			let scaleTime = d3.scaleLinear()
-												.domain([
-													78+40,
-													78+40+scaleX(r.length-1)
-												])
-												.range([
-													moment(r[0].time),
-													moment(r[r.length-1].time)
-												])
-
-			console.log('scaleTime', scaleTime.domain(), scaleTime.range());
 
 
 			sel.append('image')
@@ -113,21 +124,8 @@ d3.select('body')
 				.attr('height',444)
 				.attr('opacity',0)
 				.attr('fill','#30404D')
-				.on('mousemove', function(e,d){
-					console.log('e',e.clientX, moment(scaleTime(e.clientX)).format('YYYY-MM-DD HH:mm:ss') );
 
-					timeline.attr('transform','translate('+[e.clientX - 40,0]+')')
-						.attr('opacity',1)
-
-					timetext.attr('transform','translate('+[e.clientX - 40,0]+')')
-						.text( 'KL '+ moment(scaleTime(e.clientX)).format('HH:mm') )
-						;
-
-				});
-
-
-
-			sel.append('g').attr('transform','translate(78,78)')
+			sel.append('g').attr('transform','translate(78,77)')
 				.attr('pointer-events','none')
 				.append('text')
 						.attr('text-anchor','end')
@@ -145,6 +143,8 @@ d3.select('body')
 				.attr('width',1000)
 				.attr('height',500)
 				.attr('fill','#30404D')
+
+
 
 			sel.append('g').attr('transform','translate(78,270)')
 				.attr('pointer-events','none')
@@ -164,40 +164,46 @@ d3.select('body')
 
 				});
 
+			//=====================
+			//  now
+			//=====================
 
-//			//=====================
-//			//  MYT
-//			//=====================
-//			sel.append('g').attr('transform','translate(78,300)')
-//				.call(sel=>{
-//
-//					sel.append('g').attr('transform','translate(0,0)')
-//						.append('text')
-//								.attr('text-anchor','end')
-//								.attr('x',-20)
-//								.attr('fill','#fff')
-//								.attr('font-weight',600)
-//								.text('KL');
-//
-//					sel.append('g').attr('transform','translate(0,0)')
-//						.selectAll('text').data(r)
-//						.enter()
-//							.append('text')
-//								.attr('text-anchor','middle')
-//								.attr('x', (d,i)=>scaleX(i))
-//								.attr('y',0)
-//								.attr('fill','#fff')
-//								.attr('font-weight',600)
-//								//.text(d=>d.hr==12 ? d.hr+ d.myt.format('a').slice(0,1) : d.hr);
-//								.text(d=>d.myt.format('H') );
-//
-//				});
+			sel.append('g').attr('class','now')
+
+			//=====================
+			//  rects
+			//=====================
+
+			sel.append('g').attr('class','rects')
+				.selectAll('rect').data(r)
+					.enter()
+						.append('rect')
+							.attr('transform',(d,i)=>'translate('+(78+(scaleX(i)))+',0)')
+							//.attr('x',d=>-1 * (scaleX(1)-scaleX(0))/2)
+							.attr('x',0)
+							.attr('y',0)
+							.attr('width',(d,i)=>scaleX(1)-scaleX(0))
+							.attr('height',540)
+							.attr('fill','magenta')
+							.attr('opacity',.0)
+							.on('mouseover',function(e,d){
+
+								d3.select(this.parentNode).selectAll('rect')
+									.attr('opacity',k=>k.time==d.time ? .5 : .0)
+
+								timetext
+									.attr('transform','translate('+ [78+ scaleX(r.map(k=>k.time).indexOf(d.time)),0] +')')
+									.text( 'KL '+ moment(d.time).add(8,'hours').format('HH:mm') )
+									;
+
+							})
+
 
 
 			//=====================
 			//  Sydney
 			//=====================
-			let bh = 25;
+			let bh = 20;
 			let i = 1;
 
 			[
@@ -207,8 +213,10 @@ d3.select('body')
 				['Hong Kong',8],
 				['KL',8],
 				['Dubai',4],
+				['Moscow',3],
 				['London',1],
 				['New York',-4],
+				['Los Angeles',-7],
 			].forEach((k,i)=>{
 
 				sel.append('g').attr('transform','translate(78,'+(300 + (bh * (i++)))+')')
@@ -239,47 +247,48 @@ d3.select('body')
 
 			});
 
-//			nowline = sel.append('line')
-//				.attr('class','timeline')
-//				.attr('transform','translate(0,0)')
-//				.attr('y1',0)
-//				.attr('y2',500)
-//				.attr('stroke','magenta')
-//				.attr('stroke-width',4);
-//
-//			nowtext = sel.append('text')
-//				.attr('class','timetext')
-//				.attr('transform','translate(0,0)')
-//				.attr('text-anchor','end')
-//				.attr('x',-10)
-//				.attr('y',500)
-//				.attr('fill','magenta')
-//				.attr('font-weight',600)
-//
-
-
-			timeline = sel.append('line')
-				.attr('class','timeline')
-				.attr('transform','translate(0,0)')
-				.attr('y1',0)
-				.attr('y2',500)
-				.attr('stroke','magenta')
-				.attr('stroke-width',4)
-				.attr('opacity',0);
 
 			timetext = sel.append('text')
 				.attr('class','timetext')
 				.attr('transform','translate(0,0)')
 				.attr('text-anchor','end')
-				.attr('x',-10)
+				.attr('x',-5)
 				.attr('y',500)
 				.attr('fill','magenta')
 				.attr('font-weight',600)
+				//.attr('opacity',.5)
+
 
 
 
 		});
 
+
+function update()	{
+
+	let p = d3.select('.now')
+				.selectAll('rect').data(r);
+
+	p.enter()
+		.append('rect')
+			.attr('transform',(d,i)=>'translate('+(78+(scaleX(i)))+',0)')
+			//.attr('x',d=>-1 * (scaleX(1)-scaleX(0))/2)
+			.attr('x',0)
+			.attr('y',0)
+			.attr('width',(d,i)=>scaleX(1)-scaleX(0))
+			.attr('height',540)
+			.attr('fill','yellow')
+			//.attr('opacity',d=>moment(d.time).add(8,'hours').format('HH')==moment().format('HH') ? .2:0)
+			.attr('opacity',0)
+		.merge(p)
+			.attr('opacity',d=>moment(d.time).add(8,'hours').format('HH')==moment().format('HH') ? .2:0)
+
+
+}
+
+d3.timer(update, 1000);
+
+update();
 
 </script>
 
