@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="viewport" content="width=device-width" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="HandheldFriendly" content="True">
+<meta name="author" content="nyem69@gmail.com">
+
+<title>simple d3.js table</title>
+<meta name="description" content="simple d3.js table">
+<meta name="apple-mobile-web-app-title" content="simple d3.js table">
+<meta name="keywords" content="simple d3.js table">
+<meta property="og:title" 			content="simple d3.js table" />
+<meta property="og:description" content="simple d3.js table" />
+<meta itemprop="name"        property="og:title"       name="twitter:title"       content="simple d3.js table" />
+<meta itemprop="description" property="og:description" name="twitter:description" content="simple d3.js table" />
+
+
+
+
+<script type="text/javascript" src="//lib.aga.my/d3/6.7.0/d3.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.aga.my/chroma/2.0.3/chroma.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/moment/2.24.0/moment-with-locales.min.js"></script>
+
+<style>
+/* https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/ */
+html, body, svg {
+	font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+
+}
+
+</style>
+</head>
+<body>
+<script>
+
+let dur = 1500; // delay timeout
+
+
+// sample data
+let string = `a,b,c,d,e,f,g
+1,2,3,4,5,6,7
+8,9,10,11,12,13,14
+15,16,17,18,19,20,21
+`;
+
+let rows = d3.csvParse(string);
+
+console.log( 'rows', rows );
+/*
+
+[
+  {
+    "a": "1",
+    "b": "2",
+    "c": "3",
+    "d": "4",
+    "e": "5",
+    "f": "6",
+    "g": "7"
+  },
+  {
+    "a": "8",
+    "b": "9",
+    "c": "10",
+    "d": "11",
+    "e": "12",
+    "f": "13",
+    "g": "14"
+  },
+  columns:['a', 'b', 'c', 'd', 'e', 'f', 'g']
+]
+*/
+
+
+
+d3.select('body')
+.call(sel=>{
+
+	sel.append('h3').html('csv data');
+	sel.append('pre').html(string);
+
+
+	//=====================
+	// table 1
+	//=====================
+
+	sel.append('hr').attr('noshade',true);
+
+	sel.append('h3').html('table 1 - no data binding');
+
+	sel.append('table')
+		.call(sel=>{
+
+			sel.append('thead')
+				.append('tr')
+					.selectAll('th').data(rows.columns)
+						.join('th')
+							.html(d=>d);
+
+			sel.append('tbody')
+				.selectAll('tr').data(rows)
+					.join('tr')
+						.call(sel=>{
+
+							rows.columns.forEach(k=>{
+								sel.append('td').html(d=>d[k])
+							});
+
+						});
+
+		});
+
+
+
+
+	//=====================
+	// table 2
+	//=====================
+	console.group('table2');
+
+	sel.append('hr').attr('noshade',true);
+
+	sel.append('h3').html('table 2 - with data binding');
+
+	sel.append('table')
+		.attr('class','table2')
+		.call(sel=>{
+
+			sel.append('thead')
+				.append('tr')
+					.selectAll('th').data(rows.columns)
+						.join('th')
+							.html(d=>d);
+
+			sel.append('tbody')
+				.selectAll('tr').data(rows)
+					.join('tr')
+						.selectAll('td').data(d=>rows.columns.map(k=>d[k]))
+							.join('td')
+								.html(d=>d);
+
+		});
+
+
+	d3.timeout(()=>{
+
+		// styling based on data value
+		sel.selectAll('.table2 td')
+				.filter(d=>+d >= 10) // filter by value
+				.style('background', 'crimson')
+				.style('color', 'white')
+
+
+		console.groupEnd('table2');
+
+	}, dur);
+
+
+	//=====================
+	// table 3
+	//=====================
+
+	console.group('table3');
+
+	sel.append('hr').attr('noshade',true);
+
+	sel.append('h3').html('table 3 - enter, update ');
+
+	// append table
+	sel.call(updateTable3, rows);
+
+
+	// update
+	d3.timeout(()=>{
+
+		let rows2 = d3.csvParse(`a,b,c,d,e,f,g
+8,9,10,11,12,13,14
+1,2,3,4,5,6,7
+`);
+
+		console.log('rows2', rows2);
+
+		sel.call(updateTable3, rows2);
+
+		sel.select('.table3')
+			.selectAll('td').style('color','blue');
+
+
+
+		// update - switch columns
+		d3.timeout(()=>{
+
+			let rows3 = d3.csvParse(`e,f,g,h,<->,a,b,c,d
+5,6,7,8,,1,2,3,4
+13,14,15,16,,9,10,11,12
+`);
+
+			console.log('rows3', rows3);
+
+			sel.call(updateTable3, rows3);
+
+			sel.select('.table3')
+				.selectAll('td').style('color','red');
+
+
+
+			// update style
+			d3.timeout(()=>{
+
+				sel.selectAll('.table3 td')
+					.transition()
+						.delay((d,i)=>i*10)
+							.style('background', d=>+d[1] >= 10 ? 'crimson' : 'steelblue')
+							.style('color', 'white')
+
+				console.groupEnd('table3');
+
+			},dur);
+
+
+		},dur);
+
+
+	},dur*2);
+
+
+	function updateTable3(sel, data)	{
+
+		let  table3 = sel.selectAll('.table3').data([ data ]);
+		table3.exit().remove();
+		table3.enter()
+						.append('table')
+							.attr('class','table3')
+							.call(sel=>{
+
+								sel.append('thead')
+									.append('tr')
+
+								sel.append('tbody')
+
+							})
+						.merge(table3)
+							.call(sel=>{
+
+								sel.select('thead tr')
+										.selectAll('th').data(d=>d.columns)
+											.join('th')
+												.html(d=>d);
+
+								sel.select('tbody')
+									.selectAll('tr').data(d=>{
+											console.log('tr', d);
+											return d;
+										})
+										.join('tr')
+											.selectAll('td').data((d,i)=>{
+													console.log('td', i, d, Object.entries(d));
+													return Object.entries(d); // return as array
+												})
+												.join('td')
+													.html(d=>d[1]);
+
+							});
+
+
+
+	}
+
+
+
+
+});
+
+
+
+
+
+</script>
