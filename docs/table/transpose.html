@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<head>
+
+		<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/normalize.css"/>
+		<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint-icons.css"/>
+		<link type="text/css" rel="stylesheet" href="//lib.aga.my/blueprint/3/blueprint.css"/>
+
+
+    <script src="https://d3js.org/d3.v6.js"></script>
+		<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+
+
+    <style>
+        text {
+                font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+        	margin: 24px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="rect"></div>
+<script>
+
+// set the dimensions and margins of the graph
+const margin = {top: 0, right: 0, bottom: 0, left: 0},
+width = 460 - margin.left - margin.right,
+height = 100 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+const svg = d3.select("#rect")
+.append("svg")
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
+.append("g")
+.attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+
+//let url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTODV5OqxQupaKyWO7yQMXHHlnNJpLGjimMDb8dbQs0sRmyJlEbelaT5eCWbZXBLF_A8W68EnHEI6hk/pub?gid=331152056&single=true&output=csv';
+let url = 'DataGame - P9-ConsoleDates.csv';
+
+
+let f2 = d3.format(",.2f");
+
+d3.csv(url).then( function(data) {
+
+	console.log('originaldata', data)
+
+	// data cleaning
+	data.forEach(d=>{
+
+		// numeric fields
+		d['UnitsSoldMillions'] 	= +d['UnitsSoldMillions'];
+		d['percentage'] 				= +d['percentage'];
+
+	});
+
+	// remove missing column name
+	data['columns'] = data['columns'].filter(d=>d!='');
+
+
+
+	// total platform
+	let total = d3.count(data, d => d.UnitsSoldMillions)
+	console.log('total', total)
+
+	// min
+	const min = d3.min(data, d => +d.UnitsSoldMillions)
+	console.log('min', min)
+
+	// max = 155
+	const max = d3.max(data, d => +d.UnitsSoldMillions)
+	console.log('max', max)
+
+	// average/mean
+	const mean = d3.mean(data, d => d.UnitsSoldMillions)
+	console.log('mean', mean)
+
+	//transposed Platform
+	var transpose = d3.transpose([data])
+	console.log('transpose', transpose)
+
+
+
+
+	d3.select('body')
+		.call(sel=>{
+
+			//=====================
+			// table 1
+			//=====================
+
+			sel.append('h1').html('Gaming Platforms');
+
+			sel.append('table')
+				.attr('class','table-1 bp3-html-table bp3-html-table-bordered bp3-html-table-condensed bp3-html-table-striped')
+				.call(sel=>{
+
+					sel.append('thead')
+						.append('tr')
+							.selectAll('th').data(data['columns'])
+								.enter()
+									.append('th')
+										.style('cursor','pointer')
+										.on('click', function(e,k){
+
+											//=====================
+											// sort rows
+											//=====================
+											console.group(k);
+
+											console.log
+
+											//=====================
+											// ascending or descending
+											//=====================
+											let asc = !d3.select(this).classed('ascending');
+											d3.select(this).classed('ascending', asc);
+
+											//=====================
+											// sort tr
+											//=====================
+											d3.select(
+												this					// th
+													.parentNode // tr
+													.parentNode	// thead
+													.parentNode	// table
+											)
+												.select('tbody')
+													.selectAll('tr')
+														.sort(d3.comparator().order(asc ? d3.ascending : d3.descending, d=>d[k]))
+
+
+											console.groupEnd(k);
+
+										})
+										.html(d=>d);
+
+					sel.append('tbody').selectAll('tr').data(data)
+							.enter()
+								.append('tr')
+									.call(sel=>{
+
+										data['columns'].forEach(k=>{
+											sel.append('td')
+												.style('text-align', ['UnitsSoldMillions','percentage'].includes(k) ? 'right':'center')
+												//.html(d=>d[k])
+												.html(d=>		k == 'UnitsSoldMillions' 	? f2(d[k])
+																	: k == 'percentage' 				? f2(d[k]*100)+'%'
+																	: d[k]
+														)
+										});
+
+									});
+
+				}); // table-1
+
+
+
+
+
+
+			//=====================
+			// table 2
+			// transpose columns <-> rows
+			//=====================
+
+			let hdr 	= 'Platform', 												// header
+					rows 	= data['columns'].filter(d=>d!=hdr);	// rows
+
+
+			sel.append('h1').html(hdr);
+
+			sel.append('table')
+				.attr('class','table-2 bp3-html-table bp3-html-table-bordered bp3-html-table-condensed bp3-html-table-striped')
+				.append('tbody')
+					.selectAll('tr')
+						.data( data['columns'] )
+							.enter()
+								.append('tr')
+									.call(sel=>{
+
+										//=====================
+										// row label
+										//=====================
+										sel.append('td')
+												.style('font-weight',700)
+												.style('cursor','pointer')
+												.on('click', function(e,k)	{
+
+													//=====================
+													// sort columns
+													//=====================
+													console.group(k);
+
+													//=====================
+													// ascending or descending
+													//=====================
+													let asc = !d3.select(this).classed('ascending');
+													d3.select(this).classed('ascending', asc);
+
+													//=====================
+													// sort data by field
+													//=====================
+													data.sort(d3.comparator().order(asc ? d3.ascending : d3.descending, d=>d[k]))
+
+													//=====================
+													// apply sort
+													//=====================
+													let tbody = d3.select(
+																				this					// td
+																					.parentNode // tr
+																					.parentNode	// tbody
+																			);
+
+													let td = tbody
+															.selectAll('tr')
+																.selectAll('td.data')
+																	.data(d=>{
+
+											 							let cols = data.map(j=>j[d]);
+
+											 							console.log(
+											 								Object.fromEntries([
+											 									['sortby:',k],
+											 									['column',d],
+											 									['cols',cols]
+											 								])
+											 							);
+
+											 							return cols.map((d,i)=>{
+											 								return {
+											 									key		:i,
+											 									value	:d
+											 								}
+											 							});
+																	},d=>d.key)
+
+													//=====================
+													//  update td
+													//=====================
+													td.exit().remove();
+													td.enter().append('td').attr('class','data')
+													td.merge(td)
+															.sort(d3.comparator().order(d3.ascending, d=>d.key))
+															.html(d=>d.value);
+
+
+													console.groupEnd(k);
+
+												})
+												.html(d=>d);
+
+
+
+
+										//=====================
+										// row data
+										//=====================
+										sel.selectAll('td.data')
+												.data(k=> data.map((d,i)=>{
+														return {
+															key		:i,
+															value	: d[k]
+														}
+													})
+												)
+													.enter()
+														.append('td')
+															.attr('class','data')
+															.html(d=>d.value);
+
+
+									}); // .table-2 tr
+
+
+
+
+		}); // body
+
+
+});
+
+
+</script>
+</body>
+</html>
