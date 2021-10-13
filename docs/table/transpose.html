@@ -163,6 +163,9 @@ d3.csv(url).then( function(data) {
 
 
 
+
+
+
 			//=====================
 			// table 2
 			// transpose columns <-> rows
@@ -231,10 +234,11 @@ d3.csv(url).then( function(data) {
 											 								])
 											 							);
 
-											 							return cols.map((d,i)=>{
+											 							return cols.map((j,i)=>{
 											 								return {
-											 									key		:i,
-											 									value	:d
+											 									key					: i,
+											 									value				: j,
+											 									columnName	: d
 											 								}
 											 							});
 																	},d=>d.key)
@@ -246,8 +250,11 @@ d3.csv(url).then( function(data) {
 													td.enter().append('td').attr('class','data')
 													td.merge(td)
 															.sort(d3.comparator().order(d3.ascending, d=>d.key))
-															.html(d=>d.value);
-
+															//.html(d=>d.value);
+															.html(d=>		d.columnName == 'UnitsSoldMillions' 	? f2(d.value)
+																				: d.columnName == 'percentage' 				? f2(d.value*100)+'%'
+																				: d.value
+																	)
 
 													console.groupEnd(k);
 
@@ -263,18 +270,32 @@ d3.csv(url).then( function(data) {
 										sel.selectAll('td.data')
 												.data(k=> data.map((d,i)=>{
 														return {
-															key		:i,
-															value	: d[k]
+															key					: i,
+															value				: d[k],
+															columnName	: k,
 														}
 													})
 												)
 													.enter()
 														.append('td')
 															.attr('class','data')
-															.html(d=>d.value);
+															//.html(d=>d.value)
+															.style('text-align',d=>['UnitsSoldMillions','percentage'].includes(d.columnName) ? 'right':'left')
+															.html(d=>		d.columnName == 'UnitsSoldMillions' 	? f2(d.value)
+																				: d.columnName == 'percentage' 				? f2(d.value*100)+'%'
+																				: d.value
+																	)
+
 
 
 									}); // .table-2 tr
+
+
+
+
+
+
+
 
 
 
