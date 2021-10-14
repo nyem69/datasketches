@@ -16,7 +16,7 @@
         }
 
         body {
-        	margin: 24px;
+        	margin: 32px;
         }
 
     </style>
@@ -39,15 +39,20 @@ const svg = d3.select("#rect")
 .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 
+
+
+let f2 		= d3.format(",.2f"),
+		comma = d3.format(",");
+
+
+
+
 //let url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTODV5OqxQupaKyWO7yQMXHHlnNJpLGjimMDb8dbQs0sRmyJlEbelaT5eCWbZXBLF_A8W68EnHEI6hk/pub?gid=331152056&single=true&output=csv';
 let url = 'DataGame - P9-ConsoleDates.csv';
 
-
-let f2 = d3.format(",.2f");
-
 d3.csv(url).then( function(data) {
 
-	console.log('originaldata', data)
+	console.log('data', data)
 
 	// data cleaning
 	data.forEach(d=>{
@@ -177,7 +182,11 @@ d3.csv(url).then( function(data) {
 
 			sel.append('h1').html(hdr);
 
-			sel.append('table')
+			sel
+				.append('div')
+				.style('overflow-x','scroll')
+				.style('width', innerWidth - (+(d3.select('body').style('margin').replace('px','')*2)) +'px')
+				.append('table')
 				.attr('class','table-2 bp3-html-table bp3-html-table-bordered bp3-html-table-condensed bp3-html-table-striped')
 				.append('tbody')
 					.selectAll('tr')
@@ -294,7 +303,10 @@ d3.csv(url).then( function(data) {
 
 
 
-
+			//=====================
+			// svg gannt chart
+			//=====================
+			sel.call(ganntChart, data);
 
 
 
@@ -304,6 +316,617 @@ d3.csv(url).then( function(data) {
 
 
 });
+
+
+
+//====================================================================================
+//
+//====================================================================================
+
+function ganntChart(sel, data)	{
+
+	console.group('ganntChart');
+
+	// sort by date
+	data.sort(d3.comparator().order(d3.ascending, d=>d['FirstRetailAvailability']));
+
+
+
+	let bh 			= 20,  								// bar height
+			margin	= {
+									left		: 50,
+									right		: 200,
+									top			: 50,
+									bottom	: 50,
+								},
+
+			// plot area width/height
+			width 	= innerWidth - 50 - margin.left - margin.right,
+			height	= (bh * data.length),
+
+			//=====================
+			// dates x axis
+			//=====================
+
+			minDate		= d3.min(data, d=>d['FirstRetailAvailability']),
+			maxDate		= d3.max(data, d=>d['Discontinued']),
+
+			limitDate	= (+new Date(maxDate).getFullYear()+1)+'-01-01',
+
+			xDate			= d3.scaleTime().domain([
+										 new Date(minDate),
+										 new Date(limitDate)
+									]).range([0,width]),
+
+			xDateAxis = d3.axisTop(xDate).tickFormat(d3.timeFormat("%d %b %Y")),
+
+			//=====================
+			// units x axis
+			//=====================
+
+			units 			= d3.extent(data, d=>d['UnitsSoldMillions']),
+			xUnitsScale	=	d3.scaleLinear().domain([0, units[1]]).range([0,width]),
+			xUnitsAxis	= d3.axisTop(xUnitsScale),
+
+			//=====================
+			// percentage x axis
+			//=====================
+
+			perc 				= d3.extent(data, d=>d['percentage']*100),
+			xPercScale	=	d3.scaleLinear().domain([0, perc[1]]).range([0,width]),
+			xPercAxis		= d3.axisTop(xPercScale);
+
+
+
+
+	console.log('minDate', minDate);
+	console.log('maxDate', maxDate);
+	console.log('limitDate', limitDate);
+	console.log('xDate.domain()', xDate.domain() );
+	console.log('xDate.range()', xDate.range() );
+	console.log('xDate('+minDate+')', xDate( new Date(minDate)));
+	console.log('xDate('+maxDate+')', xDate( new Date(maxDate)));
+
+
+	console.log('units', units);
+	console.log('xUnitsScale('+units[1]+')', xUnitsScale(units[1]) );
+
+
+
+
+	//=====================
+	// calculate days
+	//=====================
+	data.forEach(d=>{
+		const diffTime 	= Math.abs(new Date(d['FirstRetailAvailability']) - new Date(d['Discontinued']||limitDate));
+		d._days 				= Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+		d._soldPerDay 	= (d['UnitsSoldMillions']* 1e6) / d._days;
+	});
+
+		//=====================
+		// days x axis
+		//=====================
+	let	days 				= d3.extent(data, d=>d['_days']),
+			xDaysScale	=	d3.scaleLinear().domain([0, days[1]]).range([0,width]),
+			xDaysAxis		= d3.axisTop(xDaysScale),
+
+		//=====================
+		// units sold per day x axis
+		//=====================
+			soldPerDay 	= d3.extent(data, d=>d['_soldPerDay']),
+			xSoldScale	=	d3.scaleLinear().domain([0, soldPerDay[1]]).range([0,width]),
+			xSoldAxis		= d3.axisTop(xSoldScale);
+
+	console.log('days', days);
+	console.log('xDaysScale('+days[1]+')', xDaysScale(days[1]) );
+
+	console.log('soldPerDay', soldPerDay);
+	console.log('xSoldScale('+soldPerDay[1]+')', xSoldScale(soldPerDay[1]) );
+
+
+
+
+
+
+
+	sel.append('h1').html('Gannt Chart');
+
+	sel.append('div')
+			.attr('class','buttons')
+			.style('display','flex');
+
+
+
+	sel.append('svg')
+			.attr('class','gannt')
+			.attr('viewBox',[
+									0,0,
+									width + margin.left + margin.right,
+									height + margin.top + margin.bottom
+								].join(' ')
+			)
+			.call(sel=>{
+
+				sel.append('g')
+						.attr('class','axes')
+						.attr('transform','translate('+[margin.left, margin.top]+')')
+						.call( xDateAxis )
+
+				sel.append('g')
+						.attr('class','plot')
+						.attr('transform','translate('+[margin.left, margin.top]+')')
+						.selectAll('g.data').data(data)
+								.enter()
+									.append('g')
+										.attr('class','data')
+										.attr('transform',(d,i)=>'translate('+[0, bh*i ]+')')
+										.call(sel=>{
+
+											sel.append('rect')
+												.attr('x', d=>xDate(new Date(d['FirstRetailAvailability'])))
+												.attr('width', d=>{
+													if (d['Discontinued'])	{
+														return 	d3.max([1, xDate(new Date(d['Discontinued'])) - xDate(new Date(d['FirstRetailAvailability'])) ])
+													}else	{
+														return 	d3.max([1, xDate(new Date(limitDate)) - xDate(new Date(d['FirstRetailAvailability'])) ])
+													}
+												})
+												.attr('height', bh-1)
+												.attr('fill','steelblue')
+												.attr('cursor','pointer')
+												.on('click', function(e,d){
+
+													let sel = d3.select(this),
+															active	= !sel.classed('active');
+
+													console.log(sel.node(), active);
+
+													sel.classed('active',active)
+														.transition()
+															.attr('fill', active?'crimson':'steelblue');
+
+												});
+
+											sel.append('text')
+												.attr('class','label')
+												.attr('x', d=>xDate(new Date(d['FirstRetailAvailability'])) + 5)
+												.attr('y', bh-4)
+												.attr('fill', '#fff')
+												.text(d=>d['Platform'])
+
+											sel.append('text')
+												.attr('class','value')
+												.attr('x', d=>( d['Discontinued'] ? xDate(new Date(d['Discontinued'])) : xDate(new Date(limitDate)) ) + 5)
+												.attr('y', bh-4)
+												.attr('fill', 'steelblue')
+												.attr('text-padding','end')
+												.text(d=>f2(d['UnitsSoldMillions'])+'M')
+
+										});
+
+
+
+			});
+
+
+
+
+
+
+
+	//====================================================================================
+	//  interactivity
+	//====================================================================================
+	d3.select('.buttons')
+			.call(sel=>{
+
+				let _delay = 20,
+						_duration = 600;
+
+				//==========================================
+				//  FirstRetailAvailability
+				//==========================================
+				sel.append('div').style('flex','1 1 auto')
+					.append('button')
+					.attr('type','button')
+					.style('cursor','pointer')
+					.html('FirstRetailAvailability')
+					.on('click', function(e,d){
+
+						console.group('FirstRetailAvailability');
+
+						let active = !d3.select(this).classed('active');
+						d3.select(this).classed('active', active);
+
+						console.log('active', active);
+
+						d3.select('svg.gannt')
+							.call(sel=>{
+
+								sel.select('.axes').transition().call( xDateAxis )
+
+								sel.selectAll('g.data')
+									.sort(d3.comparator().order(active?d3.descending:d3.ascending, d=>d['FirstRetailAvailability'] ))
+									.call(sel=>{
+
+										sel.select('rect')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xDate(new Date(d['FirstRetailAvailability'])))
+													.attr('width', d=>{
+														if (d['Discontinued'])	{
+															return 	d3.max([1, xDate(new Date(d['Discontinued'])) - xDate(new Date(d['FirstRetailAvailability'])) ])
+														}else	{
+															return 	d3.max([1, xDate(new Date(limitDate)) - xDate(new Date(d['FirstRetailAvailability'])) ])
+														}
+													})
+
+										sel.select('.label')
+											.transition()
+												.duration(_duration)
+												.attr('x', d=>xDate(new Date(d['FirstRetailAvailability'])) + 5)
+												.attr('fill','#fff')
+
+										sel.select('.value')
+											.text(d=>f2(d['UnitsSoldMillions'])+'M')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>( d['Discontinued'] ? xDate(new Date(d['Discontinued'])) : xDate(new Date(limitDate)) ) + 5)
+
+									})
+									.transition()
+										.duration(_duration)
+										.delay((d,i)=>i*_delay)
+											.attr('transform',(d,i)=>'translate('+[0, bh*i ]+')')
+
+
+							});
+
+
+						console.groupEnd('FirstRetailAvailability');
+
+					});
+
+				//==========================================
+				//  Discontinued
+				//==========================================
+				sel.append('div').style('flex','1 1 auto')
+					.append('button')
+					.attr('type','button')
+					.style('cursor','pointer')
+					.html('Discontinued')
+					.on('click', function(e,d){
+
+						console.group('Discontinued');
+
+						let active = !d3.select(this).classed('active');
+						d3.select(this).classed('active', active);
+
+						console.log('active', active);
+
+						d3.select('svg.gannt')
+							.call(sel=>{
+
+								sel.select('.axes').transition().call( xDateAxis )
+
+								sel.selectAll('g.data')
+									.sort(d3.comparator().order(active?d3.descending:d3.ascending, d=>d['Discontinued']||limitDate ))
+									.call(sel=>{
+
+										sel.select('rect')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xDate(new Date(d['FirstRetailAvailability'])))
+													.attr('width', d=>{
+														if (d['Discontinued'])	{
+															return 	d3.max([1, xDate(new Date(d['Discontinued'])) - xDate(new Date(d['FirstRetailAvailability'])) ])
+														}else	{
+															return 	d3.max([1, xDate(new Date(limitDate)) - xDate(new Date(d['FirstRetailAvailability'])) ])
+														}
+													})
+
+										sel.select('.label')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xDate(new Date(d['FirstRetailAvailability'])) + 5)
+													.attr('fill','#fff')
+
+										sel.select('.value')
+											.text(d=>f2(d['UnitsSoldMillions'])+'M')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>( d['Discontinued'] ? xDate(new Date(d['Discontinued'])) : xDate(new Date(limitDate)) ) + 5)
+
+									})
+									.transition()
+										.duration(_duration)
+										.delay((d,i)=>i*_delay)
+										.attr('transform',(d,i)=>'translate('+[0, bh*i ]+')')
+
+
+							});
+
+
+						console.groupEnd('Discontinued');
+
+					});
+
+				//==========================================
+				//  UnitsSoldMillions
+				//==========================================
+				sel.append('div').style('flex','1 1 auto')
+					.append('button')
+					.attr('type','button')
+					.style('cursor','pointer')
+					.html('UnitsSoldMillions')
+					.on('click', function(e,d){
+
+						console.group('UnitsSoldMillions');
+
+						let active = !d3.select(this).classed('active');
+						d3.select(this).classed('active', active);
+
+						console.log('active', active);
+
+						d3.select('svg.gannt')
+							.call(sel=>{
+
+								sel.select('.axes').transition().call( xUnitsAxis )
+
+								sel.selectAll('g.data')
+									.sort(d3.comparator().order(active?d3.descending:d3.ascending, d=>d['UnitsSoldMillions']))
+									.call(sel=>{
+										sel.select('rect')
+											.transition()
+												.duration(_duration)
+													.attr('x',0)
+													.attr('width', d=>xUnitsScale(d['UnitsSoldMillions']))
+
+
+										sel.select('.label')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xUnitsScale(d['UnitsSoldMillions']) < 50
+																					? xUnitsScale(d['UnitsSoldMillions']) + 5
+																					: 5
+													)
+													.attr('fill', d=>xUnitsScale(d['UnitsSoldMillions']) < 50 ? 'steelblue' : '#fff')
+
+										sel.select('.value')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xUnitsScale(d['UnitsSoldMillions']) < 50
+																					? xUnitsScale(d['UnitsSoldMillions']) + 50
+																					: xUnitsScale(d['UnitsSoldMillions']) + 5
+													)
+
+									})
+									.transition()
+										.duration(_duration)
+										.delay((d,i)=>i*_delay)
+											.attr('transform',(d,i)=>'translate('+[0, bh*i ]+')')
+							});
+
+
+						console.groupEnd('UnitsSoldMillions');
+
+					});
+
+
+
+				//==========================================
+				//  percentage
+				//==========================================
+
+				sel.append('div').style('flex','1 1 auto')
+					.append('button')
+					.attr('type','button')
+					.style('cursor','pointer')
+					.html('percentage')
+					.on('click', function(e,d){
+
+
+						console.group('percentage');
+
+						let active = !d3.select(this).classed('active');
+						d3.select(this).classed('active', active);
+
+						console.log('active', active);
+
+						d3.select('svg.gannt')
+							.call(sel=>{
+
+								sel.select('.axes').transition().call( xPercAxis )
+
+								sel.selectAll('g.data')
+									.sort(d3.comparator().order(active?d3.descending:d3.ascending, d=>d['percentage']))
+									.call(sel=>{
+										sel.select('rect')
+											.transition()
+												.duration(_duration)
+													.attr('x',0)
+													.attr('width', d=>xPercScale(d['percentage']*100))
+
+
+										sel.select('.label')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xPercScale(d['percentage']*100) < 50
+																					? xPercScale(d['percentage']*100) + 5
+																					: 5
+													)
+													.attr('fill', d=>xPercScale(d['percentage']*100) < 50 ? 'steelblue' : '#fff')
+
+										sel.select('.value')
+											.text(d=>f2(d['percentage']*100)+'%')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xPercScale(d['percentage']*100) < 50
+																					? xPercScale(d['percentage']*100) + 50
+																					: xPercScale(d['percentage']*100) + 5
+													)
+
+									})
+									.transition()
+										.duration(_duration)
+										.delay((d,i)=>i*_delay)
+											.attr('transform',(d,i)=>'translate('+[0, bh*i ]+')')
+							});
+
+						console.groupEnd('percentage');
+
+					});
+
+
+
+
+
+				//==========================================
+				//  days
+				//==========================================
+
+				sel.append('div').style('flex','1 1 auto')
+					.append('button')
+					.attr('type','button')
+					.style('cursor','pointer')
+					.html('days in market')
+					.on('click', function(e,d){
+
+
+
+						console.group('days');
+
+						let active = !d3.select(this).classed('active');
+						d3.select(this).classed('active', active);
+
+						console.log('active', active);
+
+						d3.select('svg.gannt')
+							.call(sel=>{
+
+								sel.select('.axes').transition().call( xDaysAxis )
+
+								sel.selectAll('g.data')
+									.sort(d3.comparator().order(active?d3.descending:d3.ascending, d=>d['_days']))
+									.call(sel=>{
+
+										sel.select('rect')
+											.transition()
+												.duration(_duration)
+													.attr('x',0)
+													.attr('width', d=>xDaysScale(d['_days']))
+
+
+										sel.select('.label')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xDaysScale(d['_days']) < 50
+																					? xDaysScale(d['_days']) + 5
+																					: 5
+													)
+													.attr('fill', d=>xDaysScale(d['_days']) < 50 ? 'steelblue' : '#fff')
+
+										sel.select('.value')
+											.text(d=>comma(d._days))
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xDaysScale(d['_days']) < 50
+																					? xDaysScale(d['_days']) + 50
+																					: xDaysScale(d['_days']) + 5
+													)
+
+									})
+									.transition()
+										.duration(_duration)
+										.delay((d,i)=>i*_delay)
+											.attr('transform',(d,i)=>'translate('+[0, bh*i ]+')')
+							});
+
+						console.groupEnd('days');
+
+
+
+					});
+
+
+
+
+
+				//==========================================
+				//  soldPerDay
+				//==========================================
+
+
+				sel.append('div').style('flex','1 1 auto')
+					.append('button')
+					.attr('type','button')
+					.style('cursor','pointer')
+					.html('Units sold per day')
+					.on('click', function(e,d){
+
+
+						console.group('soldPerDay');
+
+						let active = !d3.select(this).classed('active');
+						d3.select(this).classed('active', active);
+
+						console.log('active', active);
+
+						d3.select('svg.gannt')
+							.call(sel=>{
+
+								sel.select('.axes').transition().call( xSoldAxis )
+
+								sel.selectAll('g.data')
+									.sort(d3.comparator().order(active?d3.descending:d3.ascending, d=>d['_soldPerDay']))
+									.call(sel=>{
+										sel.select('rect')
+											.transition()
+												.duration(_duration)
+													.attr('x',0)
+													.attr('width', d=>xSoldScale(d['_soldPerDay']))
+
+
+										sel.select('.label')
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xSoldScale(d['_soldPerDay']) < 50
+																					? xSoldScale(d['_soldPerDay']) + 5
+																					: 5
+													)
+													.attr('fill', d=>xSoldScale(d['_soldPerDay']) < 50 ? 'steelblue' : '#fff')
+
+										sel.select('.value')
+											.text(d=>f2(d._soldPerDay))
+											.transition()
+												.duration(_duration)
+													.attr('x', d=>xSoldScale(d['_soldPerDay']) < 50
+																					? xSoldScale(d['_soldPerDay']) + 50
+																					: xSoldScale(d['_soldPerDay']) + 5
+													)
+
+									})
+									.transition()
+										.duration(_duration)
+										.delay((d,i)=>i*_delay)
+											.attr('transform',(d,i)=>'translate('+[0, bh*i ]+')')
+							});
+
+						console.groupEnd('soldPerDay');
+
+
+					});
+
+			});
+
+
+
+
+	console.groupEnd('ganntChart');
+
+}
+
+
 
 
 </script>
