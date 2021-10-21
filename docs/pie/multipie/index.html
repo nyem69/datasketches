@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://d3js.org/d3.v6.js"></script>
+</head>
+
+<body>
+    <div id="multipleline"></div>
+</body>
+
+<script>
+    const width = 450,
+        height = 450,
+        margin = 40;
+
+    const radius = Math.min(width, height) / 2 - margin;
+
+    let url = "cities_commuter.csv";
+
+    d3.csv(url).then(function(data){
+
+        data.forEach(d =>{
+            for(var i in d){
+                if(!['City'].includes(i)){
+                    d[i] = +d[i];
+                }
+            }
+        });
+
+        console.log('data', data);
+
+
+/*
+
+        const svg = d3.select("#multipleline")
+            // .selectAll("uniqueChart")
+            // .data(cities)
+            // .enter()
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        // Colour palette
+        const color = d3.scaleOrdinal()
+            .range(d3.schemeDark2)
+
+        const pie = d3.pie()
+            .value(function(d) {return d[1]})
+
+
+        let cities = d3.groups(data, d => d.City);
+        console.log('cities',cities);
+
+        let citiez = Object.entries(cities);
+        console.log('citiez', citiez);
+
+        const data_ready = pie(citiez)
+        console.log('data_ready', data_ready)
+
+        svg.selectAll('piechart')
+            .data(data_ready)
+            .join('path')
+            .attr('d', d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius)
+            )
+            .attr('fill', function(d){ return color(d[0]) })
+            .attr("stroke", "black")
+            .style("stroke-width", "2px")
+            .style("opacity", 0.7)
+
+*/
+
+
+      const pie = d3.pie()
+          .value(function(d) { return d })
+
+      const arc = d3.arc()
+										.innerRadius(radius*.5)
+										.outerRadius(radius);
+
+      const color = d3.scaleOrdinal()
+          .range(d3.schemeDark2)
+
+
+
+      let cities = d3.groups(data, d => d.City)
+      								.map(d=>{
+      									return {
+      										key			: d[0],
+      										values	: d[1],
+      										piedata	: d[1].map(d=>d['Bicycle'])
+      									}
+      								});
+
+
+      console.log('cities',cities);
+
+
+			d3.select("#multipleline")
+				.style('display','flex')
+				.style('flex-wrap','wrap')
+				.selectAll('div.svg-container').data( cities )
+					.enter()
+						.append('div').attr('class','svg-container')
+							.style('flex','1 1 150px')
+							.call(sel=>{
+
+								sel.append('svg')
+									.attr('viewBox',[-width/2,-height/2,width,height].join(' '))
+									.selectAll('path.slices').data(d=>pie(d.piedata))
+										.enter()
+											.append('path')
+												.attr('d', arc )
+												.attr('fill', (d,i)=> color(i) )
+
+								sel.append('h3')
+									.html(d=>d.key)
+
+							});
+
+
+
+    });
+
+</script>
+</html>
