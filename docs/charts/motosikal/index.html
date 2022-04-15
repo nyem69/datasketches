@@ -1,0 +1,1002 @@
+
+<script type="text/javascript" src="//lib.analitik.my/d3/7.0.3/d3.min.js"></script>
+<script type="text/javascript" src="//lib.analitik.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.analitik.my/csv/export-csv.js"></script>
+<script type="text/javascript" src="//lib.analitik.my/moment/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="//lib.analitik.my/chroma/2.1.1/chroma.min.js"></script>
+
+<style>
+/* https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/ */
+html, body, svg {
+	font-family:
+		-apple-system, BlinkMacSystemFont,
+		"Lato","Roboto",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+
+}
+
+td {
+	padding:4px 6px;
+}
+
+</style>
+<body>
+<script>
+
+let M = {},
+		dbg = 1, fc=0;
+		_meta = {},
+		comma = d3.format(','),
+		f1		= d3.format('.1f');
+
+M.config = {
+	console:{
+		color:'magenta'
+	}
+};
+
+
+
+d3.csv('../../_data/data - kematian motosikal.csv')
+	.then(raw=>{
+
+		dbg&&console.log('raw',raw);
+
+//		raw.forEach((d,i)=>{
+//
+//			let title = Object.entries(d).filter(d=>['*title','*tajuk'].includes(d[1].toLowerCase()));
+//			console.log(i, title);
+//
+//			let source = Object.entries(d).filter(d=>['*sumber','*source'].includes(d[1].toLowerCase()));
+//			console.log(i, source);
+//
+//		});
+
+
+		_meta.raw =  [...raw];
+
+		_meta.title 	= raw.filter(d=>Object.entries(d).filter(d=>['*title','*tajuk'].includes(d[1].toLowerCase())).length)
+											.map(d=>Object.entries(d).filter(d=>!!d[1]).filter(d=>!['*title','*tajuk'].includes(d[1].toLowerCase()))[0][1]);
+
+		_meta.sources	= raw.filter(d=>Object.entries(d).filter(d=>['*sumber','*source'].includes(d[1].toLowerCase())).length)
+											.map(d=>Object.entries(d).filter(d=>!!d[1]).filter(d=>!['*sumber','*source'].includes(d[1].toLowerCase()))[0][1]);
+
+		_meta.data		= [];
+
+		raw.filter(d=>Object.entries(d).filter(d=>['*title','*tajuk','*sumber','*source','jumlah'].includes(d[1].toLowerCase()) ).length==0 )
+			.forEach(d=>{
+
+				let ages = d['Kumpulan Umur'];
+
+				let age={};
+
+				if (ages.match(/\-/))	{
+					age.min 	= +(ages.split(/\s*\-\s*/)[0]);
+					age.max 	= +(ages.split(/\s*\-\s*/)[1]);
+				}else	{
+					age.min 	= +(ages.replace(/\D+/g,'')) + 1;
+					age.max 	= 100;
+				}
+
+
+				Object.entries(d)
+					.filter(d=> !['jumlah','kumpulan umur'].includes(d[0].toLowerCase() ) )
+					.forEach(d=>{
+
+						let yr 			= +d[0],
+								value		= +d[1],
+
+								yob_min = yr - age.max,
+								yob_max = yr - age.min;
+
+
+						_meta.data.push({
+							agegroup		: ages,
+							year				: yr,
+							value				: value,
+
+							age_min			: age.min,
+							age_max			: age.max,
+
+							yob_min			: yob_min,
+							yob_max			: yob_max,
+
+							age_min_current	: moment().year() - yob_max,
+							age_max_current	: moment().year() - yob_min,
+
+						});
+
+					})
+
+			});
+
+
+		dbg&&console.log('_meta',_meta);
+		dbg&&console.table(_meta.data);
+
+//		downloadCSV({
+//			filename:'kematian motosikal-unpivot.csv',
+//			data:_meta.data
+//		});
+
+		render();
+
+	});
+
+
+//====================================================================================
+//
+//====================================================================================
+function render()	{
+	let fName = arguments.callee.toString().replace(/function\s+/,'').split('(')[0], f='['+(fc++)+'] '+fName,
+	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	if (dbg){ console.group('%c'+f,'color:'+M.config.console.color); console.time(f) };
+
+
+	d3.select('body')
+		.call(sel=>{
+
+//			sel.selectAll('h3').data([_meta]).join('h3')
+//				.html(d=>d.title)
+
+			sel.selectAll('.'+fName).data([1]).join('div').attr('class',fName)
+				.style('display','flex')
+				.style('flex-wrap','wrap')
+				.call(sel=>{
+
+					sel.call(renderAgeGroup)
+					sel.call(renderAgeGroup2)
+					sel.call(renderAgeGroup3)
+
+					sel.call(renderAgeDeath)
+					sel.call(renderAgeCurrent)
+
+				});
+
+
+		});
+
+	fEnd();
+}
+
+
+
+//====================================================================================
+//
+//====================================================================================
+function renderAgeGroup(sel)	{
+	let fName = arguments.callee.toString().replace(/function\s+/,'').split('(')[0], f='['+(fc++)+'] '+fName,
+	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	if (dbg){ console.group('%c'+f,'color:'+M.config.console.color); console.time(f) };
+
+	let data 	= _meta.data,
+			total	= d3.sum(data, d=>d.value),
+			years = d3.groups(data, d=>d.year),
+			age 	= d3.groups(data, d=>d.age_min),
+
+			max 	= d3.max(data, d=>d.value),
+			rows 	= d3.groups(data, d=>d.age_min, d=>d.year),
+
+			scale = d3.scaleLinear()
+								.domain([0, max/2, max])
+								.range([ '#f2f2f2', '#f90','#f00' ]),
+
+//			scale2 = d3.scaleSequential(d3.interpolatePlasma).domain([max, 0]);
+			scale2 = d3.scaleSequential(d3.interpolateSpectral).domain([max, 0]);
+
+	dbg && console.log('years', years);
+	dbg && console.log('age', age);
+	dbg && console.log('rows', rows);
+
+
+	let maxGrp = d3.max(rows, d=>d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))),
+			scale3 = d3.scaleSequential(d3.interpolateGreys).domain([0, maxGrp*2]);
+
+
+
+	dbg && console.log('scale', scale.domain(), scale.range());
+
+
+	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
+		.style('flex','1 1 auto')
+		.style('margin','12px')
+		.call(sel=>{
+
+
+			sel.selectAll('.title').data([_meta]).join('div').attr('class','title')
+				.style('margin', '12px')
+				.html(d=>d.title)
+
+			sel.selectAll('.source').data([_meta]).join('div').attr('class','source')
+				.style('margin', '12px')
+				.style('font-size','80%')
+				.html(d=>'Sumber: '+ d.sources[0])
+
+
+			sel.selectAll('table').data(d=>[d]).join('table')
+				//.style('width','100%')
+				.call(sel=>{
+
+					// thead
+					sel.selectAll('thead').data(d=>[d]).join('thead')
+						.selectAll('tr').data(d=>[d]).join('tr')
+							.call(sel=>{
+
+								sel.selectAll('th.label').data(d=>['Umur']).join('th').attr('class','label')
+									.html(d=>d);
+
+								sel.selectAll('th.year').data(d=> years ).join('th').attr('class','year')
+		//							.selectAll('a').data(d=>[d[0]]).join('a')
+		//								.attr('href','#')
+										.html(d=>d[0])
+
+								sel.selectAll('th.total').data(d=>['Jumlah','Peratus']).join('th').attr('class','total')
+									.html(d=>d);
+
+							})
+
+					// tbody
+					sel.selectAll('tbody').data(d=>[d]).join('tbody')
+						.selectAll('tr').data(d=>d).join('tr')
+							.on('click', function(e,d){
+								console.log('tr',d);
+							})
+							.call(sel=>{
+
+								sel.selectAll('td.label').data(d=>{
+										console.log(d);
+										let k = d[1][0][1][0];
+
+										return k.age_min > 75
+																	? [ '> '+(k.age_min-1) ]
+																	: [ k.age_min+'-'+k.age_max ];
+
+									}).join('td').attr('class','label')
+									.style('text-align','center')
+									.html(d=>d)
+
+								sel.selectAll('td.year').data(d=>d[1]).join('td').attr('class','year')
+									.style('text-align','right')
+									.style('background', d=>scale2(d3.sum(d[1], d=>d.value)))
+									.style('color',d=>chroma(scale2(d3.sum(d[1], d=>d.value))).luminance()>.35?'#000':'#fff')
+									.html(d=>d3.sum(d[1], d=>d.value))
+
+
+								sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+									.style('text-align','right')
+									.style('background', d=>scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))))
+									.style('color',d=>chroma(scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value)))).luminance()>.4?'#000':'#fff')
+									.html(d=>{
+
+										return comma(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) ));
+
+									});
+
+								sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+									.style('text-align','right')
+									.html(d=>{
+
+										let ttl = d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) );
+										let perc = ttl/total;
+
+										console.log('perc', ttl, total, perc);
+
+										return f1(perc*100)+'%';
+
+									});
+
+							});
+
+
+
+					//=====================
+					// tfoot
+					//=====================
+					sel.selectAll('tfoot').data(d=>[d]).join('tfoot')
+						.selectAll('tr').data(d=>[d]).join('tr')
+							.call(sel=>{
+
+								sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+									.html('Jumlah');
+
+								sel.selectAll('td.year').data(d=> years ).join('td').attr('class','year')
+									.style('text-align','right')
+									.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+								sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+									.html(comma(total));
+
+								sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+
+							});
+
+				});
+
+		});
+
+
+	fEnd();
+}
+
+
+
+
+//====================================================================================
+//
+//====================================================================================
+function renderAgeGroup2(sel)	{
+	let fName = arguments.callee.toString().replace(/function\s+/,'').split('(')[0], f='['+(fc++)+'] '+fName,
+	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	if (dbg){ console.group('%c'+f,'color:'+M.config.console.color); console.time(f) };
+
+	let data 	= _meta.data,
+			total	= d3.sum(data, d=>d.value),
+			years = d3.groups(data, d=>d.year),
+			age 	= d3.groups(data, d=>d.age_min),
+			rows = d3.groups(data, d=>{
+
+								return d.age_max <= 20 ? '<21'
+												: d.age_max <= 30 ? 30
+												: d.age_max <= 40 ? 40
+												: d.age_max <= 50 ? 50
+												: d.age_max <= 60 ? 60
+												: d.age_max <= 70 ? 70
+												: '>70';
+
+							}, d=>d.year);
+
+
+	dbg && console.log('years', years);
+	dbg && console.log('age', age);
+	dbg && console.log('rows', rows);
+
+	let max = d3.max(data, d=>d.value),
+			scale = d3.scaleLinear().domain([0, max/2, max])
+				.range([ '#f2f2f2', '#f90','#f00' ]),
+
+			scale2 = d3.scaleSequential(d3.interpolateSpectral).domain([max, 0]);
+
+	let maxGrp = d3.max(rows, d=>d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))),
+			scale3 = d3.scaleSequential(d3.interpolateGreys).domain([0, maxGrp*2]);
+
+
+	dbg && console.log('scale', scale.domain(), scale.range());
+
+
+	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
+		.style('flex','1 1 auto')
+		.style('margin','12px')
+		.call(sel=>{
+
+
+			sel.selectAll('.title').data([_meta]).join('div').attr('class','title')
+				.style('margin', '12px')
+				.html(d=>d.title)
+
+			sel.selectAll('.source').data([_meta]).join('div').attr('class','source')
+				.style('margin', '12px')
+				.style('font-size','80%')
+				.html(d=>'Sumber: '+ d.sources[0])
+
+
+			sel.selectAll('table').data(d=>[d]).join('table')
+				.call(sel=>{
+
+					// thead
+					sel.selectAll('thead').data(d=>[d]).join('thead')
+						.selectAll('tr').data(d=>[d]).join('tr')
+							.call(sel=>{
+
+								sel.selectAll('th.label').data(d=>['Umur']).join('th').attr('class','label')
+									.html(d=>d);
+
+								sel.selectAll('th.year').data(d=> years ).join('th').attr('class','year')
+		//							.selectAll('a').data(d=>[d[0]]).join('a')
+		//								.attr('href','#')
+										.html(d=>d[0])
+
+								sel.selectAll('th.total').data(d=>['Jumlah','Peratus']).join('th').attr('class','total')
+									.html(d=>d);
+
+							})
+
+
+					//=====================
+					// tbody
+					//=====================
+					sel.selectAll('tbody').data(d=>[d]).join('tbody')
+						.selectAll('tr').data(d=>d).join('tr')
+							.on('click', function(e,d){
+								console.log('tr',d);
+							})
+							.call(sel=>{
+
+								sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+									.style('text-align','right')
+									.html(d=>{
+
+										console.log('d',d);
+
+										let k = d[1][0][1][1];
+
+										console.log('k',k);
+
+										let min = d3.min(d[1], d=>d3.min(d[1], d=>d.age_min)),
+												max = d3.max(d[1], d=>d3.max(d[1], d=>d.age_max));
+
+										return max==100 ? '> 71' : [min,max].join('-')
+
+									})
+
+								sel.selectAll('td.year').data(d=>d[1]).join('td').attr('class','year')
+									.style('text-align','right')
+									.style('background', d=>scale2(d3.sum(d[1], d=>d.value)))
+									.style('color',d=>chroma(scale2(d3.sum(d[1], d=>d.value))).luminance()>.35?'#000':'#fff')
+									.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+								sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+									.style('text-align','right')
+									.style('background', d=>scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))))
+									.style('color',d=>chroma(scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value)))).luminance()>.4?'#000':'#fff')
+									.html(d=>{
+
+										return comma(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) ));
+
+									});
+
+								sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+									.style('text-align','right')
+									.html(d=>{
+
+										let ttl = d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) );
+										let perc = ttl/total;
+
+										console.log('perc', ttl, total, perc);
+
+										return f1(perc*100)+'%';
+
+									});
+
+
+							});
+
+
+					//=====================
+					// tfoot
+					//=====================
+					sel.selectAll('tfoot').data(d=>[d]).join('tfoot')
+						.selectAll('tr').data(d=>[d]).join('tr')
+							.call(sel=>{
+
+								sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+									.html('Jumlah');
+
+								sel.selectAll('td.year').data(d=> years ).join('td').attr('class','year')
+									.style('text-align','right')
+									.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+								sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+									.html(comma(total));
+
+								sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+
+							});
+
+				});
+
+			});
+
+	fEnd();
+}
+
+
+
+
+
+
+
+
+
+
+//====================================================================================
+//
+//====================================================================================
+function renderAgeGroup3(sel)	{
+	let fName = arguments.callee.toString().replace(/function\s+/,'').split('(')[0], f='['+(fc++)+'] '+fName,
+	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	if (dbg){ console.group('%c'+f,'color:'+M.config.console.color); console.time(f) };
+
+	let data 	= _meta.data,
+			total	= d3.sum(data, d=>d.value),
+			years = d3.groups(data, d=>d.year),
+			age 	= d3.groups(data, d=>d.age_min),
+			rows = d3.groups(data, d=>{
+
+								return d.age_max <= 30 ? 30
+												: d.age_max <= 50 ? 50
+												: d.age_max <= 70 ? 70
+												: '>70';
+
+							}, d=>d.year);
+
+
+	dbg && console.log('years', years);
+	dbg && console.log('age', age);
+	dbg && console.log('rows', rows);
+
+	let max = d3.max(data, d=>d.value),
+			scale = d3.scaleLinear().domain([0, max/2, max])
+				.range([ '#f2f2f2', '#f90','#f00' ]),
+
+			scale2 = d3.scaleSequential(d3.interpolateSpectral).domain([max, 0]);
+
+	let maxGrp = d3.max(rows, d=>d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))),
+			scale3 = d3.scaleSequential(d3.interpolateGreys).domain([0, maxGrp*2]);
+
+
+	dbg && console.log('scale', scale.domain(), scale.range());
+
+
+	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
+		.style('flex','1 1 auto')
+		.style('margin','12px')
+		.call(sel=>{
+
+
+			sel.selectAll('.title').data([_meta]).join('div').attr('class','title')
+				.style('margin', '12px')
+				.html(d=>d.title)
+
+			sel.selectAll('.source').data([_meta]).join('div').attr('class','source')
+				.style('margin', '12px')
+				.style('font-size','80%')
+				.html(d=>'Sumber: '+ d.sources[0])
+
+			sel.selectAll('table').data(d=>[d]).join('table')
+				.call(sel=>{
+
+					// thead
+					sel.selectAll('thead').data(d=>[d]).join('thead')
+						.selectAll('tr').data(d=>[d]).join('tr')
+							.call(sel=>{
+
+								sel.selectAll('th.label').data(d=>['Umur']).join('th').attr('class','label')
+									.html(d=>d);
+
+								sel.selectAll('th.year').data(d=> years ).join('th').attr('class','year')
+		//							.selectAll('a').data(d=>[d[0]]).join('a')
+		//								.attr('href','#')
+										.html(d=>d[0])
+
+								sel.selectAll('th.total').data(d=>['Jumlah','Peratus']).join('th').attr('class','total')
+									.html(d=>d);
+
+							})
+
+
+					//=====================
+					// tbody
+					//=====================
+					sel.selectAll('tbody').data(d=>[d]).join('tbody')
+						.selectAll('tr').data(d=>d).join('tr')
+							.on('click', function(e,d){
+								console.log('tr',d);
+							})
+							.call(sel=>{
+
+								sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+									.style('text-align','right')
+									.html(d=>{
+
+										console.log('d',d);
+
+										let k = d[1][0][1][1];
+
+										console.log('k',k);
+
+										let min = d3.min(d[1], d=>d3.min(d[1], d=>d.age_min)),
+												max = d3.max(d[1], d=>d3.max(d[1], d=>d.age_max));
+
+										return max==100 ? '> 71' : [min,max].join('-')
+
+									})
+
+								sel.selectAll('td.year').data(d=>d[1]).join('td').attr('class','year')
+									.style('text-align','right')
+									.style('background', d=>scale2(d3.sum(d[1], d=>d.value)))
+									.style('color',d=>chroma(scale2(d3.sum(d[1], d=>d.value))).luminance()>.35?'#000':'#fff')
+									.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+								sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+									.style('text-align','right')
+									.style('background', d=>scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))))
+									.style('color',d=>chroma(scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value)))).luminance()>.4?'#000':'#fff')
+									.html(d=>{
+
+										return comma(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) ));
+
+									});
+
+								sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+									.style('text-align','right')
+									.html(d=>{
+
+										let ttl = d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) );
+										let perc = ttl/total;
+
+										console.log('perc', ttl, total, perc);
+
+										return f1(perc*100)+'%';
+
+									});
+
+
+							});
+
+
+					//=====================
+					// tfoot
+					//=====================
+					sel.selectAll('tfoot').data(d=>[d]).join('tfoot')
+						.selectAll('tr').data(d=>[d]).join('tr')
+							.call(sel=>{
+
+								sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+									.html('Jumlah');
+
+								sel.selectAll('td.year').data(d=> years ).join('td').attr('class','year')
+									.style('text-align','right')
+									.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+								sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+									.html(comma(total));
+
+								sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+
+							});
+
+				});
+		});
+
+	fEnd();
+}
+
+
+
+
+
+
+
+//====================================================================================
+//
+//====================================================================================
+function renderAgeDeath(sel)	{
+	let fName = arguments.callee.toString().replace(/function\s+/,'').split('(')[0], f='['+(fc++)+'] '+fName,
+	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	if (dbg){ console.group('%c'+f,'color:'+M.config.console.color); console.time(f) };
+
+	let data 	= _meta.data,
+			total	= d3.sum(data, d=>d.value),
+			years = d3.groups(data, d=>d.year),
+			age 	= d3.groups(data, d=>d.age_min),
+
+			rows = d3.groups(data, d=>{
+
+								return d.age_max <= 20 ? '<21'
+												: d.age_max <= 30 ? 30
+												: d.age_max <= 40 ? 40
+												: d.age_max <= 50 ? 50
+												: d.age_max <= 60 ? 60
+												: d.age_max <= 70 ? 70
+												: '>70';
+
+							}, d=>d.year);
+
+//			rows = d3.groups(data, d=>d.age_min, d=>d.year);
+
+
+	dbg && console.log('years', years);
+	dbg && console.log('age', age);
+	dbg && console.log('rows', rows);
+
+	let max = d3.max(data, d=>d.value),
+			scale = d3.scaleLinear().domain([0, max/2, max])
+				.range([ '#f2f2f2', '#f90','#f00' ]),
+
+			scale2 = d3.scaleSequential(d3.interpolateSpectral).domain([max, 0]);
+
+	let maxGrp = d3.max(rows, d=>d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))),
+			scale3 = d3.scaleSequential(d3.interpolateGreys).domain([0, maxGrp*2]);
+
+
+	dbg && console.log('scale', scale.domain(), scale.range());
+
+
+
+	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
+		.style('flex','1 1 auto')
+		.style('margin','12px')
+		.call(sel=>{
+
+
+			sel.selectAll('.title').data([_meta]).join('div').attr('class','title')
+				.style('margin', '12px')
+				.html(d=>d.title)
+
+			sel.selectAll('.source').data([_meta]).join('div').attr('class','source')
+				.style('margin', '12px')
+				.style('font-size','80%')
+				.html(d=>'Sumber: '+ d.sources[0])
+
+
+
+			sel.selectAll('table').data(d=>[d]).join('table')
+				.call(sel=>{
+
+					// thead
+					sel.selectAll('thead').data(d=>[d]).join('thead')
+						.selectAll('tr').data(d=>[d]).join('tr')
+							.call(sel=>{
+
+								sel.selectAll('th.label').data(d=>['Umur']).join('th').attr('class','label')
+									.html(d=>d);
+
+		//						sel.selectAll('th.year').data(d=> years ).join('th').attr('class','year')
+		////							.selectAll('a').data(d=>[d[0]]).join('a')
+		////								.attr('href','#')
+		//								.html(d=>d[0])
+
+								sel.selectAll('th.total').data(d=>['Jumlah','Peratus']).join('th').attr('class','total')
+									.html(d=>d);
+
+							})
+
+
+					//=====================
+					// tbody
+					//=====================
+					sel.selectAll('tbody').data(d=>[d]).join('tbody')
+						.selectAll('tr').data(d=>d).join('tr')
+							.on('click', function(e,d){
+								console.log('tr',d);
+							})
+							.call(sel=>{
+
+								sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+									.style('text-align','right')
+									.html(d=>{
+
+										console.log('d',d);
+
+										let k = d[1][0][1][1];
+
+										console.log('k',k);
+
+										let min = d3.min(d[1], d=>d3.min(d[1], d=>d.age_min)),
+												max = d3.max(d[1], d=>d3.max(d[1], d=>d.age_max));
+
+										return max==100 ? '> 71' : [min,max].join('-')
+
+									})
+
+		//						sel.selectAll('td.year').data(d=>d[1]).join('td').attr('class','year')
+		//							.style('text-align','right')
+		//							.style('background', d=>scale2(d3.sum(d[1], d=>d.value)))
+		//							.style('color',d=>chroma(scale2(d3.sum(d[1], d=>d.value))).luminance()>.35?'#000':'#fff')
+		//							.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+								sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+									.style('text-align','right')
+									.style('background', d=>scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))))
+									.style('color',d=>chroma(scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value)))).luminance()>.4?'#000':'#fff')
+									.html(d=>{
+
+										return comma(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) ));
+
+									});
+
+								sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+									.style('text-align','right')
+									.html(d=>{
+
+										let ttl = d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) );
+										let perc = ttl/total;
+
+										console.log('perc', ttl, total, perc);
+
+										return f1(perc*100)+'%';
+
+									});
+
+
+							});
+
+
+					//=====================
+					// tfoot
+					//=====================
+					sel.selectAll('tfoot').data(d=>[d]).join('tfoot')
+						.selectAll('tr').data(d=>[d]).join('tr')
+							.call(sel=>{
+
+								sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+									.html('Jumlah');
+
+		//						sel.selectAll('td.year').data(d=> years ).join('td').attr('class','year')
+		//							.style('text-align','right')
+		//							.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+								sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+									.html(comma(total));
+
+								sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+
+							});
+
+				});
+		});
+
+	fEnd();
+}
+
+
+
+//====================================================================================
+//
+//====================================================================================
+function renderAgeCurrent(sel)	{
+	let fName = arguments.callee.toString().replace(/function\s+/,'').split('(')[0], f='['+(fc++)+'] '+fName,
+	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	if (dbg){ console.group('%c'+f,'color:'+M.config.console.color); console.time(f) };
+
+	let data 	= _meta.data,
+			total	= d3.sum(data, d=>d.value),
+			years = d3.groups(data, d=>d.year),
+			age 	= d3.groups(data, d=>d.age_min),
+
+			rows = d3.groups(data, d=>{
+
+								return d.age_max_current <= 20 ? '<21'
+												: d.age_max_current <= 30 ? 30
+												: d.age_max_current <= 40 ? 40
+												: d.age_max_current <= 50 ? 50
+												: d.age_max_current <= 60 ? 60
+												: d.age_max_current <= 70 ? 70
+												: '>70';
+
+							}, d=>d.year);
+
+//			rows = d3.groups(data, d=>d.age_min_current, d=>d.year);
+
+
+	dbg && console.log('years', years);
+	dbg && console.log('age', age);
+	dbg && console.log('rows', rows);
+
+	let max = d3.max(data, d=>d.value),
+			scale = d3.scaleLinear().domain([0, max/2, max])
+				.range([ '#f2f2f2', '#f90','#f00' ]),
+
+			scale2 = d3.scaleSequential(d3.interpolateSpectral).domain([max, 0]);
+
+	let maxGrp = d3.max(rows, d=>d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))),
+			scale3 = d3.scaleSequential(d3.interpolateGreys).domain([0, maxGrp*2]);
+
+
+	dbg && console.log('scale', scale.domain(), scale.range());
+
+	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
+		.style('flex','1 1 auto')
+		.selectAll('table').data(d=>[d]).join('table')
+		.call(sel=>{
+
+			// thead
+			sel.selectAll('thead').data(d=>[d]).join('thead')
+				.selectAll('tr').data(d=>[d]).join('tr')
+					.call(sel=>{
+
+						sel.selectAll('th.label').data(d=>['Umur']).join('th').attr('class','label')
+							.html(d=>d);
+
+//						sel.selectAll('th.year').data(d=> years ).join('th').attr('class','year')
+////							.selectAll('a').data(d=>[d[0]]).join('a')
+////								.attr('href','#')
+//								.html(d=>d[0])
+
+						sel.selectAll('th.total').data(d=>['Jumlah','Peratus']).join('th').attr('class','total')
+							.html(d=>d);
+
+					})
+
+
+			//=====================
+			// tbody
+			//=====================
+			sel.selectAll('tbody').data(d=>[d]).join('tbody')
+				.selectAll('tr').data(d=>d).join('tr')
+					.on('click', function(e,d){
+						console.log('tr',d);
+					})
+					.call(sel=>{
+
+						sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+							.style('text-align','right')
+							.html(d=>{
+
+								console.log('d',d);
+
+								let k = d[1][0][1][1];
+
+								console.log('k',k);
+
+								let min = d3.min(d[1], d=>d3.min(d[1], d=>d.age_min_current)),
+										max = d3.max(d[1], d=>d3.max(d[1], d=>d.age_max_current));
+
+								return max > 70 ? '> 71' : [min,max].join('-')
+
+							})
+
+//						sel.selectAll('td.year').data(d=>d[1]).join('td').attr('class','year')
+//							.style('text-align','right')
+//							.style('background', d=>scale2(d3.sum(d[1], d=>d.value)))
+//							.style('color',d=>chroma(scale2(d3.sum(d[1], d=>d.value))).luminance()>.35?'#000':'#fff')
+//							.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+						sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+							.style('text-align','right')
+							.style('background', d=>scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))))
+							.style('color',d=>chroma(scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value)))).luminance()>.4?'#000':'#fff')
+							.html(d=>{
+
+								return comma(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) ));
+
+							});
+
+						sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+							.style('text-align','right')
+							.html(d=>{
+
+								let ttl = d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) );
+								let perc = ttl/total;
+
+								console.log('perc', ttl, total, perc);
+
+								return f1(perc*100)+'%';
+
+							});
+
+
+					});
+
+
+			//=====================
+			// tfoot
+			//=====================
+			sel.selectAll('tfoot').data(d=>[d]).join('tfoot')
+				.selectAll('tr').data(d=>[d]).join('tr')
+					.call(sel=>{
+
+						sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+							.html('Jumlah');
+
+//						sel.selectAll('td.year').data(d=> years ).join('td').attr('class','year')
+//							.style('text-align','right')
+//							.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+						sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+							.html(comma(total));
+
+						sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+
+					});
+
+		});
+
+	fEnd();
+}
+
+
+
+</script>
+</body>
