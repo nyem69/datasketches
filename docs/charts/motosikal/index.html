@@ -152,6 +152,26 @@ function render()	{
 					sel.call(renderAgeDeath)
 					sel.call(renderAgeCurrent)
 
+
+					sel.call(renderLinechart, _meta.data, 'Keseluruhan');
+
+//					sel.call(renderLinechart, _meta.data.filter(d=>d.age_max==10), '6-10');
+//					sel.call(renderLinechart, _meta.data.filter(d=>d.age_max==15), '11 - 15');
+
+					let maxvalue = d3.max(d3.groups(_meta.data, d=>d.year, d=>d.agegroup), d=>d3.max(d[1], d=>d3.max(d[1], d=>d.value)));
+					dbg&&console.log('maxvalue',maxvalue);
+
+					d3.groups(_meta.data, d=>d.age_max)
+						.forEach(k=>{
+							let data 	= _meta.data.filter(d=>d.age_max==+k[0]),
+									title	= 'Kumpulan Umur ' + k[1][0].agegroup;
+
+							dbg&&console.log('data',data);
+							dbg&&console.log('title',title);
+
+							sel.call(renderLinechart, data, title, maxvalue);
+						});
+
 				});
 
 
@@ -200,7 +220,7 @@ function renderAgeGroup(sel)	{
 
 	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
 		.style('flex','1 1 auto')
-		.style('margin','12px')
+		.style('margin','6px')
 		.call(sel=>{
 
 
@@ -366,7 +386,7 @@ function renderAgeGroup2(sel)	{
 
 	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
 		.style('flex','1 1 auto')
-		.style('margin','12px')
+		.style('margin','6px')
 		.call(sel=>{
 
 
@@ -540,7 +560,7 @@ function renderAgeGroup3(sel)	{
 
 	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
 		.style('flex','1 1 auto')
-		.style('margin','12px')
+		.style('margin','6px')
 		.call(sel=>{
 
 
@@ -716,7 +736,7 @@ function renderAgeDeath(sel)	{
 
 	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
 		.style('flex','1 1 auto')
-		.style('margin','12px')
+		.style('margin','6px')
 		.call(sel=>{
 
 
@@ -886,112 +906,256 @@ function renderAgeCurrent(sel)	{
 
 	dbg && console.log('scale', scale.domain(), scale.range());
 
+
+
 	sel.selectAll('.'+fName).data([rows]).join('div').attr('class',fName)
 		.style('flex','1 1 auto')
-		.selectAll('table').data(d=>[d]).join('table')
+		.style('margin','6px')
 		.call(sel=>{
 
-			// thead
-			sel.selectAll('thead').data(d=>[d]).join('thead')
-				.selectAll('tr').data(d=>[d]).join('tr')
+
+			sel.selectAll('.title').data([_meta]).join('div').attr('class','title')
+				.style('margin', '12px')
+				//.html(d=>d.title)
+				.html('Anggaran pecahan umur semasa')
+
+			sel.selectAll('.source').data([_meta]).join('div').attr('class','source')
+				.style('margin', '12px')
+				.style('font-size','80%')
+				.html(d=>'Sumber: '+ d.sources[0])
+
+			sel.selectAll('table').data(d=>[d]).join('table')
 					.call(sel=>{
 
-						sel.selectAll('th.label').data(d=>['Umur']).join('th').attr('class','label')
-							.html(d=>d);
+						// thead
+						sel.selectAll('thead').data(d=>[d]).join('thead')
+							.selectAll('tr').data(d=>[d]).join('tr')
+								.call(sel=>{
 
-//						sel.selectAll('th.year').data(d=> years ).join('th').attr('class','year')
-////							.selectAll('a').data(d=>[d[0]]).join('a')
-////								.attr('href','#')
-//								.html(d=>d[0])
+									sel.selectAll('th.label').data(d=>['Umur']).join('th').attr('class','label')
+										.html(d=>d);
 
-						sel.selectAll('th.total').data(d=>['Jumlah','Peratus']).join('th').attr('class','total')
-							.html(d=>d);
+			//						sel.selectAll('th.year').data(d=> years ).join('th').attr('class','year')
+			////							.selectAll('a').data(d=>[d[0]]).join('a')
+			////								.attr('href','#')
+			//								.html(d=>d[0])
 
-					})
+									sel.selectAll('th.total').data(d=>['Jumlah','Peratus']).join('th').attr('class','total')
+										.html(d=>d);
+
+								})
 
 
-			//=====================
-			// tbody
-			//=====================
-			sel.selectAll('tbody').data(d=>[d]).join('tbody')
-				.selectAll('tr').data(d=>d).join('tr')
-					.on('click', function(e,d){
-						console.log('tr',d);
-					})
-					.call(sel=>{
+						//=====================
+						// tbody
+						//=====================
+						sel.selectAll('tbody').data(d=>[d]).join('tbody')
+							.selectAll('tr').data(d=>d).join('tr')
+								.on('click', function(e,d){
+									console.log('tr',d);
+								})
+								.call(sel=>{
 
-						sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
-							.style('text-align','right')
-							.html(d=>{
+									sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+										.style('text-align','right')
+										.html(d=>{
 
-								console.log('d',d);
+											console.log('d',d);
 
-								let k = d[1][0][1][1];
+											let k = d[1][0][1][1];
 
-								console.log('k',k);
+											console.log('k',k);
 
-								let min = d3.min(d[1], d=>d3.min(d[1], d=>d.age_min_current)),
-										max = d3.max(d[1], d=>d3.max(d[1], d=>d.age_max_current));
+											let min = d3.min(d[1], d=>d3.min(d[1], d=>d.age_min_current)),
+													max = d3.max(d[1], d=>d3.max(d[1], d=>d.age_max_current));
 
-								return max > 70 ? '> 71' : [min,max].join('-')
+											return max > 70 ? '> 71' : [min,max].join('-')
 
-							})
+										})
 
-//						sel.selectAll('td.year').data(d=>d[1]).join('td').attr('class','year')
-//							.style('text-align','right')
-//							.style('background', d=>scale2(d3.sum(d[1], d=>d.value)))
-//							.style('color',d=>chroma(scale2(d3.sum(d[1], d=>d.value))).luminance()>.35?'#000':'#fff')
-//							.html(d=>comma(d3.sum(d[1], d=>d.value)))
+			//						sel.selectAll('td.year').data(d=>d[1]).join('td').attr('class','year')
+			//							.style('text-align','right')
+			//							.style('background', d=>scale2(d3.sum(d[1], d=>d.value)))
+			//							.style('color',d=>chroma(scale2(d3.sum(d[1], d=>d.value))).luminance()>.35?'#000':'#fff')
+			//							.html(d=>comma(d3.sum(d[1], d=>d.value)))
 
-						sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
-							.style('text-align','right')
-							.style('background', d=>scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))))
-							.style('color',d=>chroma(scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value)))).luminance()>.4?'#000':'#fff')
-							.html(d=>{
+									sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+										.style('text-align','right')
+										.style('background', d=>scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value))))
+										.style('color',d=>chroma(scale3(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value)))).luminance()>.4?'#000':'#fff')
+										.html(d=>{
 
-								return comma(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) ));
+											return comma(d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) ));
 
-							});
+										});
 
-						sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
-							.style('text-align','right')
-							.html(d=>{
+									sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+										.style('text-align','right')
+										.html(d=>{
 
-								let ttl = d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) );
-								let perc = ttl/total;
+											let ttl = d3.sum(d[1], d=>d3.sum(d[1], d=>d.value) );
+											let perc = ttl/total;
 
-								console.log('perc', ttl, total, perc);
+											console.log('perc', ttl, total, perc);
 
-								return f1(perc*100)+'%';
+											return f1(perc*100)+'%';
 
-							});
+										});
 
+
+								});
+
+
+						//=====================
+						// tfoot
+						//=====================
+						sel.selectAll('tfoot').data(d=>[d]).join('tfoot')
+							.selectAll('tr').data(d=>[d]).join('tr')
+								.call(sel=>{
+
+									sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
+										.html('Jumlah');
+
+			//						sel.selectAll('td.year').data(d=> years ).join('td').attr('class','year')
+			//							.style('text-align','right')
+			//							.html(d=>comma(d3.sum(d[1], d=>d.value)))
+
+									sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
+										.html(comma(total));
+
+									sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
+
+								});
 
 					});
 
+			});
 
-			//=====================
-			// tfoot
-			//=====================
-			sel.selectAll('tfoot').data(d=>[d]).join('tfoot')
-				.selectAll('tr').data(d=>[d]).join('tr')
-					.call(sel=>{
+	fEnd();
+}
 
-						sel.selectAll('td.label').data(d=>[d]).join('td').attr('class','label')
-							.html('Jumlah');
 
-//						sel.selectAll('td.year').data(d=> years ).join('td').attr('class','year')
-//							.style('text-align','right')
-//							.html(d=>comma(d3.sum(d[1], d=>d.value)))
 
-						sel.selectAll('td.total').data(d=>[d]).join('td').attr('class','total')
-							.html(comma(total));
 
-						sel.selectAll('td.perc').data(d=>[d]).join('td').attr('class','perc')
 
-					});
 
-		});
+//====================================================================================
+//
+//====================================================================================
+function renderLinechart(sel, data, title, maxvalue)	{
+	let fName = arguments.callee.toString().replace(/function\s+/,'').split('(')[0], f='['+(fc++)+'] '+fName,
+	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	if (dbg){ console.group('%c'+f,'color:'+M.config.console.color); console.time(f) };
+
+	let	width		= 200,
+			height	= 150,
+			margin	= {
+									left		: 50,
+									right		: 80,
+									top			: 20,
+									bottom	: 50,
+								},
+
+			rows		= d3.groups(data, d=>d.year)
+									.map(d=>{
+										return {
+											year	: d[0],
+											value	: d3.sum(d[1], d=>d.value),
+											values: d[1],
+										}
+									});
+
+			years 	= d3.groups(rows, d=>d.year),
+			x				= d3.scaleLinear().domain(d3.extent(years, d=>d[0])).range([0,width]),
+			xAxis		= d3.axisBottom(x).ticks(years.length).tickPadding(5),
+
+			max			= d3.max(rows, d=>d.value),
+			y				= d3.scaleLinear().domain([0,maxvalue||max]).range([0,height]),
+			y2			= d3.scaleLinear().domain([0,maxvalue||max]).range([height,0]),
+			yAxis		= d3.axisLeft(y2).ticks(5);
+
+	dbg&&console.log('rows', rows);
+	dbg&&console.log('years[1][0]', years[1][0]);
+	let w = x(rows[1].year) - x(rows[0].year);
+
+
+	dbg&&console.log('years', d3.extent(years, d=>d[0]));
+	dbg&&console.log('max', max);
+	dbg&&console.log('w', w);
+	dbg&&console.log('y', y.domain(), y.range(), y(rows[0].value));
+
+
+	sel.selectAll('.'+fName+'-'+fc).data([rows]).join('div').attr('class',fName+'-'+fc)
+		.style('flex','1 1 250px')
+		.style('margin','6px')
+		.call(sel=>{
+
+
+			sel.selectAll('.title').data([_meta]).join('div').attr('class','title')
+				.style('margin', '12px')
+				//.html(d=>d.title)
+				//.html('Jumlah kematian penunggang motosikal dari 2014 hingga 2020')
+				.html(title)
+
+			sel.selectAll('.source').data([_meta]).join('div').attr('class','source')
+				.style('margin', '12px')
+				.style('font-size','80%')
+				.html(d=>'Sumber: '+ d.sources[0])
+
+
+			sel.selectAll('svg').data(d=>[d]).join('svg')
+				.attr('viewBox', [0,0,width+margin.left+margin.right, height+margin.top+margin.bottom].join(' '))
+				.selectAll('.plot').data(d=>[d])
+					.join('g').attr('transform','translate('+[margin.left, margin.top]+')')
+						.call(sel=>{
+
+							sel.selectAll('.axes').data(d=>[d]).join('g').attr('class','axes')
+								.call(sel=>{
+
+									sel.selectAll('.axes-x').data(d=>[d])
+										.join('g').attr('class','axes-x')
+											.attr('transform','translate('+[w/2,height]+')')
+											.call(xAxis)
+											.call(sel=>{
+												//console.log('text',sel.selectAll('text').data());
+
+												sel.selectAll('text')
+													.text(d=>d)
+											})
+
+									sel.selectAll('.axes-y').data(d=>[d])
+										.join('g').attr('class','axes-y')
+										.call(yAxis)
+
+								});
+
+							sel.selectAll('.bars').data(d=>[d]).join('g').attr('class','bars')
+								.selectAll('.bar').data(d=>d).join('g').attr('class','bar')
+								.call(sel=>{
+
+									sel.selectAll('rect').data(d=>[d]).join('rect')
+										.attr('x',d=>x(d.year))
+										.attr('y',d=>height - y(d.value))
+										.attr('width',w-1)
+										.attr('height',d=>y(d.value))
+										.attr('fill','steelblue');
+
+									sel.selectAll('text').data(d=>[d]).join('text')
+										.attr('x',d=>x(d.year)+(w/2))
+										.attr('y',d=>height - y(d.value)-5)
+										.attr('text-anchor','middle')
+										.attr('font-size','80%')
+										.text(d=>d.value);
+
+
+								});
+
+
+						});
+
+
+	});
+
 
 	fEnd();
 }
