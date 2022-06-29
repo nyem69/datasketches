@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<script type="text/javascript" src="//lib.aga.my/jquery/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3.v4.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+
+<style>
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(",");
+
+
+d3.tsv("../_data/LokalitiHotspot2015.txt",
+	function(err,data) {
+
+		console.table([...data]);
+
+		var nestByTahun = d3.nest().key(function(d){ return +d.Tahun })
+			.entries(data);
+
+		console.log('nestByTahun', nestByTahun);
+
+		d3.select('body')
+			.append('div').attr('class','container-fluid')
+				.datum( nestByTahun[0] )
+				.call(function(sel)	{
+
+					sel.append('h1')
+						.html(function(d){
+
+							console.log('d',d);
+
+							var year 	= d.key,
+									total = d3.sum(d.values, function(d){ return +d['Jumlah Kes Terkumpul'] }) ;
+
+							return 'Jumlah Kes Denggi Tahun '+ d.key +' : '+ comma( total );
+
+						});
+
+
+					sel
+						.append('ul').attr('class','list-group')
+							.selectAll('li')
+								.data(function(d){
+
+									//------------
+									// nest().rollup()
+									//------------
+									var nest2 = d3.nest()
+										.key(function(d){
+
+											return d['Negeri']
+												.toUpperCase()							// standardize case
+												.trim() 										// remove extra spaces
+												.replace('PERAL','PERAK')		// cleanup spelling errors
+											;
+
+										})
+										.rollup(function(d){
+
+											// calculate total
+
+											return {
+												total: d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] })
+											}
+
+										})
+										.entries(d.values);
+
+									console.log('nest2',nest2);
+
+									/*
+
+										{
+										  "key": "SELANGOR",
+										  "value": {
+										    "total": 64196
+										  }
+										}
+
+									*/
+
+									return nest2;
+
+
+
+								})
+								.enter()
+									.append('li').attr('class','list-group-item')
+										.sort( d3.comparator().order(d3.descending, function(d){ return d.value.total }) )
+										.html(function(d){ return d.key })
+											.append('span')
+												.attr('class','badge badge-secondary')
+												.style('margin-left','12px')
+												.html(function(d){ return comma(d.value.total) });
+
+				});
+
+
+	});
+
+
+</script>
+
+

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- bootstrap -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<script type="text/javascript" src="//lib.aga.my/jquery/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- d3 -->
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3.v4.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+
+<!-- utilities -->
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.aga.my/chroma/0.6.3/chroma.min.js"></script>
+
+<!-- highcharts -->
+<script type="text/javascript" src="//lib.aga.my/highcharts/7.1.2/code/highcharts.js"></script>
+
+
+<style>
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(",");
+
+
+d3.tsv("../_data/LokalitiHotspot2015.txt",
+	function(err,data) {
+
+		console.group('load data');
+
+		//console.table([...data]);
+
+		var nestByTahun = d3.nest().key(function(d){ return +d.Tahun })
+			.entries(data);
+
+		console.log('nestByTahun', nestByTahun);
+
+		d3.select('body')
+			.append('div').attr('class','container-fluid')
+				.datum( nestByTahun[0] )
+				.call(function(sel)	{
+
+					sel.call(renderTitle);
+
+					sel.append('div')
+						.styles({
+							display:'flex',
+							'flex-wrap': 'wrap',
+						})
+						.call(function(sel)	{
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'300px',
+									'margin-right':'12px',
+								})
+								.call(renderTable2d);
+
+						}); // flex
+
+				}); // container-fluid
+
+
+	});
+
+
+//---------------------------------------------------
+// title
+//---------------------------------------------------
+function renderTitle(sel)	{
+
+	console.group('renderTitle');
+
+	sel.append('h1')
+		.html(function(d){
+			return 'Jumlah Kes Denggi Tahun '+ d.key;
+		});
+
+	console.groupEnd('renderTitle');
+
+}
+
+
+//---------------------------------------------------
+// table
+//---------------------------------------------------
+function renderTable2d(sel)	{
+
+	console.group('renderTable2d');
+
+
+	//----------
+	// data prep
+	//----------
+
+	var data = sel.datum();
+
+	console.log('data', data);
+
+
+	var weeksExtend = d3.extent(data.values, function(d){ return +d['Minggu'] }),
+			weeks = d3.range( weeksExtend[0], weeksExtend[1]+1 );
+
+	console.log('weeks', weeks);
+
+
+
+
+	var nest = d3.nest()
+		.key(function(d){
+
+			return d['Negeri']
+				.toUpperCase()													// standardize case
+				.trim() 																// remove extra spaces
+				.replace('PERAL','PERAK')								// cleanup spelling errors
+				.replace(/P.*?PINANG/,'PULAU PINANG')		// cleanup spelling inconsistencies
+			;
+
+		})
+		.rollup(function(d){
+
+			var series=[];
+
+			weeks.forEach(function(k)	{
+
+				series.push({
+					week	: +k,
+					total	: d3.sum(
+										d.filter(function(t){ return +k==+t['Minggu'] }),
+										function(d){ return +d['Jumlah Kes Terkumpul'] }
+									)
+				});
+
+			});
+
+			return {
+				weeks	: series,
+				total : d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] }),
+			};
+
+		})
+		.entries(data.values);
+
+	console.log('nest', nest);
+
+	/*
+		[
+		  {
+		    "key": "SELANGOR",
+		    "value": {
+		      "series": [
+		        {
+		          "week": 1,
+		          "total": 2770
+		        },
+		        {
+		          "week": 2,
+		          "total": 2934
+		        },
+						...
+		      ],
+		      "total": 64196
+		    }
+		  },
+		  {
+		    "key": "PERAK",
+		    "value": {
+		      "series": [
+		        {
+		          "week": 1,
+		          "total": 655
+		        },
+		        {
+		          "week": 2,
+		          "total": 855
+		        },
+						...
+		      ],
+		      "total": 14324
+		    }
+		  },
+		  ...
+		]
+	*/
+
+
+	//----------
+	// table
+	//----------
+
+	sel
+		.append('div').html('Multi-dimensional table')
+		.append('table').attr('class','table table-sm')
+			.styles({
+				'font-size':'90%',
+			})
+		.call(function(sel)	{
+
+			//----------
+			// thead
+			//----------
+			sel.append('thead')
+				.call(function(sel)	{
+
+					// header 1st row
+					sel
+						.append('tr')
+							.call(function(sel)	{
+
+								sel.append('th')
+									.attr('rowspan',2)
+									.html('Negeri');
+
+								sel.append('th')
+									.attr('colspan',weeks.length)
+									.style('text-align','center')
+									.html('Minggu');
+
+								sel.append('th')
+									.attr('rowspan',2)
+									.html('Jumlah');
+
+							});
+
+					// header 2nd row
+					sel
+						.append('tr')
+							.selectAll('th').data(weeks)
+								.enter()
+									.append('th')
+										.style('text-align','center')
+										.html(function(d){ return d });
+
+
+				});
+
+
+			//----------
+			// tbody
+			//----------
+			sel.append('tbody')
+				.selectAll('tr').data(nest)
+				.enter()
+					.append('tr')
+						.sort(d3.comparator().order(d3.descending, function(d){ return +d.value.total }))
+						.call(function(sel)	{
+
+							sel.append('td')
+								.html(function(d){ return d.key });
+
+
+							// weekly columns
+
+							sel.selectAll('td.weekly')
+								.data(function(d){ return d.value.weeks })
+								.enter()
+									.append('td')
+										.attr('class','weekly')
+										.style('text-align','right')
+										.html(function(d){ return d.total ? comma(d.total) : '' }); // do not display 0 values
+
+							sel.append('th')
+								.style('text-align','right')
+								.html(function(d){ return +d.value.total>0 ? comma(+d.value.total) : '' }); // do not display 0 values
+
+
+						});
+
+			//----------
+			// tfoot
+			//----------
+			sel.append('thead')
+				.append('tr')
+					.call(function(sel)	{
+
+						sel.append('th').html('Jumlah');
+
+
+						// column total
+
+						sel.selectAll('th.weekly')
+							.data(function(d){
+
+								console.log('tfoot d',d);
+
+								var weekly = weeks.map(function(k){
+										return d3.sum(
+											d.values.filter(function(d){ return +d['Minggu'] == + k}),
+											function(d){ return +d['Jumlah Kes Terkumpul'] }
+										)
+									});
+
+								console.log('tfoot weekly',weekly);
+
+								return weekly;
+
+							})
+							.enter()
+								.append('th')
+									.attr('class','weekly')
+									.style('text-align','right')
+										.html(function(d){ return comma(+d) });
+
+
+						// row total
+
+						sel.append('th')
+							.style('text-align','right')
+							.html(function(d){ return comma(+d3.sum(d.values, function(d){ return +d['Jumlah Kes Terkumpul'] }) ) });
+
+					});
+
+		});
+
+	console.groupEnd('renderTable2d');
+
+}
+
+
+
+</script>
+
+
+
+
+

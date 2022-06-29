@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- bootstrap -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<script type="text/javascript" src="//lib.aga.my/jquery/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- d3 -->
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3.v4.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+
+<!-- highcharts -->
+<script type="text/javascript" src="//lib.aga.my/highcharts/7.1.2/code/highcharts.js"></script>
+
+
+<style>
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(",");
+
+
+d3.tsv("../_data/LokalitiHotspot2015.txt",
+	function(err,data) {
+
+		console.group('load data');
+
+		console.table([...data]);
+
+		var nestByTahun = d3.nest().key(function(d){ return +d.Tahun })
+			.entries(data);
+
+		console.log('nestByTahun', nestByTahun);
+
+		d3.select('body')
+			.append('div').attr('class','container-fluid')
+				.datum( nestByTahun[0] )
+				.call(function(sel)	{
+
+					sel.call(renderTitle);
+
+					sel.append('div')
+						.styles({
+							display:'flex',
+							'flex-wrap': 'wrap',
+						})
+						.call(function(sel)	{
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'200px',
+								})
+								.call(renderList);
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'300px',
+								})
+								.call(renderPie);
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 2 auto',
+									'min-width':'400px',
+								})
+								.call(renderColumns);
+
+						});
+
+
+				});
+
+
+	});
+
+
+//---------------------------------------------------
+// title
+//---------------------------------------------------
+function renderTitle(sel)	{
+
+	console.group('renderTitle');
+
+	sel.append('h1')
+		.html(function(d){
+
+			console.log('d',d);
+
+			var year 	= d.key,
+					total = d3.sum(d.values, function(d){ return +d['Jumlah Kes Terkumpul'] }) ;
+
+			return 'Jumlah Kes Denggi Tahun '+ d.key +' : '+ comma( total );
+
+		});
+
+	console.groupEnd('renderTitle');
+
+}
+
+
+//---------------------------------------------------
+// list
+//---------------------------------------------------
+function renderList(sel)	{
+
+	console.group('renderList');
+
+	sel
+		.append('ul').attr('class','list-group')
+			.selectAll('li')
+				.data(function(d){
+
+					//------------
+					// nest().rollup()
+					//------------
+					var nest2 = d3.nest()
+						.key(function(d){
+
+							return d['Negeri']
+								.toUpperCase()							// standardize case
+								.trim() 										// remove extra spaces
+								.replace('PERAL','PERAK')		// cleanup spelling errors
+							;
+
+						})
+						.rollup(function(d){
+
+							// calculate total
+
+							return {
+								total: d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] })
+							}
+
+						})
+						.entries(d.values);
+
+					console.log('nest2',nest2);
+
+					/*
+
+						{
+						  "key": "SELANGOR",
+						  "value": {
+						    "total": 64196
+						  }
+						}
+
+					*/
+
+					return nest2;
+
+
+
+				})
+				.enter()
+					.append('li').attr('class','list-group-item')
+						.sort( d3.comparator().order(d3.descending, function(d){ return d.value.total }) )
+						.html(function(d){ return d.key })
+							.append('span')
+								.attr('class','badge badge-secondary')
+								.style('margin-left','12px')
+								.html(function(d){ return comma(d.value.total) });
+
+
+	console.groupEnd('renderList');
+
+}
+
+
+
+//---------------------------------------------------
+// pie
+//---------------------------------------------------
+function renderPie(sel)	{
+
+	console.group('renderPie');
+
+	sel.append('div')
+		.selectAll('.chart').data(function(d){
+
+			var data = [];
+
+			d3.nest()
+				.key(function(d){
+
+					return d['Negeri']
+						.toUpperCase()							// standardize case
+						.trim() 										// remove extra spaces
+						.replace('PERAL','PERAK')		// cleanup spelling errors
+					;
+
+				})
+				.rollup(function(d){
+
+					// calculate total
+
+					return {
+						total: d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] })
+					}
+
+				})
+				.entries(d.values)
+				.forEach(function(d){
+
+					data.push({
+						name: d.key,
+						y: d.value.total
+					});
+
+				});
+
+			return [data];
+
+		})
+		.enter()
+			.append('div').attr('class','chart')
+			.call(function(sel)	{
+
+
+				var container = sel.node(),
+						data = sel.datum();
+
+				console.log('data',data);
+
+				// https://www.highcharts.com/demo/pie-basic
+				// https://api.highcharts.com/highcharts/
+
+				Highcharts.chart(container, {
+				    chart: {
+				        plotBackgroundColor: null,
+				        plotBorderWidth: null,
+				        plotShadow: false,
+				        type: 'pie'
+				    },
+				    title: {
+				        text: 'Jumlah Kes Denggi',
+				    },
+				    tooltip: {
+				        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				    },
+				    plotOptions: {
+				        pie: {
+				            allowPointSelect: true,
+				            cursor: 'pointer',
+				            dataLabels: {
+				                enabled: true,
+				                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+				                style: {
+				                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+				                }
+				            }
+				        }
+				    },
+				    series: [{
+				        name: 'Negeri',
+				        colorByPoint: true,
+				        data: data
+				    }],
+				    credits:{
+				    	enabled:false
+				    }
+				});
+
+
+			});
+
+
+	console.groupEnd('renderPie');
+
+}
+
+
+//---------------------------------------------------
+// column
+//---------------------------------------------------
+function renderColumns(sel)	{
+
+	console.group('renderColumns');
+
+	sel.append('div')
+		.selectAll('.chart').data(function(d){
+
+
+			var weeksExtent = d3.extent(d.values, function(d){ return +d['Minggu'] }),
+					weeks = d3.range(weeksExtent[0], weeksExtent[1]+1);
+
+			console.log('weeks', weeks);
+
+			var nest = d3.nest()
+				.key(function(d){
+
+					return d['Negeri']
+						.toUpperCase()							// standardize case
+						.trim() 										// remove extra spaces
+						.replace('PERAL','PERAK')		// cleanup spelling errors
+					;
+
+				})
+				.rollup(function(d){
+
+					var series = [];
+					weeks.forEach(function(k){
+						series.push( d3.sum(d.filter(function(d){ return +d['Minggu']==k }), function(d){ return +d['Jumlah Kes Terkumpul'] }) );
+					});
+
+					return {
+						series: series
+					};
+
+				})
+				.entries(d.values);
+
+			console.log('nest', nest);
+
+			var data = {};
+			data.categories = weeks;
+
+			data.series=nest.map(function(d){
+				return {
+					name: d.key,
+					data: d.value.series,
+				}
+			});
+
+			data.series.sort(d3.comparator().order(d3.ascending, function(d){ return d3.sum(d.data) }));
+
+			return [data];
+
+		})
+		.enter()
+			.append('div').attr('class','chart')
+			.call(function(sel)	{
+
+
+				var container = sel.node(),
+						data = sel.datum();
+
+				console.log('data',data);
+
+				// https://www.highcharts.com/demo/column-stacked
+				// https://api.highcharts.com/highcharts/
+
+				Highcharts.chart(container, {
+				    chart: {
+				        type: 'column'
+				    },
+				    title: {
+				        text: 'Jumlah Kes Mengikut Minggu & Negeri'
+				    },
+				    xAxis: {
+				        //categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+				        categories: data.categories
+				    },
+				    yAxis: {
+				        min: 0,
+				        title: {
+				            text: 'Jumlah kes'
+				        },
+				        stackLabels: {
+				            enabled: true,
+				            style: {
+				                fontWeight: 'bold',
+				                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+				            }
+				        }
+				    },
+				    legend: {
+				        align: 'right',
+				        x: -30,
+				        verticalAlign: 'top',
+				        y: 25,
+				        floating: false,
+				        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+				        //borderColor: '#CCC',
+				        //borderWidth: 1,
+				        shadow: false,
+				        //margin:34,
+				    },
+				    tooltip: {
+				        headerFormat: '<b>{point.x}</b><br/>',
+				        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+				    },
+				    plotOptions: {
+				        column: {
+				            stacking: 'normal',
+				            dataLabels: {
+				                enabled: true,
+				                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+				            }
+				        }
+				    },
+//				    series: [{
+//				        name: 'John',
+//				        data: [5, 3, 4, 7, 2]
+//				    }, {
+//				        name: 'Jane',
+//				        data: [2, 2, 3, 2, 1]
+//				    }, {
+//				        name: 'Joe',
+//				        data: [3, 4, 4, 2, 5]
+//				    }],
+				    series: data.series,
+				    credits:{
+				    	enabled:false
+				    }
+
+				});
+
+	});
+
+}
+
+
+</script>
+
+

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- bootstrap -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<script type="text/javascript" src="//lib.aga.my/jquery/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- d3 -->
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3.v4.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+
+<!-- utilities -->
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.aga.my/chroma/0.6.3/chroma.min.js"></script>
+
+<!-- highcharts -->
+<script type="text/javascript" src="//lib.aga.my/highcharts/7.1.2/code/highcharts.js"></script>
+
+
+<style>
+
+
+td, th {
+	padding:3px 6px;
+}
+
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(",");
+
+
+d3.tsv("../_data/LokalitiHotspot2015.txt",
+	function(err,data) {
+
+		console.group('load data');
+
+		//console.table([...data]);
+
+		var nestByTahun = d3.nest().key(function(d){ return +d.Tahun })
+			.entries(data);
+
+		console.log('nestByTahun', nestByTahun);
+
+		d3.select('body')
+			.append('div').attr('class','container-fluid')
+				.datum( nestByTahun[0] )
+				.call(function(sel)	{
+
+					sel.call(renderTitle);
+
+					sel.append('div')
+						.styles({
+							display:'flex',
+							'flex-wrap': 'wrap-reverse',
+						})
+						.call(function(sel)	{
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'400px',
+									//'margin-right':'12px',
+								})
+								.call(renderColumns);
+
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'400px',
+									//'margin-right':'12px',
+								})
+								.call(renderColumns);
+
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'400px',
+									//'margin-right':'12px',
+								})
+								.call(renderColumns);
+
+
+						}); // flex
+
+				}); // container-fluid
+
+
+	});
+
+
+//---------------------------------------------------
+// title
+//---------------------------------------------------
+function renderTitle(sel)	{
+
+	console.group('renderTitle');
+
+	sel.append('h1')
+		.html(function(d){
+			return 'Jumlah Kes Denggi Tahun '+ d.key;
+		});
+
+	console.groupEnd('renderTitle');
+
+}
+
+
+
+//---------------------------------------------------
+// contrastColor
+//---------------------------------------------------
+function contrastColor(color)	{
+
+	return chroma(color).luminance() > .4 ? 'black' : 'white'
+
+}
+
+
+//---------------------------------------------------
+// title
+//---------------------------------------------------
+function renderColumns(sel)	{
+
+	console.group('renderColumns');
+
+
+
+	//----------------------------
+	// data prep
+	//----------------------------
+	// x-axis: weeks
+	// y-axis: weekly total
+
+	var data = sel.datum();
+
+	var weeksExtend = d3.extent(data.values, function(d){ return +d['Minggu'] }),
+			weeks = d3.range( weeksExtend[0], weeksExtend[1]+1 );
+
+	console.log('weeks', weeks);
+
+
+	var nest = d3.nest()
+		.key(function(d){ return +d['Minggu'] })
+		.rollup(function(d){
+			return d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] })
+		})
+		.entries(data.values);
+
+	console.log('nest', nest);
+
+
+	var valueExtent = d3.extent(nest, function(d){ return d.value });
+	console.log('valueExtent', valueExtent);
+
+
+
+	//----------------------------
+	// chart size
+	//----------------------------
+	var margin	= {top: 20, right: 20, bottom: 30, left: 50}, // plotArea outer margins
+			svg			= {
+				width: 800,
+				height: 400,
+			},
+			plot		= {
+				width	: svg.width - margin.left - margin.right,
+				height: svg.height - margin.top - margin.bottom
+			};
+
+	console.log('svg', svg);
+	console.log('plot', plot);
+
+	//----------------------------
+	// scales
+	//----------------------------
+
+	var yMaxPlot = Math.ceil( valueExtent[1]/1000 )*1000; // max y-value axis
+
+	var scaleX = d3.scaleLinear()
+				.domain([0, weeksExtend[1]+1])
+				.range([0, plot.width ]),
+
+			scaleY = d3.scaleLinear()
+				.domain([0, yMaxPlot]) 			// start with 0
+				.range([ 0, plot.height ]),
+
+			scaleYAxis = d3.scaleLinear()
+				.domain([0, yMaxPlot]) 			// start with 0
+				.range([ plot.height, 0 ]); // reverse scale
+
+	//----------------------------
+	// axes
+	//----------------------------
+
+	var axisX = d3.axisBottom(scaleX),
+			axisY = d3.axisLeft(scaleYAxis);
+
+
+
+	//-----------------------
+	// render chart
+	//-----------------------
+
+	sel.append('svg')
+		.attrs({
+			// skip width,height
+			// and use viewBox to make it responsive
+			// while maintaining aspect ratio
+			viewBox: [0,0, svg.width, svg.height].join(' '),
+		})
+		.call(function(sel)	{
+
+			//-----------------------
+			// chart background
+			//-----------------------
+			sel.append('g')
+				.append('rect')
+					.attrs({
+						width: '100%',
+						height: '100%',
+						fill:'#f2f2f2',
+					});
+
+			//-----------------------
+			// plot areas background
+			//-----------------------
+			sel.append('rect')
+				.attrs({
+					width:plot.width,
+					height:plot.height,
+					fill:'#ddd',
+					transform:'translate('+ margin.left +', '+ margin.top +')',
+				});
+
+			//-----------------------
+			// chart axis
+			//-----------------------
+			sel
+				.append('g').attr('class','axes')
+				.attr('transform','translate('+ margin.left +', '+ margin.top +')')
+				.call(function(sel)	{
+
+					sel.append('g')
+						.attr('class','axis-x')
+						.attr('transform','translate(0, '+ (plot.height) +')')
+						.call(axisX)
+
+					sel.append('g')
+						.attr('class','axis-y')
+						.call(axisY)
+
+				});
+
+
+			//-----------------------
+			// plot ares
+			//-----------------------
+			sel
+				.append('g').attr('class','plot_areas')
+				.attr('transform','translate('+ margin.left +', '+ margin.top +')')
+				.call(function(sel)	{
+
+
+					//-----------------------
+					// bars
+					//-----------------------
+					sel
+						.append('g').attr('class','g-bars')
+						.selectAll('.bars')
+							.data(nest)
+							.enter()
+								.append('rect')
+									.attrs({
+										class:'bar',
+										x:function(d){ return scaleX(+d.key) - (scaleX(1)/2) },
+										y:function(d){ return plot.height - scaleY(d.value) },
+										width:function(d){ return scaleX(1)-1 },
+										height:function(d){ return scaleY(d.value) },
+										fill:'steelblue',
+									});
+
+					//-----------------------
+					// labels
+					//-----------------------
+					sel
+						.append('g').attr('class','g-labels')
+						.selectAll('.label')
+							.data(nest)
+							.enter()
+								.append('text')
+									.attrs({
+										class:'label',
+										transform:function(d){
+											return 'translate('+[
+												scaleX(+d.key),
+												plot.height - scaleY(d.value) - 5
+											]+')'
+										},
+										'text-anchor':'middle',
+										'font-size':'12px',
+									})
+									.text(function(d){ return comma(d.value) })
+
+				});
+
+		});
+
+	console.groupEnd('renderColumns');
+
+}
+
+
+
+
+
+
+</script>
+
+
+
+
+

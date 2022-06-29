@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- bootstrap -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<script type="text/javascript" src="//lib.aga.my/jquery/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- d3 -->
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3.v4.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+
+<!-- utilities -->
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.aga.my/chroma/0.6.3/chroma.min.js"></script>
+
+
+<style>
+.flexContainer {
+	display:'flex',
+	'flex-wrap': 'wrap-reverse',
+}
+
+.flexItem {
+	flex:'1 1 400px',
+	'max-width':'500px',
+}
+
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(",");
+
+
+d3.select('body')
+	.call(function(sel)	{
+
+		sel
+			.append('div').attr('class','container-fluid')
+				.call(function(sel)	{
+
+					sel.call(renderTitle);
+
+					sel.append('div')
+						.styles({
+							display:'flex',
+							'flex-wrap': 'wrap-reverse',
+						})
+						.call(function(sel)	{
+
+							sel.call(renderBar);
+							sel.call(renderBar);
+							sel.call(renderBar);
+							sel.call(renderBar);
+
+
+						});
+
+				}); // container-fluid
+
+
+
+
+	});
+
+
+
+
+
+
+//---------------------------------------------------
+// title
+//---------------------------------------------------
+function renderTitle(sel)	{
+
+	console.group('renderTitle');
+
+	sel.append('h1')
+		.html(function(d){
+			return 'Jumlah Kes Denggi';
+		});
+
+	console.groupEnd('renderTitle');
+
+}
+
+
+
+//---------------------------------------------------
+// contrastColor
+//---------------------------------------------------
+function contrastColor(color)	{
+
+	return chroma(color).luminance() > .4 ? 'black' : 'white'
+
+}
+
+
+
+
+
+//---------------------------------------------------
+// bar
+//---------------------------------------------------
+function renderBar(sel)	{
+
+	console.group('renderBar');
+
+	var svg = sel.append('div')
+		.styles({
+			flex:'1 1 auto',
+			//'max-width': 1024/2+'px',
+			'min-width':'300px',
+			padding:'12px',
+		})
+		.append('svg');
+
+	var g = svg
+			.append('g').attr('class','bars')
+			.attr('transform','translate(100,0)');
+
+
+
+	d3.tsv("../_data/LokalitiHotspot2015.txt", function(err,data) {
+
+		console.log('data', data);
+
+		var nestByStates = d3.nest()
+			.key(function(d){
+
+				return d['Negeri']
+					.toUpperCase()													// standardize case
+					.trim() 																// remove extra spaces
+					.replace('PERAL','PERAK')								// cleanup spelling errors
+					.replace(/P.*?PINANG/,'PULAU PINANG')		// cleanup spelling inconsistencies
+				;
+
+			})
+			.rollup(function(d){
+				return {
+					total: d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] })
+				}
+			})
+			.entries(data);
+
+
+		console.log('nestByStates', nestByStates);
+
+
+		var w = 300,
+				h = 25;
+
+		svg.attr('viewBox',[0,0,400, h * nestByStates.length ]);
+
+
+		var max = d3.max(nestByStates, function(d){ return d.value.total });
+		var scaleWidth = d3.scaleLinear().domain([0,max]).range([1,300]);
+
+
+		var bars = g.selectAll('g')
+			.data(nestByStates, function(d){ return d.key });
+
+		bars.exit().remove();
+
+		bars
+			.enter()
+				.append('g')
+					.attr('transform',function(d,i){ return 'translate(0,'+(i*h)+')' })
+					.call(function(sel)	{
+
+						sel
+							.append('text')
+								.attrs({
+									class:'key',
+									x:-10,
+									y:h/2+5,
+									'text-anchor':'end',
+									'font-size':'12px',
+								})
+								.text(function(d){ return d.key });
+
+						sel
+							.append('rect')
+								.attrs({
+									width:0,
+									height:h-1,
+									fill: 'crimson',
+								});
+
+
+						sel
+							.append('text')
+								.attrs({
+									class:'value',
+									x:0,
+									y:h/2+5,
+									'font-size':'12px',
+									opacity:0,
+								})
+								.text(function(d){ return comma(d.value.total) });
+
+
+					})
+				.merge(bars)
+					.call(function(sel)	{
+
+						sel.select('rect')
+							.transition()
+								.delay(500)
+								.duration(1000)
+									.attr('width',function(d){ return scaleWidth(d.value.total) });
+
+						sel.select('.value')
+							.attr('text-anchor', function(d){ return d.value.total/max > .5 ? 'end' : 'begin' })
+							.transition()
+								.delay(500)
+								.duration(1000)
+									.attr('opacity',1)
+									.attr('fill',function(d){ return d.value.total/max > .5 ? '#fff' : '#000' })
+									.attr('x',function(d){
+											return d.value.total/max > .5
+												? scaleWidth(d.value.total) - 10
+												: scaleWidth(d.value.total) + 10
+										})
+
+					});
+
+
+			console.groupEnd('renderBar');
+
+		});
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+

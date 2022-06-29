@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3.v4.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+
+<style>
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(",");
+
+
+d3.tsv("../_data/LokalitiHotspot2015.txt",
+	function(err,data) {
+
+		console.table([...data]);
+
+		var nestByTahun = d3.nest().key(function(d){ return +d.Tahun })
+			.entries(data);
+
+		console.log('nestByTahun', nestByTahun);
+
+		d3.select('body')
+			.append('div')
+				.datum( nestByTahun[0] )
+				.call(function(sel)	{
+
+					sel.append('h1')
+						.html(function(d){
+
+							console.log('d',d);
+
+							var year 	= d.key,
+									total = d3.sum(d.values, function(d){ return +d['Jumlah Kes Terkumpul'] }) ;
+
+							return 'Jumlah Kes Denggi Tahun '+ d.key +' : '+ comma( total );
+
+						});
+
+
+					sel
+						.append('ul')
+							.selectAll('li')
+								.data(function(d){
+
+									//------------
+									// nest() - group by negeri
+									//------------
+
+									var nest = d3.nest()
+										.key(function(d){
+
+											return d['Negeri']
+												.toUpperCase()							// standardize case
+												.trim() 										// remove extra spaces
+												.replace('PERAL','PERAK')		// cleanup spelling errors
+											;
+
+										})
+										.entries(d.values);
+
+									//------------
+									// calculate total by negeri
+									//------------
+									nest.forEach(function(d){
+										d.total = d3.sum(d.values, function(d){ return +d['Jumlah Kes Terkumpul'] });
+									});
+
+									/*
+									{
+									  "key": "SELANGOR",
+									  "total": 64196,
+									  "values": [
+									    {
+									      "Tahun": "2015",
+									      "Minggu": "1",
+									      "Negeri": "Selangor",
+									      "Daerah/Zon/PBT": "Petaling",
+									      "Lokaliti": "Du Ss 22 ( 2)",
+									      "Jumlah Kes Terkumpul": "111",
+									      "Tempoh Wabak Berlaku (Hari)": "204"
+									    },
+									    ...
+									  ]
+									}
+									*/
+
+									console.log('nest',nest);
+									return nest;
+
+
+
+								})
+								.enter()
+									.append('li')
+
+										.sort( d3.comparator().order(d3.descending, function(d){ return d.total }) )
+
+										.html(function(d){
+											return d.key+' ('+comma( d.total )+')'
+										});
+
+				});
+
+
+	});
+
+
+</script>
+
+

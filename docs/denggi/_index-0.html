@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<script src="http://lib.aga.my/d3/3.5.5/d3.min.js"></script>
+<script src="http://lib.aga.my/d3/plugins/d3.comparator.js"></script>
+
+<style>
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(",");
+
+
+d3.tsv("../_data/LokalitiHotspot2015.txt",
+	function(err,data) {
+
+		data.forEach(function(d){
+
+			d['Tahun'] = +d['Tahun'];
+			d['Minggu'] = +d['Minggu'];
+			d['Jumlah Kes Terkumpul'] = +d['Jumlah Kes Terkumpul'];
+			d['Tempoh Wabak Berlaku (Hari)'] = +d['Tempoh Wabak Berlaku (Hari)'];
+
+			d['Negeri'] = d['Negeri'].toUpperCase();
+			d['Negeri'] = d['Negeri'].trim();
+
+			if (d['Negeri']=='PERAL') d['Negeri']='PERAK';
+
+			d['Negeri'] = d['Negeri'].replace(/^P\.+\s*/,'PULAU ');
+			d['Negeri'] = d['Negeri'].replace(/^P\s+/,'PULAU ');
+
+		});
+
+		//console.warn('err',err);
+		//console.log('data',data);
+		//console.table(data);
+
+
+		//----------------
+		// calculate total
+		//----------------
+		var total = d3.sum(data, function(d){
+				return d['Jumlah Kes Terkumpul']
+			});
+
+		console.log('Total',total);
+
+		d3.select('body')
+			.append('h1')
+			.html(
+				'Jumlah Kes Denggi Tahun '+ data[0]['Tahun'] +' : '+ comma(total)
+			);
+
+
+
+
+		//----------------
+		// calculate total by negeri
+		//----------------
+		var nest = d3.nest()
+	    .key(function(d) { return d['Negeri']; })
+	    .rollup(function(d){
+	    	return d3.sum(d, function(g){
+	    		return g['Jumlah Kes Terkumpul']
+		    })
+	    })
+	    .entries(data);
+
+		nest.sort(
+			d3.comparator()
+				.order(d3.descending,function(d){
+					return d.values
+				})
+		);
+
+		console.table(nest);
+
+		d3.select('body')
+			.append('ul')
+			.selectAll('li').data(nest)
+			.enter()
+				.append('li')
+				.html(function(d){
+					return d.key+' '+comma(d.values)
+				});
+
+
+
+	});
+
+
+</script>
+
+

@@ -1,0 +1,1331 @@
+Tahun	Minggu	Negeri	Daerah/Zon/PBT	Lokaliti	Jumlah Kes Terkumpul	Tempoh Wabak Berlaku (Hari)
+2010	9	Selangor	MPSJ	Pjs 9	17	109
+2010	9	Selangor	MBPJ	Flat Desa Mentari Pjs 6	24	99
+2010	9	Selangor	Petaling	Seksyen 7 Flat  A	59	86
+2010	9	Selangor	MPSJ	Ss 18	63	85
+2010	9	Selangor	MPSJ	Usj 2	18	76
+2010	9	Selangor	MPSJ	Usj 11	62	75
+2010	9	Selangor	Hulu Langat	Pangsapuri Sri Ayu Seksyen 4 Bandar Baru Bangi	39	69
+2010	9	Selangor	Gombak	Kg Wira Damai	15	68
+2010	9	Selangor	Petaling	Seksyen 7 Flat D	88	67
+2010	9	Selangor	Petaling	Seksyen 7 Teres A	26	63
+2010	9	Selangor	Petaling	Seksyen 7 Teres A	74	63
+2010	9	Selangor	Gombak	Taman Samudera Timur	16	63
+2010	9	Selangor	MPAJ	Au5D Taman Keramat (Zon A)	8	60
+2010	9	Selangor	Petaling	Seksyen 7E B	54	60
+2010	9	Selangor	MBPJ	Mentari Court Pjs 8	20	58
+2010	9	Selangor	MPSJ	Ss 14	22	57
+2010	9	Selangor	Gombak	Kg Desa Aman	20	56
+2010	9	Selangor	Hulu Langat	Kuarters Penjara	20	55
+2010	9	Selangor	Gombak	Taman Sri Gombak Fasa 9	15	52
+2010	9	Selangor	MBPJ	Apartment Suria Mas Pjs 10	10	50
+2010	9	Selangor	MBPJ	Flat Desaria Pjs 5	32	48
+2010	9	Selangor	MPSJ	Taman Universiti Indah 1	9	46
+2010	9	Selangor	Hulu Langat	Seksyen 1 Bandar Rinching	9	41
+2010	9	Selangor	Petaling	Seksyen 7 Flat B	12	41
+2010	9	Selangor	MBSA	Kolej Jati	11	40
+2010	9	Selangor	MBSA	Seksyen 7D	9	40
+2010	9	Selangor	MBPJ	Flat Taman Sri Manja Pjs 3	13	39
+2010	9	Selangor	MPAJ	Taman Melawati (Zon 5)	15	38
+2010	9	Selangor	MPSJ	Bandar Kinrara (6)	10	38
+2010	9	Selangor	MPAJ	Pandan Indah (Zon B Episod B)	10	38
+2010	9	Selangor	MPAJ	Taman Permata (Zon A)	6	38
+2010	9	Selangor	Hulu Langat	Apartment 16C Seksyen 16 Bandar Baru Bangi	13	37
+2010	9	Selangor	MBPJ	Sri Manja Court Pjs 3	16	36
+2010	9	Selangor	MPS	Taman Tun Teja	6	35
+2010	9	Selangor	MPSJ	Taman Sedang Perdana (Sp 5)	17	33
+2010	9	Selangor	MPAJ	Taman Dagang Jaya ( Zon A)	9	32
+2010	9	Selangor	Hulu Langat	Taman Cheras Awana	10	32
+2010	9	Selangor	MBPJ	Flat Sri Meranti Sd 13 Pju 9	8	31
+2010	9	Selangor	Hulu Langat	Apartment Seksyen 3 Bandar Teknologi	5	31
+2010	9	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	7	30
+2010	9	Selangor	MPAJ	Taman Bukit Teratai (Zon C)	8	30
+2010	9	WPKL	Cheras	Ppr Taman Mulia	21	60
+2010	9	WPKL	Cheras	Ppr Desa Tun Razak	10	54
+2010	9	WPKL	Cheras	Flat Sri Melaka.	6	32
+2010	9	WPKL	Setapak	Taman Setapak Jaya (Jalan Rejang 4-10)	14	53
+2010	9	WPKL	Setapak	"Keramat Wangsa Kelumpuk Kuang,Teratai,Menara Merak Kayangan."	13	44
+2010	9	WPKL	Setapak	Ppr Air Panas	8	48
+2010	9	WPKL	Setapak	Keramat Wangsa Kelumpuk Sunding  Malam Bunga Raya	5	30
+2010	9	WPKL	Pusat Bandar	Bandar Baru Sentul (Menara Orkid)	15	50
+2010	9	WPKL	Pusat Bandar	Flat Sri Selangor	49	38
+2010	9	WPKL	Klang Lama	Ppr Kg Limau	8	33
+2010	9	Johor	MPJBT	"Taman Desa Cemerlang Rumah Pangsa,Pelentong."	39	77
+2010	9	Johor	MBJB	"Taman Gembira,Tebrau."	12	73
+2010	9	Johor	MBJB	"Larkin Jaya,Bandaraya"	12	34
+2010	9	Johor	MPPG	"Apartment Tg Putri Resort,Pelentong."	8	46
+2010	9	Johor	MBJB	"Kg Melayu Majidee, Bandaraya"	7	41
+2010	9	Johor	MBJB	Kondo Bukit Saujana Bandaraya Jb	13	50
+2010	9	Johor	MBJB	"Taman Scientex Jalan Serindit,Pelentong"	12	68
+2010	9	Sarawak	Miri	Kg Baru Jalan Anting 2	36	69
+2010	9	Sarawak	Miri	"Pujut Tanjung Batu, Lorong 1C"	15	82
+2010	9	Sarawak	Miri	Piasau Utara Lorong 3B	14	93
+2010	9	Sarawak	Marudi	Long Teru	7	32
+2010	9	Sarawak	Bintulu	Bandar Baru Bintulu	13	88
+2010	9	N. Sembilan	Seremban	"Taman Marida, S'Wang"	10	34
+2010	9	N. Sembilan	Seremban	Taman Tuanku Jaafar F3	6	36
+2010	9	N. Sembilan	Seremban	Taman Kelab Tuanku	7	40
+2010	9	N. Sembilan	Seremban	Blok C Ampangan	6	33
+2010	9	N. Sembilan	Seremban	Taman Tunku Ampuan Najihah	5	32
+2010	9	Pahang	Kuantan	Taman Cenderawasih	22	33
+2010	9	P. Pinang	Timur Laut	"Lorong Nipah,Sungai Dua"	6	37
+2010	9	Terengganu	KKM	Kampung Buluh Gading	36	33
+2010	10	Selangor	MPSJ	Pjs 9	17	116
+2010	10	Selangor	MBPJ	Flat Desa Mentari Pjs 6	24	106
+2010	10	Selangor	MPSJ	Ss 18	63	92
+2010	10	Selangor	MPSJ	Usj 2	18	83
+2010	10	Selangor	MPSJ	Usj 11	67	82
+2010	10	Selangor	Hulu Langat	Pangsapuri Sri Ayu Seksyen 4 Bandar Baru Bangi	39	76
+2010	10	Selangor	MPAJ	Au5D Taman Keramat (Zon A)	9	67
+2010	10	Selangor	MBPJ	Mentari Court Pjs 8	23	65
+2010	10	Selangor	MPSJ	Ss 14	22	64
+2010	10	Selangor	Gombak	Kg Desa Aman	27	63
+2010	10	Selangor	Hulu Langat	Kuarters Penjara	20	62
+2010	10	Selangor	Gombak	Taman Sri Gombak Fasa 9	17	59
+2010	10	Selangor	MBPJ	Apartment Suria Mas Pjs 10	10	57
+2010	10	Selangor	MBPJ	Flat Desaria Pjs 5	34	55
+2010	10	Selangor	Hulu Langat	Seksyen 1 Bandar Rinching	9	48
+2010	10	Selangor	MBSA	Seksyen 7D	10	47
+2010	10	Selangor	MBSA	Kolej Jati	11	47
+2010	10	Selangor	MBPJ	Flat Taman Sri Manja Pjs 3	13	46
+2010	10	Selangor	MPAJ	Taman Melawati (Zon 5)	17	45
+2010	10	Selangor	MPSJ	Bandar Kinrara (6)	10	45
+2010	10	Selangor	Hulu Langat	Apartment 16C Seksyen 16 Bandar Baru Bangi	14	44
+2010	10	Selangor	MBPJ	Sri Manja Court Pjs 3	16	43
+2010	10	Selangor	MPSJ	Taman Sedang Perdana (Sp 5)	18	40
+2010	10	Selangor	MPAJ	Taman Dagang Jaya ( Zon A)	9	39
+2010	10	Selangor	Hulu Langat	Taman Cheras Awana	10	39
+2010	10	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	9	37
+2010	10	Selangor	MPAJ	Taman Bukit Teratai (Zon C)	12	37
+2010	10	Selangor	MPSJ	Pjs 11	11	36
+2010	10	Selangor	MPAJ	Taman Dagang (Zon A)	9	35
+2010	10	Selangor	Hulu Langat	Taman Jasmin	5	33
+2010	10	Selangor	Sepang	Apartment Rista Villa	5	33
+2010	10	Selangor	Gombak	Selayang Baru K5	7	31
+2010	10	Selangor	MPSJ	Pusat Bandar Puchong ( Jalan Wawasan )(2)	9	30
+2010	10	Selangor	MBSA	Subang Suria & Hijauan Seksyen U5	7	30
+2010	10	WPKL	Cheras	Ppr Taman Mulia	22	67
+2010	10	WPKL	Cheras	Ppr Desa Tun Razak	13	61
+2010	10	WPKL	Cheras	Flat Sri Melaka.	7	39
+2010	10	WPKL	Setapak	Taman Setapak Jaya (Jalan Rejang 4-10)	15	60
+2010	10	WPKL	Setapak	"Keramat Wangsa Kelumpuk Kuang,Teratai,Menara Merak Kayangan."	15	51
+2010	10	WPKL	Setapak	Keramat Wangsa Kelumpuk Sunding  Malam Bunga Raya	5	37
+2010	10	WPKL	Pusat Bandar	Bandar Baru Sentul (Menara Orkid)	16	57
+2010	10	WPKL	Pusat Bandar	Flat Sri Selangor	62	45
+2010	10	WPKL	Klang Lama	Ppr Kg Limau	9	40
+2010	10	Johor	MPJBT	"Taman Desa Cemerlang Rumah Pangsa,Pelentong."	41	84
+2010	10	Johor	MBJB	"Larkin Jaya,Bandaraya"	12	40
+2010	10	Johor	MBJB	"Kg Melayu Majidee, Bandaraya"	8	48
+2010	10	Johor	MPJBT	"Taman Pelangi Indah Flat Jalan Cantik,Tebrau."	17	55
+2010	10	Johor	MBJB	"Taman Kenanga,Tebrau"	8	31
+2010	10	Johor	MBJB	Kondo Bukit Saujana Bandaraya Jb	14	57
+2010	10	Johor	MBJB	"Taman Scientex Jalan Serindit,Pelentong"	13	75
+2010	10	Sarawak	Miri	Kg Baru Jalan Anting 2	40	76
+2010	10	Sarawak	Miri	"Pujut Tanjung Batu, Lorong 1C"	17	89
+2010	10	Sarawak	Miri	Piasau Utara Lorong 3B	15	100
+2010	10	Sarawak	Bintulu	Bandar Baru Bintulu	13	95
+2010	10	N. Sembilan	Seremban	"Taman Marida, Senawang"	11	41
+2010	10	N. Sembilan	Seremban	Blok C Ampangan	6	40
+2010	10	N. Sembilan	Seremban	Taman Rasah Jaya F 1	8	33
+2010	10	N. Sembilan	Seremban	Apartment Desa Palma	5	35
+2010	10	Pahang	Kuantan	Taman Cenderawasih	22	40
+2010	10	Perak	Batang Padang	"Kg Baru Coldstrem, Bidor"	7	33
+2010	10	Terengganu	KKM	Kampung Buluh Gading	37	40
+2010	10	Terengganu	KKM	Rakr Telaga Daeng	15	36
+2010	11	Selangor	MBPJ	Flat Desa Mentari Pjs 6	26	113
+2010	11	Selangor	MPSJ	Ss 18	71	99
+2010	11	WPKL	MPSJ	Usj 11	70	89
+2010	11	WPKL	MPAJ	Au5D Taman Keramat (Zon A)	9	74
+2010	11	WPKL	MBPJ	Mentari Court Pjs 8	23	72
+2010	11	WPKL	Gombak	Kg Desa Aman	30	70
+2010	11	WPKL	Gombak	Taman Sri Gombak Fasa 9	21	66
+2010	11	WPKL	MBPJ	Flat Desaria Pjs 5	36	62
+2010	11	WPKL	MBSA	Seksyen 7D (Teres Jalan 7/63)	12	54
+2010	11	WPKL	MPAJ	Taman Melawati (Zon 5)	19	52
+2010	11	WPKL	Hulu Langat	Apartment 16C Seksyen 16 Bandar Baru Bangi	17	51
+2010	11	Selangor	MPSJ	Taman Sedang Perdana (Sp 5)	20	47
+2010	11	Selangor	Hulu Langat	Taman Cheras Awana	10	46
+2010	11	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	14	44
+2010	11	Selangor	MPAJ	Taman Bukit Teratai (Zon C)	12	44
+2010	11	Selangor	MPSJ	Pjs 11	12	43
+2010	11	Selangor	MPAJ	Taman Dagang (Zon A)	9	42
+2010	11	Selangor	Gombak	Selayang Baru K5	7	38
+2010	11	Selangor	MPSJ	Pusat Bandar Puchong ( Jalan Wawasan ) (2)	10	37
+2010	11	Selangor	MPSJ	Usj 6	12	35
+2010	11	Selangor	MPSJ	Taman Bkt Serdang	10	35
+2010	11	Selangor	MPKJ	Taman Sepakat Indah	8	34
+2010	11	Selangor	MPAJ	Au3/1 Taman Keramat (Zon A)	12	33
+2010	11	Selangor	MPAJ	Taman Ukay Perdana (Zon 6)	9	32
+2010	11	Selangor	Gombak	Selayang Baru K2	8	32
+2010	11	Selangor	MPAJ	Pandah Indah (Zon C)	11	30
+2010	11	Selangor	MPSJ	Ss 15	12	30
+2010	11	Selangor	Hulu Langat	Apartment Pesona Taman Kajang	8	30
+2010	11	Selangor	Gombak	Taman Sri Gombak F1	8	30
+2010	11	WPKL	Cheras	Ppr Taman Mulia	23	74
+2010	11	WPKL	Cheras	Ppr Desa Tun Razak	13	68
+2010	11	WPKL	Cheras	Flat Sri Melaka.	7	46
+2010	11	WPKL	Setapak	Taman Setapak Jaya (Jalan Rejang 4-10)	19	67
+2010	11	WPKL	Setapak	"Keramat Wangsa Kelumpuk Kuang,Teratai,Menara Merak Kayangan."	15	58
+2010	11	WPKL	Setapak	Desa Tun Hussin Onn B ( Blok 5-17)	7	34
+2010	11	WPKL	Pusat Bandar	Bandar Baru Sentul (Menara Orkid)	17	64
+2010	11	WPKL	Pusat Bandar	Flat Sri Selangor	74	52
+2010	11	WPKL	Klang Lama	Ppr Kg Limau	9	47
+2010	11	WPKL	Klang Lama	Vista Angkasa	7	30
+2010	11	Johor	MPJBT	"Taman Desa Cemerlang Rumah Pangsa,Pelentong."	43	91
+2010	11	Johor	MBJB	"Kg Melayu Majidee, Bandaraya"	8	56
+2010	11	Johor	MPJBT	"Taman Pelangi Indah Flat Jalan Cantik,Tebrau."	17	62
+2010	11	Johor	MBJB	"Taman Kenanga,Tebrau"	8	38
+2010	11	Johor	MBJB	"Flat Larkin ,Bandaraya"	10	30
+2010	11	Johor	MBJB	Kondo Bukit Saujana Bandaraya Jb	14	64
+2010	11	Johor	MBJB	"Taman Scientex Jalan Serindit,Pelentong"	13	82
+2010	11	Sarawak	Miri	Kg Baru Jalan Anting 2	41	83
+2010	11	Sarawak	Miri	"Pujut Tanjung Batu, Lorong 1C"	18	96
+2010	11	Sarawak	Miri	Piasau Utara Lorong 3B	15	107
+2010	11	Sarawak	Bintulu	Bandar Baru Bintulu	13	102
+2010	11	N. Sembilan	Seremban	"Taman Marida, Senawang"	11	48
+2010	11	N. Sembilan	Seremban	Blok C Ampangan	6	47
+2010	11	N. Sembilan	Seremban	Apartment Desa Palma	7	41
+2010	11	Pahang	Kuantan	Taman Cenderawasih	22	47
+2010	11	Pahang	Kuantan	Taman Indera Mahkota 5	9	32
+2010	11	Terengganu	KKM	Kampung Buluh Gading	37	47
+2010	11	Terengganu	KKM	Rakr Telaga Daeng	15	43
+2010	12	Selangor	MBPJ	Flat Desa Mentari Pjs 6	26	120
+2010	12	Selangor	MPSJ	Ss 18	71	106
+2010	12	Selangor	MPSJ	Usj 11	70	96
+2010	12	Selangor	MBPJ	Mentari Court Pjs 8	25	79
+2010	12	Selangor	Gombak	Kg Desa Aman	32	77
+2010	12	Selangor	Gombak	Taman Sri Gombak Fasa 9	23	73
+2010	12	Selangor	MBPJ	Flat Desaria Pjs 5	37	69
+2010	12	Selangor	MBSA	Seksyen 7D (Teres Jalan 7/63)	13	61
+2010	12	Selangor	MPAJ	Taman Melawati (Zon 5)	19	59
+2010	12	Selangor	Hulu Langat	Apartment 16C Seksyen 16 Bandar Baru Bangi	20	58
+2010	12	Selangor	MPSJ	Taman Sedang Perdana (Sp 5)	22	54
+2010	12	Selangor	Hulu Langat	Taman Cheras Awana	10	53
+2010	12	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	23	51
+2010	12	Selangor	MPSJ	Pjs 11	12	50
+2010	12	Selangor	MPAJ	Taman Dagang (Zon A)	11	49
+2010	12	Selangor	MPSJ	Pusat Bandar Puchong ( Jalan Wawasan )(2)	11	44
+2010	12	Selangor	MPSJ	Taman Bukit Serdang	14	42
+2010	12	Selangor	MPSJ	Usj 6	12	42
+2010	12	Selangor	MPKJ	Taman Sepakat Indah	10	41
+2010	12	Selangor	MPAJ	Au3/1 Taman Keramat (Zon A)	12	40
+2010	12	Selangor	Gombak	Selayang Baru K2	9	39
+2010	12	Selangor	MPAJ	Taman Ukay Perdana (Zon 6)	9	39
+2010	12	Selangor	MPAJ	Pandan Indah (Zon C)	11	37
+2010	12	Selangor	MPSJ	Ss 15	12	37
+2010	12	Selangor	Hulu Langat	Apartment Pesona Taman Kajang	8	37
+2010	12	Selangor	MPS	Taman Pelangi Rawang	12	36
+2010	12	Selangor	Gombak	Bandar Baru Selayang Fasa 2B	5	36
+2010	12	Selangor	Gombak	Taman Industri Tago Kepong	12	34
+2010	12	Selangor	MPAJ	Taman Dagang (Zon B)	11	33
+2010	12	Selangor	Hulu Langat	Apartment Seksyen 1 Bandar Baru Bangi	9	33
+2010	12	Selangor	MBPJ	Gugusan Melur Sek 4 Pju 5	6	32
+2010	12	Selangor	MBPJ	Taman Indah Jaya Pjs 4	8	32
+2010	12	Selangor	Hulu Langat	Pkns Beranang	12	31
+2010	12	Selangor	MPSJ	Taman Puchong Intan	10	31
+2010	12	Selangor	MBPJ	Ss 9A	16	30
+2010	12	Selangor	MPAJ	Pandan Jaya (Zon B)	9	30
+2010	12	Selangor	MPAJ	Au2 Taman Keramat (Zon A)	8	30
+2010	12	WPKL	Cheras	Ppr Taman Mulia	26	81
+2010	12	WPKL	Cheras	Ppr Desa Tun Razak	14	75
+2010	12	WPKL	Setapak	Taman Setapak Jaya (Jalan Rejang 4-10)	21	74
+2010	12	WPKL	Setapak	"Keramat Wangsa Kelumpuk Kuang,Teratai,Menara Merak Kayangan."	16	65
+2010	12	WPKL	Setapak	Keramat Wangsa ( Pangsapuri Atm)	12	34
+2010	12	WPKL	Setapak	Jalan Semarak (Pulapol)	6	31
+2010	12	WPKL	Pusat Bandar	Bandar Baru Sentul (Menara Orkid)	17	71
+2010	12	WPKL	Pusat Bandar	Flat Sri Selangor	74	59
+2010	12	WPKL	Pusat Bandar	"Kg, Baru (Jalan Hamzah,Jalan Hj Yahya Syeikh Ahmad)"	9	30
+2010	12	WPKL	Damansara	Apartment Putra Ria	7	31
+2010	12	WPKL	Klang Lama	Vista Angkasa	10	37
+2010	12	Johor	MPJBT	"Taman Desa Cemerlang Rumah Pangsa,Pelentong."	43	97
+2010	12	Johor	MPJBT	"Taman Pelangi Indah Flat Jalan Cantik,Tebrau."	18	69
+2010	12	Johor	MBJB	"Flat Larkin ,Bandaraya"	10	37
+2010	12	Johor	MBJB	Kondo Bukit Saujana Bandaraya Jb	15	71
+2010	12	Sarawak	Miri	Kg Baru Jalan Anting 2	41	90
+2010	12	Sarawak	Miri	"Pujut Tanjung Batu, Lorong 1C"	18	103
+2010	12	Sarawak	Miri	Piasau Utara Lorong 3B	15	114
+2010	12	Sarawak	Bintulu	Bandar Baru Bintulu	13	109
+2010	12	Sarawak	Meradong	No. 5 Jalan Teo Kui Ngo	6	33
+2010	12	N. Sembilan	Seremban	Apartment Desa Palma	7	48
+2010	12	Pahang	Kuantan	Taman Cenderawasih	24	54
+2010	12	Pahang	Kuantan	Taman Indera Mahkota 5	9	39
+2010	13	Selangor	MPSJ	Ss 18	71	113
+2010	13	Selangor	MPSJ	Usj 11	73	103
+2010	13	Selangor	MBPJ	Mentari Court Pjs 8	29	86
+2010	13	Selangor	Gombak	Kg Desa Aman	33	84
+2010	13	Selangor	Gombak	Taman Sri Gombak Fasa 9	24	80
+2010	13	Selangor	MBPJ	Flat Desaria Pjs 5	37	76
+2010	13	Selangor	MBSA	Seksyen 7D (Teres -Jalan 7/63)	16	68
+2010	13	Selangor	Hulu Langat	Apartment 16C Seksyen 16 Bandar Baru Bangi	20	65
+2010	13	Selangor	MPSJ	Taman Sedang Perdana (Sp 5)	22	61
+2010	13	Selangor	Hulu Langat	Taman Cheras Awana	13	60
+2010	13	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	25	58
+2010	13	Selangor	MPSJ	Pjs 11	12	57
+2010	13	Selangor	MPAJ	Taman Dagang (Zon A)	12	56
+2010	13	Selangor	MPSJ	Pusat Bandar Puchong ( Jalan Wawasan )(2)	11	51
+2010	13	Selangor	MPSJ	Taman Bukit Serdang	16	49
+2010	13	Selangor	MPSJ	Usj 6	12	49
+2010	13	Selangor	MPKJ	Taman Sepakat Indah	12	48
+2010	13	Selangor	MPS	Taman Pelangi Rawang	13	43
+2010	13	Selangor	Gombak	Bandar Baru Selayang Fasa 2B	7	43
+2010	13	Selangor	Gombak	Taman Industri Tago Kepong	14	41
+2010	13	Selangor	MPAJ	Taman Dagang (Zon B)	13	40
+2010	13	Selangor	Hulu Langat	Pkns Beranang	13	38
+2010	13	Selangor	MBPJ	Ss 9A	18	37
+2010	13	Selangor	MPAJ	Pandan Jaya (Zon B)	9	37
+2010	13	Selangor	Gombak	Taman Selayang Utama	5	33
+2010	13	Selangor	Hulu Langat	Seksyen 3 Taman Pelangi Semenyih	19	31
+2010	13	Selangor	Gombak	"Apartment Julia
+(Bandar Baru Selayang F2B)"	6	30
+2010	13	Selangor	MPSJ	Taman Serdang Raya 4	8	30
+2010	13	WPKL	Cheras	Ppr Taman Mulia	26	88
+2010	13	WPKL	Cheras	Kg Malaysia Tambahan	5	36
+2010	13	WPKL	Cheras	Ppr Desa Tun Razak	17	82
+2010	13	WPKL	Cheras	Taman Maluri Jalan Jejaka	10	33
+2010	13	WPKL	Setapak	Taman Setapak Jaya (Jalan Rejang 4-10)	23	81
+2010	13	WPKL	Setapak	"Keramat Wangsa Kelumpuk Kuang,Teratai,Menara Merak Kayangan."	16	72
+2010	13	WPKL	Setapak	Jalan Semarak (Pulapol)	6	38
+2010	13	WPKL	Setapak	Heritage Kondo	16	31
+2010	13	WPKL	Setapak	Keramat Wangsa Kelumpuk Cempaka Penguin	14	32
+2010	13	WPKL	Pusat Bandar	Flat Sri Selangor	76	66
+2010	13	WPKL	Pusat Bandar	"Kg, Baru (Jalan Hamzah,Jalan Hj Yahya Syeikh Ahmad)"	9	37
+2010	13	WPKL	Damansara	Kg Sg Pencala	7	31
+2010	13	WPKL	Klang Lama	Vista Angkasa	11	44
+2010	13	WPKL	Klang Lama	Bukit Jalil (Jalil Damai Apartment)	9	30
+2010	13	Johor	MPJBT	"Taman Desa Cemerlang Rumah Pangsa,Pelentong."	45	105
+2010	13	Johor	MPJBT	"Taman Pelangi Indah Flat Jalan Cantik,Tebrau."	18	93
+2010	13	Johor	MBJB	"Taman Kenanga, Tebrau"	9	52
+2010	13	Sarawak	Miri	"Pujut Tanjung Batu, Lorong 1C"	18	110
+2010	13	Sarawak	Miri	Piasau Utara Lorong 3B	15	121
+2010	13	Pahang	Kuantan	Taman Cenderawasih	24	61
+2010	13	Pahang	Kuantan	Taman Pasdec Makmur	14	31
+2010	14	Selangor	MBPJ	Mentari Court Pjs 8	30	93
+2010	14	Selangor	Gombak	Kg Desa Aman	33	91
+2010	14	Selangor	Gombak	Taman Sri Gombak Fasa 9	26	87
+2010	14	Selangor	MBPJ	Flat Desaria Pjs 5	38	83
+2010	14	Selangor	MBSA	Seksyen 7D (Teres - Jalan 7/63)	16	75
+2010	14	Selangor	Hulu Langat	Apartment 16C Seksyen 16 Bandar Baru Bangi	22	72
+2010	14	Selangor	Hulu Langat	Taman Cheras Awana	14	67
+2010	14	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	26	65
+2010	14	Selangor	MPAJ	Taman Dagang (Zon A)	12	63
+2010	14	Selangor	MPSJ	Taman Bukit Serdang	16	56
+2010	14	Selangor	MPKJ	Taman Sepakat Indah	17	55
+2010	14	Selangor	MPS	Taman Pelangi Rawang	13	50
+2010	14	Selangor	Gombak	Bandar Baru Selayang Fasa 2B	7	50
+2010	14	Selangor	Gombak	Taman Industri Tago Kepong	15	48
+2010	14	Selangor	MPAJ	Taman Dagang (Zon B)	15	47
+2010	14	Selangor	Hulu Langat	Pkns Beranang	13	45
+2010	14	Selangor	MBPJ	Ss 9A	19	44
+2010	14	Selangor	Gombak	Taman Selayang Utama	5	40
+2010	14	Selangor	Hulu Langat	Seksyen 3 Taman Pelangi Semenyih	24	38
+2010	14	Selangor	Gombak	"Apartment Julia
+(Bandar Baru Selayang F2B)"	6	37
+2010	14	Selangor	Hulu Langat	Fasa 2 Seksyen 4 Bandar Baru Bangi	10	36
+2010	14	Selangor	MPAJ	Pandan Mewah (Zon A)	12	34
+2010	14	Selangor	MPAJ	Taman Permata (Zon A)	8	32
+2010	14	Selangor	MBSA	Seksyen 13 (Pangsapuri Perdana)	16	30
+2010	14	Selangor	MBPJ	Apt Saujana Pju 10	5	30
+2010	14	WPKL	Cheras	Ppr Taman Mulia	29	95
+2010	14	WPKL	Cheras	Ppr Desa Tun Razak	18	89
+2010	14	WPKL	Cheras	Taman Maluri Jalan Jejaka	12	40
+2010	14	WPKL	Setapak	Taman Setapak Jaya (Jalan Rejang 4-10)	23	88
+2010	14	WPKL	Setapak	"Keramat Wangsa Kelumpuk Kuang,Teratai,Menara Merak Kayangan."	23	79
+2010	14	WPKL	Setapak	Keramat Wangsa Kelumpuk Cempaka Penguin	15	39
+2010	14	WPKL	Pusat Bandar	Flat Sri Selangor	77	73
+2010	14	WPKL	Pusat Bandar	"Kg Baru (Jalan Hamzah,Jalan Hj Yahya Syeikh Ahmad)"	10	44
+2010	14	WPKL	Pusat Bandar	Flat Sri Sarawak	11	33
+2010	14	WPKL	Klang Lama	Vista Angkasa	14	51
+2010	14	WPKL	Klang Lama	Bukit Jalil (Jalil Damai Apartment)	11	37
+2010	14	Johor	MPJBT	"Taman Desa Cemerlang Rumah Pangsa,Pelentong."	47	112
+2010	14	Johor	MBJB	"Taman Kenanga, Tebrau"	9	59
+2010	14	Johor	MBJB	Kawasan Perindustrian Tampoi Tebrau	32	34
+2010	14	Johor	MPJBT	Bandar Sri Alam Jalan Tasek 6A Pelentong	5	33
+2010	14	Pahang	Kuantan	Taman Indera Mahkota 6	7	35
+2010	15	Selangor	MBPJ	Mentari Court Pjs 8	34	100
+2010	15	Selangor	Gombak	Taman Sri Gombak Fasa 9	28	94
+2010	15	Selangor	MBPJ	Flat Desaria Pjs 5	38	90
+2010	15	Selangor	Hulu Langat	Apartment 16C Seksyen 16 Bandar Baru Bangi	23	79
+2010	15	Selangor	Hulu Langat	Taman Cheras Awana	15	74
+2010	15	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	26	72
+2010	15	Selangor	MPKJ	Taman Sepakat Indah	29	62
+2010	15	Selangor	MPAJ	Taman Dagang (Zon B)	16	54
+2010	15	Selangor	MBPJ	Ss 9A	23	51
+2010	15	Selangor	Hulu Langat	Seksyen 3 Taman Pelangi Semenyih	34	45
+2010	15	Selangor	Hulu Langat	Fasa 2 Seksyen 4 Bandar Baru Bangi	12	43
+2010	15	Selangor	MPAJ	Pandan Mewah (Zon A)	14	41
+2010	15	Selangor	MBSA	Seksyen 13 (Pangsapuri Perdana)	19	37
+2010	15	Selangor	Hulu Langat	Fasa 4 Taman Taming Jaya	6	36
+2010	15	Selangor	MPAJ	Taman Kosas (Zon C)	12	34
+2010	15	Selangor	MPSJ	Taman Pinggiran Usj 2	6	33
+2010	15	Selangor	Gombak	Taman Desa Jaya	13	32
+2010	15	Selangor	MBPJ	Apartment Permai Pju 10	11	32
+2010	15	Selangor	Gombak	Kg Matang Pagar	6	31
+2010	15	Selangor	Hulu Selangor	"Kuarters Rumah Kedai, Jalan Seri Pagi, Sg Choh"	5	30
+2010	15	Selangor	MBSA	Apartment Alora Seksyen 25	6	30
+2010	15	WPKL	Cheras	Ppr Taman Mulia	29	103
+2010	15	WPKL	Cheras	Ppr Desa Tun Razak	23	97
+2010	15	WPKL	Cheras	Taman Maluri Jalan Jejaka	13	48
+2010	15	WPKL	Cheras	Flat Sri Johor A (Blok 1-35)	4	31
+2010	15	WPKL	Setapak	"Keramat Wangsa Kelumpuk Kuang,Teratai,Menara Merak Kayangan."	23	87
+2010	15	WPKL	Setapak	Keramat Wangsa Kelumpuk Cempaka Penguin	16	47
+2010	15	WPKL	Pusat Bandar	Flat Sri Selangor	77	81
+2010	15	WPKL	Pusat Bandar	"Kg Baru (Jalan Hamzah,Jalan Hj Yahya Syeikh Ahmad)"	10	52
+2010	15	WPKL	Pusat Bandar	Flat Sri Sarawak	11	41
+2010	15	WPKL	Klang Lama	Vista Angkasa	15	59
+2010	15	WPKL	Klang Lama	Bukit Jalil (Jalil Damai Apartment)	12	44
+2010	15	WPKL	Kepong	Pangsapuri Sri Batu	7	33
+2010	15	Johor	MPJBT	"Taman Desa Cemerlang Rumah Pangsa,Pelentong."	47	119
+2010	15	Johor	MPPG	"Flat Sedc, Pelentong"	13	31
+2010	15	Johor	MBJB	"Flat Larkin,Bandaraya"	11	61
+2010	15	Pahang	Kuantan	Taman Indera Mahkota 6	10	38
+2010	15	Pahang	Kuantan	Kuarters Pga Bukit Galing	5	31
+2010	16	Selangor	MBPJ	Mentari Court Pjs 8	36	107
+2010	16	Selangor	Gombak	Taman Sri Gombak Fasa 9	29	101
+2010	16	Selangor	Hulu Langat	Apartment 16C Seksyen 16 Bandar Baru Bangi	23	86
+2010	16	Selangor	Hulu Langat	Taman Cheras Awana	15	81
+2010	16	Selangor	MPKJ	Taman Sepakat Indah	42	69
+2010	16	Selangor	MPAJ	Taman Dagang (Zon B)	18	61
+2010	16	Selangor	MBPJ	Ss 9A	27	58
+2010	16	Selangor	Hulu Langat	Seksyen 3 Taman Pelangi Semenyih	45	52
+2010	16	Selangor	Hulu Langat	Fasa 2 Seksyen 4 Bandar Baru Bangi	13	50
+2010	16	Selangor	MPAJ	Pandan Mewah (Zon A)	18	48
+2010	16	Selangor	MBSA	Seksyen 13 (Pangsapuri Perdana)	23	44
+2010	16	Selangor	Hulu Langat	Fasa 4 Taman Taming Jaya	6	43
+2010	16	Selangor	MPAJ	Taman Kosas (Zon C)	12	41
+2010	16	Selangor	MPSJ	Taman Pinggiran Usj 2	8	40
+2010	16	Selangor	Gombak	Taman Desa Jaya	17	39
+2010	16	Selangor	Gombak	Kg Matang Pagar	7	38
+2010	16	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	13	35
+2010	16	Selangor	MPSJ	Taman Serdang Jaya 2	11	31
+2010	16	Selangor	MPK	Taman Palm Grove Jalan Resak	7	31
+2010	16	Selangor	MPKJ	Taman Berjaya Baru	16	30
+2010	16	Selangor	MBSA	Seksyen 6( Jalan 6/5- Jalan 6/5C)	8	30
+2010	16	WPKL	Cheras	Ppr Desa Tun Razak	23	103
+2010	16	WPKL	Cheras	Taman Maluri Jalan Jejaka	14	54
+2010	16	WPKL	Setapak	"Keramat Wangsa Kelumpuk Kuang,Teratai,Menara Merak Kayangan."	23	93
+2010	16	WPKL	Setapak	Keramat Wangsa Kelumpuk Cempaka Penguin	18	53
+2010	16	WPKL	Klang Lama	Vista Angkasa	17	65
+2010	16	WPKL	Klang Lama	Bukit Jalil (Jalil Damai Apartment)	12	51
+2010	16	WPKL	Kepong	Pangsapuri Sri Batu	7	39
+2010	16	Johor	MPJBT	Felda Ulu Tebrau	5	37
+2010	16	Johor	MPPG	"Flat Sedc, Pelentong"	15	39
+2010	16	Pahang	Kuantan	Taman Indera Mahkota 6	12	45
+2010	16	Sarawak	Bau	Kpg Stenggang	4	33
+2010	17	Selangor	MBPJ	Mentari Court Pjs 8	37	114
+2010	17	Selangor	MPKJ	Taman Sepakat Indah	50	76
+2010	17	Selangor	MPAJ	Taman Dagang (Zon B)	18	68
+2010	17	Selangor	MBPJ	Ss 9A	31	65
+2010	17	Selangor	Hulu Langat	Seksyen 3 Taman Pelangi Semenyih	47	59
+2010	17	Selangor	Hulu Langat	Fasa 2 Seksyen 4 Bandar Baru Bangi	13	57
+2010	17	Selangor	MPAJ	Pandan Mewah (Zon A)	22	55
+2010	17	Selangor	MBSA	Seksyen 13 (Pangsapuri Perdana)	25	51
+2010	17	Selangor	MPSJ	Taman Pinggiran Usj 2	8	47
+2010	17	Selangor	Gombak	Taman Desa Jaya	17	46
+2010	17	Selangor	Gombak	Kg Matang Pagar	8	45
+2010	17	Selangor	Hulu Langat	Fasa 4 Taman Taming Jaya	7	47
+2010	17	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	17	42
+2010	17	Selangor	MPSJ	Taman Serdang Jaya 2	12	38
+2010	17	Selangor	MPKJ	Taman Berjaya Baru	16	37
+2010	17	Selangor	MPAJ	Taman Teratai (Zon C) Ep 2	11	36
+2010	17	Selangor	Hulu Langat	Seksyen 1 Bandar Rinching	10	35
+2010	17	Selangor	Hulu Langat	Fasa 1 Taman Kantan Permai	7	35
+2010	17	Selangor	MPKJ	Taman Kajang Jaya	7	32
+2010	17	Selangor	K.Langat	Bandar Saujana Putra	5	31
+2010	17	Selangor	Gombak	Selayang Baru K5	5	31
+2010	17	WPKL	Cheras	Ppr Desa Tun Razak	24	110
+2010	17	WPKL	Cheras	Taman Maluri Jalan Jejaka	15	61
+2010	17	WPKL	Cheras	Desa Tasik (Polis)	10	30
+2010	17	WPKL	Setapak	Keramat Wangsa Kelumpuk Cempaka Penguin	19	60
+2010	17	WPKL	Setapak	Ppr Desa Rejang	9	30
+2010	17	WPKL	Klang Lama	Vista Angkasa	20	72
+2010	17	WPKL	Klang Lama	Bukit Jalil (Jalil Damai Apartment)	13	58
+2010	17	Johor	MPPG	"Flat Sedc, Pelentong"	15	46
+2010	17	Johor	MPPG	"Taman Tg Puteri Resort Jalan Lampam,Pelentong"	9	34
+2010	17	Pahang	Kuantan	Taman Indera Mahkota 6	12	45
+2010	18	Selangor	MBPJ	Mentari Court Pjs 8	37	121
+2010	18	Selangor	MPKJ	Taman Sepakat Indah	54	83
+2010	18	Selangor	MBPJ	Ss 9A	35	72
+2010	18	Selangor	Hulu Langat	Seksyen 3 Taman Pelangi Semenyih	48	66
+2010	18	Selangor	MPAJ	Pandan Mewah (Zon A)	25	62
+2010	18	Selangor	MBSA	Seksyen 13 (Pangsapuri Perdana)	25	58
+2010	18	Selangor	Hulu Langat	Fasa 4 Taman Taming Jaya	7	54
+2010	18	Selangor	Gombak	Taman Desa Jaya	21	53
+2010	18	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	18	49
+2010	18	Selangor	MPSJ	Taman Serdang Jaya 2	12	45
+2010	18	Selangor	K.Langat	Bandar Saujana Putra	5	38
+2010	18	Selangor	Hulu Selangor	"Apartment Kenangan Tbr, Bukit Beruntung"	5	34
+2010	18	Selangor	MBPJ	Apartment Impian Pju 10	6	33
+2010	18	Selangor	MBSA	Seksyen 2	5	33
+2010	18	Selangor	MPSJ	Pusat Bandar Puchong (Jalan Wawasan 1)	11	32
+2010	18	Selangor	MPSJ	Pusat Bandar Puchong (Wawasan 2)	7	32
+2010	18	Selangor	MBPJ	Ss 22	5	31
+2010	18	Selangor	MPKJ	Taman Koperasi Lln	7	30
+2010	18	Selangor	MPAJ	Taman Melawati (Zon 5)	11	30
+2010	18	WPKL	Cheras	Ppr Desa Tun Razak	24	117
+2010	18	WPKL	Cheras	Taman Maluri Jalan Jejaka	16	68
+2010	18	WPKL	Cheras	Desa Tasik (Polis)	14	37
+2010	18	WPKL	Setapak	Keramat Wangsa Kelumpuk Cempaka Penguin	19	67
+2010	18	WPKL	Setapak	Ppr Desa Rejang	9	37
+2010	18	WPKL	Klang Lama	Vista Angkasa	22	79
+2010	18	WPKL	Klang Lama	Bukit Jalil (Jalil Damai Apartment)	13	65
+2010	18	WPKL	Klang Lama	Pantai Dalam ( Ppr Pantai Ria)	5	32
+2010	18	WPKL	Kepong	"Ampat Tin (R,K,A,T)"	6	31
+2010	18	WPKL	Damansara	Apartment Putra Ria	11	31
+2010	18	WPKL	Damansara	Apartment Abdullah Hukum	6	30
+2010	18	Johor	MPPG	"Taman Tg Puteri Resort Jalan Lampam,Pelentong"	9	40
+2010	18	Johor	MPPG	"Taman Mawar, Pelentong"	9	34
+2010	18	Pahang	Rompin	Bandar Melati	8	31
+2010	18	N. Sembilan	Seremban	Taman Rasah Jaya F1 (Ep 2)	7	32
+2010	18	N. Sembilan	Seremban	Taman Marida (Anggerik/Taman Melati)	9	30
+2010	19	Selangor	MPKJ	Taman Sepakat Indah	62	90
+2010	19	Selangor	MBPJ	Ss 9A	35	79
+2010	19	Selangor	Hulu Langat	Seksyen 3 Taman Pelangi Semenyih	48	73
+2010	19	Selangor	MPAJ	Pandan Mewah (Zon A)	26	69
+2010	19	Selangor	Gombak	Taman Desa Jaya	21	60
+2010	19	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	20	56
+2010	19	Selangor	MBPJ	Apartment Impian Pju 10	7	40
+2010	19	Selangor	MPSJ	Pusat Bandar Puchong (Jalan Wawasan 1)	11	39
+2010	19	Selangor	MPSJ	Pst Bandar Puchong (Wawasan 2)	7	39
+2010	19	Selangor	MBPJ	Ss 22	7	38
+2010	19	Selangor	MPAJ	Taman Melawati (Zon 5)	12	37
+2010	19	Selangor	MPKJ	Taman Koperasi Lln	7	37
+2010	19	Selangor	MPKJ	Taman Kajang Mewah	12	34
+2010	19	Selangor	Hulu Langat	Taman Jasmin (2)	9	34
+2010	19	Selangor	Hulu Langat	Taman Delima Kajang (2)	5	34
+2010	19	Selangor	Hulu Langat	Hostel Kolej Politek Mara Bangi	12	33
+2010	19	Selangor	Hulu Langat	Fasa 2 Seksyen 3 Tambahan	7	32
+2010	19	Selangor	MPAJ	Taman Permata (Zon A)	10	32
+2010	19	WPKL	Cheras	Taman Maluri Jalan Jejaka	16	75
+2010	19	WPKL	Cheras	Desa Tasik (Polis)	17	44
+2010	19	WPKL	Cheras	Desa Tasik (Awam)	5	34
+2010	19	WPKL	Setapak	"Taman Setapak
+(Jalan Bakubang,Tioman)"	6	32
+2010	19	WPKL	Setapak	Heritage Kondo	6	36
+2010	19	WPKL	Klang Lama	Vista Angkasa	25	86
+2010	19	WPKL	Kepong	"Ampat Tin (R,K,A,T)"	7	38
+2010	19	WPKL	Kepong	Quarters Kerajaan Jalan Duta	8	35
+2010	19	WPKL	Damansara	Apartment Putra Ria	11	38
+2010	19	WPKL	Damansara	Apartment Abdullah Hukum	7	37
+2010	19	Johor	MPPG	"Taman Mawar, Pelentong"	10	41
+2010	19	Johor	MPJBT	Taman Sri Skudai Jalan Emas	11	33
+2010	19	Johor	Kluang (PBT)	Taman Kluang Barat	10	31
+2010	19	Pahang	Rompin	Bandar Melati	8	38
+2010	19	Pahang	Kuantan	Pakr Kg Padang	11	32
+2010	19	N. Sembilan	Seremban	Taman Rasah Jaya F1 (Ep 2)	9	39
+2010	19	N. Sembilan	Seremban	Taman Marida (Anggerik/Taman Melati)	9	37
+2010	19	N. Sembilan	Seremban	Flat Dahlia Seremban 2	15	35
+2010	20	Selangor	MPKJ	Taman Sepakat Indah	67	97
+2010	20	Selangor	MPAJ	Pandan Mewah (Zon A)	28	76
+2010	20	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	20	63
+2010	20	Selangor	MBPJ	Apartment Impian Pju 10	8	47
+2010	20	Selangor	MBPJ	Ss 22	7	45
+2010	20	Selangor	MPKJ	Taman Koperasi Lln	8	44
+2010	20	Selangor	MPAJ	Taman Melawati (Zon 5)	15	44
+2010	20	Selangor	MPKJ	Taman Kajang Mewah	17	41
+2010	20	Selangor	Hulu Langat	Taman Jasmin (2)	11	41
+2010	20	Selangor	Hulu Langat	Taman Delima Kajang (2)	7	41
+2010	20	Selangor	Hulu Langat	Hostel Kolej Politek Mara Bangi	13	40
+2010	20	Selangor	MPAJ	Taman Permata (Zon A)	10	39
+2010	20	Selangor	Hulu Langat	Fasa 2 Seksyen 3 Tambahan	7	39
+2010	20	Selangor	MPSJ	Taman Sri Serdang	8	33
+2010	20	Selangor	MPKJ	Taman Putra	10	32
+2010	20	Selangor	Gombak	Kg Changkat	13	32
+2010	20	Selangor	MPSJ	Usj 11	6	31
+2010	20	Selangor	Hulu Langat	Taman Asa Jaya	5	31
+2010	20	Selangor	Gombak	Kg Nakhoda Kiri	5	30
+2010	20	WPKL	Cheras	Desa Tasik (Polis)	18	51
+2010	20	WPKL	Cheras	"Desa Petaling
+(Pangsa Ria Apartment)"	7	36
+2010	20	WPKL	Setapak	"Taman Setapak
+(Jalan Bakubang,Tioman)"	6	39
+2010	20	WPKL	Klang Lama	Vista Angkasa	26	93
+2010	20	WPKL	Kepong	"Ampat Tin (R,K,A,T)"	7	45
+2010	20	WPKL	Kepong	Quarters Kerajaan Jalan Duta	12	42
+2010	20	WPKL	Kepong	Taman Sri Segambut	5	32
+2010	20	WPKL	Damansara	Apartment Putra Ria	11	45
+2010	20	Johor	MPPG	"Taman Mawar, Pelentong"	12	48
+2010	20	Johor	MPJBT	Taman Sri Skudai Jalan Emas	11	40
+2010	20	Johor	Kluang (PBT)	Taman Kluang Barat	10	38
+2010	20	Pahang	Kuantan	Pakr Kg Padang	11	39
+2010	20	N. Sembilan	Seremban	Taman Rasah Jaya F1 (Ep 2)	9	46
+2010	20	N. Sembilan	Seremban	Taman Marida (Anggerik/Taman Melati)	9	44
+2010	20	N. Sembilan	Seremban	Flat Dahlia Seremban 2	16	42
+2010	21	Selangor	MPKJ	Taman Sepakat Indah	70	104
+2010	21	Selangor	MPAJ	Pandan Mewah (Zon A)	28	83
+2010	21	Selangor	MBPJ	Apartmentimpian Pju 10	8	54
+2010	21	Selangor	MPKJ	Taman Koperasi Lln	9	51
+2010	21	Selangor	MPAJ	Taman Melawati (Zon 5)	16	51
+2010	21	Selangor	Hulu Langat	Taman Jasmin (2)	13	48
+2010	21	Selangor	MPKJ	Taman Kajang Mewah	18	48
+2010	21	Selangor	Hulu Langat	Taman Delima Kajang (2)	7	48
+2010	21	Selangor	Hulu Langat	Hostel Kolej Politek Mara Bangi	13	47
+2010	21	Selangor	MPKJ	Taman Putra	12	39
+2010	21	Selangor	Gombak	Kg Changkat	14	39
+2010	21	Selangor	MPAJ	Taman. Permata(Zon C)	10	36
+2010	21	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	18	33
+2010	21	Selangor	MPK	Kawasan Perindustrian Sg Rasa Jalan Bt 3 Lama	13	31
+2010	21	WPKL	Cheras	Desa Tasik (Polis)	18	58
+2010	21	WPKL	Cheras	Bandar Tun Razak (Apartment Lumayan)	9	33
+2010	21	WPKL	Cheras	Ppr Raya Permai	5	33
+2010	21	WPKL	Setapak	"Taman Setapak (Jalan Bakubang,Tioman)"	8	46
+2010	21	WPKL	Klang Lama	Vista Angkasa	26	100
+2010	21	WPKL	Kepong	Quarters Kerajaan Jalan Duta	17	49
+2010	21	Johor	MPPG	"Taman Mawar, Pelentong"	16	55
+2010	21	Johor	MBJB	Taman Gembira	7	34
+2010	21	N. Sembilan	Seremban	Flat Dahlia Seremban 2	16	49
+2010	21	Sabah	Sandakan	Taman Fajar	10	32
+2010	22	Selangor	MPKJ	Taman Sepakat Indah	72	111
+2010	22	Selangor	MPAJ	Pandan Mewah (Zon A)	29	90
+2010	22	Selangor	MPKJ	Taman Koperasi Lln	9	58
+2010	22	Selangor	MPAJ	Taman Melawati (Zon 5)	16	58
+2010	22	Selangor	MPKJ	Taman Kajang Mewah	23	55
+2010	22	Selangor	Hulu Langat	Taman Jasmin (2)	14	55
+2010	22	Selangor	MPKJ	Taman Putra	13	46
+2010	22	Selangor	Gombak	Kg Changkat	17	46
+2010	22	Selangor	MPAJ	Taman Permata(Zon C)	11	43
+2010	22	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	18	40
+2010	22	Selangor	MBPJ	Flat Desa Mentari Pjs 6	5	34
+2010	22	Selangor	MPS	Rawang Integrated	9	33
+2010	22	Selangor	Hulu Langat	Seksyen 3 Bandar Teknologi (3)	8	33
+2010	22	Selangor	Hulu Langat	Seksyen 1 Bandar Tasik Kesuma (3)	8	32
+2010	22	Selangor	MBPJ	Apartment Harmoni Pju 10	8	30
+2010	22	WPKL	Cheras	Desa Tasik (Polis)	18	65
+2010	22	WPKL	Cheras	Bandar Tun Razak (Apartment Lumayan)	10	40
+2010	22	WPKL	Setapak	"Taman Setapak
+(Jalan Bakubang,Tioman)"	10	53
+2010	22	WPKL	Kepong	Quarters Kerajaan Jalan Duta	20	56
+2010	22	WPKL	Kepong	Jinjang Utara R/P Jg Kawasan D Jalan 1/16C-12/16C	7	36
+2010	22	Johor	MPPG	"Taman Mawar, Pelentong"	16	62
+2010	22	Johor	MBJB	Taman Gembira	10	41
+2010	22	Johor	MPPG	Taman Scientex Jalan Helang	5	30
+2010	22	N. Sembilan	Seremban	Flat Dahlia Seremban 2	19	55
+2010	23	Selangor	MPKJ	Taman Sepakat Indah	76	118
+2010	23	Selangor	MPAJ	Pandan Mewah (Zon A)	29	97
+2010	23	Selangor	MPKJ	Taman Kajang Mewah	29	62
+2010	23	Selangor	Hulu Langat	Taman Jasmin (2)	14	62
+2010	23	Selangor	MPKJ	Taman Putra	14	53
+2010	23	Selangor	Gombak	Kg Changkat	20	53
+2010	23	Selangor	MPAJ	Taman Permata(Zon C)	11	50
+2010	23	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	24	47
+2010	23	Selangor	MPS	Rawang Integrated	10	40
+2010	23	Selangor	Hulu Langat	Seksyen 1 Bandar Tasik Kesuma (3)	9	39
+2010	23	Selangor	MPS	Taman Rawang Perdana Apartmentlily	12	36
+2010	23	Selangor	MPAJ	Kg Melayu Ampang (Zon A)	12	33
+2010	23	Selangor	MPSJ	Sri Kembangan (Sk 13)	5	32
+2010	23	Selangor	MPAJ	Pandan Jaya (Zon B)	16	31
+2010	23	Selangor	MPSJ	Usj 8 (Court 6)	6	30
+2010	23	WPKL	Cheras	Bandar Tun Razak (Apartmentlumayan)	11	47
+2010	23	WPKL	Setapak	"Taman Setapak
+(Jalan Bakubang,Tioman)"	10	60
+2010	23	WPKL	Kepong	Quarters Kerajaan Jalan Duta	22	63
+2010	23	Johor	MPPG	"Taman Mawar, Pelentong"	17	69
+2010	23	Johor	MBJB	Taman Gembira	13	48
+2010	23	N. Sembilan	Seremban	Flat Dahlia Seremban 2	19	62
+2010	23	Kelantan	Kota Bharu	"Kg. Batu 6, Sabak"	12	34
+2010	24	Selangor	MPKJ	Taman Sepakat Indah	80	125
+2010	24	Selangor	MPKJ	Taman Kajang Mewah	32	69
+2010	24	Selangor	Gombak	Kg Changkat	21	60
+2010	24	Selangor	MPKJ	Taman Putra	14	60
+2010	24	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	26	54
+2010	24	Selangor	MPS	Rawang Integrated	11	47
+2010	24	Selangor	Hulu Langat	Seksyen  1 Bandar Tasik Kesuma (3)	9	46
+2010	24	Selangor	MPS	Taman Rawang Perdana Apartmentlily	13	43
+2010	24	Selangor	MPAJ	Kg Melayu Ampang (Zon A)	12	40
+2010	24	Selangor	MPAJ	Pandan Jaya (Zon B)	20	38
+2010	24	Selangor	Hulu Langat	Flat Sri Tanjung Seksyen 7 Bandar Baru Bangi	6	35
+2010	24	Selangor	MPAJ	Kg Melayu Ampang ( Zon C)	9	33
+2010	24	Selangor	Hulu Langat	Fasa 4 Taman Bukit Mewah	7	33
+2010	24	Selangor	Klang	Lot 6120 Batu 5 3/4 Jalan Hj Abdul Manan Off Jalan Meru	5	33
+2010	24	Selangor	Hulu Langat	Taman Desa Jenaris	8	32
+2010	24	Selangor	Gombak	Apartment Aman 1 Desa Aman Puri	5	30
+2010	24	WPKL	Kepong	Quarters Kerajaan Jalan Duta	22	70
+2010	24	WPKL	Cheras	Bandar Tun Razak (Apartment Lumayan)	11	54
+2010	24	WPKL	Setapak	Setapak Ria Kondo Jalan Genting Klang	5	30
+2010	24	WPKL	Setapak	Keramat Wangsa Kelumpuk Kenanga Sunding Malam	6	30
+2010	24	Johor	MBJB	Taman Gembira	13	55
+2010	24	Johor	MPPG	"Rumah Pangsa Jalan Tembusu,Pasir Gudang"	12	35
+2010	24	Johor	MPPG	Perjiranan 9 Pasir Gudang	6	35
+2010	24	Kelantan	Kota Bharu	"Kg. Batu 6, Sabak"	13	41
+2010	25	Selangor	MPKJ	Taman Sepakat Indah	82	132
+2010	25	Selangor	MPKJ	Taman Kajang Mewah	32	76
+2010	25	Selangor	Gombak	Kg Changkat	22	67
+2010	25	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	30	61
+2010	25	Selangor	MPS	Rawang Integrated	11	54
+2010	25	Selangor	MPS	Taman Rawang Perdana Apartment Lily	13	50
+2010	25	Selangor	MPAJ	Pandan Jaya (Zon B)	22	45
+2010	25	Selangor	Hulu Langat	Flat Sri Tanjung Seksyen 7 Bandar Baru Bangi	7	42
+2010	25	Selangor	MPAJ	Kg Melayu Ampang ( Zon C)	12	40
+2010	25	Selangor	Hulu Langat	Taman Desa Jenaris	9	39
+2010	25	Selangor	Gombak	Apartment Aman 1 Desa Aman Puri	6	37
+2010	25	Selangor	Hulu Langat	Kem Pga 2	11	34
+2010	25	Selangor	MPAJ	Pandan Perdana (Zon B)	13	30
+2010	25	Selangor	MBPJ	Armanee Kondo Pju 10	7	30
+2010	25	Selangor	MPAJ	Pandan Indah ( Zon C)	9	30
+2010	25	WPKL	Kepong	Quarters Kerajaan Jalan Duta	23	77
+2010	25	WPKL	Setapak	Keramat Wangsa Kelumpuk Kenanga Sunding Malam	6	37
+2010	25	Johor	MBJB	Taman Gembira	16	62
+2010	25	Johor	MPPG	"Rumah Pangsa
+Jalan Tembusu,Pasir Gudang"	12	43
+2010	25	Johor	MPPG	Perjiranan 9 Pasir Gudang	6	43
+2010	25	Johor	MBJB	Kondominium Wadihana	6	33
+2010	25	Johor	MBJB	Taman Century	43	33
+2010	25	Johor	PBT	Chamek N/V	10	34
+2010	25	Kelantan	Kota Bharu	"Kg. Batu 6, Sabak"	13	48
+2010	25	Pahang	Kuantan	Taman Siok Thong	21	36
+2010	25	Sarawak	Daro	Kpg Masjid Lama Belawai	4	31
+2010	25	N. Sembilan	Seremban	Taman Seremban Jaya F3	10	31
+2010	26	Selangor	MPKJ	Taman Sepakat Lndah	85	139
+2010	26	Selangor	Gombak	Kg Changkat	24	74
+2010	26	Selangor	MPAJ	Aus Taman Keramat (Zon A)	33	68
+2010	26	Selangor	MPAJ	Pandan Jaya (Zon B)	29	52
+2010	26	Selangor	Hulu Langat	Flat Sri Tanjung Seksyen 7 Bandar Baru Bangi	9	49
+2010	26	Selangor	MPAJ	Kg Melayu Ampang ( Zon C)	13	47
+2010	26	Selangor	Hulu Langat	Taman Desa Jenaris	9	46
+2010	26	Selangor	Gombak	Apartment Aman 1 Desa Aman Puri	7	44
+2010	26	Selangor	Hulu Langat	Kem Pga (2)	13	41
+2010	26	Selangor	MPAJ	Pandan Perdana (Zon B)	17	37
+2010	26	Selangor	MBPJ	Armanee Kondo Pju 10	7	37
+2010	26	Selangor	MPKJ	Kg Baru Sg Chua	6	33
+2010	26	Selangor	Hulu Langat	Apartment Taman Kajang Utama (2)	5	31
+2010	26	Selangor	Hulu Langat	Pangsapuri Baiduri Bandartasik Kesuma	17	30
+2010	26	WPKL	Kepong	Quarters Kerajaan Jalan Duta	23	84
+2010	26	WPKL	Cheras	Desa Tasik Awam	18	33
+2010	26	WPKL	Setapak	"Taman Setapak Lndah (Jalan 8C/6-13C/6, Jalansd/6-1 Od)"	5	31
+2010	26	Johor	MPPG	"Taman Mawar, Pelentong"	23	90
+2010	26	Johor	MBJB	Taman Gembira	17	68
+2010	26	Johor	MPPG	Perjiranan 9 Pasir Gudang	7	49
+2010	26	Johor	MBJB	Kondominium Wadihana	6	40
+2010	26	Johor	MBJB	Taman Century	49	40
+2010	26	Johor	PBT	Chamek Nn	10	41
+2010	26	Johor	MPJBT	Rumah Rakyat Lima Kedai	15	33
+2010	26	Johor	MPJBT	Taman Johor Jaya Jalan Bakawali	9	33
+2010	26	Pahang	Kuantan	Taman Siok Thong	21	43
+2010	26	N. Sembilan	Seremban	Taman Seremban Jaya F3	10	38
+2010	26	Perak	Kinta	Kg Sg Tapah Tambahan	7	34
+2010	26	Kelantan	Pasir Mas	Kg Baroh Pial Kangkong	12	34
+2010	26	Sarawak	Sibu	Jalan Tiong Hua	14	31
+2010	27	Selangor	MPKJ	Taman Sepakat Indah	86	146
+2010	27	Selangor	Gombak	Kg Changkat	25	81
+2010	27	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	40	75
+2010	27	Selangor	MPAJ	Pandan Jaya (Zon B)	33	59
+2010	27	Selangor	Hulu Langat	Flat Sri Tanjung Seksyen 7 Bandar Baru Bangi	10	56
+2010	27	Selangor	MPAJ	Kg Melayu Ampang ( Zon C)	14	54
+2010	27	Selangor	Gombak	Apartment Aman 1 Desa Aman Puri	7	51
+2010	27	Selangor	Hulu Langat	Kem Pga (2)	17	48
+2010	27	Selangor	MPAJ	Pandan Perdana (Zon B)	17	44
+2010	27	Selangor	Hulu Langat	Apartment Taman Kajang Utama (2)	5	38
+2010	27	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	18	37
+2010	27	Selangor	Gombak	Kg Bendahara	15	35
+2010	27	Selangor	Hulu Langat	Taman Sri Jelok	15	33
+2010	27	Selangor	Hulu Langat	Taman Sri Bahagia	5	31
+2010	27	Selangor	MPAJ	Pandan Jaya (Zon C)	7	31
+2010	27	WPKL	Cheras	Desa Tasik Awam	19	40
+2010	27	Johor	MPJBT	Rumah Rakyat Lima Kedai	15	40
+2010	27	Johor	MBJB	Taman Century	56	47
+2010	27	Johor	MPJBT	Taman Johor Jaya Jalan Bakawali	9	40
+2010	27	Johor	MPPG	"Taman Mawar, Pelentong"	26	97
+2010	27	Johor	MPPG	Perjiranan 9 Pasir Gudang	10	56
+2010	27	Johor	MBJB	Taman Gembira	20	75
+2010	27	Pahang	Kuantan	Taman Sentosaair Putih	8	30
+2010	27	N. Sembilan	Seremban	Taman Tunku Jaafar F3 (Ep2)	8	35
+2010	27	Perak	Kinta	Kg Sg Tapah Tambahan	8	41
+2010	27	Kelantan	Pasir Mas	Kg Baroh Pial Kangkong	15	41
+2010	27	Sarawak	Sibu	Jalan Tiong Hua	23	38
+2010	27	Sarawak	Sibu	Jalan Hardin	6	31
+2010	28	Selangor	MPKJ	Taman Sepakat Indah	87	153
+2010	28	Selangor	Gombak	Kg Changkat	27	88
+2010	28	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	41	82
+2010	28	Selangor	MPAJ	Pandan Jaya (Zon B)	33	66
+2010	28	Selangor	Hulu Langat	Flat Sri Tanjung Seksyen 7 Bandar Baru Bangi	10	63
+2010	28	Selangor	MPAJ	Kg Melayu Ampang ( Zon C)	14	61
+2010	28	Selangor	Hulu Langat	Kem Pga (2)	17	55
+2010	28	Selangor	MPAJ	Pandan Perdana (Zon B)	18	51
+2010	28	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	20	44
+2010	28	Selangor	Gombak	Kg Bendahara	18	42
+2010	28	Selangor	Hulu Langat	Taman Sri Jelok	16	40
+2010	28	Selangor	MPAJ	Pandan Jaya (Zon C)	8	38
+2010	28	Selangor	Hulu Langat	Taman Sri Bahagia	5	38
+2010	28	Selangor	MPAJ	Pandan Mewah (Zon A)	6	32
+2010	28	Selangor	Hulu Langat	Taman Sri Bangi	7	32
+2010	28	Selangor	Hulu Langat	Taman Permai Bangi (2)	4	32
+2010	28	Selangor	MPS	Jalan Hijau Gv 3 Btp	8	31
+2010	28	Selangor	Hulu Langat	Fasa 1 Seksyen 8 Bandar Baru Bangi	5	31
+2010	28	Johor	MPJBT	Rumah Rakyat Lima Kedai	17	46
+2010	28	Johor	MBJB	Taman Century	64	53
+2010	28	Johor	MPPG	"Taman Mawar, Pelentong"	26	103
+2010	28	Johor	MPJBT	Taman Johor Jaya Jalan Bakawali	10	46
+2010	28	Johor	MBJB	Taman Sri Tebrau	5	32
+2010	28	Johor	MBJB	Taman Sinaran Kempas	6	31
+2010	28	Johor	MPPG	Rumah Pangsa Jalan Tembusu	14	66
+2010	28	Johor	MPPG	Perjiranan 9 Pasir Gudang	13	63
+2010	28	Johor	MBJB	Taman Gembira	21	82
+2010	28	Sarawak	Sibu	Jalan Tiong Hua	25	45
+2010	28	Sarawak	Sibu	Jalan Huo Ping	13	35
+2010	28	Sarawak	Sibu	Jalan Hardin	8	38
+2010	28	Sarawak	Bintulu	"Kg Sebuan Kecil,Jepak"	11	33
+2010	28	Perak	Kinta	Kg Sg Tapah Tambahan	8	47
+2010	28	Perak	Kinta	Kg Manjoi	12	34
+2010	28	Kelantan	Pasir Mas	Kg Baroh Pial	15	48
+2010	28	Kelantan	Pasir Mas	Kg Gual Pasir	12	32
+2010	28	WPKL	Cheras	Desa Tasik Awam	17	47
+2010	28	N. Sembilan	Seremban	Taman Tunku Jaafar F3 (Ep2)	8	42
+2010	28	P. Pinang	Timur Laut	"Kuarters Polis, Lone Pine"	27	34
+2010	29	Selangor	Gombak	Kg Changkat	28	95
+2010	29	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	42	89
+2010	29	Selangor	MPAJ	Pandan Jaya (Zon B)	36	73
+2010	29	Selangor	Hulu Langat	Kem Pga (2)	19	62
+2010	29	Selangor	MPAJ	Pandan Perdana (Zon B)	19	58
+2010	29	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	22	51
+2010	29	Selangor	Gombak	Kg Bendahara	20	49
+2010	29	Selangor	Hulu Langat	Taman Sri Jelok	17	47
+2010	29	Selangor	MPAJ	Pandan Jaya (Zon C)	8	45
+2010	29	Selangor	Hulu Langat	Taman Sri Bangi	9	39
+2010	29	Selangor	Hulu Langat	Fasa 1 Seksyen 8 Bandar Baru Bangi	8	38
+2010	29	Selangor	MPS	Jalan Hijau Gv 3 Btp	8	38
+2010	29	Selangor	Hulu Langat	Taman Maju Kajang	6	36
+2010	29	Selangor	Gombak	Taman Desa Jaya	14	34
+2010	29	Selangor	Gombak	Taman Selayang Jaya	9	33
+2010	29	Selangor	Hulu Langat	Taman Cheras Jaya (2)	13	32
+2010	29	Selangor	Hulu Langat	Apartment D'Puncak Suasana Bandar Tun Hussin Onn	7	31
+2010	29	Johor	MPJBT	Rumah Rakyat Lima Kedai	17	53
+2010	29	Johor	MBJB	Taman Century	68	60
+2010	29	Johor	MBJB	Taman Sri Tebrau	6	39
+2010	29	Johor	MBJB	Kg Melayu Majidee	6	31
+2010	29	Johor	MPPG	Rumah Pangsa Jalan Tembusu	16	70
+2010	29	Johor	MPPG	Perjiranan 9 Pasir Gudang	15	70
+2010	29	Sarawak	Sibu	Jalan Tiong Hua	29	52
+2010	29	Sarawak	Sibu	Jalan Huo Ping	15	42
+2010	29	Sarawak	Sibu	Jalan Hardin	10	45
+2010	29	Sarawak	Sibu	Jalan Laichee	7	32
+2010	29	Sarawak	Bintulu	"Kg Sebuan Kecil,Jepak"	12	40
+2010	29	Kelantan	Pasir Mas	Kg Jejawi	11	33
+2010	29	WPKL	Setapak	"Setapak Jaya Jalan 1,3,5,6,13&14"	6	32
+2010	29	Perak	Kinta	Kg Sg Tapah Tambahan	9	55
+2010	29	Perak	Kinta	Kg Manjoi	15	42
+2010	29	N. Sembilan	Seremban	Taman Panchor Jaya F3	5	35
+2010	29	Melaka	Jasin	Taman Maju	11	36
+2010	30	Selangor	Gombak	Kg Changkat	32	102
+2010	30	Selangor	MPAJ	Aus Taman Keramat (Zon A)	42	96
+2010	30	Selangor	MPAJ	Pandan Jaya (Zon B)	39	80
+2010	30	Selangor	Hulu Langat	Kem Pga (2)	21	69
+2010	30	Selangor	MPAJ	Pandan Perdana (Zon B)	19	65
+2010	30	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	22	58
+2010	30	Selangor	Gombak	Kg Bendahara	21	56
+2010	30	Selangor	Hulu Langat	Taman Sri Jelok	19	54
+2010	30	Selangor	Hulu Langat	Taman Sri Sangi	9	46
+2010	30	Selangor	Hulu Langat	Fasa 1 Seksyen 8 Bandar Baru Sangi	12	45
+2010	30	Selangor	Gombak	Taman Desa Jaya	16	41
+2010	30	Selangor	Gombak	Taman Selayang Jaya	10	40
+2010	30	Selangor	Hulu Langat	Taman Cheras Jaya (2)	17	39
+2010	30	Selangor	Gombak	Apartment Nuri Bukit Ldaman	5	33
+2010	30	Selangor	Hulu Langat	Apartment D'Tinggian Suasana Bandar Tun Hussein Onn 9 (3)	7	32
+2010	30	Selangor	MPAJ	Taman Melawati (Zon 5)	6	32
+2010	30	Selangor	MBSA	Apartment Perdana Seksyen 13 (Blok 2& 4)	7	30
+2010	30	Johor	MBJB	Taman Century	68	67
+2010	30	Johor	MBJB	Taman Melodies	6	32
+2010	30	Johor	MBJB	Taman Sri Tebrau	7	46
+2010	30	Johor	MBJB	Kg Melayu Majidee	7	38
+2010	30	Johor	MBJBT	Taman Johar Jaya Jalan Teratai	6	36
+2010	30	Johor	MPPG	Rumah Pangsa Jalan Tembusu	16	77
+2010	30	Sarawak	Sibu	Jalan Tiong Hua	31	59
+2010	30	Sarawak	Sibu	Jalan Hua Ping	17	49
+2010	30	Sarawak	Sibu	Jalan Hardin	10	52
+2010	30	Sarawak	Sibu	Jalan Laichee	8	39
+2010	30	Sarawak	Sibu	Jalan Foochow	10	34
+2010	30	Sarawak	Sibu	Jalan Hua Kiew	13	33
+2010	30	Sarawak	Bintulu	"Kg Sebuan Kecil, Jepak"	13	47
+2010	30	WPKL	Setapak	"Setapak Jaya Jalan 1,3,5,6,13&14"	7	39
+2010	30	WPKL	Setapak	Taman Melati Jalan Taman Melati 1-7 Qrts Bomba.	8	32
+2010	30	Perak	Kinta	Kg Manjoi	15	49
+2010	30	Perak	MB lpoh	Taman Silibin	5	32
+2010	31	Selangor	Gombak	Kg Changkat	37	109
+2010	31	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	43	103
+2010	31	Selangor	MPAJ	Pandan Jaya (Zon B)	39	87
+2010	31	Selangor	Hulu Langat	Kem Pga (2)	22	76
+2010	31	Selangor	Gombak	Kg Bendahara	22	63
+2010	31	Selangor	Hulu Langat	Taman Sri Jelok	21	61
+2010	31	Selangor	Hulu Langat	Fasa 1 Seksyen 8 Bandarbaru Bangi	15	52
+2010	31	Selangor	Gombak	Taman Desa Jaya	18	48
+2010	31	Selangor	Gombak	Taman Selayang Jaya	12	47
+2010	31	Selangor	Hulu Langat	Taman Cheras Jaya (2)	18	46
+2010	31	Selangor	Hulu Langat	Apartment D'Tinggian Suasana Bandar Tun Hussein Onn 9 (3)	7	39
+2010	31	Selangor	Sepang	Taman Mawar 2	12	35
+2010	31	Selangor	Gombak	Taman Selayang Baru	6	35
+2010	31	Selangor	MPS	Taman Rawang Perdana 2 Fasa 10	6	32
+2010	31	Selangor	MBPJ	Mentari Court Pjs 8	5	31
+2010	31	Johor	MBJB	Kg Melayu Majidee	7	45
+2010	31	Johor	MPJBT	Taman Pulai Utama Jalan Pulai 43-85	6	33
+2010	31	Johor	MPJBT	Taman Desa Cemerlang Jalan Tanjung	4	32
+2010	31	Johor	MBJBT	Taman Johor Jaya Jalan Teratai	7	43
+2010	31	Johor	MBJB	Taman Cempaka	10	33
+2010	31	Sarawak	Sibu	Jalan Tiong Hua	32	66
+2010	31	Sarawak	Sibu	Jalan Huo Ping	20	56
+2010	31	Sarawak	Sibu	Jalan Laichee	8	46
+2010	31	Sarawak	Sibu	Jalan Foochow	10	41
+2010	31	Sarawak	Sibu	Jalan Hua Kiew	14	40
+2010	31	Sarawak	Sibu	Jalan Amoy	9	31
+2010	31	Sarawak	Bintulu	"Kg Sebuan Kecil,Jepak"	14	54
+2010	31	Sarawak	Bau	Kg Stenggang	10	31
+2010	31	WPKL	Setapak	"Setapak Jaya Jalan 1,3,5,6,13&14"	9	46
+2010	31	Kelantan	Pasir Mas	Kg Teresek	8	32
+2010	32	Selangor	Gombak	Kg Changkat	43	116
+2010	32	Selangor	MPAJ	Au5 Taman Keramat (Zon A)	43	110
+2010	32	Selangor	Hulu Langat	Kem Pga (2)	22	83
+2010	32	Selangor	Gombak	Kg Bendahara	22	70
+2010	32	Selangor	Hulu Langat	Taman Sri Jelok	21	68
+2010	32	Selangor	Hulu Langat	Fasa 1 Seksyen 8 Bandar Baru Bangi	15	59
+2010	32	Selangor	Gombak	Taman Selayang Jaya	12	54
+2010	32	Selangor	Hulu Langat	Taman Cheras Jaya (2)	20	53
+2010	32	Selangor	Sepang	Taman Mawar 2	14	42
+2010	32	Selangor	MPSJ	Taman Sri Serdang 2	10	36
+2010	32	Selangor	MPKJ	Taman Kajang Mewah	6	32
+2010	32	Selangor	MPS	Jalan Hijau Gv5 Btp	6	30
+2010	32	Johor	MBJB	Taman Sri Tebrau	9	60
+2010	32	Johor	MBJB	Kg Melayu Majidee	10	52
+2010	32	Johor	MBJBT	Taman Johor Jaya Jalan Teratai	7	50
+2010	32	Johor	MPJBT	Taman Desa Cemerlang Jalan Johar.	9	39
+2010	32	Johor	MPJBT	Flat Bandar Pulai Jaya	6	31
+2010	32	Johor	MBJB	Apartment Sri Wangi	5	30
+2010	32	Johor	MBJB	Kg Dato Sulaiman Menteri	5	30
+2010	32	Sarawak	Sibu	Jalan Tiong Hua	32	73
+2010	32	Sarawak	Sibu	Jalan Huo Ping	20	63
+2010	32	Sarawak	Bintulu	"Kg Sebuan Kecil,Jepak"	14	61
+2010	32	Sarawak	Sibu	Jalan Laichee	9	53
+2010	32	Sarawak	Sibu	Jalan Hua Kiew	15	47
+2010	32	WPKL	Setapak	"Setapak Jaya Jalan 1,3,5,6,13&14"	9	53
+2010	32	WPKL	Klang Lama	Taman Oug Jalan Hujan Emas 8 & 9 Jalan Hujan Gerimis 1&2	8	33
+2010	32	Kelantan	Pasir Mas	Kg Teresek	9	39
+2010	32	Kelantan	Kota Bharu	Lorong Merican	20	35
+2010	32	Pahang	Kuantan	Taman Beserah	6	30
+2010	33	Selangor	Gombak	Kg Changkat	46	123
+2010	33	Selangor	Hulu Langat	Taman Sri Jelok	27	75
+2010	33	Selangor	Gombak	Taman Selayang Jaya	17	61
+2010	33	Selangor	Hulu Langat	Taman Cheras Jaya (2)	20	60
+2010	33	Selangor	Sepang	Taman Mawar 2	15	49
+2010	33	Selangor	MPKJ	Taman Kajang Mewah	7	39
+2010	33	Selangor	Hulu Langat	Taman Jasmin	10	32
+2010	33	Johor	MBJB	Kg Melayu Majidee	11	59
+2010	33	Johor	MPJBT	Taman Desa Cemerlang Jalan Johar	9	46
+2010	33	Johor	MBJB	Apartment Sri Wangi	5	37
+2010	33	Johor	MBJB	Kg Dato Sulaiman Menteri	6	37
+2010	33	Johor	MBJB	Taman Sutera	9	31
+2010	33	Sarawak	Sibu	Jalan Huo Ping	20	70
+2010	33	Sarawak	Sibu	Jalan Laichee	9	60
+2010	33	Sarawak	Sibu	Jalan Hua Kiew	15	54
+2010	33	WPKL	Klang Lama	Taman Oug Jalan Hujan Emas 8 & 9 Jalan Hujan Gerimis 1&2	8	40
+2010	33	WPKL	Setapak	Genting Court Kondo	10	36
+2010	33	Kelantan	Pasir Mas	Kg Teresek	9	46
+2010	33	Kelantan	Kota Bharu	Lorong Merican	22	42
+2010	34	Selangor	Gombak	Kg Changkat	50	130
+2010	34	Selangor	Hulu Langat	Taman Sri Jelok	27	82
+2010	34	Selangor	Gombak	Taman Selayang Jaya	17	68
+2010	34	Selangor	MPKJ	Taman Kajang Mewah	8	46
+2010	34	Selangor	Hulu Langat	Taman Jasmin	10	39
+2010	34	Selangor	MPS	Bandartasik Puteri Fasa 7	8	34
+2010	34	Selangor	MBSA	Seksyen 17 (Flat 17/1)	7	33
+2010	34	Selangor	MBPJ	Flat Impian Baiduri Seksyen 51A	6	33
+2010	34	Selangor	Gombak	Taman Selasih Fasa 1	6	32
+2010	34	Johor	MBJB	Kg Melayu Majidee	13	66
+2010	34	Johor	MBJB	Apartment Sri Wangi	6	44
+2010	34	Johor	MBJB	Kg Dato Sulaiman Menteri	7	44
+2010	34	Johor	MBJB	Taman Suria	9	38
+2010	34	Johor	MBJB	Taman Cempaka	13	53
+2010	34	Sarawak	Sibu	Jalan Hua Kiew	15	61
+2010	34	Sarawak	Sibu	"Tuong Aik Shipyard,Sg Bidut"	11	31
+2010	34	WPKL	Klang Lama	Taman Oug Jalan Hujan Emas 8 & 9 Jalan Hujan Gerimis 1&2	11	47
+2010	34	WPKL	Setapak	Genting Court Kondo	13	43
+2010	34	WPKL	Cheras	Flat Sri Kota	6	30
+2010	34	Kelantan	Kota Bharu	Lorong Merican	22	49
+2010	34	Kelantan	Pasir Mas	Kg Rasal	9	34
+2010	35	Selangor	Gombak	Kg Changkat	54	137
+2010	35	Selangor	MPKJ	Taman Kajang Mewah	8	53
+2010	35	Selangor	MPS	Bandar Tasik Puteri Fasa 7	10	41
+2010	35	Selangor	MPSJ	Bt 13 (Kg Kenangan)	7	32
+2010	35	Johor	MBJB	Kg Melayu Majidee	15	73
+2010	35	Johor	MBJB	Apartment Sri Wangi	6	51
+2010	35	Johor	MBJB	Kg Dato Sulaiman Menteri	8	51
+2010	35	Johor	MBJB	Taman Suria	11	45
+2010	35	Johor	MBJB	Taman Cempaka	14	60
+2010	35	Johor	MBJB	Taman Munsyi Ibrahim Jalan Dian	7	33
+2010	35	Johor	MPPG	Flat Taman Cendana	6	36
+2010	35	Johor	MBJBT	Taman Johor Jaya Jalan Teratai	8	71
+2010	35	Melaka	Melaka Tengah	Taman Melaka Baru Fasa 1	13	32
+2010	35	Melaka	Melaka Tengah	Taman Air Keroh Height	13	32
+2010	35	Melaka	Melaka Tengah	Kg Lapan Tengkera	23	32
+2010	35	Melaka	Melaka Tengah	Taman Kota Laksamana S1	7	31
+2010	35	Sarawak	Sibu	"Tuong Aik Shipyard,Sg Bidut"	13	39
+2010	35	WPKL	Klang Lama	Taman Oug Jalan Hujan Emas 8 & 9 Jalan Hujan Gerimis 1&2	11	54
+2010	35	WPKL	Setapak	Genting Court Kondo	15	50
+2010	35	WPKL	Cheras	Desa Tasik Polis	6	31
+2010	35	Kelantan	Kota Bharu	Lorong Merican	27	56
+2010	35	Kelantan	Kota Bharu	Cabang 3 Pengkalan Chepa	8	33
+2010	35	Terengganu	K.Terengganu	Kg Gong Penaga	9	30
+2010	36	Selangor	Gombak	Kg. Changkat	55	144
+2010	36	Selangor	MPSJ	"Kg.Tengah 4, Gombak, Setapak"	11	34
+2010	36	Selangor	Gombak	Taman Sri Gombak  Fasa 7	6	33
+2010	36	Selangor	Gombak	Taman Sri Gombak  Fasa 4	6	32
+2010	36	Selangor	MPS	Bandar Tasik Puteri Fasa 7	12	48
+2010	36	Sarawak	Sibu	"Tuong Aik Shipyard, Sg Bidut"	13	45
+2010	36	Kelantan	Kota Bharu	Lorong Merican	28	63
+2010	36	Kelantan	Kota Bharu	"Cabang 3, Pengkalan Chepa"	8	40
+2010	36	Johor	MBJB	Kg. Melayu Majidee	17	80
+2010	36	Johor	MBJB	Kg. Dato Sulaiman Menteri	9	58
+2010	36	Johor	MBJB	Taman Suria	11	52
+2010	36	Johor	MBJB	Taman Cempaka	18	67
+2010	36	Johor	MBJB	"Taman Munsyi Ibrahim, Jln. Dian"	7	40
+2010	36	Johor	MPPG	Flat Taman Cendana	7	43
+2010	36	Johor	MBJBT	"Taman. Johor Jaya, Jln. Teratai"	8	79
+2010	36	Johor	MPPG	"Taman Scientex, Jln. Kijang"	5	56
+2010	36	Johor	MBJB	Apartment Sri Wangi	8	58
+2010	36	Johor	MPPG	Taman Mawar	9	32
+2010	36	WPKL	Cheras	Desa Tasik Polis	8	38
+2010	36	WPKL	Zon Setapak	Villa Wangsa Mas Kondo	4	30
+2010	36	WPKL	Zon Setapak	Genting Court Condo	16	57
+2010	36	Melaka	Melaka Tengah	Taman  Air Keroh Height	14	39
+2010	36	Melaka	Melaka Tengah	Kg. Lapan Tengkera	25	39
+2010	36	Melaka	Melaka Tengah	Taman Kota Laksamana S.1	9	38
+2010	36	Melaka	Melaka Tengah	Taman  Melaka  Baru  Fasa 1	14	39
+2010	36	Melaka	Melaka Tengah	Taman Sinn Ujong Pasir	16	30
+2010	36	Terengganu	KKM	"Kg. Simpang 4, Chendering"	32	35
+2010	36	P. Pinang	KKM	"Flat  Hanna, Sungai Dua"	31	30
+2010	37	Selangor	Gombak	Kg Changkat	55	151
+2010	37	Selangor	MPS	Bandar Tasik Puteri Fasa 7	12	55
+2010	37	Selangor	Gombak	Taman Sri Gombak Fasa 7	6	40
+2010	37	Selangor	MPS	Taman Rawang Perdana Fasa 5	7	36
+2010	37	Selangor	Gombak	Taman Selayang Bahagia	8	36
+2010	37	Johor	MBJB	Kg Melayu Majidee	18	87
+2010	37	Johor	MBJB	Kg Dato Sulaiman Menteri	9	65
+2010	37	Johor	MBJB	Taman Cempaka	19	75
+2010	37	Johor	MBJB	Taman Munsyi Ibrahim Jln Dian	9	47
+2010	37	Johor	MPPG	Flat Taman Cendana	10	50
+2010	37	Johor	MBJBT	Taman Johor Jaya Jln Teratai	10	85
+2010	37	Johor	MPPG	Taman Mawar	9	39
+2010	37	Johor	MBJB	Apartment Sri Wangi	8	65
+2010	37	Melaka	Melaka Tengah	Taman Melaka Baru Fasa 1	15	46
+2010	37	Melaka	Melaka Tengah	Taman Air Keroh Height	14	46
+2010	37	Melaka	Melaka Tengah	Kg. Lapan Tengkera	26	46
+2010	37	Melaka	Melaka Tengah	Taman Kota Laksamana S.1	9	45
+2010	37	Melaka	Melaka Tengah	Taman Kesidang Seksyen 1/Kg 8	23	31
+2010	37	Melaka	Melaka Tengah	Taman Kenanga Seksyen1	24	36
+2010	37	Sarawak	Sibu	"Tuong Aik Shipyard,Sg Bidut"	14	52
+2010	37	Sarawak	Sibu	Lorong Belian	7	31
+2010	37	WPKL	Setapak	Genting Court Kondo	16	64
+2010	37	WPKL	Cheras	Desa Tasik Polis	9	45
+2010	37	WPKL	Klang Lama	Taman Sri Petaling (Endah Villa Condo)	6	36
+2010	37	Kelantan	Kota Bharu	Lorong Merican	28	70
+2010	37	Kelantan	Kota Bharu	Kg Kok Pasir	34	32
+2010	37	Kelantan	Kota Bharu	Taman Idaman	8	31
+2010	37	Kelantan	Kota Bharu	Taman Desa Kemumin	8	31
+2010	37	Kelantan	Kota Bharu	Kg Batu 3 Jln Kuala Krai	7	32
+2010	37	Terengganu	K.Terengganu	Kg Simpang 4 Chendering	36	42
+2010	37	Terengganu	K.Terengganu	Flat Polis Padang Hiliran	8	30
+2010	37	P. Pinang	Timur Laut	"Flat Hamna,Sg Dua"	39	37
+2010	38	Selangor	Gombak	Taman Selayang Bahagia	9	43
+2010	38	Selangor	MPS	Taman Rawang Perdana Fasa 5	7	43
+2010	38	Selangor	Hulu Langat	Taman Shah Jaya	5	36
+2010	38	Selangor	Gombak	Taman Pinggiran Bt Caves Z2	13	34
+2010	38	Selangor	Gombak	Taman Sri Gombak Fasa 9	8	31
+2010	38	Selangor	Hulu Langat	Taman Zamrud	5	30
+2010	38	Selangor	Gombak	Kg Selayang Indah	5	30
+2010	38	Johor	MBJB	Kg Melayu Majidee	19	94
+2010	38	Johor	MBJB	Taman Cempaka	20	82
+2010	38	Johor	MBJB	Taman Munsyi Ibrahim Jln Dian	9	54
+2010	38	Johor	MPPG	Flat Taman Cendana	18	57
+2010	38	Johor	MBJBT	Taman Johor Jaya Jln Teratai	10	92
+2010	38	Johor	MPPG	Taman Mawar	10	46
+2010	38	Johor	MPPG	Taman Air Biru Jln Jati	4	36
+2010	38	Johor	MPJBT	Taman Putri Wangsa Jln Beladau 33.43	6	31
+2010	38	Johor	MBJB	Apartment Sri Wangi	10	72
+2010	38	Johor	MPJBT	Taman Putri Wangsa Jln Badik	9	32
+2010	38	Johor	MPPG	Taman Scientex Jln Kijang	6	70
+2010	38	Melaka	Melaka Tengah	Taman Melaka Baru Fasa 1	16	53
+2010	38	Melaka	Melaka Tengah	Kg. Lapan Tengkera	29	53
+2010	38	Melaka	Melaka Tengah	Taman Kesidang Sek.1/Kg 8	23	38
+2010	38	Melaka	Melaka Tengah	Taman Kenanga Sek.1	25	43
+2010	38	Sarawak	Sibu	"Tuong Aik Shipyard,Sg Bidut"	14	59
+2010	38	WPKL	Cheras	Desa Tasik Polis	10	52
+2010	38	WPKL	Cheras	Ppr Desa Tun Razak	4	31
+2010	38	WPKL	Kepong	"Kepong Baru (Jln Bangau,Jln Kelicap, Jln Helang,Jln Bungur)"	4	30
+2010	38	Kelantan	Kota Bharu	Kg Kok Pasir	34	39
+2010	38	Kelantan	Kota Bharu	Taman Desa Kemumin	8	38
+2010	38	Kelantan	Kota Bharu	Taman Guru	11	33
+2010	38	Kelantan	Kota Bharu	"Kuarters Penjara, Pengkalan Chepa."	4	30
+2010	38	Terengganu	K.Terengganu	Kg Simpang 4 Chendering	40	49
+2010	38	Terengganu	K.Terengganu	Flat Polis Padang Hiliran	16	37
+2010	38	P. Pinang	Timur Laut	"Flat Hamna,Sg Dua"	39	44
+2010	38	Perlis	Kangar	Taman Singgahsana	7	35
+2010	39	Selangor	Gombak	Taman Selayang Bahagia	9	50
+2010	39	Selangor	Hulu Langat	Taman Shah Jaya	7	43
+2010	39	Selangor	Gombak	Taman Pinggiran Bt Caves Z2	14	41
+2010	39	Selangor	Gombak	Taman Sri Gombak Fasa 9	9	38
+2010	39	Selangor	Hulu Langat	Taman Zamrud	6	37
+2010	39	Selangor	Gombak	Kg Selayang Indah	7	37
+2010	39	Selangor	Hulu Langat	Apartment Intana Ria Seksyen 7   Bandar Baru Bangi	11	31
+2010	39	Johor	MBJB	Kg Melayu Majidee	20	101
+2010	39	Johor	MBJB	Taman Cempaka	22	89
+2010	39	Johor	MPPG	Flat Taman Cendana	21	64
+2010	39	Johor	MPPG	Taman Mawar	12	53
+2010	39	Johor	MPJBT	Taman Putri Wangsa Jln Beladau 33.43	7	38
+2010	39	Johor	MBJB	Apartment Sri Wangi	11	79
+2010	39	Johor	MPJBT	Taman Putri Wangsa Jln Badik	10	39
+2010	39	Johor	MBJB	Kawasan Industri Tampoi.	11	36
+2010	39	Johor	MPPG	Taman Scientex Jln Kijang	7	77
+2010	39	Johor	MPPG	"Taman Scientex, Jln. Helang"	13	32
+2010	39	Johor	MBJB	"Taman Rinting, Jln. Balau"	11	33
+2010	39	Johor	MPJBT	Taman Bkt Jaya Jln Denai	6	30
+2010	39	Melaka	Melaka Tengah	Kg. Lapan Tengkera	30	60
+2010	39	Melaka	Melaka Tengah	Taman Kenanga Sek.1	26	50
+2010	39	Melaka	Melaka Tengah	Kg Limbungan	13	34
+2010	39	WPKL	Cheras	Ppr Desa Tun Razak	4	38
+2010	39	WPKL	Kepong	"Kepong Baru (Jln Bangau,Jln Kelicap, Jln Helang,Jln Bungur)"	5	37
+2010	39	Kelantan	Kota Bharu	Taman Desa Kemumin	8	45
+2010	39	Kelantan	Kota Bharu	Taman Uda Murni	10	33
+2010	39	Terengganu	K.Terengganu	Kg Simpang 4 Chendering	43	56
+2010	39	Terengganu	K.Terengganu	Flat Polis Padang Hiliran	26	44
+2010	39	Terengganu	K.Terengganu	Kg Gong Pak Maseh	15	36
+2010	39	P. Pinang	Timur Laut	"Flat Hamna,Sg Dua"	39	51
+2010	39	Perlis	Kangar	Taman Singgahsana	8	42
+2010	40	Selangor	Hulu Langat	Taman Shah Jaya	7	50
+2010	40	Selangor	Gombak	Taman Pinggiran Bt Caves Z2	14	48
+2010	40	Selangor	Gombak	Taman Sri Gombak Fasa 9	11	45
+2010	40	Selangor	Hulu Langat	Taman Zamrud	6	44
+2010	40	Selangor	Gombak	Kg Selayang Indah	7	44
+2010	40	Selangor	Hulu Langat	Apartment Intana Ria Seksyen 7   Bandar Baru Bangi	13	38
+2010	40	Selangor	Gombak	Selayang Baru K4	7	35
+2010	40	Selangor	Hulu Langat	Jln Selamat  Kg Sg Ramal Dalam	13	35
+2010	40	Selangor	Gombak	Taman Greenwood	6	32
+2010	40	Johor	MBJB	Kg Melayu Majidee	22	108
+2010	40	Johor	MBJB	Taman Cempaka	25	96
+2010	40	Johor	MPPG	Flat Taman Cendana	24	71
+2010	40	Johor	MPPG	Taman Mawar	13	60
+2010	40	Johor	MBJB	Apartment Sri Wangi	12	86
+2010	40	Johor	MPJBT	Taman Putri Wangsa Jln Beladau 33.43	7	45
+2010	40	Johor	MPJBT	Taman Putri Wangsa Jln Badik	10	46
+2010	40	Johor	MBJB	Kawasan Industri Tampoi.	11	43
+2010	40	Johor	MPPG	Taman Scientex Jln Kijang	7	84
+2010	40	Johor	MPPG	"Taman Scientex, Jln. Helang"	17	39
+2010	40	Johor	MBJB	"Taman Rinting, Jln. Balau"	12	40
+2010	40	Johor	MPJBT	Taman Bkt Jaya Jln Denai	7	37
+2010	40	Johor	Kluang	Yap Tau Sah	14	36
+2010	40	Johor	Kluang	Taman Intan	15	33
+2010	40	Johor	MBJB	Kg Stulang Baru	9	36
+2010	40	Johor	MPJBT	Taman Mesra	5	31
+2010	40	Melaka	Melaka Tengah	Kg. Lapan Tengkera	31	67
+2010	40	Melaka	Melaka Tengah	Taman Kenanga Seksyen1	26	57
+2010	40	Melaka	Melaka Tengah	Kg Limbungan	13	41
+2010	40	WPKL	Kepong	"Kepong Baru (Jln Bangau,Jln Kelicap, Jln Helang,Jln Bungur)"	5	44
+2010	40	Terengganu	K.Terengganu	Kg Simpang 4 Chendering	43	63
+2010	40	Terengganu	K.Terengganu	Flat Polis Padang Hiliran	29	51
+2010	40	Terengganu	K.Terengganu	Kg Gong Pak Maseh	15	43
+2010	40	Perlis	Kangar	Taman Singgahsana	8	49
+2010	40	Kelantan	Kota Bharu	Taman Uda Murni	10	40
+2010	40	P. Pinang	Timur Laut	"Taman Utara, Batu Uban"	6	30
+2010	41	Selangor	Gombak	Taman Sri Gombak Fasa 9	11	52
+2010	41	Selangor	Hulu Langat	Apartment Intana Ria Seksyen 7   Bandar Baru Bangi	13	45
+2010	41	Selangor	Gombak	Selayang Baru K4	11	42
+2010	41	Selangor	Hulu Langat	Jln Selamat  Kg Sg Ramal Dalam	14	42
+2010	41	Selangor	Gombak	Taman Greenwood	7	39
+2010	41	Johor	MBJB	Kg Melayu Majidee	22	115
+2010	41	Johor	MBJB	Taman Cempaka	25	103
+2010	41	Johor	MPPG	Flat Taman Cendana	25	78
+2010	41	Johor	MPPG	Taman Mawar	13	67
+2010	41	Johor	MBJB	Apartment Sri Wangi	12	93
+2010	41	Johor	MPPG	"Taman Scientex, Jln. Helang"	19	46
+2010	41	Johor	MBJB	"Taman Rinting, Jln. Balau"	12	47
+2010	41	Johor	MPJBT	Taman Bkt Jaya Jln Denai	8	44
+2010	41	Johor	PBT	Yap Tau Sah	14	43
+2010	41	Johor	PBT	Taman Intan	19	40
+2010	41	Johor	MPJBT	Taman Mesra	5	38
+2010	41	Johor	MPPG	Taman Bukit Dahlia Jln Sejambak	11	33
+2010	41	Johor	MPK	Taman Kg Majid	19	30
+2010	41	Melaka	Melaka Tengah	Kg Lapan Tengkera	32	74
+2010	41	Melaka	Melaka Tengah	Kg Limbongan	14	48
+2010	41	Terengganu	K.Terengganu	Flat Polis Padang Hiliran	55	58
+2010	41	Sarawak	Sibu	Jln Tiong Sang	6	36
+2010	42	Selangor	Gombak	Taman Sri Gombak Fasa 9	12	59
+2010	42	Selangor	Hulu Langat	Jln Selamat  Kg Sg Ramal Dalam	15	49
+2010	42	Selangor	Gombak	Selayang Baru K4	12	49
+2010	42	Selangor	Gombak	Taman Greenwood	8	46
+2010	42	Selangor	MPS	Kg Rajah Rawang	11	32
+2010	42	Selangor	Hulu Langat	Apartment Taman Tenaga (3)	9	30
+2010	42	Johor	MPPG	Flat Taman Cendana	28	85
+2010	42	Johor	MPPG	"Taman Scientex, Jln. Helang"	19	53
+2010	42	Johor	MPK	Taman Intan	19	47
+2010	42	Johor	MPPG	Taman Bukit Dahlia Jln Sejambak	12	40
+2010	42	Johor	MPK	Taman Kg. Majid	20	37
+2010	42	Johor	MPK	Taman Kluang Baru	8	36
+2010	42	Johor	MPK	Taman Makmur	10	32
+2010	42	Johor	MPK	Taman Matahari	8	34
+2010	42	Johor	MPJBT	Rumah Pangsa Sri Lanang	5	35
+2010	42	Melaka	Melaka Tengah	Kg. Lapan Tengkera	32	81
+2010	42	Melaka	Melaka Tengah	Jln.Taming Sari	19	33
+2010	42	Melaka	Melaka Tengah	Taman Hilir Ujong Pasir	9	34
+2010	42	Melaka	Melaka Tengah	Taman Malim Jaya	32	34
+2010	42	Terengganu	K.Terengganu	Flat Polis Padang Hiliran	60	65
+2010	42	WPKL	Setapak	Taman Melati (Fs Tioman 172.Fs Langkawi 1&2)	9	32
+2010	42	WPKL	Setapak	"Taman Setapak Indah Jln 1A/6-6A/6,1B/6-7B/6, 1C/6-
+7C/6,1D/6-3D/6"	8	30
+2010	43	Selangor	Gombak	Taman Sri Gombak Fasa 9	13	66
+2010	43	Selangor	Gombak	Selayang Baru K4	14	56
+2010	43	Selangor	Hulu Langat	Jln Selamat  Kg Sg Ramal Dalam	18	56
+2010	43	Selangor	Gombak	Taman Greenwood	8	53
+2010	43	Selangor	MPS	Kg Rajah Rawang	13	39
+2010	43	Selangor	Hulu Langat	Apartment Taman Tenaga (3)	9	37
+2010	43	Selangor	Hulu Langat	Apartment Sri Anggerik 7 Bandar Baru Bangi	10	35
+2010	43	Selangor	MPAJ (GB)	Au2 Taman Keramat (Zon A)	17	32
+2010	43	Johor	MPPG	Flat Taman Cendana	29	92
+2010	43	Johor	MPPG	"Taman Scientex, Jln. Helang"	20	60
+2010	43	Johor	MPPG	Taman Bukitdahlia Jln Sejambak	12	47
+2010	43	Johor	MPK	Taman Kg. Majid	24	44
+2010	43	Johor	MPK	Taman Orkid	24	35
+2010	43	Johor	MPK	Taman Matahari	8	41
+2010	43	Johor	MBJB	Taman Melati	7	36
+2010	43	Johor	MPK	Taman Sri Tengah	9	34
+2010	43	Johor	MPK	Taman Kluang Baru	9	43
+2010	43	Melaka	Melaka Tengah	Jln.Taming Sari	23	40
+2010	43	Melaka	Melaka Tengah	Taman Malim Jaya	34	41
+2010	43	Melaka	Melaka Tengah	Kg Morten	6	36
+2010	43	Melaka	Melaka Tengah	Rumah Pangsa Pt Peringgit	24	32
+2010	43	Melaka	Melaka Tengah	Kg Pengkalan Rama Pantai	14	30
+2010	43	WPKL	Setapak	"Taman Setapak Indah Jln 1A/6-6A/6,1B/6-7B/6, 1C/6-
+7C/6,1D/6-3D/6"	8	37
+2010	43	WPKL	Setapak	Taman Melati (Fs Tioman 172.Fs Langkawi 1&2)	10	39
+2010	43	WPKL	Setapak	Taman Maluri (Jln Pria Pertiwi&Wirawati)	4	32
+2010	43	Terengganu	K.Terengganu	Flat Polis Padang Hiliran	60	72
+2010	44	Selangor	Gombak	Taman Sri Gombak Fasa 9	13	73
+2010	44	Selangor	Gombak	Selayang Baru K4	17	63
+2010	44	Selangor	Hulu Langat	Jln Selamat  Kg Sg Ramal Dalam	18	63
+2010	44	Selangor	MPS	Kg Rajah Rawang	15	46
+2010	44	Selangor	Hulu Langat	Apartment Sri Anggerik 7 Bandar Baru Bangi	10	42
+2010	44	Selangor	MPAJ (GB)	Au2 Taman Keramat (Zon A)	21	39
+2010	44	Selangor	Hulu Langat	Hentian Kajang	14	35
+2010	44	Selangor	Gombak	Taman Desa Jaya Kepong	18	34
+2010	44	Selangor	Hulu Langat	Flat Sri Kenari Kg Sg Ramal Luar	8	32
+2010	44	Selangor	Gombak	Selayang Baru K5	11	31
+2010	44	Johor	MPPG	Flat Taman Cendana	30	99
+2010	44	Johor	MPK	Taman Kg. Majid	25	51
+2010	44	Johor	MPK	Taman Orkid	24	42
+2010	44	Johor	MPK	Taman Matahari	8	48
+2010	44	Johor	MBJB	Taman Melati	7	43
+2010	44	Johor	MPPG	"Taman Cahaya Masai,Jln Intan"	9	34
+2010	44	Johor	MBJB	"Taman Daya, Jln Sagu"	14	33
+2010	44	Johor	MBJB	Flat Stulang Laut	8	32
+2010	44	Johor	MPK	Taman Kluang Baru	9	50
+2010	44	Melaka	Melaka Tengah	Jln.Taming Sari	24	47
+2010	44	Melaka	Melaka Tengah	Taman Malim Jaya	34	48
+2010	44	Melaka	Melaka Tengah	Rumah Pangsa Pt Peringgit	24	39
+2010	44	Melaka	Melaka Tengah	Kg Pengkalan Rama Pantai	17	37
+2010	44	WPKL	Setapak	Taman Melati (Fs Tioman 172 Fs Langkawi 1&2)	10	46
+2010	44	WPKL	Setapak	Seksyen 2 Wangsa Maju (A1-A19)	7	31
+2010	44	WPKL	Setapak	"Setapak Jaya (Asrama Sizwazah Utm,
+Jln Rejang 1-14)"	12	30
+2010	45	Selangor	Gombak	Selayang Baru K4	19	70
+2010	45	Selangor	MPS (GB)	Kg Rajah Rawang	16	53
+2010	45	Selangor	MPAJ (GB)	Au2 Taman Keramat (Zon A)	26	46
+2010	45	Selangor	Hulu Langat	Hentian Kajang	15	42
+2010	45	Selangor	Gombak	Taman Desa Jaya Kepong	21	41
+2010	45	Selangor	Gombak	Selayang Baru K5	11	38
+2010	45	Selangor	MPK (KG)	Jln Pelangi Kondominium Menara Regency	20	36
+2010	45	Selangor	MPAJ (GB)	Taman Ukay Perdana (Zon 2)	7	36
+2010	45	Selangor	MPAJ (HL)	Bandar Baru Ampang (Zon D)	4	36
+2010	45	Selangor	Gombak	Ipd Gombak	8	34
+2010	45	Selangor	MPS (GB)	Batu 8 Gombak	13	34
+2010	45	Selangor	MPS (GB)	Rawang Perdana Fasa 4	17	31
+2010	45	Selangor	Hulu Langat	Fasa 6 Seksyen 4 Bandar Baru Bangi	11	31
+2010	45	Selangor	MPAJ (HL)	Pandan Perdana (Zon B)	4	31
+2010	45	Johor	MPK	Taman Kg. Majid	25	58
+2010	45	Johor	MPPG	"Taman Cahaya Masai,Jln Intan"	10	41
+2010	45	Johor	MBJB	Taman Daya Jln Sagu	15	40
+2010	45	Johor	MPK	Taman Korakyat	12	33
+2010	45	Melaka	Melaka Tengah	Jln.Taming Sari	24	54
+2010	45	Melaka	Melaka Tengah	Kg Pengkalan Rama Pantai	17	44
+2010	45	WPKL	Setapak	"Setapak Jaya (Asrama Sizwazah Utm,
+Jln Rejang 1-14)"	12	37
+2010	45	WPKL	Kepong	"Taman Bkt Maluri (Jln Brg Balam,Merbuk,Terkukur& Jln 5/37A)"	11	36
+2010	46	Selangor	Gombak	Selayang Baru K4	19	77
+2010	46	Selangor	MPS (GB)	Kg Rajah Rawang	16	60
+2010	46	Selangor	MPAJ (GB)	Au2 Taman Keramat (Zon A)	26	53
+2010	46	Selangor	Hulu Langat	Hentian Kajang	18	49
+2010	46	Selangor	Gombak	Taman Desa Jaya Kepong	22	48
+2010	46	Selangor	MPK (KG)	Jln Pelangi Kondominium Menara Regency	20	43
+2010	46	Selangor	Gombak	Ipd Gombak	10	41
+2010	46	Selangor	Hulu Langat	Fasa 6 Seksyen 4 Bandar Baru Bangi	16	38
+2010	46	Selangor	MPS (GB)	Rawang Perdana Fasa 4	17	38
+2010	46	Selangor	Hulu Langat	Fasa 3 Seksyen 4 Bandar Baru Bangi	6	35
+2010	46	Selangor	Gombak	Taman Sri Ehsan	12	35
+2010	46	Selangor	Hulu Langat	Taman Tenaga	11	31
+2010	46	Selangor	Hulu Langat	Seksyen 2 Bandar Baru Bangi	6	30
+2010	46	Johor	MPJBT	"Bandar Seri Alam, Jln. Tasek"	7	36
+2010	46	Johor	MPJBT	Taman. Nusa Printis 1 Jln. Medan	19	30
+2010	46	WPKL	Setapak	"Setapak Jaya (Asrama Sizwazah Utm,
+Jln Rejang 1-14)"	14	44
+2010	46	WPKL	Kepong	"Taman Bkt Maluri (Jln Brg Balam,Merbuk,Terkukur & Jln 5/37A)"	12	43
+2010	46	WPKL	Pusat Bandar	Flat Sri Selangor	10	35
+2010	47	Selangor	MPS (GB)	Kg Rajah Rawang	17	67
+2010	47	Selangor	MPAJ (GB)	Au2 Taman Keramat (Zon A)	28	60
+2010	47	Selangor	Hulu Langat	Hentian Kajang	18	56
+2010	47	Selangor	Gombak	Taman Desa Jaya Kepong	24	55
+2010	47	Selangor	Gombak	Ipd Gombak	14	48
+2010	47	Selangor	Hulu Langat	Fasa 6 Seksyen 4 Bandar Baru Bangi	18	45
+2010	47	Selangor	MPS (GB)	Rawang Perdana Fasa 4	18	45
+2010	47	Selangor	Hulu Langat	Fasa 3 Seksyen 4 Bandar Baru Bangi	8	42
+2010	47	Selangor	Gombak	Taman Sri Ehsan	13	42
+2010	47	Selangor	Hulu Langat	Taman Tenaga	11	38
+2010	47	Selangor	Hulu Langat	Seksyen 2 Bandar Baru Bangi	6	37
+2010	47	Selangor	MPAJ (GB)	Taman Rawang Perdana Fasa 5 Flat	8	31
+2010	47	Selangor	MPKj (HL)	Taman Putra	7	30
+2010	47	WPKL	Setapak	"Setapak Jaya (Asrama Sizwazah Utm,
+Jln Rejang 1-14)"	14	51
+2010	47	WPKL	Kepong	Ppr Pekan Batu	12	35
+2010	47	WPKL	Pusat Bandar	Flat Sri Selangor	10	42
+2010	47	WPKL	Klang Lama	Vista Angkasa	8	33
+2010	47	Johor	MPJBT	"Bandar Seri Alam, Jln. Tasek"	7	43
+2010	47	Johor	MPJBT	"Taman Nusa Printis 1, Jln. Medan"	20	37
+2010	47	Melaka	Melaka Tengah	"Taman Peruna,Sg Udang"	44	35
+2010	48	Selangor	MPAJ (GB)	Au2 Taman Keramat (Zon A)	28	67
+2010	48	Selangor	Gombak	Taman Desa Jaya Kepong	25	62
+2010	48	Selangor	Gombak	Ipd Gombak	16	55
+2010	48	Selangor	Hulu Langat	Fasa 6 Seksyen 4 Bandar Baru Bangi	18	52
+2010	48	Selangor	Hulu Langat	Fasa 3 Seksyen 4 Bandar Baru Bangi	8	49
+2010	48	Selangor	Gombak	Taman Sri Ehsan	13	49
+2010	48	Selangor	MPAJ (GB)	Taman Rawang Perdana Fasa 5 Flat	8	38
+2010	48	Selangor	MPKj (HL)	Taman Putra	7	37
+2010	48	Selangor	MPKj (HL)	Pandan Indah (Zon C)	6	36
+2010	48	WPKL	Setapak	"Setapak Jaya (Asrama Sizwazah Utm,
+Jln Rejang 1-14)"	15	58
+2010	48	WPKL	Kepong	Ppr Pekan Batu	13	42
+2010	48	WPKL	Pusat Bandar	Flat Sri Selangor	11	49
+2010	48	WPKL	Pusat Bandar	Kg Baru Kaw A (Jln Raja Alang/Jln Abd Rahman Idris)	7	30
+2010	48	WPKL	Klang Lama	Vista Angkasa	9	40
+2010	48	WPKL	Klang Lama	Taman Salak Selatan ( Jln Gempita 3 - 7 )	8	31
+2010	48	Johor	MPJBT	Taman. Nusa Printis 1 Jln. Medan	21	44
+2010	48	Melaka	Melaka Tengah	"Taman Peruna,Sg Udang"	44	42
+2010	48	Pahang	Kuantan	Felda Bukit Goh	11	33
+2010	49	Selangor	Gombak	Taman Desa Jaya Kepong	25	69
+2010	49	Selangor	Gombak	Ipd Gombak	17	62
+2010	49	Selangor	Hulu Langat	Fasa 6 Seksyen 4 Bandar Baru Bangi	20	59
+2010	49	Selangor	Hulu Langat	Fasa 3 Seksyen 4 Bandar Baru Bangi	9	56
+2010	49	Selangor	MBSA (PT)	Seksyen 13 (Apartment Perdana)	7	31
+2010	49	WPKL	Setapak	"Setapak Jaya (Asrama Sizwazah Utm,
+Jln Rejang 1-14)"	15	65
+2010	49	WPKL	Kepong	Ppr Pekan Batu	14	49
+2010	49	WPKL	Pusat Bandar	Flat Sri Selangor	11	56
+2010	49	WPKL	Pusat Bandar	Kg Baru Kawasan A (Jln Raja Alang/Jln Abd Rahman Idris)	7	37
+2010	49	WPKL	Klang Lama	Vista Angkasa	9	47
+2010	49	Johor	MPJBT	Taman Perling Jln Pekaka	4	31
+2010	50	Selangor	Hulu Langat	Fasa 6 Seksyen 4 Bandar Baru Bangi	24	66
+2010	50	Selangor	MPAJ (GB)	Taman Ukay Perdana (Zon 1)	16	36
+2010	50	Selangor	Gombak	Taman Pinggiran Bt Caves Z2	5	35
+2010	50	Selangor	Gombak	Bandar Baru Selayang Fasa 2B	4	35
+2010	50	Selangor	Hulu Langat	Kg Baru Bt 11 Cheras	4	32
+2010	50	WPKL	Kepong	Ppr Pekan Batu	14	56
+2010	50	WPKL	Klang Lama	Vista Angkasa	10	54
+2010	50	Johor	MPJBT	Bandar Sri Alam Jln Tasek 64	5	32
+2010	51	Selangor	Hulu Langat	Fasa 6 Seksyen 4 Bandar Baru Bangi	25	73
+2010	51	Selangor	MPAJ (GB)	Taman Ukay Perdana (Zon 1)	16	43
+2010	51	Selangor	Gombak	Taman Pinggiran Bt Caves Z2	5	42
+2010	51	WPKL	Klang Lama	Vista Angkasa	10	61
+2010	52	Selangor	MPAJ (GB)	Taman Ukay Perdana (Zon 1)	18	50
+2010	52	Selangor	MPS (GB)	Kg. Melayu Bt 16 Rawang	6	36
+2010	52	Selangor	MPS (GB)	"Kg. Baru, Sg Terentang"	13	31
+2010	52	Pahang	Kuantan	Taman Tas Selatan	11	33

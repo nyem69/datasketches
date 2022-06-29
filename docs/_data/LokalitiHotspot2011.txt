@@ -1,0 +1,209 @@
+Tahun	Minggu	Negeri	Daerah/Zon/PBT	Lokaliti	Jumlah Kes Terkumpul	Tempoh Wabak Berlaku (Hari)
+2011	1	Selangor	MPAJ (GB)	Taman Ukay Perdana (Zon 1)	19	57
+2011	1	Selangor	MPS (GB)	Kg Melayu Bt 16 Rawang	6	43
+2011	1	Selangor	MPS (GB)	Kg Baru Sg Terentang	13	38
+2011	1	WPKL	Cheras	Taman Miharja ( Fasa 1)	9	32
+2011	1	Pahang	Kuantan	Taman Tas Selatan	14	40
+2011	2	Selangor	MPAJ (GB)	Taman Ukay Perdana (Zon 1)	19	64
+2011	2	Selangor	MPS (GB)	Kg Baru Sg Terentang	17	45
+2011	2	Selangor	MPSJ (PT)	Serdang Raya (Sr 5 & Sr 6 )	10	36
+2011	2	Selangor	K.Selangor	Teratai Bandar Baru Kuala Selangor	6	36
+2011	2	Selangor	MPS (GB)	Taman Belmas Johan	7	34
+2011	2	Selangor	MPS (GB)	Taman Tun Teja Apartment Rawang	10	33
+2011	2	WPKL	Cheras	Taman Miharja ( Fasa 1)	15	39
+2011	2	WPKL	Cheras	Miharja Kondominium Fasa 3A	8	31
+2011	2	Pahang	Kuantan	Taman Tas Selatan	14	46
+2011	2	Johor	MBJB	Taman Molek Jln Molek 3	19	36
+2011	3	Selangor	MPS (GB)	Kg Baru Sg Terentang	19	52
+2011	3	Selangor	MPS (GB)	Taman Tun Teja Apartment Rawang	13	40
+2011	3	WPKL	Cheras	Taman Miharja ( Fasa 1)	12	46
+2011	3	WPKL	Cheras	Miharja Kondominium Fasa 3A	8	38
+2011	3	Johor	MBJB	Taman Molek Jln Molek 3	19	43
+2011	3	Johor	MPJBT	Kg Baru Gelang Patah	8	35
+2011	3	P. Pinang	Barat Daya	"Pintasan Bahagia, Bagan Lepas"	6	30
+2011	4	Selangor	MPS (GB)	Kg Baru Sg Terentang	26	59
+2011	4	Selangor	MPS (GB)	Taman Tun Teja Apartment Rawang	16	47
+2011	4	WPKL	Cheras	Taman Miharja ( Fasa 1)	13	53
+2011	4	WPKL	Cheras	Miharja Kondominium Fasa 3A	8	45
+2011	4	Johor	MPPG	Flat Taman Cendana	7	30
+2011	4	Terengganu	K.Terengganu	Kg Duyung Besar	17	36
+2011	5	Selangor	MPS (GB)	Kg Baru Sg Terentang	28	66
+2011	5	Selangor	MPS (GB)	Taman Tun Teja Apartment Rawang	19	54
+2011	5	Selangor	MPS (GB)	Las Palmas Apartment Bandar Country Homes	4	33
+2011	5	Selangor	MPAJ (GB)	Taman Al-Ridzuan (Zon A)	7	32
+2011	5	Selangor	MPS (GB)	Taman Muhibbah Rawang	6	30
+2011	5	WPKL	Cheras	Taman Miharja ( Fasa 1)	14	60
+2011	5	Terengganu	K.Terengganu	Kg Duyung Besar	17	43
+2011	6	Selangor	MPS (GB)	Kg Baru Sg Terentang	30	73
+2011	6	Selangor	MPS (GB)	Taman Tun Teja Apartment Rawang	19	61
+2011	6	Selangor	MPAJ (GB)	Taman Al-Ridzuan (Zon A)	7	39
+2011	6	Selangor	MPS (GB)	Taman Muhibbah Rawang	6	37
+2011	6	Selangor	Gombak	Selayang Baru K4	16	30
+2011	6	Selangor	MPSJ (PT)	Taman Puchong Perdana (Jln Perdana 4)	4	30
+2011	6	WPKL	Cheras	Taman Miharja ( Fasa 1)	17	67
+2011	6	Pahang	Maran	Rantau Perintis	14	34
+2011	7	Selangor	MPS (GB)	Kg Baru Sg Terentang	31	80
+2011	7	Selangor	MPS (GB)	Taman Tun Teja Apartment Rawang	20	68
+2011	7	Selangor	MPS (GB)	Taman Muhibbah Rawang	7	44
+2011	7	Selangor	Gombak	Selayang Baru K4	18	37
+2011	7	Selangor	MPAJ (GB)	Taman Ukay Perdana ( Zon 2)	16	35
+2011	7	WPKL	Cheras	Taman Miharja ( Fasa 1)	17	74
+2011	7	Johor	MBJB	Taman Gembira	4	31
+2011	8	Selangor	MPS (GB)	Kg Baru Sg Terentang	32	87
+2011	8	Selangor	MPS (GB)	Taman Tun Teja Apartment Rawang	20	75
+2011	8	Selangor	MPS (GB)	Taman Muhibbah Rawang	9	51
+2011	8	Selangor	Gombak	Selayang Baru K4	23	44
+2011	8	Selangor	MPAJ (GB)	Taman Ukay Perdana ( Zon 2)	16	42
+2011	8	Selangor	MPS (GB)	Apartment Dahlia Bandar Country Homes	5	31
+2011	8	WPKL	Cheras	Taman Miharja ( Fasa 1)	17	81
+2011	8	WPKL	Kepong	Rkat Ampat Tin	9	31
+2011	8	Johor	MBJB	Kg Pasir	13	35
+2011	9	Selangor	MPS (GB)	Kg Baru Sg Terentang	32	94
+2011	9	Selangor	MPS (GB)	Taman Muhibbah Rawang	9	58
+2011	9	Selangor	Gombak	Selayang Baru K4	23	51
+2011	9	Selangor	MPS (GB)	Apartment Dahlia Bandar Country Homes Rawang	5	38
+2011	9	Selangor	MPS (GB)	Apartment Palma Bandar Country Homes Rawang	9	33
+2011	9	WPKL	Kepong	Rkat Ampat Tin	14	38
+2011	9	Johor	MBJB	Kg Pasir	13	42
+2011	9	Perak	Perak Tengah	Taman Maju	7	31
+2011	10	Selangor	MPS (GB)	Apartment Palma Bandar Country Homes Rawang	9	40
+2011	10	WPKL	Kepong	Rkat Ampat Tin	14	38
+2011	11	Selangor	MBSA (PT)	"Seksyen 27
+(Flat B: Blok 35 & 36)"	9	32
+2011	11	Selangor	MPAJ (HL)	Pandan Mewah  (Zon B)	`	30
+2011	11	WPKL	Kepong	Rkat Ampat Tin	17	52
+2011	12	Selangor	MBSA (PT)	"Seksyen 27
+(Flat B: Blok 35 & 36)"	9	39
+2011	12	Selangor	MPAJ (HL)	Pandan Mewah (Zon B)	18	37
+2011	12	Selangor	MBSA (PT)	Seksyen 18 (Teres A 18/16B)	10	31
+2011	12	Selangor	Hulu Langat	Seksyen 4 Bandar Rinching	11	30
+2011	12	Selangor	MPS (GB)	Bandar Country Homes Fasa 13	10	30
+2011	12	Selangor	MPS (GB)	Taman Hijau Rawang	5	30
+2011	12	WPKL	Kepong	Rkat Ampat Tin	18	59
+2011	12	WPKL	Pusat Bandar	Ppr Laksamana (Jln Peel)	8	32
+2011	13	Selangor	Hulu Langat	Seksyen 4 Bdr Rinching	11	37
+2011	13	Selangor	MPAJ (HL)	Taman Nirwana (Zon B)	6	31
+2011	13	WPKL	Kepong	Rkat Ampat Tin	18	66
+2011	13	WPKL	Pusat Bandar	Ppr Laksamana (Jln Peel)	8	39
+2011	17	Selangor	Hulu Langat	Apartment Sri Cempaka Seksyen 16 Bandar Bangi	6	35
+2011	17	Selangor	MPS (GB)	Las Palmas Apartment Bandar Country Homes	9	34
+2011	18	Selangor	Gombak	Selayang Baru K5	5	32
+2011	18	Selangor	Hulu Langat	Pangsapuri Sri Mawar Bandar Sri Putra	6	31
+2011	18	WPKL	Kepong	Flat Sri Perak	25	33
+2011	19	Selangor	Hulu Langat	Pangsapuri Sri Mawar Bandar Sri Putra	6	38
+2011	19	Selangor	MPS (GB)	Kg Kerdas 3 Gombak	12	32
+2011	19	Selangor	Hulu Langat	Taman Paling Jaya Semenyih	4	30
+2011	19	WPKL	Kepong	Flat Sri Perak	27	40
+2011	19	WPKL	Cheras	Bukit Jalil (Apartment Sri Rakyat)	15	32
+2011	19	WPKL	Kepong	Menara Orkid	11	30
+2011	20	Selangor	MPS (GB)	Kg Kerdas 3 Gombak	13	39
+2011	20	Selangor	Hulu Langat	Taman Paling Jaya Semenyih	5	37
+2011	20	WPKL	Kepong	Flat Sri Perak	27	47
+2011	20	WPKL	Cheras	Bukit Jalil (Apartment Sri Rakyat)	17	39
+2011	20	WPKL	Kepong	Menara Orkid	13	37
+2011	21	Selangor	MPS (GB)	Kg Kerdas 3 Gombak	13	46
+2011	21	Selangor	Hulu Langat	Taman Paling Jaya Semenyih	5	44
+2011	21	Selangor	MBSA (PT)	"Seksyen U2
+(Blok 24&26 Apartment Ilham)"	10	32
+2011	21	WPKL	Cheras	Bukit Jalil (Apartment Sri Rakyat)	22	46
+2011	21	WPKL	Kepong	Menara Orkid	16	44
+2011	21	WPKL	Setapak	Seksyen 10 Wangsa Maju (Blok B)	5	34
+2011	22	WPKL	Cheras	Bukit Jalil (Apartment Sri Rakyat)	25	53
+2011	22	WPKL	Kepong	Menara Orkid	17	51
+2011	22	WPKL	Pusat Bandar	Ppr Cochrane Perkasa (Jln Nakhoda Yusoff)	4	30
+2011	24	Selangor	Gombak	Apartment Enggang	16	38
+2011	24	Selangor	Gombak	Apartment Casmaria	11	46
+2011	24	Selangor	Gombak	Taman Samudera Timur (Flat)	10	33
+2011	24	Selangor	Gombak	Taman Samudera Timur (Teres)	14	42
+2011	24	Selangor	Hulu Langat	Apartment Taman Kajang Utama	15	32
+2011	24	Selangor	Hulu Langat	Casa Villa Condo Sungai Chua	6	33
+2011	24	Selangor	Hulu Langat	Seksyen 2 Bandar Rincing	5	32
+2011	24	Selangor	MPAJ (GB)	Ukay Perdana ( Sri Wira Apartment)	10	34
+2011	24	WPKL	Kepong	Menara Orkid	19	68
+2011	24	WPKL	Cheras	Bukit Jalil (Apartment Sri Rakyat)	26	68
+2011	24	WPKL	Cheras	Kem Sg Besi	17	31
+2011	24	WPKL	Pusat Bandar	"Kg Baru D
+(Jln Dato Abdullah Yassin)"	6	36
+2011	25	Selangor	Gombak	Apartment Enggang	18	45
+2011	25	Selangor	Gombak	Apartment Casmaria	12	53
+2011	25	Selangor	Gombak	Taman Samudera Timur (Teres)	14	49
+2011	25	Selangor	Hulu Langat	Apartment Taman Kajang Utama	15	39
+2011	25	Selangor	MPAJ (GB)	Ukay Perdana (Sri Wira Apartment)	10	41
+2011	25	WPKL	Kepong	Menara Orkid	19	75
+2011	25	WPKL	Cheras	Bukit Jalil (Apartment Sri Rakyat)	26	75
+2011	25	WPKL	Cheras	Kem Sg Besi	18	38
+2011	27	Selangor	Gombak	Apartment Enggang	19	59
+2011	27	Selangor	Gombak	Apartment Casmaria	15	67
+2011	27	Selangor	Klang	Taman Seri Sementa	13	38
+2011	27	Selangor	Gombak	Taman Bukit Rahman Putra	8	35
+2011	27	Selangor	Gombak	Apartment Sri Wira	11	33
+2011	27	Selangor	Gombak	Kg. Simpang Tiga	17	32
+2011	27	WPKL	Kepong	Menara Orkid	24	89
+2011	27	Johor	Johor Bharu	Taman Air Batu	19	33
+2011	28	Selangor	Gombak	Taman Bukit Rahman Putra	8	42
+2011	28	Selangor	Gombak	Apartment Sri Wira	13	40
+2011	28	Selangor	Gombak	Kg Simpang Tiga	17	39
+2011	28	Selangor	Hulu Langat	Jalan Tps 2 Taman Pelangi Semenyih	7	34
+2011	28	WPKL	Kepong	Menara Orkid	25	96
+2011	29	Selangor	Gombak	Apartment Sri Wira	20	69
+2011	29	Selangor	Gombak	Apartment Bangau	11	37
+2011	29	WPKL	Kepong	Menara Orkid	25	103
+2011	29	WPKL	Pusat Bandar	Desa Pandan ( Blok G1 - G10 )	10	38
+2011	30	Selangor	Gombak	Apartment Sri Wira	15	54
+2011	30	Selangor	Petaling	Pjs 7	7	31
+2011	30	WPKL	Pusat Bandar	Desa Pandan (Blok G1-G10)	10	45
+2011	30	WPKL	Setapak	Taman Melati (Kenari Appt)	5	33
+2011	31	WPKL	Pusat Bandar	Desa Pandan (Blok G1-G10)	10	52
+2011	31	WPKL	Setapak	Taman Melati (Kenari Appt)	5	40
+2011	31	WPKL	Setapak	Pangsapuri Atm	23	37
+2011	31	WPKL	Setapak	Taman Melati Utama (Platinum Hill)	21	34
+2011	32	WPKL	Setapak	Pangsapuri Atm	25	44
+2011	32	WPKL	Setapak	Taman Melati Utama (Platinum Hill)	24	41
+2011	33	WPKL	Setapak	Pangsapuri Atm	25	51
+2011	33	WPKL	Setapak	Taman Melati Utama (Platinum Hill)	28	48
+2011	34	Selangor	Petaling	Seksyen 4 (Teres)	7	31
+2011	34	WPKL	Setapak	Taman Melati Utama (Platinum Hill)	29	55
+2011	35	WPKL	Setapak	Taman Melati Utama (Platinum Hill)	29	62
+2011	41	Selangor	Hulu Langat	Flat Pandan Perdana	10	33
+2011	41	Selangor	Hulu Langat	Apartment Taman Bukit Mewah	4	32
+2011	41	WPKL	Cheras	Bintang Mas Kondo	11	37
+2011	41	WPKL	Pusat Bandar	Corenthian Kondo	9	34
+2011	42	Selangor	Hulu Langat	Flat Pandan Perdana	10	40
+2011	42	WPKL	Cheras	Bintang Mas Kondo	11	44
+2011	42	WPKL	Pusat Bandar	Corenthian Kondo	9	41
+2011	42	WPKL	Klang Lama	Kolej Ke 12 Universiti Malaya	17	34
+2011	43	WPKL	Klang Lama	Kolej Ke 12 Universiti Malaya	21	41
+2011	43	WPKL	Cheras	Ppr Desa Tun Razak	16	35
+2011	44	WPKL	Klang Lama	Kolej Ke 12 Universiti Malaya	22	48
+2011	44	WPKL	Cheras	Ppr Desa Tun Razak	20	42
+2011	44	WPKL	Klang Lama	Taman Gembira	13	31
+2011	45	WPKL	Klang Lama	Kolej Ke 12 Universiti Malaya	22	55
+2011	45	WPKL	Cheras	Ppr Desa Tun Razak	20	49
+2011	45	WPKL	Klang Lama	Flat Taman Gembira	18	38
+2011	45	WPKL	Pusat Bandar	Kg Baru C (Rj Abdullah/Rj Alang/Rj Uda/Rj Musa Abd Aziz/J.Hamzah/J.Daud/Rj Mahmud)	5	32
+2011	45	Selangor	Hulu Langat	Jalan Bunga Melur Taman Suria Jaya.	4	32
+2011	45	Selangor	Klang (MBSA)	Seksyen 35 (Teres B Alam Impian)	8	33
+2011	46	WPKL	Cheras	Ppr Desa Tun Razak	21	56
+2011	46	WPKL	Klang Lama	Flat Taman Gembira	20	45
+2011	46	WPKL	Setapak	Seksyen 2 Wangsa Maju (Menara Alpha Kondo)	4	37
+2011	46	WPKL	Klang Lama	Taman Sri Petaling	8	31
+2011	46	Selangor	Klang (MBSA)	Seksyen 35 (Teres B Alam Impian)	9	40
+2011	47	WPKL	Cheras	Ppr Desa Tun Razak	23	63
+2011	47	WPKL	Klang Lama	Flat Taman Gembira	22	52
+2011	47	WPKL	Cheras	Ppr Taman Mulia	10	36
+2011	47	WPKL	Klang Lama	Taman Sri Petaling	8	38
+2011	47	Selangor	Klang (MBSA)	Seksyen 35 (Teres B Alam Impian)	9	47
+2011	48	WPKL	Cheras	Ppr Desa Tun Razak	22	70
+2011	48	WPKL	Klang Lama	Flat Taman Gembira	22	59
+2011	48	WPKL	Cheras	Ppr Taman Mulia	12	43
+2011	49	WPKL	Klang Lama	Flat Taman Gembira	23	66
+2011	49	WPKL	Cheras	Ppr Taman Mulia	12	50
+2011	49	WPKL	Klang Lama	Vista Angkasa	9	32
+2011	50	WPKL	Klang Lama	Flat Taman Gembira	23	73
+2011	50	WPKL	Klang Lama	Vista Angkasa	9	39
+2011	50	Selangor	Hulu Langat	Apartment Taman Bukit Kenangan	16	32
+2011	51	WPKL	Klang Lama	Vista Angkasa	11	46
+2011	51	Selangor	Hulu Langat	Apartment Taman Bukit Kenangan	16	39
+2011	51	Selangor	Hulu Langat	Pangsapuri Baiduri Bandar Tasik Kesuma	5	31
+2011	52	WPKL	Klang Lama	Vista Angkasa	11	53
+2011	52	Selangor	Hulu Langat	Kem Pga Batu 7 Cheras	9	31

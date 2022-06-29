@@ -1,0 +1,49 @@
+Tahun	Minggu	Negeri	Daerah/Zon/PBT	Lokaliti	Jumlah Kes Terkumpul	Tempoh Wabak Berlaku (Hari)
+2012	2	Selangor	Hulu Langat	Apartment Taman Sri Kenari	5	35
+2012	2	WPKL	Klang Lama	Taman Gembira D (Jalan Riang 1-8)	13	37
+2012	2	WPKL	Cheras	Taman Miharja Fasa 2	8	31
+2012	7	WPKL	Cheras	Taman Miharja (Miharja Kondo Fasa 3)	5	34
+2012	7	WPKL	Bandar Tun Razak	Flat Sri Melaka B (Blok 24- 40)	8	31
+2012	8	WPKL	Setapak	Flat Desa Tungku Mariam 1	13	37
+2012	8	WPKL	Setapak	Taman Sri Rampai (Jln 76/26)	5	32
+2012	9	WPKL	Setapak	Flat Desa Tungku Mariam 1	13	44
+2012	9	WPKL	Setapak	Taman Sri Rampai (Jln 76/26)	5	39
+2012	9	WPKL	Cheras	"Taman Bukit Anggerik B (Jln 9/154(No.1-67), 2/154,10-
+16/154,23-25/154"	8	35
+2012	9	WPKL	Klang Lama	Ppr Pantai Ria	5	31
+2012	9	Selangor	Hulu Langat	Apartment Taman Setia Balakong	7	31
+2012	10	WPKL	Klang Lama	Ppr Pantai Ria	6	38
+2012	10	Selangor	Hulu Langat	Apartment Taman Setia Balakong	7	38
+2012	10	Selangor	Petaling	"Pju 5 Seksyen 4, Gugusan Semarak"	6	37
+2012	10	Selangor	Hulu Langat	Taman Seri Emas	4	32
+2012	10	Selangor	Petaling	Pjs 8 Apartment Mentari Court 2	4	31
+2012	11	WPKL	Klang Lama	Ppr Pantai Ria	9	45
+2012	11	Selangor	Petaling	Pju 5 Seksyen 4 Gugusan Semarak	6	44
+2012	11	Selangor	Klang	T.S Jln Dato Dagang 21-30	6	31
+2012	12	WPKL	Klang Lama	Ppr Pantai Ria	16	52
+2012	12	WPKL	Cheras	Flat Sri Kota	6	35
+2012	13	WPKL	Klang Lama	Ppr Pantai Ria	16	59
+2012	14	WPKL	Setapak	Taman Melati (Jln Melati 1-5)	4	32
+2012	14	Selangor	Sabak Bernam	Site B Sekinchan	10	31
+2012	15	Selangor	Sabak Bernam	Site B Sekinchan	10	38
+2012	17	WPKL	Pusat Bandar	Qrts Kakitangan Atm (Jalan U-Thant)	18	34
+2012	17	WPKL	Klang Lama	Asrama Inst Pengajian Bahasa Melayu	10	30
+2012	18	WPKL	Pusat Bandar	Qrts Kakitangan Atm (Jalan U-Thant)	19	41
+2012	18	WPKL	Klang Lama	Asrama Inst Pengajian Bahasa Melayu	10	37
+2012	18	Selangor	Sepang	Uni Tenaga Nasional	8	33
+2012	19	WPKL	Pusat Bandar	"Qrts Kakitangan Atm
+(Jalan U-Thant)"	19	48
+2012	19	WPKL	Cheras	"Taman Mulia (Jalan
+Budiman)"	9	35
+2012	20	WPKL	Cheras	Taman Mulia (Jalan Budiman)	9	42
+2012	20	WPKL	Parlimen Batu	Bandar Baru Sentul (Melur Apartment)	10	35
+2012	21	WPKL	Klang Lama	Vista Angkasa	5	31
+2012	24	Terengganu	K.Terengganu	Kg. Baru Seberang Takir	7	33
+2012	41	Sarawak	Betong	Beladin	5	31
+2012	42	Sarawak	Meradong	Rh Patsy Selah	10	33
+2012	43	Sarawak	Meradong	Rh Patsy Selah	10	40
+2012	45	WPKL	Kepong	Metro Prima (Mutiara Magna)	5	31
+2012	45	Sarawak	Meradong	Ulu Strass	7	31
+2012	46	Sarawak	Meradong	Ulu Strass	7	38
+2012	47	WPKL	Setiawangsa 	Appt Mawar Sari / Kenanga Sari	4	32
+2012	48	WPKL	Setiawangsa 	Appt Mawar Sari / Kenanga Sari	4	39

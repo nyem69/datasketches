@@ -1,0 +1,1049 @@
+Tahun	Minggu	Negeri	Daerah/Zon/PBT	Lokaliti	Jumlah Kes Terkumpul	Tempoh Wabak Berlaku (Hari)
+2013	10	Sarawak	Sarikei	Sarikel Town	11	32
+2013	17	Perak	K.Kangsar	Kg Baru Liman	10	35
+2013	25	Selangor	Bukit Raja	Seksyen 7E B Shah Alam	18	37
+2013	25	Selangor	Bukit Raja	Seksyen U2 (Pangsapuri Ilham)	8	36
+2013	26	Selangor	Petaling	Seksyen 7E B Shah Alam	19	43
+2013	26	Selangor	Petaling	Seksyen U2 (Pangsapuri Ilham)	9	42
+2013	27	Selangor	Hulu Langat	Jalan Bukit Permai 1-5 Taman Bukit Permai	6	32
+2013	27	Selangor	Petaling	Seksyen 7E B Shah Alam (Jln 7/101 - 7/103)	21	49
+2013	27	Selangor	Petaling	Seksyen U2 (Pangsapuri Ilham)	9	48
+2013	27	Selangor	Petaling	Pjs 10 Kondo Ridzuan	8	32
+2013	28	Selangor	Petaling	Seksyen 7E B Shah Alam (Jin 7/101-7/103)	21	57
+2013	28	Selangor	Petaling	Pjs 10 Kondo Ridzuan	10	40
+2013	29	Perlis	Kangar	Padang Katong	2	9
+2013	29	P. Pinang	Barat Daya	Bandar Baru Teluk Kumbar	3	4
+2013	29	P. Pinang	Barat Daya	Teluk Awak	3	16
+2013	29	P. Pinang	Timur Laut	Kuarters Polis Fasa 1	2	7
+2013	29	P. Pinang	Timur Laut	Pengkalan Quay (Weld Quay)	4	17
+2013	29	Perak	Kinta	Jln Thambusamy Ipoh	3	19
+2013	29	Perak	Kinta	Taman Mansion	2	13
+2013	29	Perak	Kinta	Taman Ramai	9	24
+2013	29	Perak	Batang Padang	Kg Baru Cold Streem	2	11
+2013	29	Perak	K.Kangsar	Taman Orkid	3	5
+2013	29	Selangor	Gombak	Appt Desa Satu	3	11
+2013	29	Selangor	Gombak	Appt Impian Indah	3	7
+2013	29	Selangor	Gombak	Flat Tmn Samudera Timur	7	14
+2013	29	Selangor	Gombak	Kg Melayu Sg Buloh (Lot 119)	2	10
+2013	29	Selangor	Gombak	Appt Residensi Bistaria	5	16
+2013	29	Selangor	Gombak	Flat Dahlia Tmn Tun Teja	4	5
+2013	29	Selangor	Gombak	Kg Sg Terentang (Lot 319)	2	7
+2013	29	Selangor	Gombak	Tmn Melawati J Zon 2	2	14
+2013	29	Selangor	Hulu Langat	Pangsapuri Nusa Kurnia Taman Bukit Pandan	2	2
+2013	29	Selangor	Hulu Langat	Flat Taman Berjaya	2	13
+2013	29	Selangor	Hulu Langat	Jalan 4/9-4/32 Pandan Indah	2	7
+2013	29	Selangor	Hulu Langat	Jalan Bunga Melati 1-5 Taman Seraya	3	10
+2013	29	Selangor	Hulu Langat	Jalan Pinang Kampung Melayu Ampang	2	7
+2013	29	Selangor	Hulu Langat	Jalan Teratai 1/1-1/7 Taman Bukit Teratai	2	10
+2013	29	Selangor	Hulu Langat	Kondominium Sri Angsana Hilir Taman Sri Angsana Hilir	2	12
+2013	29	Selangor	Hulu Langat	Lorong Dagang 5-11 Taman Dagang Jaya	2	6
+2013	29	Selangor	Hulu Langat	Pangsapuri Sri Intan Lembah Jaya Selatan	2	10
+2013	29	Selangor	Hulu Langat	Taman Cheras Utama	7	24
+2013	29	Selangor	Hulu Langat	Taman Sinaran	4	21
+2013	29	Selangor	Hulu Langat	Appt Taman Damai Mewah	3	10
+2013	29	Selangor	Hulu Langat	Flat Taman Kajang Mewah	2	5
+2013	29	Selangor	Hulu Langat	Jalan 3/5A-K Seksyen 3 Bandar Baru Bangi	3	6
+2013	29	Selangor	Hulu Selangor	Apt Seri Cempaka Bs	4	15
+2013	29	Selangor	Hulu Selangor	"Jalan Kemboja 4A, Bs"	2	9
+2013	29	Selangor	Hulu Selangor	"Jalan Telipot 4, Bs"	3	18
+2013	29	Selangor	Hulu Selangor	"Jln. Cempaka 2, Bs"	3	7
+2013	29	Selangor	Hulu Selangor	Apt Seri Cempaka Bs	4	15
+2013	29	Selangor	Hulu Selangor	"Jalan Kemboja 4A, Bs"	2	9
+2013	29	Selangor	Hulu Selangor	"Jalan Telipot 4, Bs"	3	18
+2013	29	Selangor	Hulu Selangor	"Jln. Cempaka 2, Bs"	3	7
+2013	29	Selangor	Klang	Tmn Sementa Jaya (Jln Sementa Jaya 7)	2	6
+2013	29	Selangor	Klang	Pangsapuri Amazing Hieghts	5	13
+2013	29	Selangor	Klang	Kg. Sg. Udang ( Jln Sg. Udang Lot 1724 )	2	6
+2013	29	Selangor	Klang	Taman Berkeley ( Jln Unta )	2	5
+2013	29	Selangor	Petaling	Taman Serdang Lama (Anggerik)	2	3
+2013	29	Selangor	Petaling	Seksyen U10 Uitm Puncak Perdana	2	1
+2013	29	Selangor	Petaling	Seksyen U13 Setia Damai 14	2	2
+2013	29	Selangor	Petaling	Seksyen 20 Teres D ( Jalan 20/12 - 20/13F )	2	13
+2013	29	Selangor	Petaling	Seksyen 5 Petaling Jaya	3	21
+2013	29	Selangor	Petaling	Seksyen 11 Teres B ( Jalan 11/2A-11/2G)	3	14
+2013	29	Selangor	Petaling	Seksyen 13 (Apartment Perdana)	2	11
+2013	29	Selangor	Petaling	Seksyen 15 Dataran Automobil ( Zon A Blok 1 - 6 )	2	12
+2013	29	Selangor	Petaling	Seksyen 15 Dataran Automobil ( Zon D Blok 11 - 18)	5	20
+2013	29	Selangor	Petaling	Seksyen 2 Uitm S.Alam Kolej Meranti	2	4
+2013	29	Selangor	Petaling	Seksyen 24 ( Flat Pkns J )	4	11
+2013	29	Selangor	Petaling	"Seksyen 28 (Flat B : Blok 11,13,15,17,19)"	2	8
+2013	29	Selangor	Petaling	"Seksyen 7 Shah Alam Flat A (Blok 1 - Blok 12 & Blok 38 -
+Blok 43)"	2	13
+2013	29	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	3	6
+2013	29	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon C (Jln 7/31 - 7/35)	5	20
+2013	29	Selangor	Petaling	Seksyen U2 (Pangsapuri Jaya)	2	11
+2013	29	Selangor	Petaling	Seksyen U5 Pangsapuri Subang Suria	2	9
+2013	29	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5 , 6)"	2	5
+2013	29	Selangor	Petaling	Pju 10 (Indah Kondo)	2	6
+2013	29	Selangor	Petaling	Pju 10 Apartment Selasih (Jln Pju 10/1 Damansara Damai)	2	4
+2013	29	Selangor	Petaling	Pju 10 Armanee Condo (Jln Pju 10/1C Damansara Damai)	3	17
+2013	29	Selangor	Petaling	Pju 1A Apartment Sri Ara	3	8
+2013	29	Selangor	Petaling	"Pju 8 Apt Flora Damansara 1 (Blok A ,B)"	6	5
+2013	29	Selangor	Petaling	"Pju 8 Apt Flora Damansara 2 (Blok C, D, E, F)"	5	15
+2013	29	Selangor	Petaling	"Pju 9 Sd 13 Apt Sri Meranti 1 ( Blok A,B,C,D,E,F,G )"	2	3
+2013	29	Selangor	Petaling	Ss 2 (Selatan)	5	18
+2013	29	Selangor	Petaling	Ss 6 Kediaman Kastam Kelana Jaya	2	4
+2013	29	Selangor	Petaling	Ss 7 Kelana Jaya	2	8
+2013	29	Selangor	Petaling	"Ss 9A 1 (Jln 9A/3,5,6,7,8,9,10,11,12,17,20 )"	4	12
+2013	29	Selangor	Petaling	Bandar Kinrara 4	2	7
+2013	29	Selangor	Petaling	Batu 3 ( Pangsapuri Pelangi )	2	3
+2013	29	Selangor	Petaling	Taman Bukit Kinrara 1 ( Pangsapuri Melor)	2	3
+2013	29	Selangor	Petaling	Taman Kinrara 4 ( Suria )	2	6
+2013	29	Selangor	Petaling	"Taman Serdang Jaya ( Bosnia
+)"	2	6
+2013	29	Selangor	Petaling	Taman Universiti Indah 1 ( Jalan Indah 1/1 - 1/12 )	2	13
+2013	29	Selangor	Petaling	"Usj 6/2, Subang Jaya"	3	5
+2013	29	Selangor	Petaling	Seksyen 16 Kuarters Suk	7	20
+2013	29	Selangor	Petaling	Pjs 2C Taman Medan	7	27
+2013	29	Selangor	Petaling	Pjs 3 (Apartmen Sri Manja Court)	5	21
+2013	29	Selangor	Petaling	Seksyen 2 Petaling Jaya	7	24
+2013	29	Selangor	Petaling	Bandar Sunway ( Noutica Kondo )	9	29
+2013	29	Selangor	Petaling	Pjs 9 Lagoon Perdana	7	21
+2013	29	Selangor	Petaling	Taman Pinggiran Usj 2 ( Sri Nipah )	6	23
+2013	29	Selangor	Petaling	Pjs 10 Kondo Ridzuan	10	45
+2013	29	Selangor	Petaling	"Pjs 8 Mentari Court 1(Blok A,B,C,D)"	28	33
+2013	29	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	9	33
+2013	29	Selangor	Petaling	Saujana Puchong Sp 7	19	35
+2013	29	Selangor	Petaling	Taman Puncak Jalil 2	2	14
+2013	29	Johor	Batu Pahat	Gunung Soga	6	3
+2013	29	Johor	Batu Pahat	Tmn Perdana	5	5
+2013	29	Johor	Batu Pahat	Tmn. Sri Aman	2	5
+2013	29	Johor	Johor Bharu	Tmn Seri Stanggi	2	2
+2013	29	Johor	Johor Bharu	Tmn U_Apt Meranti	2	2
+2013	29	Johor	Johor Bharu	Apartmen Larkin Idaman	3	15
+2013	29	Johor	Johor Bharu	Appartment Sri Murni 2 Has	3	10
+2013	29	Johor	Johor Bharu	Kampung Melayu Majidee	2	12
+2013	29	Johor	Johor Bharu	Kg. Melayu Pandan	2	8
+2013	29	Johor	Johor Bharu	Kg. Usaha Jaya	2	3
+2013	29	Johor	Johor Bharu	Taman Kobena	2	9
+2013	29	Johor	Johor Bharu	Bandar Sri Alam_Jln Rimbun	2	13
+2013	29	Johor	Johor Bharu	Bdr Baru Permas Jaya 2	4	20
+2013	29	Johor	Johor Bharu	Bdr Baru Permas Jaya 3	2	7
+2013	29	Johor	Johor Bharu	Tdc_Flat Meranti	2	5
+2013	29	Johor	Johor Bharu	Tdcemerlang_Kenanga	3	15
+2013	29	Johor	Johor Bharu	Tjj_Rosemerah 4	2	7
+2013	29	Johor	Johor Bharu	Tmn Megah Ria_Jalan Cenderai	2	11
+2013	29	Johor	Johor Bharu	Tmn Redang	3	18
+2013	29	Johor	Johor Bharu	Flat K/Pulai	2	11
+2013	29	Johor	Johor Bharu	Flat Taman Pulai Utama	2	10
+2013	29	Johor	Johor Bharu	Taman Perling	4	13
+2013	29	Johor	Johor Bharu	Tmn Desa Skudai_Jln Sejahtera	2	5
+2013	29	Johor	Johor Bharu	Tmn Mutiara Rini_Bakti	2	12
+2013	29	Johor	Johor Bharu	Tmn Pulai Indah_Jln Pulai Indah /8	4	24
+2013	29	Johor	Johor Bharu	Tmn Pulai Indah_Jln Pulai Indah /9	2	4
+2013	29	Johor	Johor Bharu	Tmn Pulai Utama_Jalan Pulai 43-85	2	8
+2013	29	Johor	Johor Bharu	Tmn Skudai Baru	2	7
+2013	29	Johor	Johor Bharu	Tmn U_Kebangsaan	2	11
+2013	29	Johor	Johor Bharu	Tmn Mesra	2	7
+2013	29	Johor	Johor Bharu	Kempas Denai	3	5
+2013	29	Johor	Johor Bharu	Kempas Lurah	3	11
+2013	29	Johor	Johor Bharu	Kg Pasir	2	4
+2013	29	Johor	Johor Bharu	Pandan City	3	21
+2013	29	Johor	Johor Bharu	Taman Austin Perdana	2	10
+2013	29	Johor	Johor Bharu	Tmn Daya Nipah	4	9
+2013	29	Johor	Johor Bharu	Tmn Delima 2	3	16
+2013	29	Johor	Johor Bharu	Tmn Desa Mutiara	3	10
+2013	29	Johor	Johor Bharu	Tmn Istimewa	3	13
+2013	29	Johor	Johor Bharu	Tmn Kobena	3	3
+2013	29	Johor	Johor Bharu	Tmn Melor	3	7
+2013	29	Johor	Johor Bharu	Tmn Pulai Utama_Jln Pulai 1- 42	2	13
+2013	29	Johor	Kluang	Taman Kluang Barat	3	3
+2013	29	Johor	Kluang	Tmn Berlian	2	11
+2013	29	Johor	Kluang	Tmn Dato Amar Diraja 2	5	15
+2013	29	Johor	Kluang	Tmn Kluang Baru	3	7
+2013	29	Johor	Kluang	Tmn Sri Tengah	2	13
+2013	29	Johor	Kulai	Kg Baru Senai	3	17
+2013	29	Melaka	Melaka Tengah	Taman Ayer Keroh Heights	4	10
+2013	29	N. Sembilan	Seremban	Tmn Tasik Jaya (Jalan 15 - 22)	6	16
+2013	29	N. Sembilan	Seremban	Putra Point Nilai	2	12
+2013	29	N. Sembilan	Seremban	Taman Permai Impian	2	2
+2013	29	Sabah	Beluran	Pekan Telupid	2	4
+2013	29	Sarawak	Miri	Pujut Rail	2	9
+2013	29	Sarawak	Sarikei	Sarikei Town	2	14
+2013	29	WPKL	Titiwangsa	Kg Baru (Plaza Rah)	3	2
+2013	29	WPKL	Lembah Pantai	Corenthian Kondo	2	7
+2013	29	WPKL	Lembah Pantai	Ppr Cempaka	2	11
+2013	29	WPKL	Lembah Pantai	Bandar Baru Sri Petaling (Jalan Pasai)	2	7
+2013	29	WPKL	Lembah Pantai	Bukit Oug Condo	7	18
+2013	29	WPKL	Lembah Pantai	Taman Oug (Jalan Awan Kecil)	2	13
+2013	29	WPKL	Lembah Pantai	"Taman Sri Petaling ( Jln 1/149D, 1/149J-11/149J)"	2	7
+2013	29	WPKL	Titiwangsa	Ppr Jelatek	2	12
+2013	29	WPKL	Titiwangsa	Taman Maluri (Jalan Wirawati 6)	2	9
+2013	29	WPKL	Titiwangsa	Flat Sri Tioman 2	2	6
+2013	29	WPKL	Titiwangsa	Sek2 W/Maju Blok C	3	17
+2013	29	WPKL	Titiwangsa	Taman Melati (Putra Villa Condo)	2	8
+2013	29	WPKL	W/P Putrajaya	Presint 11 - Putra Damai	3	12
+2013	29	WPKL	Titiwangsa	"Ppr Desa Rejang Bloka,B,C,D"	5	19
+2013	29	WPKL	Lembah Pantai	Endah Ria Condo	2	14
+2013	29	WPKL	Titiwangsa	Flat Pkns (Jalan Tun Razak)	3	16
+2013	30	Selangor	Petaling	Pjs 10 Kondo Ridzuan	10	52
+2013	30	Selangor	Petaling	"Pjs 8 Mentari Court 1 (Blok A, B, C,D)"	39	40
+2013	30	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	13	40
+2013	30	Selangor	Petaling	Seksyen 2 Petaling Jaya	7	30
+2013	30	Selangor	Petaling	Saujana Puchong Sp 7	20	42
+2013	31	N. Sembilan	Seremban	Tmn Tasik Jaya (Jalan 15 - 22)	8	30
+2013	31	P. Pinang	Timur Laut	Pengkalan Quay (Weld Quay)	8	30
+2013	31	Selangor	Petaling	"Pjs 8 Mentari Court 1 (Blok A, B, C,D)"	53	47
+2013	31	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	20	47
+2013	31	Selangor	Petaling	Saujana Puchong Sp 7	22	49
+2013	32	P. Pinang	Timur Laut	Pengkalan Quay (Weld Quay)	8	38
+2013	32	Selangor	Petaling	Seksyen 13 (Apartment Perdana)	5	32
+2013	32	Selangor	Petaling	"Seksyen 7 Shah Alam Flat A (Blok 1 - Blok 12 & Blok 38 - Blok
+43)"	7	34
+2013	32	Selangor	Petaling	"Pjs 8 Mentari Court 1 (Blok A, B, C,D)"	62	55
+2013	32	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	23	55
+2013	32	Selangor	Petaling	Saujana Puchong Sp 7	22	57
+2013	33	Selangor	Petaling	Seksyen 13 (Apartment Perdana)	12	39
+2013	33	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1 - Blok 12 & Blok 38 - Blok 43)	10	41
+2013	33	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	16	34
+2013	33	Selangor	Petaling	"Pjs 8 Mentari Court 1 (Blok A, B, C,D)"	68	62
+2013	33	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	24	62
+2013	33	Selangor	Petaling	Pju 1A Apartment Sri Ara	7	36
+2013	33	Selangor	Petaling	"Pju 8 Apt Flora Damansara 1 (Blok A ,B)"	14	33
+2013	33	Selangor	Petaling	Taman Bukit Kinrara 1 ( Pangsapuri Melor)	4	31
+2013	33	Selangor	Petaling	Taman Serdang Jaya ( Bosnia )	5	34
+2013	34	Selangor	Petaling	Seksyen 13 (Apartment Perdana)	12	45
+2013	34	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1 - Blok 12 & Blok 38 Blok 43	15	47
+2013	34	Selangor	Petaling	"Seksyen 7 Shah Alam Flat
+18
+C (Blok 44 - Blok 51)"	18	41
+2013	34	Selangor	Petaling	"Pjs 8 Mentari Court 1
+(Blok A, B, C,D)                   "	74	68
+2013	34	Selangor	Petaling	"Pjs 8 Mentari Court 2
+29
+(Blok E, F & G)"	29	68
+2013	34	Selangor	Petaling	Pju 1A Apartment Sri Ara         	7	43
+2013	34	Selangor	Petaling	"Pju 8 Apt Flora
+16
+Damansara 1 (Blok A ,B)"	16	40
+2013	34	Selangor	Petaling	"Taman Bukit Kinrara 1
+( Pangsapuri Meler)                "	5	38
+2013	34	Selangor	Petaling	"Seksyen 13
+12
+(Apartment Perdana)"	12	45
+2013	35	Selangor	Petaling	"Pjs 8 Mentari Court 1 (Blok A, B, C,D)"	78	76
+2013	35	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	34	76
+2013	35	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1 - Blok 12 & Blok 38 - Blok 43)	23	55
+2013	35	Selangor	Petaling	Seksyen 13 (Apartment Perdana)	14	53
+2013	35	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	21	48
+2013	35	Selangor	Petaling	"Pju 8 Apt Flora Damansara 1 (Blok A ,B)"	18	47
+2013	35	Selangor	Petaling	Taman Bukit Kinrara 1 ( Pangsapuri Melor)	7	45
+2013	35	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37)	17	34
+2013	35	Selangor	Petaling	"Pju 8 Apt Flora Damansara 2 (Blok C, D, E, F)"	16	33
+2013	35	Selangor	Petaling	Taman Pinggiran Putra (Pangsapuri Putra Raya)	5	33
+2013	36	Selangor	Petaling	Seksyen 13 (Apartment Perdana)	15	59
+2013	36	Selangor	Petaling	Seksyen 7 Pangsapuri Baiduri	5	34
+2013	36	Selangor	Petaling	"Seksyen 7 Shah Alam Flat A (Blok 1 - Blok 12 & Blok 38 -
+Blok 43)"	29	61
+2013	36	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37)	22	40
+2013	36	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	26	54
+2013	36	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A
+(Jln 7/29 - 7/30, Unisel & Jln A7/A - F7/F)"	12	35
+2013	36	Selangor	Petaling	Seksyen U4 Pangsapuri Damai	10	34
+2013	36	Selangor	Petaling	Seksyen U5 ( Pangsapuri Sri Purnama )	15	31
+2013	36	Selangor	Petaling	"Pjs 8 Mentari Court 1 (Blok A, B, C,D)"	85	82
+2013	36	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	36	82
+2013	36	Selangor	Petaling	Pju 5 Seksyen 4 Gugusan Semarak	9	35
+2013	36	Selangor	Petaling	"Pju 8 Apt Flora Damansara 1 (Blok A ,B)"	18	53
+2013	36	Selangor	Petaling	Seksyen 20 Taman Paramount	5	34
+2013	36	Selangor	Petaling	Taman Bukit Kinrara 1 ( Pangsapuri Melor)	8	51
+2013	36	Johor	Kulai	Rumah Pangsa Kulai	12	33
+2013	36	Selangor	Hulu Selangor	Taman Ihsan Ibu	11	33
+2013	37	Selangor	Petaling	"Pjs 8 Mentari Court 1 (Blok A, B, C,D)"	87	89
+2013	37	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	36	89
+2013	37	Selangor	Petaling	"Seksyen 7 Shah Alam Flat A (Blok 1 - Blok 12 & Blok 38 -
+Blok 43)"	42	68
+2013	37	Selangor	Petaling	Seksyen 13 (Apartment Perdana)	17	67
+2013	37	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	27	61
+2013	37	Selangor	Petaling	Taman Bukit Kinrara 1 ( Pangsapuri Melor)	10	58
+2013	37	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37)	25	47
+2013	37	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A
+(Jln 7/29 - 7/30, Unisel & Jln A7/A - F7/F)"	13	42
+2013	37	Selangor	Petaling	Pju 5 Seksyen 4 Gugusan Semarak	9	42
+2013	37	Selangor	Petaling	Seksyen U4 Pangsapuri Damai	11	41
+2013	37	Selangor	Petaling	Seksyen 20 Taman Paramount	6	40
+2013	37	Selangor	Petaling	Seksyen U5 ( Pangsapuri Sri Purnama )	17	38
+2013	37	Selangor	Petaling	Apartment Taman Damai Mewah	13	34
+2013	37	Selangor	Petaling	Seksyen 7 Shah Alam Flat D (Blok 52 – 58)	7	34
+2013	37	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5, 6)"	8	30
+2013	38	Selangor	Petaling	"Pjs 8 Mentari Court 1 (Blok A, B, C,D)"	88	98
+2013	38	Selangor	Petaling	"Pjs 8 Mentari Court 2 (Blok E, F & G)"	37	98
+2013	38	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1 - Blok 12 & Blok 38 - Blok 43)	50	77
+2013	38	Selangor	Petaling	Seksyen 13 (Apartment Perdana)	19	75
+2013	38	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	31	70
+2013	38	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37)	37	56
+2013	38	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A (Jln 7/29 - 7/30, Unisel & Jln A7/A - F7/F)"	14	50
+2013	38	Selangor	Petaling	Seksyen 7 Pangsapuri Baiduri	6	49
+2013	38	Selangor	Petaling	Seksyen U4 Pangsapuri Damai	11	49
+2013	38	Selangor	Petaling	Seksyen 20 Taman Paramount	6	49
+2013	38	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5 , 6)"	10	38
+2013	38	Selangor	Gombak	Tmn Desa Jaya Zon 6	14	35
+2013	38	Selangor	Petaling	"Ss 9A 1 (Jln 9A/3,5,6,7,8,9,10,11,12,17,
+20 )"	4	35
+2013	38	Selangor	Petaling	Seksyen 27 Flat A (Blok 1 - Blok 6)	7	34
+2013	38	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon B
+(Jln 7/24 - 7/27)"	12	34
+2013	38	Selangor	Petaling	Pusat Bandar Puchong 5 ( Sri Pinang )	11	34
+2013	38	Selangor	Petaling	Upm Serdang Kolej 17	13	34
+2013	38	Selangor	Petaling	Taman Lestari Putra 4	7	34
+2013	38	Perak	Batang Padang	Kg Baru Cold Streem	9	32
+2013	39	Selangor	Petaling	"Pjs 8 Mentari Court 1
+(Blok A, B, C,D)                  "	92	103
+2013	39	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1 -Blok 12 & Blok 3B - Blok 43)	65	82
+2013	39	Selangor	Petaling	"Seksyen 13
+(Apartment Perdana)                "	19	80
+2013	39	Selangor	Petaling	"Seksyen 7 Shah Alam Flat
+C (Blok 44 - Blok 51)              "	36	75
+2013	39	Selangor	Petaling	"Seksyen 7 Shah Alam Flat
+B (Blok 13 - Blok 37)              "	44	61
+2013	39	Selangor	Petaling	"Seksyen 7 Shah Alam
+Teres B Zon A (Jin 7/29 -
+7130, Unisel & Jin A7/A -           
+F7/F)"	16	56
+2013	39	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5 , 6)                   "	10	44
+2013	39	Selangor	Gombak	Tmn Desa Jaya Zon 6            	19	41
+2013	39	Selangor	Petaling	"Seksyen 27 Flat A
+(Blok 1 - Blok 6)                   "	9	40
+2013	39	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon B
+(Jln 7/24 - 7/27)"	15	40
+2013	39	Selangor	Petaling	"Jalan 2 Taman Lmpian
+Putra"	14	40
+2013	39	Selangor	Petaling	Taman Lestari Putra 4              	8	40
+2013	39	Selangor	Petaling	Upm Serdang Kolej 17             	15	40
+2013	39	Selangor	Petaling	Ss 2 (Timur)                      	10	36
+2013	39	Selangor	Hulu Langat	"Jalan 2 Taman Lmpian
+Putra"	18	34
+2013	39	Selangor	Petaling	Taman Serdang Jaya 3	7	33
+2013	39	Selangor	Petaling	Ss 2 (Selatan)	7	32
+2013	39	Selangor	Petaling	Taman Puchong Prima (Melor)	28	32
+2013	39	WPKL	Titiwangsa	Kg Baru (Plaza Rah)	9	31
+2013	39	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jln 7/11 - 7/22)	7	30
+2013	43	Selangor	Petaling	"Pjs 8 Mentari Court  1 (Blok A, B, C,D)"	99	132
+2013	43	Selangor	Petaling	"Seksyen 7 Shah Alam Flat A (Blok 1-Blok 12 & Blok 38
+- Blok 43)"	109	111
+2013	43	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	51	104
+2013	43	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37 )	67	90
+2013	43	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A (Jln 7/29-7/30, Unisel & Jln A7/A-F7/F)"	31	84
+2013	43	Selangor	Gombak	Tmn Desa Jaya Zon 6	26	69
+2013	43	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon B (Jln 7/24-7/27)	32	68
+2013	43	Selangor	Petaling	Seksyen 27 Flat A (Blok 1 - Blok 6)	11	68
+2013	43	Selangor	Petaling	Upm Serdang Kolej 17	32	68
+2013	43	Selangor	Petaling	Ss 2 (Timur)	17	64
+2013	43	Selangor	Hulu Langat	Jalan 2 Taman Impian Putra	75	62
+2013	43	Selangor	Petaling	Taman Puchong Prima (Melor)	40	60
+2013	43	Selangor	Petaling	Ss 2 (Selatan)	25	60
+2013	43	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jln 7/11-7/22)	14	58
+2013	43	Selangor	Hulu Langat	Jln 3/13A-C Seksyen 3 Taman Kajang Utama	17	57
+2013	43	Selangor	Hulu Langat	Apartment Seksyen 1 Bandar Teknologi	26	54
+2013	43	Selangor	Petaling	Ss 22	11	52
+2013	43	Selangor	Petaling	"Pju 8 Apartment Flora Damansara 2 (Blok C, D, E, F)"	9	51
+2013	43	Selangor	Hulu Langat	Jalan 8/1-15 Seksyen 8 Bandar Baru Bangi	15	47
+2013	43	Selangor	Petaling	Seksyen 1 Petaling Jaya	23	47
+2013	43	Selangor	Petaling	"Pju 10 Apartment Saujana
+1  ( Blok A,B,C,D,E,F,L,M )"	13	47
+2013	43	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang	21	46
+2013	43	Selangor	Hulu Langat	Seksyen 5 Bandar Rinching	14	44
+2013	43	Selangor	Petaling	Seksyen 12 Petaling Jaya	33	44
+2013	43	Selangor	Petaling	Taman Puchong Utama 2	14	43
+2013	43	Selangor	Hulu Langat	Apartment Taman Bukit Kenangan	9	42
+2013	43	Selangor	Hulu Langat	Apartment Seraya Taman Kajang Utama	14	41
+2013	43	Selangor	Petaling	"Pju 8 Apartment Flora Damansara 1 (Blok A ,B)"	5	41
+2013	43	Selangor	Petaling	"Pju 3 Kondo Palm Spring 2 (Blok D, E,& F)"	9	41
+2013	43	Selangor	Gombak	Taman Rasmi Jaya Zon 1	23	40
+2013	43	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	14	39
+2013	43	Selangor	Gombak	Bandar Tasik Puteri Fasa 7 Zon 1	14	39
+2013	43	Selangor	Gombak	Taman Bukit Indah Fasa 1 Zon 1	9	39
+2013	43	Selangor	Hulu Langat	Apartment Persona Taman Kajang Utama	9	38
+2013	43	Selangor	Hulu Langat	Pangsapuri Mewah Taman Sri Mewah	9	38
+2013	43	Selangor	Sepang	Taman Desa Sentosa	79	37
+2013	43	Selangor	Hulu Langat	Jalan 7/3 Seksyen 7 Bandar Baru Bangi	11	35
+2013	43	Selangor	Gombak	Taman Kelab Ukay	8	35
+2013	43	Selangor	Hulu Langat	City Garden Palm Villa Kondo Taman Cempaka	27	34
+2013	43	Selangor	Hulu Langat	Batu 12 1/2 Jalan Cheras - Kajang	8	34
+2013	43	Selangor	Hulu Langat	Jalan 3/5A-K Seksyen 3 Bandar Baru Bangi	12	34
+2013	43	Selangor	Hulu Langat	Seksyen 7 Bandar Sri Putra	6	34
+2013	43	Selangor	Petaling	Pju 5 Seksyen  5	6	34
+2013	43	Selangor	Petaling	Pusat Bandar Puchong (Jalan Wawasan 2)	7	34
+2013	43	Selangor	Gombak	Apatrment Laksaman	7	34
+2013	43	Selangor	Petaling	"Pju 10 Apartment Harmoni 2  ( D,E,F,G,H,J,K,T,S,R )"	6	33
+2013	43	Selangor	Gombak	Bandar Baru Selayang Fasa 1 (Zon 2)	12	33
+2013	43	Selangor	Hulu Langat	Jalan 8/16-23 Seksyen 8 Bandar Baru Bangi	14	32
+2013	43	Selangor	Petaling	Pusat Bandar Puchong 5 ( Sri Jati )	6	32
+2013	43	Selangor	Petaling	Pjs 9 Lagoon Perdana	9	32
+2013	43	Selangor	Gombak	Taman Rasmi Jaya Zon 2	12	31
+2013	43	Selangor	Hulu Langat	"Jalan 6/9,6/10,6/11 & 6/14 Tasik Tambahan"	13	31
+2013	43	Selangor	Hulu Langat	Apartment Taman Anggerik Villa	6	31
+2013	43	Selangor	Petaling	Seksyen  3 Uitm Shah Alam Kolej Jati	7	31
+2013	44	Selangor	Petaling	"Pjs 8 Mentari Court  1 (Blok A, B, C,D)"	101	139
+2013	44	Selangor	Petaling	"Seksyen 7 Shah Alam Flat A (Blok 1-Blok 12 & Blok 38
+- Blok 43)"	121	118
+2013	44	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	57	111
+2013	44	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37 )	69	97
+2013	44	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A (Jln 7/29-7/30, Unisel & Jln A7/A-F7/F)"	37	91
+2013	44	Selangor	Gombak	Tmn Desa Jaya Zon 6	27	76
+2013	44	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon B (Jln 7/24-7/27)	34	75
+2013	44	Selangor	Petaling	Upm Serdang Kolej 17	34	75
+2013	44	Selangor	Petaling	Ss 2 (Timur)	20	71
+2013	44	Selangor	Hulu Langat	Jalan 2 Taman Impian Putra	78	69
+2013	44	Selangor	Petaling	Ss 2 (Selatan)	25	67
+2013	44	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jln 7/11-7/22)	19	65
+2013	44	Selangor	Hulu Langat	Jln 3/13A-C Seksyen 3 Taman Kajang Utama	18	64
+2013	44	Selangor	Hulu Langat	Apartment Seksyen 1 Bandar Teknologi	27	61
+2013	44	Selangor	Petaling	Ss 22	11	59
+2013	44	Selangor	Petaling	"Pju 8 Apartment Flora Damansara 2 (Blok C, D, E, F)"	12	58
+2013	44	Selangor	Hulu Langat	Jalan 8/1-15 Seksyen 8 Bandar Baru Bangi	23	54
+2013	44	Selangor	Petaling	Seksyen 1 Petaling Jaya	26	54
+2013	44	Selangor	Petaling	"Pju 10 Apartment Saujana 1 ( Blok A,B,C,D,E,F,L,M )"	13	54
+2013	44	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang	25	53
+2013	44	Selangor	Hulu Langat	Seksyen 5 Bandar Rinching	15	51
+2013	44	Selangor	Petaling	Taman Puchong Utama 2	16	50
+2013	44	Selangor	Hulu Langat	Apartment Taman Bukit Kenangan	9	49
+2013	44	Selangor	Hulu Langat	Apartment Seraya Taman Kajang Utama	15	48
+2013	44	Selangor	Petaling	"Pju 3 Kondo Palm Spring 2 (Blok D, E,& F)"	10	48
+2013	44	Selangor	Gombak	Taman Rasmi Jaya Zon 1	27	47
+2013	44	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	17	46
+2013	44	Selangor	Gombak	Bandar Tasik Puteri Fasa 7 Zon 1	15	46
+2013	44	Selangor	Gombak	Taman Bukit Indah Fasa 1 Zon 1	10	46
+2013	44	Selangor	Hulu Langat	Apartment Persona Taman Kajang Utama	10	45
+2013	44	Selangor	Hulu Langat	Pangsapuri Mewah Taman Sri Mewah	9	45
+2013	44	Selangor	Sepang	Taman Desa Sentosa	87	44
+2013	44	Selangor	Hulu Langat	Jalan 7/3 Seksyen 7 Bandar Baru Bangi	16	42
+2013	44	Selangor	Gombak	Taman Kelab Ukay	9	42
+2013	44	Selangor	Hulu Langat	City Garden Palm Villa Kondo Taman Cempaka	32	41
+2013	44	Selangor	Hulu Langat	Batu 12 1/2 Jalan Cheras - Kajang	10	41
+2013	44	Selangor	Hulu Langat	Jalan 3/5A-K Seksyen 3 Bandar Baru Bangi	13	41
+2013	44	Selangor	Petaling	Pju 5 Seksyen  5	10	41
+2013	44	Selangor	Gombak	Apatrment Laksaman	8	41
+2013	44	Selangor	Hulu Langat	Seksyen 7 Bandar Sri Putra	7	41
+2013	44	Selangor	Gombak	Bandar Baru Selayang Fasa 1 (Zon 2)	13	40
+2013	44	Selangor	Hulu Langat	Jalan 8/16-23 Seksyen 8 Bandar Baru Bangi	14	39
+2013	44	Selangor	Petaling	Pusat Bandar Puchong 5 ( Sri Jati )	7	39
+2013	44	Selangor	Petaling	Pjs 9 Lagoon Perdana	11	39
+2013	44	Selangor	Gombak	Taman Rasmi Jaya Zon 2	14	38
+2013	44	Selangor	Hulu Langat	"Jalan 6/9,6/10,6/11 & 6/14 Tasik Tambahan"	13	38
+2013	44	Selangor	Hulu Langat	Apartment Taman Anggerik Villa	6	38
+2013	44	Selangor	Petaling	Seksyen  3 Uitm Shah Alam Kolej Jati	8	38
+2013	44	Selangor	Hulu Langat	Pangsapuri Mewah Taman Damai Mewah	9	38
+2013	44	Selangor	Hulu Langat	Jalan Nirwana 1-17 Taman Nirwana	15	37
+2013	44	Selangor	Hulu Langat	Jalan Teratai 2/7A-2/7N Taman Bukit Teratai	5	37
+2013	44	Selangor	Petaling	Seksyen 7E B Pusat Komersial (Jalan Aa7/Aa & Ac7/Ac & Jln U7/U - Z7/Z)	13	37
+2013	44	Selangor	Petaling	Ss 5A ( 2 )	4	37
+2013	44	Selangor	Sepang	Taman Emas	37	37
+2013	44	Selangor	Gombak	Bdr Baru Selayang Fasa 1 (Zon 3)	7	36
+2013	44	Selangor	Petaling	Seksyen 2 Petaling Jaya	6	35
+2013	44	Selangor	Petaling	Ss 19/1 Subang Jaya	13	35
+2013	44	Selangor	Hulu Langat	Pangsapuri Delima Taman Pinggiran Delima	11	34
+2013	44	Selangor	Petaling	Pjs 10 Kondo Ridzuan	9	34
+2013	44	Selangor	Petaling	Pju 9 Sd 7	13	34
+2013	44	Selangor	Petaling	Batu 13 Kg Sri Aman (Lorong Aman 1 )	7	34
+2013	44	Selangor	Gombak	Taman  Greenwood Zon 1	10	33
+2013	44	Selangor	Hulu Langat	Taman Semenyeh Jaya	7	33
+2013	44	Selangor	Petaling	Seksyen 27 Apartment Ixora	19	33
+2013	44	Selangor	Petaling	Pjs 2C Flat Taman Medan Cahaya	6	33
+2013	44	Selangor	Petaling	Pjs 2C Taman Medan	9	33
+2013	44	Selangor	Hulu Langat	Jalan 4/9 Seksyen 4 Bandar Baru Bangi	6	32
+2013	44	Selangor	Petaling	Seksyen U4 Pangsapuri Damai	9	32
+2013	44	Selangor	Petaling	Seksyen U5 Pangsapuri Subang Suria	6	32
+2013	44	Selangor	Petaling	Bandar Bukit Puchong 1 (Flat Bandar Bukit Puchong)	7	32
+2013	44	Selangor	Petaling	Taman Puchong Prima 1	5	32
+2013	44	P. Pinang	Barat Daya	Lebuh Bukit Kecil	9	31
+2013	45	Selangor	Petaling	"Pjs 8 Mentari Court  1 (Blok A, B, C,D)"	106	146
+2013	45	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1-Blok 12 & Blok 38 - Blok 43)	134	125
+2013	45	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	62	118
+2013	45	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37 )	71	104
+2013	45	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A (Jln 7/29-7/30, Unisel & Jln A7/A-F7/F)"	40	98
+2013	45	Selangor	Petaling	Upm Serdang Kolej 17	34	82
+2013	45	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon B (Jln 7/24-7/27)	38	82
+2013	45	Selangor	Petaling	Ss 2 (Timur)	26	78
+2013	45	Selangor	Hulu Langat	Jalan 2 Taman Impian Putra	78	76
+2013	45	Selangor	Petaling	Ss 2 (Selatan)	28	74
+2013	45	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jln 7/11-7/22)	21	72
+2013	45	Selangor	Hulu Langat	Apartment Seksyen 1 Bandar Teknologi	28	68
+2013	45	Selangor	Petaling	Ss 22	12	66
+2013	45	Selangor	Petaling	"Pju 8 Apartment Flora Damansara 2 (Blok C, D, E, F)"	13	65
+2013	45	Selangor	Hulu Langat	Jalan 8/1-15 Seksyen 8 Bandar Baru Bangi	26	61
+2013	45	Selangor	Petaling	Seksyen 1 Petaling Jaya	29	61
+2013	45	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang	30	60
+2013	45	Selangor	Hulu Langat	Seksyen 5 Bandar Rinching	15	58
+2013	45	Selangor	Petaling	Taman Puchong Utama 2	17	57
+2013	45	Selangor	Petaling	"Pju 8 Apartment Flora Damansara 1 (Blok A ,B)"	6	55
+2013	45	Selangor	Hulu Langat	Apartment Seraya Taman Kajang Utama	15	55
+2013	45	Selangor	Gombak	Taman Rasmi Jaya Zon 1	29	54
+2013	45	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	17	53
+2013	45	Selangor	Gombak	Bandar Tasik Puteri Fasa 7 Zon 1	17	53
+2013	45	Selangor	Gombak	Taman Bukit Indah Fasa 1 Zon 1	11	53
+2013	45	Selangor	Hulu Langat	Apartment Persona Taman Kajang Utama	12	52
+2013	45	Selangor	Sepang	Taman Desa Sentosa	88	51
+2013	45	Selangor	Hulu Langat	Jalan 7/3 Seksyen 7  Bandar Baru Bangi	16	49
+2013	45	Selangor	Gombak	Taman Kelab Ukay	9	49
+2013	45	Selangor	Hulu Langat	City Garden Palm Villa Kondo Taman Cempaka	35	48
+2013	45	Selangor	Hulu Langat	Batu 12 1/2 Jalan Cheras - Kajang	13	48
+2013	45	Selangor	Hulu Langat	Jalan 3/5A-K Seksyen 3 Bandar Baru Bangi	13	48
+2013	45	Selangor	Petaling	Pju 5 Seksyen  5	11	48
+2013	45	Selangor	Hulu Langat	Seksyen 7 Bandar Sri Putra	8	48
+2013	45	Selangor	Gombak	Apatrment Laksaman	8	48
+2013	45	Selangor	Gombak	Bandar Baru Selayang Fasa 1 (Zon 2)	13	47
+2013	45	Selangor	Petaling	Pjs 9 Lagoon Perdana	13	46
+2013	45	Selangor	Petaling	Pusat Bandar Puchong 5 ( Sri Jati )	9	46
+2013	45	Selangor	Gombak	Taman Rasmi Jaya Zon 2	14	45
+2013	45	Selangor	Petaling	Seksyen  3 Uitm Shah Alam Kolej Jati	10	45
+2013	45	Selangor	Hulu Langat	Pangsapuri Mewah Taman Damai Mewah	10	45
+2013	45	Selangor	Hulu Langat	"Jalan 6/9,6/10,6/11 & 6/14 Tasek Tambahan"	14	45
+2013	45	Selangor	Hulu Langat	Jalan Nirwana 1-17 Taman Nirwana	16	44
+2013	45	Selangor	Sepang	Taman Emas	39	44
+2013	45	Selangor	Petaling	Seksyen 7E B Pusat Komersial (Jalan Aa7/Aa & Ac7/Ac & Jln U7/U - Z7/Z)	17	44
+2013	45	Selangor	Petaling	Ss 19/1 Subang Jaya	16	42
+2013	45	Selangor	Petaling	Seksyen 2 Petaling Jaya	7	42
+2013	45	Selangor	Hulu Langat	Pangsapuri Delima Taman Pinggiran Delima	13	41
+2013	45	Selangor	Petaling	Pjs 10 Kondo Ridzuan	10	41
+2013	45	Selangor	Petaling	Pju 9 Sd 7	18	41
+2013	45	Selangor	Gombak	Apartment Residensi Bistaria	9	41
+2013	45	Selangor	Petaling	Seksyen 27 Apartment Ixora	21	40
+2013	45	Selangor	Petaling	Pjs 2C Flat Taman Medan Cahaya	7	40
+2013	45	Selangor	Petaling	Pjs 2C Taman Medan	11	40
+2013	45	Selangor	Hulu Langat	Jalan 4/9 Seksyen 4 Bandar Baru Bangi	10	39
+2013	45	Selangor	Petaling	Seksyen U5 Pangsapuri Subang Suria	10	39
+2013	45	Selangor	Petaling	Bandar  Bukit Puchong 1 (Flat Bandar Bukit Puchong)	8	39
+2013	45	Selangor	Hulu Langat	Apartment Sri Pinang Taman Nirwana	21	37
+2013	45	Selangor	Hulu Langat	Jalan Cempaka 2-7 Taman Cempaka	15	37
+2013	45	Selangor	Hulu Langat	Jalan Suasana 2 Bandar Tun Hussein Onn	5	37
+2013	45	Selangor	Hulu Langat	Jalan Tps 3 Taman Pelangi Semenyih	22	37
+2013	45	Selangor	Hulu Langat	Seksyen 1 Bandar Rinching	6	37
+2013	45	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon C (Jalan 7/31 - 7/35)	31	37
+2013	45	Selangor	Petaling	Ss 3 ( Taman Universiti )	16	35
+2013	45	Selangor	Hulu Langat	Apartment Taman Bukit Mutiara	9	35
+2013	45	Selangor	Petaling	Taman Puchong Permai (Jalan A28 - A36 )	5	34
+2013	45	Selangor	Hulu Langat	Jalan 4C/1-4C/3 Bandar Tasik Kesuma	10	34
+2013	45	Selangor	Hulu Langat	Jalan Tkp 1-14 Taman Kantan Permai	6	34
+2013	45	Selangor	Petaling	Seksyen U5 Subang Murni (Teres A)	5	34
+2013	45	Selangor	Petaling	Taman Equine (Jalan Putra Permai 2)	7	34
+2013	45	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5 , 6)"	5	33
+2013	45	Selangor	Hulu Langat	"Jalan 8,15,17&14A Taman Cempaka"	8	33
+2013	45	Selangor	Hulu Langat	Jalan 9/9A-M Seksyen 9 Bandar Baru Bangi	17	33
+2013	45	Selangor	Hulu Langat	Jalan 15/1 Seksyen 15 Bandar Bari Bangi	18	32
+2013	45	Selangor	Hulu Langat	Seksyen 6 Bandar Sri Putra	19	32
+2013	45	Selangor	Petaling	Seksyen 8 Teres B2 (Jalan 8/14 - Jalan 8/28)	10	31
+2013	45	Selangor	Petaling	"Pju 5 Sek 11 Gugusan Dedap
+2 (Blok 6-10)"	11	31
+2013	45	Selangor	Petaling	Pju 5 Seksyen 6 Gugusan Tanjung	7	31
+2013	45	Selangor	Gombak	Taman Sunway Batu Caves	4	31
+2013	46	Selangor	Petaling	"Pjs 8 Mentaricourt 1 (Blok A, B, C,D)"	109	153
+2013	46	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1-Blok 12 & Blok 38 - Blok 43)	148	132
+2013	46	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	64	125
+2013	46	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37)	72	111
+2013	46	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A (Jln 7/29- 7/30, Unisel &Jln A7/A- F7/F)"	41	105
+2013	46	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon B (Jln 7/24- 7/27)	39	89
+2013	46	Selangor	Petaling	Ss 2 (Timur)	27	85
+2013	46	Selangor	Petaling	Ss 2 (Selatan)	29	81
+2013	46	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jln 7/11- 7/22)	24	79
+2013	46	Selangor	Petaling	Ss 22	13	73
+2013	46	Selangor	Hulu Langat	Jalan 8/1-15 Seksyen 8 Bandar Baru Bangi	28	68
+2013	46	Selangor	Petaling	Seksyen 1 Petaling Jaya	29	68
+2013	46	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang	33	67
+2013	46	Selangor	Gombak	Bandar Tasik Puteri Fasa 7 Zon 1	17	60
+2013	46	Selangor	Gombak	Taman Bukit Indah Fasa 1 Zon 1	11	59
+2013	46	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	20	60
+2013	46	Selangor	Hulu Langat	Apartmentpersona Taman Kajang Utama	14	59
+2013	46	Selangor	Sepang	Taman Desa Sentosa	96	58
+2013	46	Selangor	Hulu Langat	Jalan 7/3 Seksyen 7 Bandar Baru Bangi	20	56
+2013	46	Selangor	Hulu Langat	Citygardenpalmvillakond O Taman Cempaka	38	55
+2013	46	Selangor	Hulu Langat	Batu 12 1/2 Jalan Cheras - Kajang	13	55
+2013	46	Selangor	Hulu Langat	Seksyen 7 Bandar Sri Putra	9	55
+2013	46	Selangor	Petaling	Pjs 9 Lagoon Perdana	14	53
+2013	46	Selangor	Petaling	Pusat Bandar Puchong 5 ( Sri Jati )	10	53
+2013	46	Selangor	Hulu Langat	Pangsapuri Mewah Taman Damai Mewah	10	52
+2013	46	Selangor	Hulu Langat	"Jalan 6/9,6/10,6/11 & 6/14 Tasek Tambahan"	15	52
+2013	46	Selangor	Petaling	Seksyen  3 Uitm Shah Alam Kolej Jati	14	52
+2013	46	Selangor	Hulu Langat	Jalan Nirwana 1-17 Taman Nirwana	18	51
+2013	46	Selangor	Petaling	"Seksyen 7E B Pusat Komersial (Jalan Aa7/Aa
+& Ac7/Ac & Jln U7/U - Z7/Z)"	20	51
+2013	46	Selangor	Petaling	Ss 19/1 Subang Jaya	16	49
+2013	46	Selangor	Petaling	Seksyen 2 Petaling Jaya	8	49
+2013	46	Selangor	Hulu Langat	Pangsapuri Delima Taman Pinggiran Delima	14	48
+2013	46	Selangor	Petaling	Pjs 10 Kondo Ridzuan	13	48
+2013	46	Selangor	Petaling	Pju 9 Sd 7	23	48
+2013	46	Selangor	Gombak	Apartmentresidensibistari A	11	48
+2013	46	Selangor	Petaling	Seksyen 27 Apartmentixora	21	47
+2013	46	Selangor	Petaling	Pjs 2C Flat Taman Medan Cahaya	10	47
+2013	46	Selangor	Petaling	Pjs 2C Taman Medan	12	47
+2013	46	Selangor	Hulu Langat	Jalan 4/9 Seksyen 4 Bandar Baru Bangi	10	46
+2013	46	Selangor	Petaling	Bandar  Bukit Puchong 1 (Flat Bandar Bukit Puchong)	10	46
+2013	46	Selangor	Petaling	Seksyen U5 Pangsapuri Subang Suria	10	46
+2013	46	Selangor	Hulu Langat	Apartment Sri Pinang Taman Nirwana	23	44
+2013	46	Selangor	Hulu Langat	Jalan Tps 3 Taman Pelangi Semenyih	24	44
+2013	46	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon C (Jalan 7/31
+- 7/35)"	37	44
+2013	46	Selangor	Hulu Langat	Jalan Cempaka 2-7 Taman Cempaka	16	44
+2013	46	Selangor	Petaling	Ss 3 ( Taman Universiti )	18	42
+2013	46	Selangor	Hulu Langat	Apartment Taman Bukit Mutiara	11	42
+2013	46	Selangor	Petaling	Taman Puchong Permai (Jalan A28 - A36 )	5	41
+2013	46	Selangor	Petaling	Taman  Equini (Jalan Putra Permai 2)	10	41
+2013	46	Selangor	Hulu Langat	Jalan 9/9A-M Seksyen 9 Bandar Baru Bangi	18	40
+2013	46	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5 , 6)"	6	40
+2013	46	Selangor	Hulu Langat	"Jalan 8,15,17&14A Taman Cempaka"	11	40
+2013	46	Selangor	Hulu Langat	Jalan 15/1 Seksyen 15 Bandar Bari Bangi	19	39
+2013	46	Selangor	Hulu Langat	Seksyen 6 Bandar Sri Putra	19	39
+2013	46	Selangor	Petaling	Seksyen 8 Teres B2 (Jalan 8/14 - Jalan 8/28)	22	38
+2013	46	Selangor	Petaling	"Pju 5 Sek 11 Gugusan
+Dedap 2 (Blok 6-10)"	13	38
+2013	46	Selangor	Hulu Langat	Jalan 3/1-15 Seksyen 3 Bandar Baru Bangi	21	37
+2013	46	Selangor	Hulu Langat	Kampung Baru Bangi Lama	5	36
+2013	46	Selangor	Hulu Langat	Apartment Taman Bukit Mewah	8	35
+2013	46	Selangor	Petaling	"Pju 10 Apartmentidaman
+2    ( Blok E,F,G,O,P,Q,R,S )"	11	35
+2013	46	Selangor	Hulu Langat	Jalan Inang 1/9-11/9 Bandar Mahkota Cheras	8	35
+2013	46	Selangor	Hulu Langat	Apartment Sri Tanjung Seksyen 7 Bandar Baru Bangi	7	33
+2013	46	Selangor	Petaling	Pju 3 (Rianagreencondo)	9	33
+2013	46	Selangor	Gombak	Taman Jasa Utama Zon  1	8	32
+2013	46	Selangor	Hulu Langat	Apartment Pandan Mesra Prima Kampung Ampang Campuran	8	32
+2013	46	Selangor	Hulu Langat	Pangsapuri Vista Perdana Bandar Teknologi	4	31
+2013	46	Selangor	Petaling	Pju 5 Seksyen 6	15	32
+2013	46	Selangor	Gombak	Taman Samudera Selatan	5	31
+2013	46	Selangor	Hulu Langat	Casavillacondo Sungai Chua	9	31
+2013	47	Selangor	Petaling	"Pjs 8 Mentari Court  1 (Blok A, B, C,D)"	112	160
+2013	47	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1-Blok 12 & Blok 38 - Blok 43)	154	139
+2013	47	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	71	132
+2013	47	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A (Jln 7/29- 7/30, Unisel & Jln A7/A- F7/F)"	44	112
+2013	47	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon B (Jln 7/24- 7/27)	42	96
+2013	47	Selangor	Petaling	Ss 2 (Timur)	30	92
+2013	47	Selangor	Petaling	Ss 2 (Selatan)	31	88
+2013	47	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jln 7/11- 7/22)	25	86
+2013	47	Selangor	Petaling	Ss 22	13	80
+2013	47	Selangor	Hulu Langat	Jalan 8/1-15 Seksyen 8 Bandar Baru Bangi	29	75
+2013	47	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang	39	74
+2013	47	Selangor	Petaling	Taman Puchong Utama 2	18	71
+2013	47	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	22	67
+2013	47	Selangor	Hulu Langat	Apartment Persona Taman Kajang Utama	14	66
+2013	47	Selangor	Sepang	Taman Desa Sentosa	102	65
+2013	47	Selangor	Hulu Langat	Jalan 7/3 Seksyen 7 Bandar Baru Bangi	21	63
+2013	47	Selangor	Hulu Langat	City Garden Palm Villa Kondo Taman Cempaka	42	62
+2013	47	Selangor	Hulu Langat	Seksyen 7 Bandar Sri Putra	11	62
+2013	47	Selangor	Petaling	Pjs 9 Lagoon Perdana	17	60
+2013	47	Selangor	Petaling	Pusat Bandar Puchong 5 ( Sri Jati )	13	60
+2013	47	Selangor	Hulu Langat	"Jalan 6/9,6/10,6/11 & 6/14 Tasek Tambahan"	15	59
+2013	47	Selangor	Hulu Langat	Pangsapuri Mewah Taman Damai Mewah	12	59
+2013	47	Selangor	Petaling	Seksyen  3 Uitm Shah Alam Kolej Jati	20	59
+2013	47	Selangor	Petaling	"Seksyen 7E B Pusat Komersial (Jalan Aa7/Aa
+& Ac7/Ac & Jalan U7/U - Z7/Z)"	22	58
+2013	47	Selangor	Hulu Langat	Jalan Nirwana 1-17 Taman Nirwana	20	58
+2013	47	Selangor	Petaling	Seksyen 2 Petaling Jaya	8	56
+2013	47	Selangor	Petaling	Ss 19/1 Subang Jaya	18	56
+2013	47	Selangor	Hulu Langat	Pangsapuri Delima Taman Pinggiran Delima	14	55
+2013	47	Selangor	Petaling	Pjs 10 Kondo Ridzuan	16	55
+2013	47	Selangor	Petaling	Pju 9 Sd 7	25	55
+2013	47	Selangor	Gombak	Apartment Residensi Bistaria	11	55
+2013	47	Selangor	Petaling	Seksyen 27 Apartment Ixora	23	54
+2013	47	Selangor	Petaling	Pjs 2C Flat Taman Medan Cahaya	10	54
+2013	47	Selangor	Petaling	Pjs 2C Taman Medan	15	54
+2013	47	Selangor	Petaling	Bandar  Bukit Puchong 1 (Flat Bandar Bukit Puchong)	13	53
+2013	47	Selangor	Hulu Langat	Jalan 4/9 Seksyen 4 Bandar Baru Bangi	14	53
+2013	47	Selangor	Petaling	Seksyen U5 Pangsapuri Subang Suria	12	53
+2013	47	Selangor	Hulu Langat	Apartment Sri Pinang Taman Nirwana	25	51
+2013	47	Selangor	Hulu Langat	Jalan Tps 3 Taman Pelangi Semenyih	28	51
+2013	47	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon C (Jalan 7/31
+- 7/35)"	50	51
+2013	47	Selangor	Petaling	Ss 3 ( Taman Universiti )	19	49
+2013	47	Selangor	Hulu Langat	Apartment Taman Bukit Mutiara	11	49
+2013	47	Selangor	Petaling	Taman  Equini (Jalan Putra Permai 2)	12	48
+2013	47	Selangor	Hulu Langat	Jalan 9/9A-M Seksyen 9 Bandar Baru Bangi	19	47
+2013	47	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5 , 6)"	9	47
+2013	47	Selangor	Hulu Langat	"Jalan 8,15,17&14A Taman Cempaka"	11	47
+2013	47	Selangor	Hulu Langat	Jalan 15/1 Seksyen 15 Bandar Baru Bangi	20	46
+2013	47	Selangor	Petaling	"Pju 5 Sek 11 Gugusan
+Dedap 2 (Blok 6-10)"	14	45
+2013	47	Selangor	Petaling	Seksyen 8 Teres B2 (Jalan 8/14 - Jalan 8/28)	32	45
+2013	47	Selangor	Hulu Langat	Jalan 3/1-15 Seksyen 3 Bandar Baru Bangi	26	44
+2013	47	Selangor	Hulu Langat	Kampung Baru Bangi Lama	8	43
+2013	47	Selangor	Petaling	"Pju 10 Apartmentidaman
+2    ( Blok E,F,G,O,P,Q,R,S )"	14	42
+2013	47	Selangor	Hulu Langat	Jalan Inang 1/9-11/9 Bandar Mahkota Cheras	11	42
+2013	47	Selangor	Hulu Langat	Apartment Taman Bukit Mewah	9	42
+2013	47	Selangor	Petaling	Pju 3 (Riana Green Condo)	10	40
+2013	47	Selangor	Hulu Langat	Apartment Sri Tanjung Seksyen 7 Bandar Baru Bangi	8	40
+2013	47	Selangor	Petaling	Pju 5 Seksyen 6	17	39
+2013	47	Selangor	Hulu Langat	Casa Villa Condo Sungai Chua	11	38
+2013	47	Selangor	Gombak	Apartment Casmaria	16	37
+2013	47	Selangor	Gombak	Au4 Taman Keramat Zon 3	9	37
+2013	47	Selangor	Hulu Langat	Apartment Cemara Taman Kajang Utama	6	37
+2013	47	Selangor	Hulu Langat	Taman Sri Bangi	6	37
+2013	47	Selangor	Hulu Langat	Flat A1-A6 Taman Pandan Mewah	8	36
+2013	47	Selangor	Hulu Langat	Jalan 39-48 Taman Bukit Mewah	4	36
+2013	47	Selangor	Hulu Langat	Taman Taming Impian	16	36
+2013	47	Selangor	Petaling	Seksyen 51A ( Rumah Teres )	7	35
+2013	47	Selangor	Petaling	"Seksyen  13
+(Kondo Sri Acapella)"	11	35
+2013	47	Selangor	Petaling	Taman Universiti Indah ( Jalan 1/11 - 1/29 )	4	34
+2013	47	Selangor	Petaling	Taman Puchong Permai ( Blok A11-A20 )	8	34
+2013	47	Selangor	Hulu Langat	Jalan Melortaman Sri Ramal	8	34
+2013	47	Selangor	Petaling	Pju 8 Metropolitan Square Condo	10	33
+2013	47	Selangor	Petaling	Ss 4 Petaling Jaya	4	33
+2013	47	Selangor	Petaling	Bandar Bukit Puchong Vista Prima	15	33
+2013	47	Selangor	Petaling	Pjs 5 Flat Desa Ria	17	33
+2013	47	WPKL	Lembah Pantai	Kuarters Ktmb (Blok 41 & 42)	8	32
+2013	47	Selangor	Hulu Langat	Jalan 2/3-2/13 Taman Kosas	5	32
+2013	47	Selangor	Hulu Langat	"Jalan 1-10,12 Taman Harmoni Semenyih"	7	32
+2013	47	Selangor	Hulu Langat	Seksyen 1 Bandar Teknologi	5	31
+2013	47	Selangor	Petaling	Pjs 6 Kg Lindungan	7	31
+2013	48	Selangor	Petaling	"Pjs 8 Mentari Court  1 (Blok A, B, C,D)"	115	167
+2013	48	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1-Blok 12 & Blok 38 - Blok 43)	163	146
+2013	48	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	71	139
+2013	48	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37)	78	125
+2013	48	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon A (Jln 7/29- 7/30, Unisel & Jln A7/A- F7/F)"	48	119
+2013	48	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon B (Jln 7/24- 7/27)	44	103
+2013	48	Selangor	Petaling	Ss 2 (Timur)	32	99
+2013	48	Selangor	Petaling	Ss 2 (Selatan)	31	95
+2013	48	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jln 7/11- 7/22)	26	93
+2013	48	Selangor	Hulu Langat	Jalan 8/1-15 Seksyen 8 Bandar Baru Bangi	31	82
+2013	48	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang	40	81
+2013	48	Selangor	Hulu Langat	Seksyen 2 Bandar Rinching	22	74
+2013	48	Selangor	Sepang	Taman Desa Sentosa	102	72
+2013	48	Selangor	Hulu Langat	Jalan 7/3 Seksyen 7 Bandar Baru Bangi	22	70
+2013	48	Selangor	Hulu Langat	City Garden Palm Villa Kondo Taman Cempaka	43	69
+2013	48	Selangor	Hulu Langat	Batu 12 1/2 Jalan Cheras- Kajang	16	69
+2013	48	Selangor	Hulu Langat	Seksyen 7 Bandar Sri Putra	11	69
+2013	48	Selangor	Petaling	Pjs 9 Lagoon Perdana	25	67
+2013	48	Selangor	Petaling	Pusat Bandar Puchong  5 ( Sri Jati )	14	67
+2013	48	Selangor	Hulu Langat	Pangsapuri Mewah Taman Damai Mewah	12	66
+2013	48	Selangor	Petaling	Seksyen  3 Uitm Shah Alam Kolej Jati	22	66
+2013	48	Selangor	Petaling	"Seksyen 7E B Pusat Komersial (Jalan Aa7/Aa
+& Ac7/Ac & Jalan U7/U - Z7/Z)"	23	65
+2013	48	Selangor	Hulu Langat	Jalan Nirwana 1-17 Taman Nirwana	24	65
+2013	48	Selangor	Petaling	Ss 19/1 Subang Jaya	22	63
+2013	48	Selangor	Petaling	Pju 9 Sd 7	26	62
+2013	48	Selangor	Hulu Langat	Pangsapuri Delima Taman Pinggiran Delima	15	62
+2013	48	Selangor	Petaling	Pjs 10 Kondo Ridzuan	19	62
+2013	48	Selangor	Petaling	Seksyen 27 Apartment Ixora	26	61
+2013	48	Selangor	Petaling	Pjs 2C Taman Medan	16	61
+2013	48	Selangor	Petaling	Bandar  Bukit Puchong  1 (Flat Bandar Bukit Puchong)	14	60
+2013	48	Selangor	Hulu Langat	Jalan 4/9 Seksyen 4 Bandar Baru Bangi	14	60
+2013	48	Selangor	Petaling	Seksyen U5 Pangsapuri Subang Suria	13	60
+2013	48	Selangor	Hulu Langat	Apartment Sri Pinang Taman Nirwana	26	58
+2013	48	Selangor	Hulu Langat	Jalan Tps 3 Taman Pelangi Semenyih	32	58
+2013	48	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B Zon C (Jalan 7/31
+- 7/35)"	52	58
+2013	48	Selangor	Petaling	Ss 3 ( Taman Universiti )	22	56
+2013	48	Selangor	Petaling	"Taman  Equini
+(Jalan Putra Permai 2)"	14	55
+2013	48	Selangor	Hulu Langat	"Jalan 8,15,17&14A Taman Cempaka"	13	54
+2013	48	Selangor	Hulu Langat	Jalan 9/9A-M Seksyen 9 Bandar Baru Bangi	19	54
+2013	48	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5 , 6)"	9	54
+2013	48	Selangor	Hulu Langat	Jalan 15/1 Seksyen 15 Bandar Baru Bangi	20	53
+2013	48	Selangor	Petaling	"Pju 5 Sek 11 Gugusan
+Dedap 2 (Blok 6-10)"	14	52
+2013	48	Selangor	Petaling	Seksyen 8 Teres B2 (Jalan 8/14 - Jalan 8/28)	42	52
+2013	48	Selangor	Hulu Langat	Jalan 3/1-15 Seksyen 3 Bandar Baru Bangi	27	51
+2013	48	Selangor	Hulu Langat	Kampung Baru Bangi Lama	8	50
+2013	48	Selangor	Petaling	"Pju 10 Apartmentidaman 2 ( Blok E,F,G,O,P,Q,R,S )"	15	49
+2013	48	Selangor	Hulu Langat	Jalan Inang 1/9-11/9 Bandar Mahkota Cheras	11	49
+2013	48	Selangor	Hulu Langat	Apartment Taman Bukit Mewah	10	49
+2013	48	Selangor	Petaling	Pju 3 (Riana Green Condo)	12	47
+2013	48	Selangor	Hulu Langat	Apartment Sri Tanjung Seksyen 7 Bandar Baru Bangi	9	47
+2013	48	Selangor	Petaling	Pju 5 Seksyen 6	19	46
+2013	48	Selangor	Hulu Langat	Casa Villa Condo Sungai Chua	11	45
+2013	48	Selangor	Gombak	Apartment Casmaria	16	44
+2013	48	Selangor	Hulu Langat	Taman Sri Bangi	6	44
+2013	48	Selangor	Hulu Langat	Taman Taming Impian	22	43
+2013	48	Selangor	Petaling	Seksyen 51A ( Rumah Teres )	7	42
+2013	48	Selangor	Petaling	Taman Universiti Indah ( Jalan 1/11 - 1/29 )	5	42
+2013	48	Selangor	Petaling	Seksyen  13 (Kondo Sri Acapella)	11	42
+2013	48	Selangor	Hulu Langat	Flat  A1-A6 Taman Pandan Mewah	9	43
+2013	48	Selangor	Hulu Langat	Jalan Melortaman Sri Ramal	8	41
+2013	48	Selangor	Petaling	Pju 8 Metropolitan Square Condo	12	40
+2013	48	Selangor	Petaling	Bandar Bukit Puchong Vista Prima	20	40
+2013	48	Selangor	Petaling	Pjs 5 Flat Desa Ria	21	40
+2013	48	Selangor	Hulu Langat	Jalan 2/3-2/13 Taman Kosas	5	39
+2013	48	Selangor	Hulu Langat	"Jalan 1-10,12 Taman Harmoni  Semenyih"	7	39
+2013	48	Selangor	Petaling	Seksyen 7 Shah Alam Kondominium Kristal Height	9	37
+2013	48	Selangor	Petaling	"Seksyen 20 Teres D
+( Jalan 20/12 - 20/13F )"	7	36
+2013	48	Selangor	Petaling	Taman Sri Andalas Seri Kembangan	8	35
+2013	48	Selangor	Petaling	Pju 1 Kg Cempaka	10	34
+2013	48	Selangor	Sepang	Asrama Kilang Wrp	69	34
+2013	48	Selangor	Sepang	Apartment  Cempaka Bukit Punchong  2	10	34
+2013	48	Selangor	Petaling	Pjs 10 Taman Sri Subang	10	32
+2013	48	Selangor	Gombak	Selayang Baru  8	9	31
+2013	48	Selangor	Petaling	Pjs 10 Taman Dato Hormat	5	31
+2013	49	Selangor	Petaling	"Pjs Mentari Court 1 ( Blok A, B, C, D)"	119	174
+2013	49	Selangor	Petaling	Seksyen 7 Shah Alaf Flat A (Blok 1-Blok 12 & Bl K 38 -Blok 43)	169	153
+2013	49	Selangor	Petaling	Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)	73	146
+2013	49	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37)	82	132
+2013	49	Selangor	Petaling	Seksyen 7 Shah Alam  Teres B Zon A (Jin 7/29-7/30 Jin A7/A-F7/F)	48	126
+2013	49	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon B (Jin 7/24-7/27	46	110
+2013	49	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jin 7/11-7/22	27	100
+2013	49	Selangor	Petaling	Ss 2 (Timur)	32	106
+2013	49	Selangor	Hulu Langat	Jln 8/1 1-15 Seksyen 8 Bandar Baru Bangi	32	89
+2013	49	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang	42	88
+2013	49	Selangor	Hulu Langat	Jalan 7/3 Seksyen 7 Bandar Baru Bangi	26	77
+2013	49	Selangor	Hulu Langat	City Garden Palm Villa Kondo Taman Cempaka	43	76
+2013	49	Selangor	Hulu Langat	Batu 12 1/2 Jalan Cheras - Kajang	16	76
+2013	49	Selangor	Petaling	Pjs 9 Lagoon Perdana	34	74
+2013	49	Selangor	Petaling	Pusat Bandar Puchong 5 (Sri Jati)	17	74
+2013	49	Selangor	Petaling	Seksyen 3 Uitm Shah Alam Kolej Jati	25	73
+2013	49	Selangor	Hulu Langat	Jalan Nirwana 1-17 Taman Nirwana	24	72
+2013	49	Selangor	Petaling	Ss 19/1 Subang Jaya	23	70
+2013	49	Selangor	Hulu Langat	Pangsapuri Delima Taman Pinggiran Delima	17	69
+2013	49	Selangor	Petaling	Pjs 10 Kondo Ridzl An	24	69
+2013	49	Selangor	Petaling	Seksyen 27 Apartme Nt Lxora	28	68
+2013	49	Selangor	Petaling	Pjs 2C Taman Med;:In	18	68
+2013	49	Selangor	Petaling	Seksyen Us Pangsapuri  Subang Suria	14	67
+2013	49	Selangor	Hulu Langat	Jalan Tps 3 Taman Pelangi Semenyih	41	65
+2013	49	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon C (Jalan 7/31 - 7/35)	66	65
+2013	49	Selangor	Petaling	 Ss 3 ( Taman Universiti)	25	63
+2013	49	Selangor	Petaling	Taman  Equini (Jalan Putra Permai 2)   	20	62
+2013	49	Selangor	Petaling	"  Pjs 6 Flat Desa Mentari 2 (Blok 4, 5 , 6)"	11	61
+2013	49	Selangor	Hulu Langat	Jalan 15/1 Seksyen 15 Bandar Baru Bangi	23	60
+2013	49	Selangor	Petaling	Seksyen 8 Jalan B2 ( Jalan 8/14 - Jalan 8/28)	47	59
+2013	49	Selangor	Hulu Langat	Kampung Baru Bangi Lama	9	57
+2013	49	Selangor	Hulu Langat	Apartmen Taman Bukit Mewah	12	56
+2013	49	Selangor	Petaling	"Pju 10 Apartmen Idamn 2 Blok ( E, F, G, O, P, Q, R, S )"	16	56
+2013	49	Selangor	Petaling	Taman Pinggiran Putra (Putra Permai Selesa Apartment)	12	55
+2013	49	Selangor	Hulu Langat	Apartment Sri Tanjur Seksyen 7 Bandar Baru Bangi	10	54
+2013	49	Selangor	Petaling	Pju 3 (Riana Green Condo)	12	54
+2013	49	Selangor	Petaling	Pju 5 Seksyen 6	23	53
+2013	49	Selangor	Hulu Langat	Casa Villa Condo Su Chua	15	52
+2013	49	Selangor	Gombak	Apartment  Casmaria	17	51
+2013	49	Selangor	Hulu Langat	"Flat  A1-A6 Taman Pandan
+Mewah"	10	50
+2013	49	Selangor	Hulu Langat	Taman Taming Lmpian	24	50
+2013	49	Selangor	Petaling	Seksyen 51A ( Rumph Teres )	8	49
+2013	49	Selangor	Petaling	"Seksyen 13
+(Kondo Sri Acapella •"	15	49
+2013	49	Selangor	Petaling	Bandar Bukit Pucho Hg Vista Prima	21	47
+2013	49	Selangor	Petaling	Pjs 5 Flat Desa Rial	22	47
+2013	49	Selangor	Petaling	Pju 8 Metropolitan Condo	17	47
+2013	49	Selangor	Petaling	Seksyen 7 Shah Ala M  Kondominium Krista Height                    	13	44
+2013	49	Selangor	Petaling	Seksyen 20 Teres D ( Jalan 20/12 - 20/13F )	9	43
+2013	49	Selangor	Sepang	Asrama Kilang Wri	70	41
+2013	49	Selangor	Petaling	Pju 1 Kg Cempaka	11	41
+2013	49	Selangor	Petaling	Pjs 10 Taman Sri S Bang	12	39
+2013	49	Selangor	Petaling	Pjs 10 Taman Dato Hormat	7	38
+2013	49	Selangor	Petaling	Pusat Bandar Pucho Ng (Jalan Wawasan 3)	7	37
+2013	49	Selangor	Hulu Langat	"Pangsapuri Cheras Wtama
+I"	10	37
+2013	49	Selangor	Petaling	Pjs 1 (Flat Taman 4Etaling Utama)	6	37
+2013	49	Selangor	Petaling	Pju 5 Seksyen 4 Gl Gusan Semarak	8	37
+2013	49	Selangor	Hulu Selangor	Kg Dato' Harun	8	36
+2013	49	Selangor	Petaling	Seksyen 17 ( A ) Petaling Jaya	6	34
+2013	49	Selangor	Hulu Langat	Taman Dalma Semenyih	4	33
+2013	49	Selangor	Petaling	Seksyen 1 Uitm Sh H Alam Kolej Mawar	4	33
+2013	49	Selangor	Petaling	Pju 9 Sd 9            	5	32
+2013	49	Selangor	Petaling	"Seksyen  20 Taman    Armount
+I"	7	32
+2013	49	Selangor	Petaling	Taman Lestari Putra	9	32
+2013	49	Selangor	Hulu Langat	Apertment Seksyen Bandar Baru Sangi	4	32
+2013	49	Selangor	Hulu Langat	Taman Sungai Jelok J	16	32
+2013	49	Selangor	Gombak	Taman Berjaya	12	31
+2013	49	Selangor	Petaling	Seksyen 1 Uitm Shah Alam Kolej Perindu       	4	31
+2013	49	Selangor	Hulu Langat	Jalan Bm 11-27 Tar Nan Bukit Mewah	5	31
+2013	50	Selangor	Petaling	"Pjs 8 Mentari Court  1 (Blok 123
+A, B, C,D)"	123	81
+2013	50	Selangor	Petaling	Seksyen 7 Shah Alam Flat A Blok 1 - Blok12 & Blok 38 - Blok 43)	172	160
+2013	50	Selangor	Petaling	"Seksyen 7 Shah Alam Flat C (Blok 44 - Blok 51)     
+"	73	153
+2013	50	Selangor	Petaling	"Seksyen 7 Shah Alam  Flat B (Blok 13 - Blok 37)       
+"	84	139
+2013	50	Selangor	Petaling	"Seksyen 7 Shah Alam Teres B        
+Zon B (Jin 7/24- 7/27)"	46	117
+2013	50	Selangor	Petaling	"Seksyen 7 Shah Alam Teres A         
+Zon A (Jin 7/11-7/22)"	27	107
+2013	50	Selangor	Hulu Langat	Jalan 8/1-15 Seksyen 8 Bandar Baru Bangi 	32	96
+2013	50	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang  	46	95
+2013	50	Selangor	Hulu Langat	Jalan 7/3 Seksyen  7 Bandar Baru Bangi	27	84
+2013	50	Selangor	Petaling	Pjs 9 Lagoon Perdana                    	39	81
+2013	50	Selangor	Petaling	Pusat Bandar Puchong  5 ( Sri Jati)	18	81
+2013	50	Selangor	Petaling	Seksyen  3 Uitm Shah Alam Kolej Jati	25	80
+2013	50	Selangor	Hulu Langat	"Jalan Nirwana 1-17 Taman Nirwana         
+"	26	79
+2013	50	Selangor	Petaling	"Seksyen 7E B Pusat Komersial (Jalan Aa7/Aa &       
+Ac7/Ac & Jalan U7/U - Z7/Z"	27	79
+2013	50	Selangor	Petaling	Ss 19/1 Subang Jaya                     	24	77
+2013	50	Selangor	Petaling	Pjs 10 Kondo Ridzuan	28	76
+2013	50	Selangor	Hulu Langat	Pangsapuri Delima Taman Pinggiran Delima	17	76
+2013	50	Selangor	Petaling	Pjs 2C Taman Medan	19	75
+2013	50	Selangor	Petaling	Seksyen 27 Apartment Lxora	31	75
+2013	50	Selangor	Petaling	Seksyen U5 Pangsapuri Subang Suria	15	74
+2013	50	Selangor	Petaling	Bandar  Bukit Puchong  1 (Flat Bandar Bukit Puchong)	16	74
+2013	50	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon C (Jalan 7/31 - 7/35)	72	72
+2013	50	Selangor	Hulu Langat	Jalan Tps 3 Taman  Pelangi Semenyih	42	72
+2013	50	Selangor	Petaling	Ss 3 ( Taman Universiti )	25	70
+2013	50	Selangor	Petaling	Taman  Equini (Jalan Putra Permai 2)	22	69
+2013	50	Selangor	Petaling	"Pjs 6 Flat Desa Mentari 2
+(Blok 4, 5 , 6)"	11	68
+2013	50	Selangor	Hulu Langat	"Jalan 8,15,17&14A Taman Cempaka"	15	68
+2013	50	Selangor	Hulu Langat	Jalan 15/1 Seksyen 15 Bandar Baru Sangi	24	67
+2013	50	Selangor	Petaling	Seksyen 8 Teres B2 (Jalan 8/14 - Jalan 8/28)	52	66
+2013	50	Selangor	Hulu Langat	Kampung Baru Sangi Lama	9	64
+2013	50	Selangor	Petaling	"Pju 10 Apartmentldaman  2 ( Blok E,F,G,O,P,Q ,R,S )"	17	63
+2013	50	Selangor	Hulu Langat	· Apartment Taman Bukit Mewah	13	63
+2013	50	Selangor	Petaling	Taman Pinggiran Putra (Putra Permai Selesa Apartment)	13	62
+2013	50	Selangor	Hulu Langat	Apartment Sri Tanjung Seksyen 7 Bandar Baru Sangi	11	61
+2013	50	Selangor	Petaling	Pju 5 Seksyen 6	25	60
+2013	50	Selangor	Hulu Langat	Casa Villa Condo Sungai Chua	15	59
+2013	50	Selangor	Gombak	Apartment  Casmaria	18	58
+2013	50	Selangor	Hulu Langat	Flat  A1-A6 Taman Pandan Mewah	11	57
+2013	50	Selangor	Hulu Langat	Taman Taming Lmpian	24	57
+2013	50	Selangor	Petaling	Seksyen 51A ( Rumah Teres )	8	56
+2013	50	Selangor	Petaling	Taman Universiti Lndah ( Jalan 1/11 - 1/29 )	6	56
+2013	50	Selangor	Petaling	Seksyen 13 (Kondo Sri Acapella)	16	56
+2013	50	Selangor	Petaling	Pjs 5 Flat Desa Ria	27	54
+2013	50	Selangor	Petaling	Pju 8 Metropolitan Square Condo	18	54
+2013	50	Selangor	Petaling	Bandar Bukit Puchong Vista Prima	28	54
+2013	50	Selangor	Petaling	Seksyen 7 Shah Alam Kondominium Kristal Height	13	51
+2013	50	Selangor	Petaling	Pju 1 Kg Cempaka	11	48
+2013	50	Selangor	Sepang	Asrama Kilang  Wrp	71	48
+2013	50	Selangor	Petaling	Pjs 10 Taman Sri Subang	13	46
+2013	50	Selangor	Hulu Langat	Pangsapuri Cheras Utama	10	44
+2013	50	Selangor	Petaling	Pjs 1 (Flat Taman Petaling Utama)	8	44
+2013	50	Selangor	Petaling	Pju 5 Seksyen 4 Gugusan Semarak	8	44
+2013	50	Selangor	Hulu Selangor	Kg Dato' Harun	9	43
+2013	50	Selangor	Petaling	Seksyen  20 Taman Parmount	7	39
+2013	50	Selangor	Hulu Langat	Apertment Seksyen 4 Bandar Baru Bangi	4	39
+2013	50	Selangor	Petaling	Taman Lestari Putra 4	10	39
+2013	50	Selangor	Hulu Langat	Taman Sungai Jelok	17	39
+2013	50	Selangor	Gombak	Taman Berjaya	13	38
+2013	50	Selangor	Hulu Langat	Pangsapuri Pandan Cahaya	11	37
+2013	50	Selangor	Petaling	Pusat Bandar Puchong (Jalan Wawasan 2)	7	37
+2013	50	Selangor	Petaling	"Ss 9A 2 ( Jalan 9A/1,2,4,13,14,15,16,18,19  )"	7	37
+2013	50	Selangor	Hulu Langat	Jalan 4/3 Seksyen 4 Bandar Baru Bangi	13	36
+2013	50	Selangor	Petaling	Seksyen 18 (Uitm-Kolej Akasia)	28	35
+2013	50	Selangor	Petaling	Taman Serdang Perdana ( South City Condo )	8	35
+2013	50	Selangor	Petaling	Seri Kembangan (The Heritage)	20	34
+2013	50	Selangor	Petaling	Ss 7 Kelana Puteri Kondo	4	34
+2013	50	Selangor	Hulu Langat	Kolej Kemahiran Mara Beranang	5	34
+2013	50	Selangor	Petaling	Seksyen  7 Pangsapuri Kristal	17	34
+2013	50	Selangor	Hulu Langat	Taman Muhibbah	4	34
+2013	50	Selangor	Hulu Langat	Flat Taman Dagang	6	34
+2013	50	Selangor	Hulu Langat	Taman Tenaga	9	34
+2013	50	N. Sembilan	Seremban	Vision Homes	8	33
+2013	50	Selangor	Petaling	"Putra Height 2
+( Jalan Putra Bistari )"	6	33
+2013	50	Selangor	Petaling	Pusat Bandar Puchong ( Kuarters Mpsj )	5	33
+2013	50	Selangor	Hulu Langat	Jalan Kp 7-10 Taman Kajang Perdana	6	33
+2013	50	Selangor	Gombak	Taman Rawang Perdana Fasa 10	22	33
+2013	50	Selangor	Hulu Langat	Lorong Dato Mufti 1-6 Kampung Dato Mufti	5	33
+2013	50	Selangor	Hulu Langat	Pangsapuri  Prima Saujana Kajang	7	33
+2013	50	Selangor	Petaling	Seksyen 16 Kuarters Suk	9	33
+2013	50	Selangor	Petaling	Ss 8 Petaling Jaya	5	32
+2013	50	Selangor	Petaling	Bandar Bukit Puchong 3	11	32
+2013	50	Selangor	Petaling	Putra Height 8 (Putra Bahagia)	4	32
+2013	50	Selangor	Hulu Selangor	Jalan Orkid Bs	15	32
+2013	50	Selangor	Hulu Langat	Rumah Kongsi Prima Saujana	4	32
+2013	50	Selangor	Gombak	Taman Greenwood Zan 1	8	31
+2013	50	Selangor	Hulu Langat	"Apartment   Lntana Ria
+Seksyen  7 Bandar Baru Bangi"	6	31
+2013	50	Selangor	Hulu Langat	Jalan Tps 2 Taman Pelang Semenyih	6	31
+2013	50	Selangor	Petaling	Seksyen 18 (Uitm-Kolej Cemara)	13	31
+2013	50	Selangor	Petaling	Seksyen 18 Teres D	10	31
+2013	52	Selangor	Petaling	"Pjs 8 Mentari Court  1     (Blok A, B, C,D)"	129	195
+2013	52	Selangor	Petaling	Seksyen 7 Shah Alam Flat A (Blok 1-Blok 12 & Blok 38 - Blok 43)	182	174
+2013	52	Selangor	Petaling	Seksyen 7 Shah Alam Flat B (Blok 13 - Blok 37)	96	153
+2013	52	Selangor	Petaling	Seksyen 7 Shah Alam Teres A Zon A (Jln 7/11-7/22)	28	121
+2013	52	Selangor	Hulu Langat	Jalan 8/1-15 Seksyen 8 Bandar Baru Bangi	37	110
+2013	52	Selangor	Hulu Langat	Flat Sri Nilam Bandar Baru Ampang	49	109
+2013	52	Selangor	Hulu Langat	Jalan 7/3 Seksyen 7  Bandar Baru Bangi	34	98
+2013	52	Selangor	Petaling	Pjs 9 Lagoon Perdana	58	95
+2013	52	Selangor	Petaling	Pusat Bandar Puchong  5        ( Sri Jati )	23	95
+2013	52	Selangor	Petaling	Seksyen  3 Uitm Shah Alam Kolej Jati	33	94
+2013	52	Selangor	Petaling	Seksyen 7E B Pusat Komersial (Jalan Aa7/Aa & Ac7/Ac & Jalan U7/U - Z7/Z)	33	93
+2013	52	Selangor	Hulu Langat	Jalan Nirwana 1-17 Taman Nirwana	28	93
+2013	52	Selangor	Petaling	Ss 19/1 Subang Jaya	30	91
+2013	52	Selangor	Petaling	Pjs 10 Kondo Ridzuan	40	90
+2013	52	Selangor	Hulu Langat	Pangsapuri Delima Taman Pinggiran Delima	23	90
+2013	52	Selangor	Petaling	Seksyen 27 Apartment Ixora	45	89
+2013	52	Selangor	Petaling	Pjs 2C Taman Medan	23	89
+2013	52	Selangor	Petaling	Seksyen U5 Pangsapuri Subang Suria	21	88
+2013	52	Selangor	Petaling	Seksyen 7 Shah Alam Teres B Zon C (Jalan 7/31 - 7/35)	86	86
+2013	52	Selangor	Hulu Langat	Jalan Tps 3 Taman Pelangi Semenyih	71	86
+2013	52	Selangor	Petaling	Ss 3 ( Taman Universiti )	29	84
+2013	52	Selangor	Petaling	"Taman  Equini
+(Jalan Putra Permai 2)"	29	83
+2013	52	Selangor	Hulu Langat	Jalan 15/1 Seksyen 15 Bandar Baru Bangi	26	81
+2013	52	Selangor	Petaling	Seksyen 8 Teres B2 (Jalan 8/14 - Jalan 8/28)	64	80
+2013	52	Selangor	Petaling	"Pju 10 Apartmentidaman 2    ( Blok E,F,G,O,P,Q,R,S )"	19	77
+2013	52	Selangor	Petaling	Taman Pinggiran Putra (Putra Permai Selesa Apartment)	27	76
+2013	52	Selangor	Hulu Langat	Apartment Sri Tanjung Seksyen 7 Bandar Baru Bangi	12	75
+2013	52	Selangor	Petaling	Pju 5 Seksyen 6	36	74
+2013	52	Selangor	Gombak	Apartment Casmaria	27	72
+2013	52	Selangor	Hulu Langat	Taman Taming Impian	33	71
+2013	52	Selangor	Petaling	Taman Universiti Indah ( Jalan 1/11 - 1/29 )	7	70
+2013	52	Selangor	Petaling	Pjs 5 Flat Desa Ria	33	68
+2013	52	Selangor	Petaling	Pju 8 Metropolitan Square Condo	19	68
+2013	52	Selangor	Petaling	Bandar Bukit Puchong Vista Prima	30	68
+2013	52	Selangor	Petaling	Seksyen 7 Shah Alam Kondominium Kristal Height	16	65
+2013	52	Selangor	Sepang	Asrama Kilang Wrp	91	62
+2013	52	Selangor	Petaling	Pju 5 Seksyen 4 Gugusan Semarak	12	58
+2013	52	Selangor	Hulu Langat	Pangsapuri Cheras Utama	16	58
+2013	52	Selangor	Petaling	Taman Lestari Putra 4	16	53
+2013	52	Selangor	Hulu Langat	Taman Sungai Jelok	23	53
+2013	52	Selangor	Petaling	Seksyen 18 Teres D	15	53
+2013	52	Selangor	Hulu Langat	Jalan 4/3 Seksyen 4 Bandar Baru Bangi	19	50
+2013	52	Selangor	Petaling	"Seksyen 18
+(Uitm-Kolej Akasia)"	33	49
+2013	52	Selangor	Petaling	Seksyen  7 Pangsapuri Kristal	24	48
+2013	52	Selangor	Petaling	Seri Kembangan (The  Heritage)	26	48
+2013	52	Selangor	Hulu Langat	Flat Taman Dagang	8	48
+2013	52	Selangor	Hulu Langat	Taman Muhibbah	5	48
+2013	52	Selangor	Hulu Langat	Taman Tenaga	13	48
+2013	52	Selangor	Gombak	Taman Rawang Perdana Fasa 10	23	47
+2013	52	Selangor	Hulu Langat	Lorong Dato Mufti 1-6 Kampung Dato Mufti	7	47
+2013	52	Selangor	Hulu Langat	Pangsapuri  Prima Saujana Kajang	12	47
+2013	52	N. Sembilan	Seremban	Vision Homes	9	47
+2013	52	Selangor	Petaling	Seksyen 16 Kuarters Suk	15	47
+2013	52	Selangor	Petaling	Bandar Bukit Puchong 3	13	46
+2013	52	Selangor	Gombak	Taman Greenwood Zon 1	11	45
+2013	52	Selangor	Hulu Langat	Jalan Tps 2 Taman Pelang Semenyih	9	45
+2013	52	Selangor	Petaling	"Seksyen 18
+(Uitm-Kolej Cemara)"	19	45
+2013	52	N. Sembilan	Seremban	Taman Desa Ixora	6	44
+2013	52	Selangor	Hulu Langat	Jalan Baiduri Taman        Desa Baiduri	7	44
+2013	52	Selangor	Petaling	Seksyen 24 Flat  Pkns A        ( Blok 1 - 9 )	26	43
+2013	52	Selangor	Petaling	Seksyen U5 Subang Bestari Teres A	7	42
+2013	52	Selangor	Gombak	Taman Bukit Rawang Jaya	5	41
+2013	52	Selangor	Hulu Langat	Jalan Dagang 2/1-2/7 Taman Dagang	8	41
+2013	52	Selangor	Hulu Langat	Seksyen 2 Bandar Teknologi	7	40
+2013	52	Selangor	Hulu Langat	Jalan 4C/4-4C/6 Bandar Tasik Kesuma	8	40
+2013	52	Selangor	Sepang	Cyberia Smarthome	44	39
+2013	52	Selangor	Hulu Langat	Apartment  Pandan Utama Taman Pandan Utama	16	39
+2013	52	Selangor	Petaling	Seksyen U2 (Pangsapuri Jaya)	26	38
+2013	52	Selangor	Petaling	Ss 19/6	19	38
+2013	52	Selangor	Hulu Langat	Chancellor  Kondominium Taman Kosas	12	38
+2013	52	Selangor	Hulu Langat	Jalan 3/29-33 Seksyen 3 Bandar Baru Bangi	15	38
+2013	52	Selangor	Hulu Langat	Taman Mesra Kajang	21	38
+2013	52	Selangor	Petaling	Taman Puchong Utama 8	6	37
+2013	52	Selangor	Petaling	Seksyen  24 Teres B	7	36
+2013	52	N. Sembilan	Seremban	Taman Pinggiran Senawang	13	36
+2013	52	Selangor	Hulu Langat	Jalan 12-28 Taman Putra	7	36
+2013	52	Selangor	Hulu Langat	"Jalan Dayang 8,22,24,28,30- 58/8 Bandar Mahkota Cheras"	6	36
+2013	52	Selangor	Hulu Langat	Jalan 3/13-22 Seksyen 3 Bandar Baru Bangi	42	36
+2013	52	Selangor	Hulu Langat	Kampung Baru Semenyih	9	36
+2013	52	Selangor	Petaling	"Pju 8 Apartment Flora Damansara 2 (Blok C, D, E, F)"	7	35
+2013	52	Selangor	Petaling	Taman Pinggiran Putra 39      ( Putra Impian )	5	35
+2013	52	Selangor	Petaling	Taman Dato Harun	9	34
+2013	52	N. Sembilan	Seremban	Taman Bandar Senawang	9	34
+2013	52	Selangor	Hulu Langat	Jalan Maju 1 Taman     Lembah Maju	5	34
+2013	52	Selangor	Hulu Langat	Jalan 3/7-12 Seksyen 3 Bandar Baru Bangi	10	34
+2013	52	Selangor	Hulu Langat	Jalan 4/7 Seksyen 4 Bandar Baru Bangi	15	34
+2013	52	Selangor	Hulu Langat	Jalan Puncak 3 Taman Puncak Saujana	10	34
+2013	52	Selangor	Petaling	Seksyen 20 Teres F	8	34
+2013	52	Selangor	Petaling	Seksyen 7 Pangsapuri Baiduri	8	33
+2013	52	Selangor	Petaling	Taman Serdang Jaya 2	6	33
+2013	52	Selangor	Hulu Langat	Jalan 1/7-1/19 Pandan Indah	7	33
+2013	52	Selangor	Hulu Langat	Seksyen U1 Kuarters Pendidikan Politeknik	12	32
+2013	52	Selangor	Gombak	Bandar Baru Selayang Fasa 1 (Zon 1)	15	32
+2013	52	Selangor	Hulu Langat	"Jalan Kosas 2/2,2/4,2/7,2/9,2/11B Taman Kosas"	6	32
+2013	52	Selangor	Hulu Langat	Apartment Vista Bandar Sri Putra	8	32
+2013	52	Selangor	Hulu Langat	Taman Seri Intan	10	32
+2013	52	Selangor	Petaling	Seksyen 24 Teres C                ( Jalan 24/8 - 24/12 )	5	31
+2013	52	Selangor	Petaling	Taman Lestari Perdana 7	6	31
+2013	52	Selangor	Petaling	Taman  Pinggiran Putra           ( Vista Pinggiran )	5	31
+2013	52	Selangor	Hulu Langat	Jalan 4B Bandar Tasik Kesuma	5	31
+2013	52	Selangor	Hulu Langat	Jalan 7/5 Seksyen 7 Bandar Baru Bangi	7	31
+2013	52	Selangor	Petaling	Seksyen 23 Teres B (Jalan 23/8- 23/9B)	4	31

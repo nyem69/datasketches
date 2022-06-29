@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- bootstrap -->
+<link type="text/css" rel="stylesheet" href="//lib.aga.my/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<script type="text/javascript" src="//lib.aga.my/jquery/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- d3 -->
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3.v4.min.js"></script>
+<script type="text/javascript" src="//lib.aga.my/d3/4.12.0/d3-selection-multi.v1.min.js"></script>
+
+<!-- utilities -->
+<script type="text/javascript" src="//lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script type="text/javascript" src="//lib.aga.my/chroma/0.6.3/chroma.min.js"></script>
+
+<!-- highcharts -->
+<script type="text/javascript" src="//lib.aga.my/highcharts/7.1.2/code/highcharts.js"></script>
+
+
+<style>
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(",");
+
+
+d3.tsv("../_data/LokalitiHotspot2015.txt",
+	function(err,data) {
+
+		console.group('load data');
+
+		//console.table([...data]);
+
+		var nestByTahun = d3.nest().key(function(d){ return +d.Tahun })
+			.entries(data);
+
+		console.log('nestByTahun', nestByTahun);
+
+		d3.select('body')
+			.append('div').attr('class','container-fluid')
+				.datum( nestByTahun[0] )
+				.call(function(sel)	{
+
+					sel.call(renderTitle);
+
+					sel.append('div')
+						.styles({
+							display:'flex',
+							'flex-wrap': 'wrap',
+						})
+						.call(function(sel)	{
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'300px',
+									'margin-right':'12px',
+								})
+								.call(renderTable);
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'300px',
+									'margin-right':'12px',
+								})
+								.call(renderTableHeatmap);
+
+							sel
+								.append('div')
+								.styles({
+									flex:'1 1 auto',
+									'min-width':'300px',
+									'margin-right':'12px',
+								})
+								.call(renderTableHeatmapMedian);
+
+
+						}); // flex
+
+				}); // container-fluid
+
+
+	});
+
+
+//---------------------------------------------------
+// title
+//---------------------------------------------------
+function renderTitle(sel)	{
+
+	console.group('renderTitle');
+
+	sel.append('h1')
+		.html(function(d){
+			return 'Jumlah Kes Denggi Tahun '+ d.key;
+		});
+
+	console.groupEnd('renderTitle');
+
+}
+
+
+//---------------------------------------------------
+// table
+//---------------------------------------------------
+function renderTable(sel)	{
+
+	console.group('renderTable');
+
+	sel
+		.append('div').html('Basic table')
+		.append('table').attr('class','table')
+		.call(function(sel)	{
+
+			//----------
+			// thead
+			//----------
+			sel.append('thead')
+				.append('tr')
+					.call(function(sel)	{
+
+						sel.append('th').html('Negeri');
+						sel.append('th').html('Jumlah Kes Terkumpul');
+
+					});
+
+			//----------
+			// tbody
+			//----------
+			sel.append('tbody')
+				.selectAll('tr').data(function(d){
+
+					var nest = d3.nest()
+						.key(function(d){
+
+							return d['Negeri']
+								.toUpperCase()													// standardize case
+								.trim() 																// remove extra spaces
+								.replace('PERAL','PERAK')								// cleanup spelling errors
+								.replace(/P.*?PINANG/,'PULAU PINANG')		// cleanup spelling inconsistencies
+							;
+
+						})
+						.rollup(function(d){
+							return {
+								total: d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] })
+							}
+						})
+						.entries(d.values);
+
+					console.log('nest',nest);
+
+					return nest;
+
+				})
+				.enter()
+					.append('tr')
+						.sort(d3.comparator().order(d3.descending, function(d){ return +d.value.total }))
+						.call(function(sel)	{
+
+							sel.append('td')
+								.html(function(d){ return d.key });
+
+							sel.append('td')
+								.style('text-align','right')
+								.html(function(d){ return comma(d.value.total) });
+
+
+						});
+
+			//----------
+			// tfoot
+			//----------
+			sel.append('thead')
+				.append('tr')
+					.call(function(sel)	{
+
+						sel.append('th').html('Jumlah');
+						sel.append('th')
+							.style('text-align','right')
+							.html(function(d){ return comma(+d3.sum(d.values, function(d){ return +d['Jumlah Kes Terkumpul'] }) ) });
+
+					});
+
+		});
+
+	console.groupEnd('renderTable');
+
+}
+
+
+//---------------------------------------------------
+// tableHeatmap
+//---------------------------------------------------
+function renderTableHeatmap(sel)	{
+
+	console.group('renderTableHeatmap');
+
+	//----------
+	// data prep
+	//----------
+
+	var data = sel.datum();
+
+	var nest = d3.nest()
+		.key(function(d){
+
+			return d['Negeri']
+				.toUpperCase()													// standardize case
+				.trim() 																// remove extra spaces
+				.replace('PERAL','PERAK')								// cleanup spelling errors
+				.replace(/P.*?PINANG/,'PULAU PINANG')		// cleanup spelling inconsistencies
+			;
+
+		})
+		.rollup(function(d){
+			return {
+				total: d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] })
+			}
+		})
+		.entries(data.values);
+
+	console.log('nest',nest);
+
+
+	var extent = d3.extent(nest, function(d){ return d.value.total });
+	console.log('extent',extent);
+
+	// min-max range
+
+	var scale = d3.scaleLinear()
+		.domain(extent)
+		.range(['blue','red']);
+
+
+	//----------
+	// render table
+	//----------
+
+
+	sel.append('table').attr('class','table')
+		.append('div').html('Basic table with heatmap')
+		.call(function(sel)	{
+
+			//----------
+			// thead
+			//----------
+			sel.append('thead')
+				.append('tr')
+					.call(function(sel)	{
+
+						sel.append('th').html('Negeri');
+						sel.append('th').html('Jumlah Kes Terkumpul');
+
+					});
+
+			//----------
+			// tbody
+			//----------
+			sel.append('tbody')
+				.selectAll('tr').data(nest)
+				.enter()
+					.append('tr')
+						.sort(d3.comparator().order(d3.descending, function(d){ return +d.value.total }))
+						.call(function(sel)	{
+
+							sel.append('td')
+								.html(function(d){ return d.key });
+
+							sel.append('td')
+								.style('text-align','right')
+								.style('background', function(d){ return scale(d.value.total) })
+								.style('color', '#fff' )
+									.html(function(d){
+											return comma(d.value.total)
+									});
+
+
+						});
+
+			//----------
+			// tfoot
+			//----------
+			sel.append('thead')
+				.append('tr')
+					.call(function(sel)	{
+
+						sel.append('th').html('Jumlah');
+						sel.append('th')
+							.style('text-align','right')
+							.html(function(d){ return comma( d3.sum(d.values, function(d){ return +d['Jumlah Kes Terkumpul'] }) ) });
+
+					});
+
+		});
+
+	console.groupEnd('renderTableHeatmap');
+
+}
+
+
+
+
+
+//---------------------------------------------------
+// tableHeatmapMedian
+//---------------------------------------------------
+function renderTableHeatmapMedian(sel)	{
+
+	console.group('renderTableHeatmapMedian');
+
+	//----------
+	// data prep
+	//----------
+
+	var data = sel.datum();
+
+	var nest = d3.nest()
+		.key(function(d){
+
+			return d['Negeri']
+				.toUpperCase()													// standardize case
+				.trim() 																// remove extra spaces
+				.replace('PERAL','PERAK')								// cleanup spelling errors
+				.replace(/P.*?PINANG/,'PULAU PINANG')		// cleanup spelling inconsistencies
+			;
+
+		})
+		.rollup(function(d){
+			return {
+				total: d3.sum(d, function(d){ return +d['Jumlah Kes Terkumpul'] })
+			}
+		})
+		.entries(data.values);
+
+	console.log('nest',nest);
+
+
+	var extent = d3.extent(nest, function(d){ return d.value.total });
+	console.log('extent',extent);
+
+	var mean = d3.mean(nest, function(d){ return d.value.total });
+	console.log('mean',mean);
+
+	var median = d3.median(nest, function(d){ return d.value.total });
+	console.log('median',median);
+
+	// min-median-max range
+	var scale = d3.scaleLinear()
+		.domain([
+			extent[0],
+			median,
+			extent[1]
+		])
+		.range([
+			'blue',
+			'yellow',
+			'red'
+		]);
+
+
+	//----------
+	// render table
+	//----------
+
+
+	sel
+		.append('div').html('Heatmap with contrasting label')
+		.append('table').attr('class','table')
+		.call(function(sel)	{
+
+			//----------
+			// thead
+			//----------
+			sel.append('thead')
+				.append('tr')
+					.call(function(sel)	{
+
+						sel.append('th').html('Negeri');
+						sel.append('th').html('Jumlah Kes Terkumpul');
+
+					});
+
+			//----------
+			// tbody
+			//----------
+			sel.append('tbody')
+				.selectAll('tr').data(nest)
+				.enter()
+					.append('tr')
+						.sort(d3.comparator().order(d3.descending, function(d){ return +d.value.total }))
+						.call(function(sel)	{
+
+							sel.append('td')
+								.html(function(d){ return d.key });
+
+							sel.append('td')
+								.style('text-align','right')
+								.style('background', function(d){ return scale(d.value.total) })
+
+								// contrast text
+								.style('color', function(d){ return chroma(scale(d.value.total)).luminance()>.4?'black':'white' })
+
+									.html(function(d){
+											return comma(d.value.total)
+									});
+
+
+						});
+
+			//----------
+			// tfoot
+			//----------
+			sel.append('thead')
+				.append('tr')
+					.call(function(sel)	{
+
+						sel.append('th').html('Jumlah');
+						sel.append('th')
+							.style('text-align','right')
+							.html(function(d){ return comma( d3.sum(d.values, function(d){ return +d['Jumlah Kes Terkumpul'] }) ) });
+
+					});
+
+		});
+
+	console.groupEnd('renderTableHeatmapMedian');
+
+}
+
+
+</script>
+
+
+
+
+

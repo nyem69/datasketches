@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>denggi</title>
+
+<link href="http://lib.aga.my/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="http://lib.aga.my/jquery/jquery-2.1.1.min.js"></script>
+<script src="http://lib.aga.my/d3/3.5.5/d3.min.js"></script>
+<script src="http://lib.aga.my/d3/plugins/d3.comparator.js"></script>
+<script src="http://lib.aga.my/highcharts/4.1.3/highcharts.js"></script>
+
+<style>
+</style>
+
+<body>
+
+<script>
+
+var comma = d3.format(","),
+		f1 = d3.format(".1f");
+
+
+d3.select('body')
+	.append('div').attr('class','container')
+	.call(function(sel){
+
+		sel.append('h1').attr('class','title text-center');
+
+		sel.append('div').attr('class','row')
+		.call(function(sel)	{
+
+			sel.append('div').attr('class','col-xs-6 denggi-list');
+			sel.append('div').attr('class','col-xs-6 denggi-pie');
+			sel.append('div').attr('class','col-xs-12 denggi-line');
+
+		});
+
+	});
+
+
+d3.tsv("../_data/LokalitiHotspot2015.txt",
+	function(err,data) {
+
+		data.forEach(function(d){
+
+			d['Tahun'] = +d['Tahun'];
+			d['Minggu'] = +d['Minggu'];
+			d['Jumlah Kes Terkumpul'] = +d['Jumlah Kes Terkumpul'];
+			d['Tempoh Wabak Berlaku (Hari)'] = +d['Tempoh Wabak Berlaku (Hari)'];
+
+			d['Negeri'] = d['Negeri'].toUpperCase();
+			d['Negeri'] = d['Negeri'].trim();
+
+			if (d['Negeri']=='PERAL') d['Negeri']='PERAK';
+
+			d['Negeri'] = d['Negeri'].replace(/^P\.+\s*/,'PULAU ');
+			d['Negeri'] = d['Negeri'].replace(/^P\s+/,'PULAU ');
+
+		});
+
+		//console.warn('err',err);
+		//console.log('data',data);
+		//console.table(data);
+
+
+		//----------------
+		// calculate total
+		//----------------
+		var total = d3.sum(data, function(d){
+				return d['Jumlah Kes Terkumpul']
+			});
+
+		//console.log('Total',total);
+
+		d3.select('.title')
+			.html(
+				'Jumlah Kes Denggi Tahun '+ data[0]['Tahun'] +' : '+ comma(total)
+			);
+
+
+
+
+		//----------------
+		// calculate total by negeri
+		//----------------
+		var nest = d3.nest()
+	    .key(function(d) { return d['Negeri']; })
+	    .rollup(function(d){
+	    	return d3.sum(d, function(g){
+	    		return g['Jumlah Kes Terkumpul']
+		    })
+	    })
+	    .entries(data);
+
+		nest.sort(
+			d3.comparator()
+				.order(d3.descending,function(d){
+					return d.values
+				})
+		);
+
+		//console.table(nest);
+
+		d3.select('.denggi-list')
+			.append('ul')
+			.selectAll('li').data(nest)
+			.enter()
+				.append('li')
+				.html(function(d){
+					return d.key+' '+comma(d.values)
+				});
+
+
+		//--------------------------
+		// pie chart
+		//--------------------------
+		var series=[];
+		nest.forEach(function(d){
+			series.push({
+				name: d.key,
+				y: d.values
+			});
+		});
+
+
+
+    $('.denggi-pie').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Kes Denggi Mengikut Negeri, '+data[0]['Tahun']
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        credits:{
+        	enabled:false
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                minSize:200,
+                dataLabels: {
+                    enabled: true,
+                    distance:-30,
+                    //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    formatter:function(){
+                    	if (this.percentage>5)	{
+                    		return this.point.name+'<br>'+f1(this.percentage)+'%'
+                    	}
+                    },
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: "Brands",
+            colorByPoint: true,
+            data: series
+//            data: [
+//            {
+//                name: "Microsoft Internet Explorer",
+//                y: 56.33
+//            },
+//            {
+//                name: "Chrome",
+//                y: 24.03,
+//                sliced: true,
+//                selected: true
+//            },
+//            {
+//                name: "Firefox",
+//                y: 10.38
+//            }, {
+//                name: "Safari",
+//                y: 4.77
+//            }, {
+//                name: "Opera",
+//                y: 0.91
+//            }, {
+//                name: "Proprietary or Undetectable",
+//                y: 0.2
+//            }]
+        }]
+    });
+
+
+
+
+
+		//--------------------------
+		// line chart
+		//--------------------------
+
+
+
+		var negeri = d3.nest()
+	    .key(function(d) { return d['Negeri']; })
+	    .rollup(function(d){
+	    	return d3.sum(d, function(g){
+	    		return g['Jumlah Kes Terkumpul']
+		    })
+	    })
+	    .entries(data);
+
+		console.log('negeri',negeri);
+
+		var minggu = d3.nest()
+	    .key(function(d) { return d['Minggu']; })
+	    .rollup(function(d){
+	    	return d3.sum(d, function(g){
+	    		return g['Jumlah Kes Terkumpul']
+		    })
+	    })
+	    .entries(data);
+
+		console.log('minggu',minggu);
+
+		var lines = d3.nest()
+	    .key(function(d) { return d['Negeri']; })
+	    .key(function(d) { return d['Minggu']; })
+	    .rollup(function(d){
+	    	return d3.sum(d, function(g){
+	    		return g['Jumlah Kes Terkumpul']
+		    })
+	    })
+	    .entries(data);
+
+		console.log('lines',lines);
+
+		var hash={};
+		lines.forEach(function(neg){
+			if (!hash[neg.key]) hash[neg.key]={};
+			neg.values.forEach(function(wk)	{
+				hash[neg.key][wk.key]=wk.values;
+			});
+		});
+
+		console.log('hash',hash);
+
+		var series=[],
+				categories=[];
+
+		minggu.forEach(function(wk){
+			categories.push(wk.key);
+		});
+
+
+		negeri.forEach(function(neg){
+
+			var k={
+				name: neg.key,
+				data:[]
+			};
+
+			minggu.forEach(function(wk){
+				k.data.push( hash[neg.key][wk.key] || 0 );
+			});
+
+			series.push(k);
+
+		});
+
+
+		console.log('series',series);
+
+
+
+    $('.denggi-line').highcharts({
+      title: {
+        text: 'Kes Denggi Mengikut Negeri & Minggu, '+data[0]['Tahun'],
+        x: -20 //center
+      },
+      credits:{
+      	enabled:false
+      },
+      xAxis: {
+      	categories: categories
+      },
+      yAxis: {
+    		min: 0,
+        title: {
+          text: 'Kes Denggi'
+        },
+        plotLines: [{
+          value: 0,
+          width: 1,
+          color: '#808080'
+        }]
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+      },
+      series: series
+
+    });
+
+
+
+	});
+
+
+</script>
+
+
