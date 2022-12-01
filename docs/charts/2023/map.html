@@ -53,6 +53,9 @@ opentype.load('https://libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', fu
         // Construct a Path object containing the letter shapes of the given text.
         // The other parameters are x, y and fontSize.
         // Note that y is the position of the baseline.
+
+        //const path = font.getPath('2023', 0, 150, 72); // all in one path, problem with holes
+
         const path1 = font.getPath('2', 0, 150, 72),
               path2 = font.getPath('0', 40, 150, 72),
               path3 = font.getPath('2', 80, 150, 72),
@@ -65,6 +68,8 @@ opentype.load('https://libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', fu
           .style('padding',0)
           .append('svg').attr('id','mysvg')
             .append('g')
+            	// final result on map appears flipped,
+            	// has to flip & adjust positioning here
               .attr('transform','translate(170,250)')
               .selectAll('path').data([
                 path1.toPathData(5),
@@ -73,35 +78,36 @@ opentype.load('https://libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', fu
                 path4.toPathData(5),
               ])
                 .join('path')
-                  .attr('transform','scale(-1)')
+                  .attr('transform','scale(-1)') // flip
                   .attr('d', d=>d);
 
-
+				// get & apply width, height for svgToGeoJson to work
         let sel = d3.select('#mysvg'),
             w    = +sel.style('width').replace('px',''),
             h    = +sel.style('height').replace('px','');
 
-
         sel.attr('width',w)
             .attr('height',h);
 
-        // flatten any transform
+        // flatten flip/transform
         flatten(document.getElementById('mysvg'), true);
-
 
 
         let bounds = [[99, 0], [120, 8]],
             boundsLatLng = bounds.map(d=>d.reverse());
 
         // svg to geojson
-        var polygon = svgtogeojson.svgToGeoJson(
+        let polygon = svgtogeojson.svgToGeoJson(
           [[85, -6], [120, 6]].map(d=>d.reverse()),
           document.getElementById('mysvg'),
           3
         );
 
+				// no longer needed, remove
         d3.select('#mysvg').remove();
 
+
+				// render map
         d3.select('body')
           .append('div')
             .attr('id','map')
@@ -118,9 +124,12 @@ opentype.load('https://libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', fu
         }).addTo(map);
 
 
-        // create randowm points, filter out those not overlap with polygon
-        var randomPoints = turf.randomPoint(5000, {bbox: [99, 0, 120, 8] }),
+	        	// create random points
+        let randomPoints = turf.randomPoint(5000, {bbox: [99, 0, 120, 8] }),
+
+        		// filter out those not within polygon
             ptsWithin = turf.pointsWithinPolygon(randomPoints, polygon);
+
 
         // render marker on map
         L.geoJSON(ptsWithin, {
