@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>masonic</title>
+    <meta charset="utf-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="d3-masonic.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="container">
+      <h1><b>Masonic:</b> masonry for <a href="http://d3js.org">d3.js</a></h1>
+      <p>
+        Based on <a href="http://isotope.metafizzy.co">Isotope</a> by David DeSandro.
+        Adapted for d3 by <a href="http://github.com/shawnbot">Shawn Allen</a>.
+        <a href="http://github.com/shawnbot/masonic">Read more!</a>
+      </p>
+      <p>
+        Resize your browser window to see the layout dynamically recalculated,
+        or <a href="#" onclick="location.reload()">refresh</a> for new random
+        brick sizes.
+      </p>
+      <div id="wall">
+      </div>
+    </div>
+
+    <script>
+      var wall = d3.select("#wall"),
+          q = 100,
+          randomSize = function(min, max) {
+            return Math.round(min + Math.random() * (max - min)) * q;
+          },
+          sizes = d3.range(20)
+            .map(function() {
+              return [randomSize(1, 2), randomSize(1, 4)];
+            }),
+          color = d3.scale.linear()
+            .range(["hsl(0,100%,80%)", "hsl(180,100%,80%)"]),
+          bricks = wall.selectAll(".brick")
+            .data(sizes)
+            .enter()
+            .append("div")
+              .attr("class", "brick")
+              .style("background", function() {
+                return color(Math.random());
+              });
+
+      var masonic = d3.masonic()
+        .width(function(d) { return d[0]; })
+        .height(function(d) { return d[1]; })
+        .columnWidth(100);
+
+      function resize() {
+        var outerWidth = wall.property("offsetWidth");
+        masonic
+          .outerWidth(outerWidth)
+          .reset();
+
+        bricks
+          .datum(masonic)
+          .style("width", function(d) { return d.width + "px"; })
+          .style("height", function(d) { return d.height + "px"; })
+          .style("left", function(d) { return d.x + "px"; })
+          .style("top", function(d) { return d.y + "px"; })
+          .datum(function(d) {
+            return d.data;
+          });
+
+        wall.style("height", masonic.outerHeight() + "px");
+      }
+
+      resize();
+      window.addEventListener("resize", resize);
+
+    </script>
+  </body>
+</html>
+
