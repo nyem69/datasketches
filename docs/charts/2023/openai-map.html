@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+  <title>2023</title>
+	<meta name="viewport" content="width=device-width" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="HandheldFriendly" content="True">
+	<meta content="Random points that spell 2020 on zommable map" name="description" >
+	<meta content="Random points that spell 2020 on zommable map" name="apple-mobile-web-app-title" >
+	<meta content="Random points that spell 2020 on zommable map" name="keywords" >
+	<meta content="Random points that spell 2020 on zommable map" property="og:title"/>
+	<meta content="Random points that spell 2020 on zommable map" property="og:description"/>
+	<meta content="Random points that spell 2020 on zommable map" itemprop="name"        property="og:title"       name="twitter:title"/>
+	<meta content="Random points that spell 2020 on zommable map" itemprop="description" property="og:description" name="twitter:description"/>
+	<meta content="2023.png" 	itemprop="image" property="og:image" name="twitter:image"/>
+	<link href="2023.png" 		rel="icon" type="image/x-icon"/>
+	<meta content="2023.png" 	property="og:image"/>
+
+
+  <!--
+    https://leaflet.js
+  -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"  crossorigin=""/>
+  <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
+
+<style>
+
+	body {
+		font-family: sans-serif;
+	}
+
+	.map {
+		width: 640px;
+		height:300px;
+		max-width: 100%;
+		max-height: 100%;
+	}
+</style>
+
+</head>
+<body>
+
+<p>How to create randowm points on a Leaflet.js map to spell out 2023 over a map of Malaysia?
+</p>
+<p>
+To create random points on a Leaflet.js map that spell out the numbers 2023 over a map of Malaysia, you can use the L.marker() method to create markers for each point, and the Math.random() function to generate random coordinates for each point.
+
+First, you will need to include the Leaflet.js library in your HTML file and create a map using the L.map() method. Next, you can use a for loop to iterate through each digit in the number 2023 and create a marker for each point using the L.marker() method. Inside the loop, you can use the Math.random() function to generate random coordinates for each point within the bounds of the map of Malaysia.
+
+Here is an example of how you could create random points on a Leaflet.js map that spell out 2023 over a map of Malaysia:
+</p>
+
+<div id="map" class="map"></div>
+
+<script>
+
+// Include the Leaflet.js library and create a map
+var map = L.map('map').setView([3.139, 101.6869], 8);
+
+// Add a tile layer to the map
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+    maxZoom: 18
+}).addTo(map);
+
+// Iterate through each digit in the number 2023 and create a marker for each point
+for (let i = 0; i < 4; i++) {
+  let digit = 2023[i]; // Get the i-th digit of 2023
+
+  // Generate random coordinates within the bounds of the map of Malaysia
+  let lat = Math.random() * (7.0 - 1.0) + 1.0;
+  let lng = Math.random() * (119.0 - 99.0) + 99.0;
+
+  // Create a marker for the point using the L.marker() method
+  let marker = L.marker([lat, lng]).addTo(map);
+
+  // Add a popup to the marker with the digit as the content
+  marker.bindPopup(digit);
+}
+
+</script>
+
+
+<p>
+How to create 1000 random points on a Leaflet.js map to that fall within polygons that spell out 2023 over a map of Malaysia?
+
+<p>
+To create 1000 random points on a Leaflet.js map that fall within polygons that spell out the numbers 2023 over a map of Malaysia, you can use the L.polygon() method to create polygons for each digit, and the Math.random() function to generate random coordinates for each point.
+
+<p>
+First, you will need to include the Leaflet.js library in your HTML file and create a map using the L.map() method. Next, you can use a for loop to iterate through each digit in the number 2023 and create a polygon for each digit using the L.polygon() method. Inside the loop, you can use the Math.random() function to generate random coordinates for each point within the bounds of the corresponding polygon.
+
+<p>
+Here is an example of how you could create 1000 random points on a Leaflet.js map that fall within polygons that spell out 2023 over a map of Malaysia:
+
+
+
+<div id="map2" class="map"></div>
+
+<script>
+
+// Include the Leaflet.js library and create a map
+var map = L.map('map2').setView([3.139, 101.6869], 8);
+
+// Add a tile layer to the map
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+    maxZoom: 18
+}).addTo(map);
+
+// Iterate through each digit in the number 2023 and create a polygon for each digit
+for (let i = 0; i < 4; i++) {
+  let digit = 2023[i]; // Get the i-th digit of 2023
+
+  // Create a polygon for the digit using the L.polygon() method
+  let polygon = L.polygon([
+    // Add coordinates for the vertices of the polygon here
+  ]).addTo(map);
+
+  // Generate 1000 random points within the bounds of the polygon
+  for (let j = 0; j < 1000; j++) {
+    // Generate random coordinates within the bounds of the polygon
+    let lat = Math.random() * (polygon.getBounds().getNorth() - polygon.getBounds().getSouth()) + polygon.getBounds().getSouth();
+    let lng = Math.random() * (polygon.getBounds().getEast() - polygon.getBounds().getWest()) + polygon.getBounds().getWest();
+
+    // Create a marker for the point using the L.marker() method
+    let marker = L.marker([lat, lng]).addTo(map);
+
+    // Add a popup to the marker with the digit as the content
+    marker.bindPopup(digit);
+  }
+}
+
+</script>
+
+<p>
+
+How to create a javascript countdown to 2023?
+
+<p>
+Here's one way to create a JavaScript countdown to 2023:
+
+<p>
+First, create a Date object for the target date (2023) using the Date constructor:
+
+<script>
+const targetDate = new Date(2023, 0, 1); // January 1, 2023
+</script>
+
+<p>
+	Next, create a function that calculates the time remaining until the target date and returns it as a string. This function can use the Date object's getTime() method to get the current time, and then subtract that from the target date's time to find the time remaining. It can then use the Date object's getTime() method to convert that time into a human-readable format, such as days, hours, minutes, and seconds.
+
+<p>
+Here's an example of what that function might look like:
+
+<script>
+function getTimeRemaining() {
+  const currentTime = new Date().getTime(); // get current time
+  const timeRemaining = targetDate - currentTime; // find time remaining
+  const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24)); // convert time to days
+  const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // convert time to hours
+  const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60)); // convert time to minutes
+  const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000); // convert time to seconds
+
+  return `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`; // return time remaining as a string
+}
+</script>
+
+<p>
+Finally, use setInterval() to call the getTimeRemaining() function repeatedly, at a regular interval (such as every second). This will update the countdown display with the latest time remaining.
+
+<p>
+Here's an example of how you might use setInterval() to call the getTimeRemaining() function every second:
+
+<script>
+setInterval(() => {
+  const timeRemaining = getTimeRemaining(); // calculate time remaining
+  console.log(timeRemaining); // log time remaining to the console
+}, 1000); // call getTimeRemaining() every second
+</script>
+
+
+<p>
+You can use the timeRemaining string returned by getTimeRemaining() to display the countdown on your webpage using a <p> element or some other HTML element.
+
+<p>
+I hope this helps! Let me know if you have any other questions.
+
