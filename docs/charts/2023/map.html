@@ -145,7 +145,8 @@ opentype.load('//libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', function
 				  },
 				}).addTo(map);
 
-				map.fitBounds(geolayer.getBounds());
+				map.fitBounds(geolayer.getBounds())
+					.setMaxBounds(geolayer.getBounds());
 
 			}
 
