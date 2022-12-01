@@ -215,7 +215,7 @@ opentype.load('//libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', function
 			});
 
 
-		const map = L.map('map',{maxBounds: boundsLatLng, preferCanvas:true, minZoom:5})
+		const map = L.map('map',{maxBounds: boundsLatLng, preferCanvas:true, minZoom:4})
 		  .fitBounds(boundsLatLng);
 
 		const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
