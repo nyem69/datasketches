@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+  <title>2023</title>
+
+  <!--
+    https://d3js.org
+  -->
+  <script type="text/javascript" src="//d3js.org/d3.v7.min.js"></script>
+
+  <!--
+    https://opentype.js.org/
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
+
+  <!--
+    https://gist.github.com/timo22345/9413158
+    -->
+  <script type="text/javascript" src="//libjs.pages.dev/svg-flattener/flattener.js"></script>
+
+
+  <!--
+    https://www.npmjs.com/package/@bettercorp/svg-to-geojson
+    https://github.com/davecranwell/svg-to-geojson
+  -->
+  <script type="text/javascript" src="//libjs.pages.dev/svg-to-geojson/svg-to-geojson.min.js"></script>
+
+  <!--
+    https://turfjs.org
+  -->
+  <script type="text/javascript" src="//libjs.pages.dev/turf/5.1.16/turf.min.js"></script>
+
+  <!--
+    https://leaflet.js
+  -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+
+</head>
+<body>
+<script>
+
+opentype.load('https://libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', function(err, font) {
+    if (err) {
+
+        alert('Font could not be loaded: ' + err);
+
+    } else {
+
+
+        // Construct a Path object containing the letter shapes of the given text.
+        // The other parameters are x, y and fontSize.
+        // Note that y is the position of the baseline.
+        const path1 = font.getPath('2', 0, 150, 72),
+              path2 = font.getPath('0', 40, 150, 72),
+              path3 = font.getPath('2', 80, 150, 72),
+              path4 = font.getPath('3', 120, 150, 72);
+
+
+        // draw the text in svg
+        d3.select('body')
+          .style('margin',0)
+          .style('padding',0)
+          .append('svg').attr('id','mysvg')
+            .append('g')
+              .attr('transform','translate(170,250)')
+              .selectAll('path').data([
+                path1.toPathData(5),
+                path2.toPathData(5),
+                path3.toPathData(5),
+                path4.toPathData(5),
+              ])
+                .join('path')
+                  .attr('transform','scale(-1)')
+                  .attr('d', d=>d);
+
+
+        let sel = d3.select('#mysvg'),
+            w    = +sel.style('width').replace('px',''),
+            h    = +sel.style('height').replace('px','');
+
+
+        sel.attr('width',w)
+            .attr('height',h);
+
+        // flatten any transform
+        flatten(document.getElementById('mysvg'), true);
+
+
+
+        let bounds = [[99, 0], [120, 8]],
+            boundsLatLng = bounds.map(d=>d.reverse());
+
+        // svg to geojson
+        var polygon = svgtogeojson.svgToGeoJson(
+          [[85, -6], [120, 6]].map(d=>d.reverse()),
+          document.getElementById('mysvg'),
+          3
+        );
+
+        d3.select('#mysvg').remove();
+
+        d3.select('body')
+          .append('div')
+            .attr('id','map')
+            .style('width', innerWidth+'px')
+            .style('height', innerHeight+'px')
+            .style('overflow','hidden');
+
+        const map = L.map('map',{maxBounds: boundsLatLng, preferCanvas:true, minZoom:5})
+          .fitBounds(boundsLatLng);
+
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+
+        // create randowm points, filter out those not overlap with polygon
+        var randomPoints = turf.randomPoint(5000, {bbox: [99, 0, 120, 8] }),
+            ptsWithin = turf.pointsWithinPolygon(randomPoints, polygon);
+
+        // render marker on map
+        L.geoJSON(ptsWithin, {
+          pointToLayer(feature, latlng) {
+            return L.marker(latlng);
+          },
+        }).addTo(map);
+
+
+    }
+});
+
+
+</script>
