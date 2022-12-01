@@ -57,104 +57,133 @@
 <body>
 <script>
 
+let geolayer;
+
 opentype.load('//libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', function(err, font) {
-    if (err) {
+	if (err) {
 
-        alert('Font could not be loaded: ' + err);
+	    alert('Font could not be loaded: ' + err);
 
-    } else {
-
-
-        // Construct a Path object containing the letter shapes of the given text.
-        // The other parameters are x, y and fontSize.
-        // Note that y is the position of the baseline.
-
-        //const path = font.getPath('2023', 0, 150, 72); // all in one path, problem with holes
-
-        const path1 = font.getPath('2', 0, 150, 72),
-              path2 = font.getPath('0', 40, 150, 72),
-              path3 = font.getPath('2', 80, 150, 72),
-              path4 = font.getPath('3', 120, 150, 72);
+	} else {
 
 
-        // draw the text in svg
-        d3.select('body')
-          .style('margin',0)
-          .style('padding',0)
-          .append('svg').attr('id','mysvg')
-            .append('g')
-            	// final result on map appears flipped,
-            	// has to flip & adjust positioning here
-              .attr('transform','translate(170,250)')
-              .selectAll('path').data([
-                path1.toPathData(5),
-                path2.toPathData(5),
-                path3.toPathData(5),
-                path4.toPathData(5),
-              ])
-                .join('path')
-                  .attr('transform','scale(-1)') // flip
-                  .attr('d', d=>d);
+		// boundary
+		let bounds = [[99, 0], [120, 8]],
+		    boundsLatLng = bounds.map(d=>d.reverse());
 
-				// get & apply width, height for svgToGeoJson to work
-        let sel = d3.select('#mysvg'),
-            w    = +sel.style('width').replace('px',''),
-            h    = +sel.style('height').replace('px','');
+		function render(e,d)	{
 
-        sel.attr('width',w)
-            .attr('height',h);
+			let value = d3.select('input').property('value'),
+					values = value.split(''),
+					x = 0,
 
-        // flatten flip/transform
-        flatten(document.getElementById('mysvg'), true);
+					// generate text path
+					textPaths = values.map((d,i)=>{
+												let k = font.getPath(d, x, 150, 72);
+												x = d3.max(k.commands, d=>d.x) + 3;
+												return k.toPathData(5);
+											});
 
 
-        let bounds = [[99, 0], [120, 8]],
-            boundsLatLng = bounds.map(d=>d.reverse());
+			// draw the text in svg
+			d3.select('body')
+			  .append('svg').attr('id','mysvg')
+			    .append('g')
+			    	// final result on map appears flipped,
+			    	// has to flip & adjust positioning here
+			      .attr('transform','translate(170,250)')
+			      .selectAll('path').data(textPaths)
+			        .join('path')
+			          .attr('transform','scale(-1)') // flip
+			          .attr('d', d=>d);
 
-        // svg to geojson
-        let polygon = svgtogeojson.svgToGeoJson(
-          [[85, -6], [120, 6]].map(d=>d.reverse()),
-          document.getElementById('mysvg'),
-          3
-        );
+			// get & apply width, height for svgToGeoJson to work
+			let sel = d3.select('#mysvg'),
+			    w    = +sel.style('width').replace('px',''),
+			    h    = +sel.style('height').replace('px','');
 
-				// no longer needed, remove
-        d3.select('#mysvg').remove();
+			sel.attr('width',w)
+			    .attr('height',h);
 
+			// flatten flip/transform
+			flatten(document.getElementById('mysvg'), true);
+
+
+			// svg to geojson
+			let polygon = svgtogeojson.svgToGeoJson(
+			  [[85, -6], [120, 6]].map(d=>d.reverse()),
+			  document.getElementById('mysvg'),
+			  3
+			);
+
+			// no longer needed, remove
+			d3.select('#mysvg').remove();
+
+
+			  	// create random points
+			let randomPoints = turf.randomPoint(5000, {bbox: [99, 0, 120, 8] }),
+
+					// filter out those not within polygon
+			    ptsWithin = turf.pointsWithinPolygon(randomPoints, polygon);
+
+
+			if (geolayer) map.removeLayer(geolayer);
+
+			// render marker on map
+			geolayer = L.geoJSON(ptsWithin, {
+			  pointToLayer(feature, latlng) {
+			    return L.marker(latlng);
+			  },
+			}).addTo(map);
+
+		}
+
+
+		d3.select('body')
+		  .style('margin',0)
+		  .style('padding',0)
+		  .style('overflow','hidden')
+			.call(sel=>{
+
+
+				// input
+			 sel.append('form')
+			 	.attr('style','padding:12px;')
+			 	.call(sel=>{
+
+			 		sel.append('span')
+			 			.html('Enter your text: ')
+
+				 	sel.append('input')
+				 		.attr('type','text')
+				 		.style('margin','auto')
+				 		.property('value',2023)
+				 		.on('input', render)
+			 	});
 
 				// render map
-        d3.select('body')
-          .append('div')
-            .attr('id','map')
-            .style('width', innerWidth+'px')
-            .style('height', innerHeight+'px')
-            .style('overflow','hidden');
-
-        const map = L.map('map',{maxBounds: boundsLatLng, preferCanvas:true, minZoom:5})
-          .fitBounds(boundsLatLng);
-
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+			 sel.append('div')
+			    .attr('id','map')
+			    .style('width', innerWidth+'px')
+			    .style('height', (innerHeight- +d3.select('form').style('height').replace('px','') )+'px')
+			    .style('overflow','hidden');
 
 
-	        	// create random points
-        let randomPoints = turf.randomPoint(5000, {bbox: [99, 0, 120, 8] }),
-
-        		// filter out those not within polygon
-            ptsWithin = turf.pointsWithinPolygon(randomPoints, polygon);
+			});
 
 
-        // render marker on map
-        L.geoJSON(ptsWithin, {
-          pointToLayer(feature, latlng) {
-            return L.marker(latlng);
-          },
-        }).addTo(map);
+		const map = L.map('map',{maxBounds: boundsLatLng, preferCanvas:true, minZoom:5})
+		  .fitBounds(boundsLatLng);
+
+		const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		  maxZoom: 19,
+		  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		}).addTo(map);
 
 
-    }
+		render();
+
+	}
 });
 
 
