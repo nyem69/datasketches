@@ -3,6 +3,21 @@
 <html>
 <head>
   <title>2023</title>
+	<meta name="viewport" content="width=device-width" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="HandheldFriendly" content="True">
+	<meta content="Random points that spell 2020 on zommable map" name="description" >
+	<meta content="Random points that spell 2020 on zommable map" name="apple-mobile-web-app-title" >
+	<meta content="Random points that spell 2020 on zommable map" name="keywords" >
+	<meta content="Random points that spell 2020 on zommable map" property="og:title"/>
+	<meta content="Random points that spell 2020 on zommable map" property="og:description"/>
+	<meta content="Random points that spell 2020 on zommable map" itemprop="name"        property="og:title"       name="twitter:title"/>
+	<meta content="Random points that spell 2020 on zommable map" itemprop="description" property="og:description" name="twitter:description"/>
+	<meta content="2023.png" 	itemprop="image" property="og:image" name="twitter:image"/>
+	<link href="2023.png" 		rel="icon" type="image/x-icon"/>
+	<meta content="2023.png" 	property="og:image"/>
+
 
   <!--
     https://d3js.org
@@ -12,7 +27,7 @@
   <!--
     https://opentype.js.org/
   -->
-  <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
 
   <!--
     https://gist.github.com/timo22345/9413158
@@ -34,15 +49,15 @@
   <!--
     https://leaflet.js
   -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"  crossorigin=""/>
+  <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
 
 
 </head>
 <body>
 <script>
 
-opentype.load('https://libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', function(err, font) {
+opentype.load('//libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', function(err, font) {
     if (err) {
 
         alert('Font could not be loaded: ' + err);
