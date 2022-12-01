@@ -52,6 +52,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"  crossorigin=""/>
   <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
 
+	<!--
+		http://maps.stamen.com/
+	-->
+	<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js?v1.3.0"></script>
 
 </head>
 <body>
@@ -84,57 +88,66 @@ opentype.load('//libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', function
 												return k.toPathData(5);
 											});
 
-
-			// draw the text in svg
-			d3.select('body')
-			  .append('svg').attr('id','mysvg')
-			    .append('g')
-			    	// final result on map appears flipped,
-			    	// has to flip & adjust positioning here
-			      .attr('transform','translate(170,250)')
-			      .selectAll('path').data(textPaths)
-			        .join('path')
-			          .attr('transform','scale(-1)') // flip
-			          .attr('d', d=>d);
-
-			// get & apply width, height for svgToGeoJson to work
-			let sel = d3.select('#mysvg'),
-			    w    = +sel.style('width').replace('px',''),
-			    h    = +sel.style('height').replace('px','');
-
-			sel.attr('width',w)
-			    .attr('height',h);
-
-			// flatten flip/transform
-			flatten(document.getElementById('mysvg'), true);
-
-
-			// svg to geojson
-			let polygon = svgtogeojson.svgToGeoJson(
-			  [[85, -6], [120, 6]].map(d=>d.reverse()),
-			  document.getElementById('mysvg'),
-			  3
-			);
-
-			// no longer needed, remove
-			d3.select('#mysvg').remove();
-
-
-			  	// create random points
-			let randomPoints = turf.randomPoint(5000, {bbox: [99, 0, 120, 8] }),
-
-					// filter out those not within polygon
-			    ptsWithin = turf.pointsWithinPolygon(randomPoints, polygon);
-
-
 			if (geolayer) map.removeLayer(geolayer);
 
-			// render marker on map
-			geolayer = L.geoJSON(ptsWithin, {
-			  pointToLayer(feature, latlng) {
-			    return L.marker(latlng);
-			  },
-			}).addTo(map);
+			if (value)	{
+
+				// draw the text in svg
+				d3.select('body')
+				  .append('svg').attr('id','mysvg')
+				    .append('g')
+				    	// final result on map appears flipped,
+				    	// has to flip & adjust positioning here
+				      .attr('transform','translate(170,250)')
+				      .selectAll('path').data(textPaths)
+				        .join('path')
+				          .attr('transform','scale(-1)') // flip
+				          .attr('d', d=>d);
+
+				// get & apply width, height for svgToGeoJson to work
+				let sel = d3.select('#mysvg'),
+				    w    = +sel.style('width').replace('px',''),
+				    h    = +sel.style('height').replace('px','');
+
+				sel.attr('width',w)
+				    .attr('height',h);
+
+				// flatten flip/transform
+				flatten(document.getElementById('mysvg'), true);
+
+
+				// svg to geojson
+				let polygon = svgtogeojson.svgToGeoJson(
+				  [[85, -6], [120, 6]].map(d=>d.reverse()),
+				  document.getElementById('mysvg'),
+				  3
+				);
+
+				// no longer needed, remove
+				d3.select('#mysvg').remove();
+
+
+						// bounding box
+				let bbox = turf.bbox(polygon),
+
+				  	// create random points within bounding box
+						randomPoints = turf.randomPoint(5000, {bbox: bbox}),
+
+						// filter out those not within polygon
+				    ptsWithin = turf.pointsWithinPolygon(randomPoints, polygon);
+
+
+
+				// render marker on map
+				geolayer = L.geoJSON(ptsWithin, {
+				  pointToLayer(feature, latlng) {
+				    return L.marker(latlng);
+				  },
+				}).addTo(map);
+
+				map.fitBounds(geolayer.getBounds());
+
+			}
 
 		}
 
@@ -180,6 +193,8 @@ opentype.load('//libjs.pages.dev/font/lato/DvlFBScY1r-FMtZSYIYoYw.ttf', function
 		  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
 
+//		let layer = new L.StamenTileLayer("watercolor");
+//		map.addLayer(layer);
 
 		render();
 
