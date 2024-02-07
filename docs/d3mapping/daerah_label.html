@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="viewport" content="width=device-width" />
+
+<title>Label positions and connectors</title>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Displaying map with d3.js"/>
+<meta property="og:description" content="d3.js exercises - render map and points from topojson and csv files"/>
+<meta property="og:url" content="https://nyem69.github.io/datasketches/d3mapping/"/>
+<meta property="og:image" content="../assets/d3mapping.png"/>
+<meta name="twitter:card" content="../assets/d3mapping.png"/>
+<meta name="twitter:site" content="@nyem"/>
+
+
+<style>
+html {
+  background:#30404D;
+  color:#ffffff;
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', sans-serif;
+}
+
+a {
+  color:
+}
+
+
+/*-------
+
+slider
+
+---------*/
+
+.range-wrap {
+  position: relative;
+  margin: 0 auto 3rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: rgb(128,0,0);
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgb(128,0,0);
+  top: -1px;
+  left: 50%;
+}
+
+
+</style>
+
+<body>
+
+<script type="text/javascript" src="//libjs.pages.dev/d3/6.7.0/d3.min.js"></script>
+<script type="text/javascript" src="//libjs.pages.dev/topojson/3.0.2/topojson.min.js"></script>
+<script type="text/javascript" src="//libjs.pages.dev/moment/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="//libjs.pages.dev/textures/1.2.3/textures.js"></script>
+<script type="text/javascript" src="//libjs.pages.dev/chroma/2.1.1/chroma.min.js"></script>
+<script type="text/javascript" src="//libjs.pages.dev/turf/5.1.16/turf.min.js"></script>
+<script type="text/javascript" src="//libjs.pages.dev/d3/plugins/d3.comparator.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//libjs.pages.dev/font/awesome/5.15.2/css/all.min.css"/>
+
+
+
+<script>
+
+var width = 960,
+    height = 400;
+
+var projection = d3.geoMercator()
+    .center([0, 0 ])
+    // .scale(2800 + 5*100)
+    .scale(2800 + 1*10)
+    .rotate([-109.45 + 5/2,-3.2]);
+
+var svg = d3.select("body")
+                .append("svg")
+                   .attr('viewBox', [0,0,width,height].join(' ')) // fill screen
+                     .style('max-height', (innerHeight-200)+'px')
+                  ;
+
+var path = d3.geoPath()
+    .projection(projection);
+
+
+svg.append('defs')
+  .html(`
+
+  <filter id="fshadow02" filterUnits="objectBoundingBox" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="BlurAlpha"/>
+    <feOffset in="BlurAlpha" dx="1" dy="1" result="OffsetBlurAlpha"/>
+    <feMerge>
+      <feMergeNode in="OffsetBlurAlpha"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+`);
+
+
+
+
+
+//=====================
+// create containers
+//=====================
+
+let g                   = svg.append("g"),
+    map_border          = svg.append("g").attr('class','map-border-states'),
+    map_fill            = svg.append("g").attr('class','map-fill-states'),
+    map_label           = svg.append("g").attr('class','map-label-states');
+
+
+
+//=====================
+// global variables
+//=====================
+
+let _render;
+
+
+
+//=====================
+// load data
+//=====================
+
+Promise.all([
+
+//   d3.json("malaysia.json"), // topojson
+    d3.json('https://geodata.pages.dev/geo/opendosm/administrative_2_district.geojson') // geojson
+
+]).then(loaded);
+
+
+
+function loaded(raw)  {
+
+
+  console.log('raw', raw[0]);
+
+  let malaysia = raw[0];
+
+  //=====================
+  // shift sabah/sarawak/labuan closer to semenanjung
+  //=====================
+
+  [malaysia].forEach(d=>{
+    d.features
+      .forEach(d=>{
+        d.geometry.coordinates.forEach(d=>{
+          d[0].forEach(_shift);
+        });
+      });
+  });
+
+  function _shift(d)  {
+    if (typeof d=='object' && d.length==2)  {
+      if (d[0]>105) d[0] += -5;
+    }
+  }
+
+
+
+    // map borders
+  map_border.selectAll(".district").data(malaysia.features)
+    .join('path')
+        .attr('class','district')
+        .attr("d", path)
+        .attr('stroke','steelblue')
+        .attr('stroke-width',1)
+        .attr('fill', 'none' )
+        // .attr('filter','url(#fshadow02)')
+
+
+
+    map_border.selectAll('.district')
+        .each(function(d){
+
+            // SVG getBBox centroid
+            // https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox
+            let bb = d3.select(this).node().getBBox();
+            d.properties.bbox = bb;
+
+            d.properties.centroid = {
+                                        x:bb.x+(bb.width/2),
+                                        y:bb.y+(bb.height/2)
+                                    };
+
+            // turf.js centerOfMass
+            // https://turfjs.org/docs/#centerOfMass
+            let center = turf.centerOfMass(d);
+            d.properties.center = {
+                                    x: projection(center.geometry.coordinates)[0],
+                                    y: projection(center.geometry.coordinates)[1]
+                                    };
+
+            // connecting line
+            d.properties.source = {
+                x: !['Sabah','Sarawak','W.P. Labuan'].includes(d.properties.state) ? 100 : width-100,
+                y: null, // calculate this later
+            };
+
+            d.properties.target = {
+                x: d.properties.center.x,
+                y: d.properties.center.y,
+            };
+
+        });
+
+
+
+
+    // connecting lines
+    function link(d)	{
+        return "M" + d.properties.source.x + "," + d.properties.source.y
+            + "C" + (d.properties.source.x + d.properties.target.x) / 2 + "," + d.properties.source.y
+            + " " + (d.properties.source.x + d.properties.target.x) / 2 + "," + d.properties.target.y
+            + " " + d.properties.target.x + "," + d.properties.target.y;
+    }
+
+
+
+
+    // console.log('malaysia', malaysia);
+    // console.log( 'state', d3.groups(malaysia.features, d=>d.properties.state).map(d=>d[0]) );
+
+    render();
+
+
+    // render
+    function render() {
+
+
+        let regions = [
+            {
+                key: 'Semenanjung',
+
+
+                values: d3.shuffle(
+                            malaysia.features.filter(d=>!['Sabah','Sarawak','W.P. Labuan'].includes(d.properties.state))
+                        ).slice(0, 38) // randomize
+                            .sort(d3.comparator().order(d3.ascending, d=>d.properties.centroid.y))
+
+            },
+            {
+                key: 'SabahSarawak',
+                values: d3.shuffle(
+                            malaysia.features.filter(d=>['Sabah','Sarawak','W.P. Labuan'].includes(d.properties.state))
+                        ).slice(0, 38) // randomize
+                            .sort(d3.comparator().order(d3.ascending, d=>d.properties.centroid.y))
+
+            },
+        ]
+
+        // console.log('regions', regions);
+
+
+        // labels & lines
+
+        map_label.selectAll('.regions').data(regions)
+            .join('g').attr('class','regions')
+                .attr('font-size', '60%')
+                .attr('fill','white')
+                .attr('text-anchor',d=>d.key=='Semenanjung' ? 'end' : 'begin')
+                .call(sel=>{
+
+                    sel.selectChildren('.label').data(d=>d.values.map((d,i)=>{
+                        d.properties.idx = i;
+                        d.properties.source.y = (d.properties.idx * 10) + 15;
+                        return d;
+                    }))
+                        .join('g').attr('class','label')
+                            .call(sel=>{
+
+                                sel.selectChildren('text').data((d,i)=>[d])
+                                    .join('text')
+                                        .attr('x', d=>!['Sabah','Sarawak','W.P. Labuan'].includes(d.properties.state) ? 100 : width-100)
+                                        .attr('y', d=>d.properties.source.y + 5 )
+                                        .text(d=>d.properties.district)
+
+                                sel.selectChildren('path.link').data(d=>[d])
+                                    .join('path')
+                                        .attr('class','link')
+                                        .attr('fill','none')
+                                        .attr('stroke','white')
+                                        .attr('d', d=>link(d))
+
+                                        // animate
+                                        .attr('stroke-dasharray',function(d){
+                                            d.strokeDashoffset = Math.ceil( d3.select(this).node().getTotalLength() * 3 );
+                                            return '0 '+d.strokeDashoffset;
+                                        })
+                                        .attr('stroke-dashoffset',0)
+                                        .transition()
+                                            .delay(d=>700 + (d.properties.idx*200) )
+                                                .attr('opacity',1)
+                                                .attr('stroke-dasharray',d=>'0 '+d.strokeDashoffset)
+                                                .attr('stroke-dashoffset',0)
+                                                .transition()
+                                                    .duration(700)
+                                                    .ease(d3.easeLinear)
+                                                        .attr('stroke-dasharray', d=>d.strokeDashoffset+' '+d.strokeDashoffset)
+                                                        .transition()
+                                                            //.delay(500)
+                                                            .duration(300)
+                                                            .attr('opacity',.1);
+
+                            })
+
+                            // hover
+                            .on('mouseover', function(e,d){
+                                d3.select(this).call(sel=>{
+                                    sel.selectChildren('text').attr('fill','magenta')
+                                    sel.selectChildren('path.link').attr('opacity',1).attr('stroke','magenta')
+                                })
+                                d3.select('#id-'+d.properties.code_state_district).attr('fill','magenta')
+
+                            })
+                            .on('mouseout', function(e,d){
+                                d3.select(this).call(sel=>{
+                                    sel.selectChildren('text').transition().attr('fill','#fff')
+                                    sel.selectChildren('path.link').transition().attr('opacity',.1).attr('stroke','#fff')
+                                })
+                                d3.select('#id-'+d.properties.code_state_district)
+                                    .transition().attr('fill','#fff')
+                            })
+                })
+
+
+        // map fill
+
+    map_fill.selectAll(".regions").data(regions)
+        .join('g').attr('class','regions')
+            .selectAll('path.district').data(d=>d.values)
+                .join('path')
+                    .attr('id', d=>'id-'+d.properties.code_state_district)
+                    .attr('class','district')
+                    .attr("d", path)
+                    .attr('fill', '#fff' )
+
+                    // hover
+                    // .on('mouseover', function(e,d){})
+                    // .on('mouseout', function(e,d){})
+
+                    // animate
+                    .attr('opacity',0)
+                    .transition().delay(d=>700+700 + (d.properties.idx*200) )
+                        .attr('opacity',0)
+                        .transition().duration(700).ease(d3.easeLinear)
+                            .attr('opacity',1)
+                            .transition().duration(300)
+                                .attr('opacity',.5);
+
+
+    }
+
+    _render = render; // global
+
+}
+
+
+
+
+
+</script>
+
+
+
+<div>
+
+
+    <div style="display:flex; justify-content:center;">
+        <div style="text-align:center">
+
+                <button onclick="_render()">Render</button>
+
+                <p>Label positions and connectors to map centroid</p>
+
+                <p>
+                    <a href="../">Main Menu</a>
+                    <button onclick="document.location='index12.html'">Back</button>
+                    <button onclick="document.location='index13.html'">Next</button>
+                </p>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
